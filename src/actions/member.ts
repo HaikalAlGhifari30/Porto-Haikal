@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import QRCode from "qrcode";
 import { uploadFile } from "@/lib/upload";
 import cloudinary from "@/lib/cloudinary";
+import { headers } from "next/headers";
 
 export async function getMembers() {
     return await prisma.member.findMany({
@@ -17,7 +18,11 @@ export async function getMembers() {
 }
 
 export async function generateMemberQR(memberId: string, slug: string) {
-    const profileUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/people/${slug}`;
+    const headersList = await headers();
+    const host = headersList.get("host");
+    const protocol = host?.includes("localhost") ? "http" : "https";
+    const baseUrl = `${protocol}://${host}`;
+    const profileUrl = `${baseUrl}/people/${slug}`;
     
     const qrBuffer = await QRCode.toBuffer(profileUrl, {
         color: {

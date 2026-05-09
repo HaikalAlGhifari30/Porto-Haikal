@@ -1,7 +1,7 @@
 "use client";
 
 import { Navbar } from "@/components/navbar";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ArrowLeft, Download, UserCheck, ShieldCheck, Mail } from "lucide-react";
@@ -128,13 +128,27 @@ export function MemberProfileView({ member }: MemberProfileViewProps) {
                                                 <div className="p-4 bg-white rounded-2xl inline-block mb-6 shadow-2xl border-4 border-blue-500/10">
                                                     <img src={member.qrCodeUrl} alt="QR Code" className="w-[120px] h-[120px]" />
                                                 </div>
-                                                <a 
-                                                    href={member.qrCodeUrl} 
-                                                    download={`${member.slug}-qr.png`}
-                                                    className={cn(buttonVariants(), "w-full rounded-xl bg-blue-600 hover:bg-blue-700 font-bold h-12 text-[10px] uppercase tracking-widest shadow-lg shadow-blue-500/20")}
+                                                <Button 
+                                                    onClick={async () => {
+                                                        try {
+                                                            const response = await fetch(member.qrCodeUrl!);
+                                                            const blob = await response.blob();
+                                                            const url = window.URL.createObjectURL(blob);
+                                                            const link = document.createElement('a');
+                                                            link.href = url;
+                                                            link.download = `${member.slug}-qr.png`;
+                                                            document.body.appendChild(link);
+                                                            link.click();
+                                                            document.body.removeChild(link);
+                                                            window.URL.revokeObjectURL(url);
+                                                        } catch (error) {
+                                                            window.open(member.qrCodeUrl!, '_blank');
+                                                        }
+                                                    }}
+                                                    className="w-full rounded-xl bg-blue-600 hover:bg-blue-700 font-bold h-12 text-[10px] uppercase tracking-widest shadow-lg shadow-blue-500/20"
                                                 >
                                                     Save Identity
-                                                </a>
+                                                </Button>
                                             </DialogContent>
                                         </Dialog>
                                     )}

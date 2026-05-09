@@ -2,7 +2,7 @@ import { prisma } from "@/lib/db";
 import { Navbar } from "@/components/navbar";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ChevronRight, Globe } from "lucide-react";
+import { ArrowLeft, ChevronRight, Globe, Mail } from "lucide-react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaGlobe } from "react-icons/fa";
 
 export default async function TeamDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -119,6 +119,11 @@ export default async function TeamDetailPage({ params }: { params: Promise<{ slu
 
                                                     {/* Social Icons */}
                                                     <div className="flex items-center gap-3">
+                                                        {member.email && (
+                                                            <a href={`mailto:${member.email}`} className="text-zinc-500 hover:text-white transition-colors">
+                                                                <Mail className="w-3.5 h-3.5" />
+                                                            </a>
+                                                        )}
                                                         {member.instagram && (
                                                             <a href={member.instagram} target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-pink-500 transition-colors">
                                                                 <FaInstagram className="w-3.5 h-3.5" />

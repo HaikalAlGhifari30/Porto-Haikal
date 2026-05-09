@@ -129,9 +129,33 @@ export function MemberCardRow({ member, positions }: MemberCardRowProps) {
                                 <p className="text-sm text-slate-400">QR Code has not been generated.</p>
                             </div>
                         )}
-                        <Button onClick={handleGenerateQR} disabled={isPending} className="w-full rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold h-11">
-                            {isPending ? "Generating..." : (member.qrCodeUrl ? "Regenerate QR" : "Generate QR Now")}
-                        </Button>
+                        {member.qrCodeUrl ? (
+                            <Button 
+                                onClick={async () => {
+                                    try {
+                                        const response = await fetch(member.qrCodeUrl!);
+                                        const blob = await response.blob();
+                                        const url = window.URL.createObjectURL(blob);
+                                        const link = document.createElement('a');
+                                        link.href = url;
+                                        link.download = `${member.slug}-qr.png`;
+                                        document.body.appendChild(link);
+                                        link.click();
+                                        document.body.removeChild(link);
+                                        window.URL.revokeObjectURL(url);
+                                    } catch (error) {
+                                        window.open(member.qrCodeUrl!, '_blank');
+                                    }
+                                }}
+                                className="w-full rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-11"
+                            >
+                                Download QR
+                            </Button>
+                        ) : (
+                            <Button onClick={handleGenerateQR} disabled={isPending} className="w-full rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold h-11">
+                                {isPending ? "Generating..." : "Generate QR Now"}
+                            </Button>
+                        )}
                     </DialogContent>
                 </Dialog>
 

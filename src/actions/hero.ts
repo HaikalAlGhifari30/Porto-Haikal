@@ -3,8 +3,7 @@
 import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { uploadFile } from "@/lib/upload";
-import fs from "fs";
-import path from "path";
+import cloudinary from "@/lib/cloudinary";
 
 export async function getHeroSlides() {
     return await prisma.heroSlide.findMany({
@@ -58,11 +57,28 @@ export async function deleteHeroSlide(id: string) {
     const slide = await prisma.heroSlide.findUnique({ where: { id } });
     if (!slide) return;
 
-    // Delete file if exists
-    if (slide.imageUrl.startsWith("/uploads/")) {
-        const filePath = path.join(process.cwd(), "public", slide.imageUrl);
-        if (fs.existsSync(filePath)) {
-            fs.unlinkSync(filePath);
+    // Delete from Cloudinary if it's a Cloudinary URL
+    if (slide.imageUrl.includes("cloudinary.com")) {
+        try {
+            // Extract public_id from URL
+            // Format: .../upload/v12345678/folder/public_id.jpg
+            const parts = slide.imageUrl.split("/");
+            const uploadIndex = parts.indexOf("upload");
+            if (uploadIndex !== -1) {
+                // public_id is everything after 'upload/v...' or 'upload/'
+                // but we need to remove the version and extension
+                const pathParts = parts.slice(uploadIndex + 1);
+                // Skip version if present (v12345678)
+                if (pathParts[0].startsWith("v")) {
+                    pathParts.shift();
+                }
+                const publicIdWithExt = pathParts.join("/");
+                const publicId = publicIdWithExt.split(".")[0];
+                
+                await cloudinary.uploader.destroy(publicId);
+            }
+        } catch (error) {
+            console.error("Failed to delete from Cloudinary:", error);
         }
     }
 

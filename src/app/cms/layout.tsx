@@ -136,9 +136,9 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                 </header>
 
                 <main className="flex-1 overflow-y-auto pt-20 pb-28 px-4 md:px-8 lg:p-10 lg:pt-24 lg:pb-10 relative z-0 scroll-smooth">
-                    {/* Desktop Top Actions (Hidden on Mobile) */}
+                    {/* Desktop Top Actions (Inside scrollable area) */}
                     <div className="hidden lg:flex absolute top-6 right-10 z-[50] items-center gap-3">
-                        <div className="flex items-center gap-2 p-2 rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border border-slate-200 dark:border-zinc-800 shadow-2xl shadow-slate-200/20 dark:shadow-none animate-in fade-in slide-in-from-top-2 duration-700">
+                        <div className="flex items-center gap-2 p-2 rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border border-slate-200 dark:border-zinc-800 shadow-2xl shadow-slate-200/20 dark:shadow-none animate-in fade-in duration-700">
                             <ThemeSwitcher />
                             <div className="h-4 w-px bg-slate-200 dark:bg-zinc-800/60 mx-1"></div>
                             <AdminProfile />

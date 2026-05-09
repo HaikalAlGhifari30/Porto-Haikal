@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
-import { Info, LayoutGrid, Type, Link as LinkIcon, Palette, Save } from "lucide-react";
+import { Info, LayoutGrid, Type, Link as LinkIcon, Palette, Save, Loader2 } from "lucide-react";
 
 interface Slide {
     id: string;
@@ -30,9 +30,10 @@ interface SlideSettingsModalProps {
     slide: Slide;
     onSave: (data: any) => void;
     children: React.ReactElement;
+    isSaving?: boolean;
 }
 
-export function SlideSettingsModal({ slide, onSave, children }: SlideSettingsModalProps) {
+export function SlideSettingsModal({ slide, onSave, children, isSaving = false }: SlideSettingsModalProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [formData, setFormData] = useState({
         title: slide.title || "",
@@ -44,6 +45,7 @@ export function SlideSettingsModal({ slide, onSave, children }: SlideSettingsMod
     });
 
     const handleSave = () => {
+        if (isSaving) return;
         onSave(formData);
         setIsOpen(false);
     };
@@ -170,9 +172,11 @@ export function SlideSettingsModal({ slide, onSave, children }: SlideSettingsMod
                     </Button>
                     <Button 
                         onClick={handleSave} 
+                        disabled={isSaving}
                         className="rounded-xl h-11 font-bold px-8 bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/20"
                     >
-                        <Save className="w-4 h-4 mr-2" /> Simpan
+                        {isSaving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
+                        {isSaving ? "Menyimpan..." : "Simpan"}
                     </Button>
                 </DialogFooter>
             </DialogContent>

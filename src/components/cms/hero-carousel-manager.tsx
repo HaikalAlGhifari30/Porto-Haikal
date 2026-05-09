@@ -43,6 +43,7 @@ interface HeroCarouselManagerProps {
 
 export function HeroCarouselManager({ initialSlides }: HeroCarouselManagerProps) {
     const [slides, setSlides] = useState<HeroSlide[]>(initialSlides);
+    const [isSaving, setIsSaving] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -77,7 +78,7 @@ export function HeroCarouselManager({ initialSlides }: HeroCarouselManagerProps)
 
     const handleAddSlide = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
-        if (!file) return;
+        if (!file || isUploading) return;
 
         if (file.size > 5 * 1024 * 1024) {
             toast.error("File terlalu besar (Maks 5MB)");
@@ -116,12 +117,16 @@ export function HeroCarouselManager({ initialSlides }: HeroCarouselManagerProps)
     };
 
     const handleUpdate = async (id: string, data: any) => {
+        if (isSaving) return;
+        setIsSaving(true);
         try {
             await updateHeroSlide(id, data);
             setSlides(slides.map(s => s.id === id ? { ...s, ...data } : s));
             toast.success("Pengaturan slide disimpan");
         } catch (error) {
             toast.error("Gagal menyimpan pengaturan");
+        } finally {
+            setIsSaving(false);
         }
     };
 
@@ -170,6 +175,7 @@ export function HeroCarouselManager({ initialSlides }: HeroCarouselManagerProps)
                                 isFirst={index === 0}
                                 onDelete={() => handleDelete(slide.id)}
                                 onUpdate={(data) => handleUpdate(slide.id, data)}
+                                isSaving={isSaving}
                             />
                         ))}
                         
@@ -225,11 +231,12 @@ export function HeroCarouselManager({ initialSlides }: HeroCarouselManagerProps)
     );
 }
 
-function SortableSlide({ slide, isFirst, onDelete, onUpdate }: { 
+function SortableSlide({ slide, isFirst, onDelete, onUpdate, isSaving }: { 
     slide: HeroSlide, 
     isFirst: boolean,
     onDelete: () => void,
-    onUpdate: (data: any) => void
+    onUpdate: (data: any) => void,
+    isSaving: boolean
 }) {
     const {
         attributes,
@@ -276,7 +283,7 @@ function SortableSlide({ slide, isFirst, onDelete, onUpdate }: {
             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[2px]">
                 {/* Settings - Top Left */}
                 <div className="absolute top-3 left-3">
-                    <SlideSettingsModal slide={slide} onSave={onUpdate}>
+                    <SlideSettingsModal slide={slide} onSave={onUpdate} isSaving={isSaving}>
                         <Button size="icon" className="w-10 h-10 rounded-2xl bg-blue-600 hover:bg-blue-700 border-none text-white shadow-xl transition-all hover:scale-110 active:scale-95">
                             <Settings2 className="w-5 h-5" />
                         </Button>

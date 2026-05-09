@@ -19,15 +19,20 @@ interface EditPositionModalProps {
 }
 
 export function EditPositionModal({ position, teamId }: EditPositionModalProps) {
+    const [isPending, setIsPending] = useState(false);
     const [open, setOpen] = useState(false);
 
     async function handleSubmit(formData: FormData) {
+        if (isPending) return;
+        setIsPending(true);
         try {
             await updatePositionAction(formData);
             setOpen(false);
             toast.success("Posisi berhasil diperbarui");
         } catch (error) {
             toast.error("Gagal memperbarui posisi");
+        } finally {
+            setIsPending(false);
         }
     }
 
@@ -83,7 +88,9 @@ export function EditPositionModal({ position, teamId }: EditPositionModalProps) 
 
                     <div className="flex gap-3 pt-4">
                         <Button type="button" variant="ghost" className="flex-1 h-12 rounded-xl text-slate-500 font-bold" onClick={() => setOpen(false)}>Batal</Button>
-                        <Button type="submit" className="flex-1 h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-lg shadow-blue-500/20">Perbarui Posisi</Button>
+                        <Button type="submit" disabled={isPending} className="flex-1 h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-lg shadow-blue-500/20">
+                            {isPending ? "Sedang Menyimpan..." : "Perbarui Posisi"}
+                        </Button>
                     </div>
                 </form>
             </DialogContent>

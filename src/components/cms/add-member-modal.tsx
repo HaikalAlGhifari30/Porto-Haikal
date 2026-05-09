@@ -49,6 +49,7 @@ export function AddMemberModal({ teamId, positions }: AddMemberModalProps) {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (isPending) return;
         setIsPending(true);
         const formData = new FormData(e.currentTarget);
         

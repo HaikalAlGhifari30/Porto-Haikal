@@ -19,6 +19,7 @@ export function ProjectFormToggle() {
     const [isPending, setIsPending] = useState(false);
 
     const handleSubmit = async (formData: FormData) => {
+        if (isPending) return;
         setIsPending(true);
         try {
             await createProject(formData);

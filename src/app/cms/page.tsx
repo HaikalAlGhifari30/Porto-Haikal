@@ -30,8 +30,8 @@ export default async function CMSDashboard() {
                 
                 <div className="relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
                     <div className="max-w-2xl">
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-blue-200 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
-                            <Zap className="w-3 h-3" /> Ringkasan Dashboard
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 border border-white/10 text-blue-200 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
+                            <Zap className="w-3 h-3 text-blue-400" /> Ringkasan Dashboard
                         </div>
                         <DashboardGreeting />
                         <p className="text-blue-100/60 text-sm md:text-base font-medium max-w-md leading-relaxed break-words">
@@ -41,12 +41,12 @@ export default async function CMSDashboard() {
                     
                     <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
                         <Link href="/cms/projects" className="flex-1 sm:flex-none">
-                            <Button className="w-full sm:w-auto h-12 px-8 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold border-none shadow-xl shadow-blue-600/20 transition-all hover:-translate-y-1 active:translate-y-0">
+                            <Button className="w-full sm:w-auto h-12 px-8 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold border-none shadow-xl shadow-blue-600/20 transition-all active:scale-95">
                                 <Plus className="w-5 h-5 mr-2" /> Proyek Baru
                             </Button>
                         </Link>
                         <Link href="/cms/teams" className="flex-1 sm:flex-none">
-                            <Button variant="outline" className="w-full sm:w-auto h-12 px-8 rounded-2xl bg-white/10 border-white/20 text-white font-bold backdrop-blur-md hover:bg-white/20 transition-all hover:-translate-y-1 active:translate-y-0">
+                            <Button variant="outline" className="w-full sm:w-auto h-12 px-8 rounded-2xl bg-white/10 border-white/20 text-white font-bold backdrop-blur-md hover:bg-white/20 transition-all active:scale-95">
                                 Kelola Tim
                             </Button>
                         </Link>

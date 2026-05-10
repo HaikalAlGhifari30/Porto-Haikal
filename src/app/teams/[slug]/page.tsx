@@ -118,29 +118,29 @@ export default async function TeamDetailPage({ params }: { params: Promise<{ slu
                                                     <p className="text-[9px] font-bold text-blue-500/80 uppercase tracking-widest mb-3">{position.name}</p>
 
                                                     {/* Social Icons */}
-                                                    <div className="flex items-center gap-3">
+                                                    <div className="flex items-center gap-3 relative z-20">
                                                         {member.email && (
-                                                            <a href={`mailto:${member.email}`} className="text-zinc-500 hover:text-white transition-colors">
+                                                            <a href={`mailto:${member.email}`} className="text-zinc-500 hover:text-white transition-colors p-1 -m-1">
                                                                 <Mail className="w-3.5 h-3.5" />
                                                             </a>
                                                         )}
                                                         {member.instagram && (
-                                                            <a href={member.instagram} target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-pink-500 transition-colors">
+                                                            <a href={member.instagram} target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-pink-500 transition-colors p-1 -m-1">
                                                                 <FaInstagram className="w-3.5 h-3.5" />
                                                             </a>
                                                         )}
                                                         {member.facebook && (
-                                                            <a href={member.facebook} target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-blue-600 transition-colors">
+                                                            <a href={member.facebook} target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-blue-600 transition-colors p-1 -m-1">
                                                                 <FaFacebook className="w-3.5 h-3.5" />
                                                             </a>
                                                         )}
                                                         {member.linkedin && (
-                                                            <a href={member.linkedin} target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-blue-400 transition-colors">
+                                                            <a href={member.linkedin} target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-blue-400 transition-colors p-1 -m-1">
                                                                 <FaLinkedin className="w-3.5 h-3.5" />
                                                             </a>
                                                         )}
                                                         {member.website && (
-                                                            <a href={member.website} target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-emerald-500 transition-colors">
+                                                            <a href={member.website} target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-emerald-500 transition-colors p-1 -m-1">
                                                                 <FaGlobe className="w-3.5 h-3.5" />
                                                             </a>
                                                         )}
@@ -149,7 +149,7 @@ export default async function TeamDetailPage({ params }: { params: Promise<{ slu
 
                                                 <Link
                                                     href={`/people/${member.slug}`}
-                                                    className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/5 text-zinc-500 hover:text-white hover:bg-blue-600 transition-all opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0"
+                                                    className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/5 text-zinc-500 hover:text-white hover:bg-blue-600 transition-all opacity-0 md:group-hover:opacity-100 md:-translate-x-2 md:group-hover:translate-x-0 after:absolute after:inset-0 after:z-10"
                                                 >
                                                     <ChevronRight className="w-5 h-5" />
                                                 </Link>

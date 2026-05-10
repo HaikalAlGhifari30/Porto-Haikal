@@ -83,19 +83,20 @@ export function AdminProfile() {
         <div className="relative" ref={dropdownRef}>
             {/* Profile Trigger */}
             <div 
-                className="flex items-center gap-4 cursor-pointer group"
+                className="flex items-center gap-3 cursor-pointer group"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <div className="text-right hidden sm:block">
                     <p className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">{adminName}</p>
                     <p className="text-xs text-slate-500 dark:text-slate-500 font-medium">Superadmin</p>
                 </div>
-                <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-blue-500/20 to-indigo-500/20 border border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold shadow-[0_0_15px_rgba(37,99,235,0.15)] group-hover:shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all overflow-hidden bg-white dark:bg-slate-900">
+                <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold transition-all overflow-hidden relative">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/5 to-indigo-500/5" />
                     {adminPhoto ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={adminPhoto} alt="Admin" className="w-full h-full object-cover" />
+                        <img src={adminPhoto} alt="Admin" className="w-full h-full object-cover relative z-10" />
                     ) : (
-                        adminName.charAt(0).toUpperCase()
+                        <span className="relative z-10 text-[10px]">{adminName.charAt(0).toUpperCase()}</span>
                     )}
                 </div>
             </div>

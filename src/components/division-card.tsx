@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { EditTeamModal } from "./cms/edit-team-modal";
 import { DeleteTeamDialog } from "./cms/delete-team-dialog";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Team {
     id: string;
@@ -31,17 +32,8 @@ export function DivisionCard({ team, className, isCms }: DivisionCardProps) {
         router.push(href);
     };
 
-    return (
-        <div
-            onClick={handleCardClick}
-            className={cn(
-                "group relative block border transition-all duration-500 rounded-2xl overflow-hidden h-full flex flex-col cursor-pointer",
-                isCms
-                    ? "bg-white dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 shadow-sm hover:shadow-lg hover:border-blue-500/50"
-                    : "bg-zinc-900/50 backdrop-blur-xl border-white/10 hover:border-blue-500/50",
-                className
-            )}
-        >
+    const CardContent = (
+        <>
             {/* Cover Area */}
             <div className={cn(
                 "aspect-[16/9] relative overflow-hidden",
@@ -64,7 +56,7 @@ export function DivisionCard({ team, className, isCms }: DivisionCardProps) {
                 )}
 
                 {isCms && (
-                    <div className="absolute top-4 right-4 flex gap-1.5 z-20">
+                    <div className="absolute top-4 right-4 flex gap-1.5 z-20" onClick={(e) => e.stopPropagation()}>
                         <EditTeamModal team={team} />
                         <DeleteTeamDialog team={team} />
                     </div>
@@ -129,7 +121,35 @@ export function DivisionCard({ team, className, isCms }: DivisionCardProps) {
                     </div>
                 )}
             </div>
-        </div>
+        </>
+    );
+
+    if (isCms) {
+        return (
+            <div
+                onClick={handleCardClick}
+                className={cn(
+                    "group relative block border transition-all duration-500 rounded-2xl overflow-hidden h-full flex flex-col cursor-pointer",
+                    "bg-white dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 shadow-sm hover:shadow-lg hover:border-blue-500/50",
+                    className
+                )}
+            >
+                {CardContent}
+            </div>
+        );
+    }
+
+    return (
+        <Link
+            href={href}
+            className={cn(
+                "group relative block border transition-all duration-500 rounded-2xl overflow-hidden h-full flex flex-col cursor-pointer",
+                "bg-zinc-900/50 backdrop-blur-xl border-white/10 hover:border-blue-500/50",
+                className
+            )}
+        >
+            {CardContent}
+        </Link>
     );
 }
 

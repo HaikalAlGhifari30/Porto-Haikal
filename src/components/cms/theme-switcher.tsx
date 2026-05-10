@@ -24,28 +24,28 @@ export function ThemeSwitcher() {
         <button 
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             className={cn(
-                "relative flex items-center w-[72px] h-9 p-1 rounded-full transition-all duration-500 cursor-pointer overflow-hidden",
+                "relative flex items-center w-[60px] h-7 p-0.5 rounded-full transition-all duration-500 cursor-pointer overflow-hidden",
                 theme === 'dark' 
-                    ? "bg-slate-900 border border-slate-800 shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)]" 
-                    : "bg-slate-100 border border-slate-200 shadow-[inset_0_2px_8px_rgba(0,0,0,0.05)]"
+                    ? "bg-slate-950 border border-slate-800 shadow-inner" 
+                    : "bg-slate-200/50 border border-slate-300/50 shadow-inner"
             )}
         >
             {/* Sliding Knob */}
             <div 
                 className={cn(
-                    "absolute w-7 h-7 rounded-full transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex items-center justify-center shadow-lg transform",
+                    "absolute w-6 h-6 rounded-full transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex items-center justify-center shadow-md transform",
                     theme === 'dark' 
-                        ? "translate-x-0 bg-slate-800 text-blue-400 border border-slate-700 shadow-blue-500/10" 
-                        : "translate-x-9 bg-white text-orange-500 border border-slate-100 shadow-orange-500/10"
+                        ? "translate-x-0 bg-slate-800 text-blue-400 border border-slate-700" 
+                        : "translate-x-8 bg-white text-orange-500 border border-slate-100"
                 )}
             >
-                {theme === 'dark' ? <Moon className="w-3.5 h-3.5 fill-blue-400/20" /> : <Sun className="w-3.5 h-3.5 fill-orange-400/20" />}
+                {theme === 'dark' ? <Moon className="w-3 h-3 fill-blue-400/10" /> : <Sun className="w-3 h-3 fill-orange-400/10" />}
             </div>
 
             {/* Background Icons (Subtle) */}
-            <div className="flex justify-between w-full px-2.5 opacity-20 pointer-events-none">
-                <Moon className={cn("w-3.5 h-3.5 transition-opacity", theme === 'dark' ? "opacity-0" : "opacity-100")} />
-                <Sun className={cn("w-3.5 h-3.5 transition-opacity", theme === 'light' ? "opacity-0" : "opacity-100")} />
+            <div className="flex justify-between w-full px-2 opacity-30 pointer-events-none">
+                <Moon className={cn("w-3 h-3 transition-opacity", theme === 'dark' ? "opacity-0" : "opacity-100")} />
+                <Sun className={cn("w-3 h-3 transition-opacity", theme === 'light' ? "opacity-0" : "opacity-100")} />
             </div>
         </button>
     );

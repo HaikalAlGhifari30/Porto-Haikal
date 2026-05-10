@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, ReactNode } from "react";
+import { useState, ReactNode, useEffect, useCallback, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { LayoutDashboard, FolderKanban, Users, Settings, Menu, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { CMSGuard } from "@/components/cms-guard";
@@ -13,7 +13,34 @@ import { motion } from "framer-motion";
 export default function CMSLayout({ children }: { children: ReactNode }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isNavVisible, setIsNavVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const scrollContainerRef = useRef<HTMLElement>(null);
     const pathname = usePathname();
+
+    const handleScroll = useCallback(() => {
+        if (!scrollContainerRef.current) return;
+        
+        const currentScrollY = scrollContainerRef.current.scrollTop;
+        
+        // Threshold to avoid flickering on small scrolls
+        if (Math.abs(currentScrollY - lastScrollY) < 10) return;
+
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            setIsNavVisible(false);
+        } else {
+            setIsNavVisible(true);
+        }
+        setLastScrollY(currentScrollY);
+    }, [lastScrollY]);
+
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (container) {
+            container.addEventListener("scroll", handleScroll, { passive: true });
+            return () => container.removeEventListener("scroll", handleScroll);
+        }
+    }, [handleScroll]);
 
     const SidebarLinks = () => {
         const menuItems = [
@@ -119,23 +146,30 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
             {/* Main Content Area */}
             <div className="flex-1 flex flex-col h-full overflow-hidden relative z-10">
                 {/* Mobile Top Header */}
-                <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border-b border-slate-100 dark:border-zinc-800/50 z-[100] px-4 flex items-center justify-between shadow-sm">
-                    <Link href="/" className="flex items-center gap-2">
-                        <img src="/logo.png" alt="Logo" className="h-8 w-auto" />
-                        <div className="flex flex-col leading-none">
-                            <span className="text-[8px] font-black uppercase tracking-wider text-slate-900 dark:text-white">Baroedak</span>
-                            <span className="text-[8px] font-black uppercase tracking-wider text-blue-600">COMO</span>
+                <header className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-xl border-b border-slate-100/50 dark:border-zinc-800/30 z-[100] px-4 flex items-center justify-between transition-all duration-300">
+                    <Link href="/" className="flex items-center gap-1.5 active:scale-95 transition-transform">
+                        <img src="/logo.png" alt="Logo" className="h-7 w-auto" />
+                        <div className="flex flex-col leading-[1.1]">
+                            <span className="text-[7px] font-black uppercase tracking-widest text-slate-900 dark:text-white">Baroedak</span>
+                            <span className="text-[7px] font-black uppercase tracking-widest text-blue-600">COMO</span>
                         </div>
                     </Link>
                     
-                    <div className="flex items-center gap-2 p-1 rounded-full bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-sm">
-                        <ThemeSwitcher />
-                        <div className="h-4 w-px bg-slate-200 dark:bg-zinc-800/60 mx-1"></div>
-                        <AdminProfile />
+                    <div className="flex items-center gap-1.5 p-1 rounded-full bg-slate-100/50 dark:bg-zinc-900/50 backdrop-blur-md border border-slate-200/50 dark:border-zinc-800/50">
+                        <div className="scale-[0.85] origin-center -mx-1">
+                            <ThemeSwitcher />
+                        </div>
+                        <div className="h-3 w-px bg-slate-200 dark:bg-zinc-800/60 mx-0.5"></div>
+                        <div className="scale-[0.85] origin-center -ml-1">
+                            <AdminProfile />
+                        </div>
                     </div>
                 </header>
 
-                <main className="flex-1 overflow-y-auto pt-20 pb-28 px-4 md:px-8 lg:p-10 lg:pt-24 lg:pb-10 relative z-0 scroll-smooth">
+                <main 
+                    ref={scrollContainerRef}
+                    className="flex-1 overflow-y-auto pt-20 pb-28 px-4 md:px-8 lg:p-10 lg:pt-24 lg:pb-10 relative z-0 scroll-smooth"
+                >
                     {/* Desktop Top Actions (Inside scrollable area) */}
                     <div className="hidden lg:flex absolute top-6 right-10 z-[50] items-center gap-3">
                         <div className="flex items-center gap-2 p-2 rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border border-slate-200 dark:border-zinc-800 shadow-2xl shadow-slate-200/20 dark:shadow-none animate-in fade-in duration-700">
@@ -153,7 +187,18 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                 </main>
 
                 {/* Refined Mobile Bottom Navigation */}
-                <nav className="lg:hidden fixed bottom-6 left-4 right-4 h-16 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border border-slate-200 dark:border-zinc-800 rounded-[1.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-none z-[100] flex items-center justify-around px-2">
+                <motion.nav 
+                    initial={{ y: 0, opacity: 1 }}
+                    animate={{ 
+                        y: isNavVisible ? 0 : 100,
+                        opacity: isNavVisible ? 1 : 0
+                    }}
+                    transition={{ 
+                        duration: 0.35, 
+                        ease: [0.23, 1, 0.32, 1] 
+                    }}
+                    className="lg:hidden fixed bottom-[calc(16px+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 w-[calc(100%-2.5rem)] max-w-md h-14 bg-zinc-950/80 dark:bg-zinc-900/80 backdrop-blur-3xl border border-white/10 dark:border-zinc-800 rounded-full shadow-[0_15px_40px_rgba(0,0,0,0.3)] z-[100] flex items-center justify-around px-2"
+                >
                     {[
                         { href: "/cms", label: "Home", icon: LayoutDashboard },
                         { href: "/cms/projects", label: "Proyek", icon: FolderKanban },
@@ -166,18 +211,18 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                                 key={item.href}
                                 href={item.href}
                                 className={cn(
-                                    "flex flex-col items-center justify-center gap-1 w-16 h-12 rounded-2xl transition-all duration-300",
+                                    "flex flex-col items-center justify-center gap-0.5 w-14 h-11 rounded-2xl transition-all duration-300 relative",
                                     isActive 
-                                        ? "text-blue-600 dark:text-blue-400" 
-                                        : "text-slate-400 dark:text-zinc-500 hover:text-blue-500"
+                                        ? "text-white" 
+                                        : "text-slate-400 dark:text-zinc-500"
                                 )}
                             >
                                 <item.icon className={cn(
-                                    "w-5 h-5 transition-transform",
-                                    isActive && "scale-110"
+                                    "w-4.5 h-4.5 transition-all duration-300",
+                                    isActive ? "scale-110" : "scale-100"
                                 )} />
                                 <span className={cn(
-                                    "text-[9px] font-bold uppercase tracking-widest",
+                                    "text-[8px] font-bold uppercase tracking-wider",
                                     isActive ? "opacity-100" : "opacity-60"
                                 )}>
                                     {item.label}
@@ -185,13 +230,13 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                                 {isActive && (
                                     <motion.div 
                                         layoutId="mobile-nav-indicator"
-                                        className="absolute -bottom-1 w-1 h-1 rounded-full bg-blue-600 dark:bg-blue-400 shadow-[0_0_10px_rgba(37,99,235,0.5)]" 
+                                        className="absolute -bottom-1.5 w-1 h-1 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]" 
                                     />
                                 )}
                             </Link>
                         );
                     })}
-                </nav>
+                </motion.nav>
             </div>
         </div>
     );

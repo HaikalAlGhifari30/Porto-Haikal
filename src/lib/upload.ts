@@ -1,25 +1,32 @@
-import { promises as fs } from 'fs';
-import path from 'path';
+import { v2 as cloudinary } from 'cloudinary';
+
+// Configure cloudinary with env variables
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function uploadFile(file: File, folder: string): Promise<string> {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Create unique filename
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const originalName = file.name || 'file';
-    const ext = path.extname(originalName) || '';
-    const nameWithoutExt = path.basename(originalName, ext).replace(/[^a-zA-Z0-9]/g, '');
-    const fileName = `${uniqueSuffix}-${nameWithoutExt}${ext}`;
+    return new Promise((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream(
+            {
+                folder: `compro-rrk/${folder}`,
+                resource_type: 'auto',
+            },
+            (error, result) => {
+                if (error) {
+                    console.error("Cloudinary Upload Error:", error);
+                    reject(error);
+                } else if (result) {
+                    resolve(result.secure_url);
+                }
+            }
+        );
 
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', folder);
-
-    // Ensure directory exists
-    await fs.mkdir(uploadDir, { recursive: true });
-
-    const filePath = path.join(uploadDir, fileName);
-    await fs.writeFile(filePath, buffer);
-
-    // Return the public URL path
-    return `/uploads/${folder}/${fileName}`;
+        uploadStream.end(buffer);
+    });
 }

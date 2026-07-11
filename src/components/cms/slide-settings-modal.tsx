@@ -19,8 +19,11 @@ import { Info, LayoutGrid, Type, Link as LinkIcon, Palette, Save, Loader2 } from
 interface Slide {
     id: string;
     title: string | null;
+    titleEn?: string | null;
     subtitle: string | null;
+    subtitleEn?: string | null;
     buttonText: string | null;
+    buttonTextEn?: string | null;
     buttonLink: string | null;
     overlayDarkness: number;
     isActive: boolean;
@@ -37,8 +40,11 @@ export function SlideSettingsModal({ slide, onSave, children, isSaving = false }
     const [isOpen, setIsOpen] = useState(false);
     const [formData, setFormData] = useState({
         title: slide.title || "",
+        titleEn: slide.titleEn || "",
         subtitle: slide.subtitle || "",
+        subtitleEn: slide.subtitleEn || "",
         buttonText: slide.buttonText || "",
+        buttonTextEn: slide.buttonTextEn || "",
         buttonLink: slide.buttonLink || "",
         overlayDarkness: slide.overlayDarkness,
         isActive: slide.isActive
@@ -75,7 +81,7 @@ export function SlideSettingsModal({ slide, onSave, children, isSaving = false }
                             <Type className="w-4 h-4 text-blue-500" />
                             <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Konten Teks</h4>
                         </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+                        <div className="grid grid-cols-1 gap-4 md:gap-6">
                             <div className="space-y-2">
                                 <Label className="text-[9px] uppercase font-black tracking-widest text-slate-400 pl-1">Judul Utama</Label>
                                 <Input 

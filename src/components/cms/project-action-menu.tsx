@@ -9,15 +9,7 @@ import { Label } from "@/components/ui/label";
 import { updateProject, deleteProject } from "@/actions/project";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-
-interface Project {
-    id: string;
-    title: string;
-    url: string;
-    imageUrl: string | null;
-    isVisible?: boolean;
-    isFeatured?: boolean;
-}
+import { Project } from "@prisma/client";
 
 export function ProjectActionMenu({ project }: { project: Project }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,7 +19,7 @@ export function ProjectActionMenu({ project }: { project: Project }) {
     const [isDeleting, setIsDeleting] = useState(false);
 
     const [editTitle, setEditTitle] = useState(project.title);
-    const [editUrl, setEditUrl] = useState(project.url);
+    const [editUrl, setEditUrl] = useState(project.url || "");
     const [editImage, setEditImage] = useState(project.imageUrl);
     const [previewImage, setPreviewImage] = useState<string | null>(project.imageUrl);
     
@@ -53,8 +45,7 @@ export function ProjectActionMenu({ project }: { project: Project }) {
             await updateProject(project.id, {
                 title: editTitle,
                 url: editUrl,
-                imageUrl: editImage,
-                isFeatured: project.isFeatured || false
+                imageUrl: editImage
             });
             setIsEditOpen(false);
             toast.success("Proyek berhasil diperbarui");

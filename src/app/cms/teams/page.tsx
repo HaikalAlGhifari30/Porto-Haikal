@@ -10,9 +10,9 @@ export default async function TeamsPage() {
         <div className="space-y-6">
             <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-8">
                 <div className="flex-1">
-                    <h2 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase font-serif">Manajemen Divisi</h2>
+                    <h2 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">Divisi & Anggota</h2>
                     <p className="text-sm text-slate-500 dark:text-zinc-400 mt-2 font-medium leading-relaxed max-w-2xl">
-                        Atur struktur organisasi, posisi jabatan, dan kelola seluruh anggota Baroedak COMO.
+                        Atur struktur organisasi, posisi jabatan, dan kelola seluruh anggota PT Rizky Rijaya Karya.
                     </p>
                     
                     <div className="mt-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">

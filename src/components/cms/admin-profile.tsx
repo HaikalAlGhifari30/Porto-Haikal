@@ -16,7 +16,7 @@ export function AdminProfile() {
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [isLogoutOpen, setIsLogoutOpen] = useState(false);
     
-    const [adminName, setAdminName] = useState("Admin COMO");
+    const [adminName, setAdminName] = useState("Admin PT Rizky Rijaya Karya");
     const [adminPhoto, setAdminPhoto] = useState<string | null>(null);
     const [previewPhoto, setPreviewPhoto] = useState<string | null>(null);
     const [tempName, setTempName] = useState("");
@@ -27,7 +27,13 @@ export function AdminProfile() {
     useEffect(() => {
         const storedName = localStorage.getItem("adminName");
         const storedPhoto = localStorage.getItem("adminPhoto");
-        if (storedName) setAdminName(storedName);
+        if (storedName && !storedName.toLowerCase().includes("como")) {
+            setAdminName(storedName);
+        } else {
+            const newName = "Admin PT Rizky Rijaya Karya";
+            setAdminName(newName);
+            localStorage.setItem("adminName", newName);
+        }
         if (storedPhoto) setAdminPhoto(storedPhoto);
 
         const handleClickOutside = (event: MouseEvent) => {

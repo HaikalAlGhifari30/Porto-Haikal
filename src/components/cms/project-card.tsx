@@ -12,14 +12,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-interface Project {
-    id: string;
-    title: string;
-    url: string;
-    description: string | null;
-    imageUrl: string | null;
-    isFeatured: boolean;
-}
+import { Project } from "@prisma/client";
 
 export function ProjectCard({ project }: { project: Project }) {
     const [isEditOpen, setIsEditOpen] = useState(false);
@@ -28,9 +21,8 @@ export function ProjectCard({ project }: { project: Project }) {
     const [isDeleting, setIsDeleting] = useState(false);
 
     const [editTitle, setEditTitle] = useState(project.title);
-    const [editUrl, setEditUrl] = useState(project.url);
+    const [editUrl, setEditUrl] = useState(project.url || "");
     const [editImage, setEditImage] = useState(project.imageUrl);
-    const [editIsFeatured, setEditIsFeatured] = useState(project.isFeatured);
     const [previewImage, setPreviewImage] = useState<string | null>(project.imageUrl);
     
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -71,8 +63,7 @@ export function ProjectCard({ project }: { project: Project }) {
             await updateProject(project.id, {
                 title: editTitle,
                 url: editUrl,
-                imageUrl: editImage,
-                isFeatured: editIsFeatured
+                imageUrl: editImage
             });
             setIsEditOpen(false);
         } catch (error) {
@@ -146,12 +137,7 @@ export function ProjectCard({ project }: { project: Project }) {
                             <GripVertical className="h-4 w-4" />
                         </div>
 
-                        {/* Featured Badge */}
-                        {project.isFeatured && (
-                            <div className="absolute top-4 right-4 px-4 py-1.5 rounded-full bg-blue-600 text-white text-[9px] font-black uppercase tracking-widest shadow-xl border border-blue-400/30">
-                                Featured
-                            </div>
-                        )}
+                        {/* Removed Featured Badge */}
                     </div>
                     
                     <CardHeader className="p-4 flex-1">
@@ -161,21 +147,21 @@ export function ProjectCard({ project }: { project: Project }) {
                                 <CardTitle className="text-slate-900 dark:text-white text-lg font-bold tracking-tight leading-snug group-hover:text-blue-400 transition-colors">
                                     {project.title}
                                 </CardTitle>
-                                <a href={project.url} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-blue-500 transition-colors shrink-0">
+                                <a href={project.url || "#"} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-blue-500 transition-colors shrink-0">
                                     <ExternalLink className="w-4 h-4" />
                                 </a>
                             </div>
                         </div>
                         <p className="text-[11px] text-slate-500 dark:text-zinc-400 font-medium leading-relaxed mt-2 line-clamp-2">
-                            {project.url.replace(/^https?:\/\//, '')}
+                            {project.url ? project.url.replace(/^https?:\/\//, '') : 'No URL'}
                         </p>
                     </CardHeader>
                     
                     <CardContent className="px-4 py-3 border-t border-slate-100 dark:border-white/5 flex justify-between items-center">
                          <div className="flex items-center gap-1.5">
-                            <div className={`w-1.5 h-1.5 rounded-full ${project.isFeatured ? 'bg-blue-500' : 'bg-slate-300 dark:bg-zinc-700'}`} />
+                            <div className={`w-1.5 h-1.5 rounded-full ${project.isVisible ? 'bg-blue-500' : 'bg-slate-300 dark:bg-zinc-700'}`} />
                             <span className="text-[9px] uppercase font-bold tracking-widest text-slate-500 dark:text-zinc-500">
-                                {project.isFeatured ? "Featured" : "Standard"}
+                                {project.isVisible ? "Tampil" : "Tersembunyi"}
                             </span>
                         </div>
                         <div className="text-[9px] font-bold uppercase tracking-widest text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -261,18 +247,7 @@ export function ProjectCard({ project }: { project: Project }) {
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-zinc-800 rounded-2xl group hover:border-blue-500/30 transition-all">
-                            <div className="relative flex items-center">
-                                <input 
-                                    type="checkbox" 
-                                    id="edit-featured"
-                                    checked={editIsFeatured}
-                                    onChange={(e) => setEditIsFeatured(e.target.checked)}
-                                    className="w-6 h-6 rounded-lg border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer" 
-                                />
-                            </div>
-                            <Label htmlFor="edit-featured" className="text-sm font-bold text-slate-700 dark:text-zinc-300 cursor-pointer">Tampilkan sebagai Proyek Unggulan</Label>
-                        </div>
+                        {/* Edit isFeatured removed */}
 
                         <div className="flex gap-3 pt-2">
                             <Button 

@@ -23,8 +23,8 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Baroedak COMO",
-  description: "Official Platform of Baroedak COMO",
+  title: "PT RIZKY RIJAYA KARYA",
+  description: "Official Platform of PT Rizky Rijaya Karya",
   icons: {
     icon: [
       { url: "/favicon.png?v=2" },

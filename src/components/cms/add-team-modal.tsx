@@ -17,11 +17,13 @@ import { Plus, Upload, X, Image as ImageIcon, Loader2 } from "lucide-react";
 import { createTeam } from "@/actions/team";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { IconSelector } from "@/components/ui/icon-selector";
 
 export function AddTeamModal() {
     const [isOpen, setIsOpen] = useState(false);
     const [isPending, setIsPending] = useState(false);
     const [coverPreview, setCoverPreview] = useState<string | null>(null);
+    const [icon, setIcon] = useState<string | null>(null);
     const coverInputRef = useRef<HTMLInputElement>(null);
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,6 +47,15 @@ export function AddTeamModal() {
         if (isPending) return;
         setIsPending(true);
         const formData = new FormData(e.currentTarget);
+        if (!icon && (!formData.get('coverImage') || (formData.get('coverImage') as File).size === 0)) {
+            toast.error("Silakan unggah Gambar Ilustrasi Divisi atau pilih Ikon");
+            setIsPending(false);
+            return;
+        }
+
+        if (icon) {
+            formData.set("icon", icon);
+        }
         
         try {
             await createTeam(formData);
@@ -70,7 +81,7 @@ export function AddTeamModal() {
                 <Plus className="w-5 h-5 mr-2 group-hover:rotate-90 transition-transform duration-300" />
                 Tambah Divisi Baru
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[650px] bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl p-0 overflow-hidden">
+            <DialogContent className="sm:max-w-[650px] bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl p-0 max-h-[90vh] overflow-y-auto overflow-x-hidden hide-scrollbar">
                 <form onSubmit={handleSubmit}>
                     <DialogHeader className="p-8 pb-0">
                         <DialogTitle className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Buat Divisi Baru</DialogTitle>
@@ -118,6 +129,14 @@ export function AddTeamModal() {
                             </div>
                         </div>
 
+                        {/* Icon Selection Fallback */}
+                        <div>
+                            <Label className="block text-[10px] text-slate-400 dark:text-zinc-500 uppercase font-bold tracking-[0.2em] pl-1 mb-2">
+                                Pilih Ikon (Otomatis dipakai bila tidak ada gambar)
+                            </Label>
+                            <IconSelector value={icon} onChange={setIcon} />
+                        </div>
+
                         <div className="space-y-2">
                             <Label className="text-[10px] text-slate-400 dark:text-zinc-500 uppercase font-bold tracking-[0.2em] pl-1">Nama Divisi</Label>
                             <Input name="name" placeholder="Contoh: Creative Media" required className="bg-slate-50 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 h-12 rounded-xl focus:ring-blue-500/20" />
@@ -125,7 +144,7 @@ export function AddTeamModal() {
 
                         <div className="space-y-2">
                             <Label className="text-[10px] text-slate-400 dark:text-zinc-500 uppercase font-bold tracking-[0.2em] pl-1">Deskripsi Singkat</Label>
-                            <Input name="description" placeholder="Ceritakan identitas visual dan misi divisi ini..." className="bg-slate-50 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 h-12 rounded-xl focus:ring-blue-500/20" />
+                            <Input name="description" placeholder="Ceritakan identitas visual dan misi divisi ini..." required className="bg-slate-50 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 h-12 rounded-xl focus:ring-blue-500/20" />
                         </div>
                     </div>
 

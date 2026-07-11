@@ -69,19 +69,19 @@ export function EditMemberModal({ member, positions }: EditMemberModalProps) {
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger 
                 render={
-                    <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-slate-100 dark:bg-zinc-800 text-slate-400 hover:text-blue-500 transition-all" />
+                    <Button variant="ghost" size="icon" className="w-9 h-9 rounded-full bg-blue-500/10 backdrop-blur-md border border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-500 hover:bg-blue-600 hover:text-white transition-all shrink-0" />
                 }
             >
                 <Pencil className="w-4 h-4" />
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[750px] w-[96vw] bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl p-0 overflow-hidden">
+            <DialogContent className="sm:max-w-[750px] w-[96vw] bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl p-0 max-h-[90vh] overflow-y-auto overflow-x-hidden hide-scrollbar">
                 <form onSubmit={handleSubmit}>
                     <input type="hidden" name="id" value={member.id} />
                     
                     <DialogHeader className="p-8 pb-0">
                         <DialogTitle className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight leading-none">Edit Profil Anggota</DialogTitle>
                         <DialogDescription className="text-slate-500 dark:text-zinc-400 mt-3 text-sm">
-                            Perbarui informasi dan data profesional anggota Baroedak COMO.
+                            Perbarui informasi dan data profesional anggota PT Rizky Rijaya Karya.
                         </DialogDescription>
                     </DialogHeader>
 

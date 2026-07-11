@@ -51,7 +51,7 @@ export function ProjectFormToggle() {
                             <Plus className="w-5 h-5 text-blue-500" />
                         </div>
                         <div>
-                            <DialogTitle className="text-lg font-bold text-slate-900 dark:text-white leading-none font-serif">Informasi Proyek Baru</DialogTitle>
+                            <DialogTitle className="text-lg font-bold text-slate-900 dark:text-white leading-none">Informasi Proyek Baru</DialogTitle>
                             <p className="text-xs text-slate-500 dark:text-zinc-500 mt-1">Data visual akan otomatis ditarik dari URL.</p>
                         </div>
                     </div>
@@ -63,7 +63,7 @@ export function ProjectFormToggle() {
                                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-1">URL Proyek (Wajib)</label>
                                 <Input 
                                     name="url" 
-                                    placeholder="https://baroedak-como.com" 
+                                    placeholder="https://compro-rrk.com" 
                                     required 
                                     className="bg-slate-50 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white h-14 rounded-2xl focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 transition-all" 
                                 />

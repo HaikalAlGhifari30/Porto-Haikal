@@ -68,23 +68,55 @@ model Verification {
 model Settings {
   id               String  @id @default(cuid())
   heroTitle        String
+  heroTitleEn      String?
   heroSubtitle     String
+  heroSubtitleEn   String?
   heroCtaText      String
+  heroCtaTextEn    String?
   heroCtaLink      String
   heroBannerUrl    String?
   heroOverlayOpacity Int   @default(50)
+  
+  // Footer fields
+  footerAbout      String?
+  footerAboutEn    String?
+  address          String?
+  phone            String?
+  email            String?
+  instagram        String?
+  linkedin         String?
+  
+  // Company Profile fields
+  aboutText        String?
+  aboutTextEn      String?
+  visionText       String?
+  visionTextEn     String?
+  missionText      String?
+  missionTextEn    String?
+  coreValues       Json?
+  
+  // Legal pages
+  termsText      String?  // Syarat & Ketentuan (ID)
+  termsTextEn    String?  // Terms & Conditions (EN)
+  privacyText    String?  // Kebijakan Privasi (ID)
+  privacyTextEn  String?  // Privacy Policy (EN)
+  
+  updatedAt        DateTime @default(now()) @updatedAt
 }
 
 model HeroSlide {
   id               String  @id @default(cuid())
   title            String?
+  titleEn          String?
   subtitle         String?
+  subtitleEn       String?
   buttonText       String?
+  buttonTextEn     String?
   buttonLink       String?
   imageUrl         String
-  overlayDarkness  Int     @default(50)
-  orderIndex       Int     @default(0)
+  overlayDarkness  Int     @default(40)
   isActive         Boolean @default(true)
+  order            Int     @default(0)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
@@ -92,12 +124,13 @@ model HeroSlide {
 model Project {
   id          String   @id @default(cuid())
   title       String
-  url         String
+  titleEn     String?
   description String?
+  descriptionEn String?
   imageUrl    String?
-  isFeatured  Boolean  @default(false)
+  url         String?
+  order       Int      @default(0)
   isVisible   Boolean  @default(true)
-  position    Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -105,13 +138,17 @@ model Project {
 model Team {
   id          String     @id @default(cuid())
   name        String
+  nameEn      String?
   slug        String     @unique
   description String?
+  descriptionEn String?
   imageUrl    String?    // Old field, keeping for compatibility
+  icon        String?    // Icon fallback for Team
   coverImage  String?    // New field for background
   logoUrl     String?    // New field for logo
   positions   Position[]
   members     Member[]
+  teamMembers TeamMember[]
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 }
@@ -119,6 +156,7 @@ model Team {
 model Position {
   id             String   @id @default(cuid())
   name           String
+  nameEn         String?
   hierarchyLevel Int      // Lower number = higher rank
   teamId         String
   team           Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
@@ -131,6 +169,7 @@ model Member {
   slug        String   @unique
   photo       String?
   bio         String?
+  bioEn       String?
   email       String?
   instagram   String?
   facebook    String?
@@ -147,6 +186,53 @@ model Member {
   positionId  String
   position    Position @relation(fields: [positionId], references: [id], onDelete: Cascade)
   
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TeamMember {
+  id          String   @id @default(cuid())
+  name        String
+  position    String
+  positionEn  String?
+  order       Int      @default(0)
+  teamId      String?
+  team        Team?    @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+}
+
+model WhatsAppAdmin {
+  id           String   @id @default(cuid())
+  name         String   // Nama Admin (misal: "CS Penjualan")
+  phone        String   // Nomor WA format 628xxx
+  message      String   // Pesan default (misal: "Halo, saya ingin bertanya...")
+  isActive     Boolean  @default(true)
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model BusinessSector {
+  id            String   @id @default(cuid())
+  name          String
+  nameEn        String?
+  description   String
+  descriptionEn String?
+  icon          String?  // Icon fallback
+  imageUrl      String?  // Ikon atau gambar ilustrasi
+  order         Int      @default(0)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Gallery {
+  id          String   @id @default(cuid())
+  title       String
+  category    String
+  imageUrl    String
+  order       Int      @default(0)
+  isVisible   Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

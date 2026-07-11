@@ -1,51 +1,70 @@
 import { getTeams } from "@/actions/team";
 import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { FloatingButtonsServer } from "@/components/floating-buttons-server";
 
 export default async function TeamsPage() {
     const teams = await getTeams();
 
     return (
-        <>
+        <div className="bg-slate-50 dark:bg-[#09090b] text-zinc-900 dark:text-white min-h-screen w-full flex flex-col transition-colors duration-300">
             <Navbar />
-            <main className="flex-1 py-20 px-6">
-                <div className="container mx-auto">
-                    <div className="mb-16 text-center max-w-2xl mx-auto">
-                        <h1 className="text-5xl font-bold tracking-tighter mb-4">Our Teams</h1>
-                        <p className="text-xl text-zinc-400">The brilliant minds behind our success.</p>
+            <main className="flex-1 pt-20 md:pt-24 pb-24">
+                <div className="container-original max-w-5xl mx-auto px-4">
+                    {/* Header */}
+                    <div className="mb-12 text-center max-w-2xl mx-auto space-y-3">
+                        <h1 className="text-3xl md:text-5xl font-black text-slate-800 dark:text-white tracking-tight">
+                            Divisi Kami
+                        </h1>
+                        <p className="text-sm md:text-base text-slate-500 dark:text-zinc-400 leading-relaxed">
+                            Kenali tim-tim spesialis yang menggerakkan keunggulan di setiap aspek ekosistem PT Rizky Rijaya Karya.
+                        </p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {/* Division Cards Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {teams.map(team => (
-                            <Link key={team.id} href={`/teams/${team.slug}`} className="group block">
-                                <div className="p-8 rounded-3xl border border-white/10 bg-zinc-900/40 hover:bg-zinc-800/60 hover:border-white/20 transition-all duration-300">
-                                    <h2 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">{team.name}</h2>
-                                    <p className="text-zinc-400 mb-8">{team.description}</p>
+                            <Link
+                                key={team.id}
+                                href={`/teams/${team.slug}`}
+                                className="group bg-white dark:bg-zinc-900/80 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors duration-300 overflow-hidden flex flex-col"
+                            >
+                                {/* Cover Image */}
+                                {(team.coverImage || team.imageUrl) ? (
+                                    <div className="aspect-[16/9] overflow-hidden border-b border-slate-200 dark:border-slate-800">
+                                        <img
+                                            src={team.coverImage || team.imageUrl || ""}
+                                            alt={team.name}
+                                            className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="aspect-[16/9] bg-slate-100 dark:bg-zinc-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-center">
+                                        <span className="text-slate-400 dark:text-zinc-600 text-sm font-medium">No Image</span>
+                                    </div>
+                                )}
 
-                                    <div className="flex items-center justify-between pt-6 border-t border-white/5">
-                                        <div className="flex -space-x-3">
-                                            {team.members.slice(0, 5).map(member => (
-                                                <div key={member.id} className="w-10 h-10 rounded-full border-2 border-zinc-900 bg-zinc-800 overflow-hidden">
-                                                    {member.photo ? (
-                                                        // eslint-disable-next-line @next/next/no-img-element
-                                                        <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
-                                                    ) : (
-                                                        <div className="w-full h-full flex items-center justify-center text-xs text-zinc-500 font-bold bg-zinc-800">
-                                                            {member.name.charAt(0)}
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            ))}
-                                            {team.members.length > 5 && (
-                                                <div className="w-10 h-10 rounded-full border-2 border-zinc-900 bg-zinc-800 flex items-center justify-center text-xs text-zinc-400 font-medium">
-                                                    +{team.members.length - 5}
-                                                </div>
-                                            )}
+                                {/* Content */}
+                                <div className="p-6 flex-1 flex flex-col">
+                                    <div className="flex items-center justify-between mb-3">
+                                        <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                            {team.name}
+                                        </h2>
+                                        <div className="w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 dark:bg-zinc-800 text-slate-400 dark:text-zinc-400 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                                         </div>
-                                        <div className="w-10 h-10 rounded-full bg-blue-500/10 text-blue-500 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-colors">
-                                            <ArrowRight className="w-4 h-4" />
-                                        </div>
+                                    </div>
+                                    <p className="text-sm text-slate-500 dark:text-zinc-400 leading-relaxed line-clamp-3 flex-1">
+                                        {team.description || "Divisi ini belum memiliki deskripsi."}
+                                    </p>
+
+                                    {/* Members Count */}
+                                    <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800">
+                                        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-zinc-500">
+                                            {team.members?.length || 0} Anggota
+                                        </span>
                                     </div>
                                 </div>
                             </Link>
@@ -53,6 +72,9 @@ export default async function TeamsPage() {
                     </div>
                 </div>
             </main>
-        </>
+
+            <Footer />
+            <FloatingButtonsServer />
+        </div>
     );
 }

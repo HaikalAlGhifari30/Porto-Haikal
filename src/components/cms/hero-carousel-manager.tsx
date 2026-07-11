@@ -33,7 +33,7 @@ interface HeroSlide {
     buttonLink: string | null;
     imageUrl: string;
     overlayDarkness: number;
-    orderIndex: number;
+    order: number;
     isActive: boolean;
 }
 

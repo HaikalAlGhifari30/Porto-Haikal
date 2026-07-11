@@ -34,7 +34,10 @@ import { uploadFile } from "@/lib/upload";
 
 export async function createTeam(formData: FormData) {
     const name = formData.get("name") as string;
+    const nameEn = (formData.get("nameEn") as string) || null;
     const description = formData.get("description") as string;
+    const descriptionEn = (formData.get("descriptionEn") as string) || null;
+    const icon = (formData.get("icon") as string) || null;
     const coverFile = formData.get("coverImage") as File;
     const logoFile = formData.get("logoUrl") as File;
     
@@ -59,8 +62,11 @@ export async function createTeam(formData: FormData) {
     await prisma.team.create({ 
         data: { 
             name, 
+            nameEn,
             slug, 
             description,
+            descriptionEn,
+            icon,
             coverImage,
             logoUrl
         } 
@@ -74,7 +80,10 @@ export async function createTeam(formData: FormData) {
 export async function updateTeamAction(formData: FormData) {
     const id = formData.get("id") as string;
     const name = formData.get("name") as string;
+    const nameEn = (formData.get("nameEn") as string) || null;
     const description = formData.get("description") as string;
+    const descriptionEn = (formData.get("descriptionEn") as string) || null;
+    const icon = (formData.get("icon") as string) || null;
     const coverFile = formData.get("coverImage") as File;
     const logoFile = formData.get("logoUrl") as File;
     
@@ -84,7 +93,7 @@ export async function updateTeamAction(formData: FormData) {
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '');
 
-    const updateData: any = { name, slug, description };
+    const updateData: any = { name, nameEn, slug, description, descriptionEn, icon };
 
     if (coverFile && coverFile.size > 0) {
         updateData.coverImage = await uploadFile(coverFile, "teams/covers");

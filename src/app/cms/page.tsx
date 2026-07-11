@@ -114,7 +114,7 @@ export default async function CMSDashboard() {
                                                 {project.isVisible ? 'LIVE' : 'DRAFT'}
                                             </span>
                                         </div>
-                                        <p className="text-xs text-slate-400 dark:text-zinc-500 font-medium truncate mb-1">{project.url.replace(/^https?:\/\//, '')}</p>
+                                        <p className="text-xs text-slate-400 dark:text-zinc-500 font-medium truncate mb-1">{project.url ? project.url.replace(/^https?:\/\//, '') : 'No URL'}</p>
                                         <p className="text-[10px] font-bold text-slate-300 dark:text-zinc-700 uppercase tracking-widest italic">{new Date(project.createdAt).toLocaleDateString('id-ID', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
                                     </div>
                                     <div className="flex items-center gap-4 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all">

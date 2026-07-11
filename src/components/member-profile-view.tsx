@@ -56,7 +56,7 @@ export function MemberProfileView({ member }: MemberProfileViewProps) {
                                         VERIFIED MEMBER PROFILE
                                     </div>
                                     
-                                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black text-white tracking-tight mb-6 leading-[1.1]">
+                                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight mb-6 leading-[1.1]">
                                         {member.name}
                                     </h1>
 
@@ -123,7 +123,7 @@ export function MemberProfileView({ member }: MemberProfileViewProps) {
                                             <DialogContent className="max-w-[320px] bg-zinc-950 border-white/10 rounded-[2.5rem] p-8 text-center text-white">
                                                 <div className="mb-6">
                                                     <h3 className="text-lg font-bold tracking-tight uppercase mb-1">Member Identity</h3>
-                                                    <p className="text-[9px] text-zinc-500 uppercase tracking-widest font-bold">Official Baroedak COMO Profile</p>
+                                                    <p className="text-[9px] text-zinc-500 uppercase tracking-widest font-bold">Official PT Rizky Rijaya Karya Profile</p>
                                                 </div>
                                                 <div className="p-4 bg-white rounded-2xl inline-block mb-6 shadow-2xl border-4 border-blue-500/10">
                                                     <img src={member.qrCodeUrl} alt="QR Code" className="w-[120px] h-[120px]" />
@@ -161,7 +161,7 @@ export function MemberProfileView({ member }: MemberProfileViewProps) {
             </main>
 
             <footer className="py-6 border-t border-white/5 bg-zinc-950 text-center">
-                <p className="text-zinc-800 text-[9px] uppercase tracking-[0.5em] font-black">Baroedak COMO Official</p>
+                <p className="text-zinc-800 text-[9px] uppercase tracking-[0.5em] font-black">PT Rizky Rijaya Karya Official</p>
             </footer>
         </div>
     );

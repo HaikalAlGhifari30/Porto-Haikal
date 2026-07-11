@@ -28,7 +28,7 @@ export default async function ProjectsPage() {
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                         {visibleProjects.map(project => (
-                            <a href={project.url} target="_blank" rel="noreferrer" key={project.id} className="group block relative">
+                            <a href={project.url || "#"} target="_blank" rel="noreferrer" key={project.id} className="group block relative">
                                 <div className="h-full rounded-[2.5rem] border border-white/5 overflow-hidden bg-zinc-900/40 backdrop-blur-sm hover:border-blue-500/30 transition-all duration-500 shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2">
                                     <div className="aspect-[16/10] bg-zinc-950 relative overflow-hidden">
                                         {project.imageUrl ? (
@@ -46,11 +46,7 @@ export default async function ProjectsPage() {
                                         {/* Overlay Glow */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity" />
 
-                                        {project.isFeatured && (
-                                            <div className="absolute top-6 right-6 px-4 py-1.5 rounded-full bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest shadow-xl border border-blue-400/30">
-                                                Featured
-                                            </div>
-                                        )}
+                                        {/* Removed Featured Badge */}
                                     </div>
                                     <div className="p-8">
                                         <div className="flex items-start justify-between gap-4 mb-3">

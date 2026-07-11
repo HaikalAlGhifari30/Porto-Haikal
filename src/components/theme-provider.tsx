@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useLayoutEffect, useState } from "react";
+import { flushSync } from "react-dom";
 
 const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
@@ -57,9 +58,21 @@ export function ThemeProvider({
 
     const value = {
         theme,
-        setTheme: (theme: Theme) => {
-            localStorage.setItem("ui-theme", theme);
-            setTheme(theme);
+        setTheme: (newTheme: Theme) => {
+            localStorage.setItem("ui-theme", newTheme);
+            if (!document.startViewTransition) {
+                setTheme(newTheme);
+            } else {
+                try {
+                    document.startViewTransition(() => {
+                        flushSync(() => {
+                            setTheme(newTheme);
+                        });
+                    });
+                } catch (err) {
+                    setTheme(newTheme);
+                }
+            }
         },
     };
 

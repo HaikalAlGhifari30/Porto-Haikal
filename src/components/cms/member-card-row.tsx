@@ -178,7 +178,7 @@ export function MemberCardRow({ member, positions }: MemberCardRowProps) {
                 <EditMemberModal member={member} positions={positions} />
 
                 <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
-                    <DialogTrigger render={<Button variant="ghost" size="icon" className="h-9 w-9 rounded-full text-slate-400 hover:text-red-500 transition-all" />} >
+                    <DialogTrigger render={<Button variant="ghost" size="icon" className="w-9 h-9 rounded-full bg-red-500/10 backdrop-blur-md border border-red-500/20 flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition-all shrink-0" />} >
                         <Trash2 className="w-4 h-4" />
                     </DialogTrigger>
                     <DialogContent className="max-w-[400px] bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 rounded-[2.5rem] p-10 text-center">
@@ -187,7 +187,7 @@ export function MemberCardRow({ member, positions }: MemberCardRowProps) {
                         </div>
                         <DialogTitle className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Delete Member?</DialogTitle>
                         <p className="text-sm text-slate-500 dark:text-zinc-400 mb-8 leading-relaxed">
-                            Data for <span className="font-bold text-slate-900 dark:text-white">{member.name}</span> will be permanently deleted from Baroedak COMO system.
+                            Data for <span className="font-bold text-slate-900 dark:text-white">{member.name}</span> will be permanently deleted from PT Rizky Rijaya Karya system.
                         </p>
                         <div className="flex gap-3">
                             <Button variant="ghost" onClick={() => setIsDeleteOpen(false)} className="flex-1 rounded-xl font-bold h-12">Cancel</Button>

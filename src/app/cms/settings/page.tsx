@@ -2,11 +2,15 @@ import { getSettings } from "@/actions/settings";
 import { getHeroSlides } from "@/actions/hero";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { HeroSettingsForm } from "@/components/cms/hero-settings-form";
+import { FooterSettingsForm } from "@/components/cms/footer-settings-form";
+import { getWhatsAppAdmins } from "@/actions/whatsapp-admin";
+import { WhatsAppAdminCMS } from "@/components/cms/whatsapp-admin-cms";
 
 export default async function SettingsPage() {
-    const [settings, slides] = await Promise.all([
+    const [settings, slides, whatsappAdmins] = await Promise.all([
         getSettings(),
-        getHeroSlides()
+        getHeroSlides(),
+        getWhatsAppAdmins()
     ]);
 
     return (
@@ -24,6 +28,24 @@ export default async function SettingsPage() {
                 </CardHeader>
                 <CardContent className="p-6">
                     <HeroSettingsForm initialSlides={slides as any} />
+                </CardContent>
+            </Card>
+
+            <Card className="bg-white dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-sm">
+                <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 bg-slate-50/50 dark:bg-zinc-900/50 px-6 py-4">
+                    <CardTitle className="text-lg font-bold text-slate-900 dark:text-white">Pengaturan Footer</CardTitle>
+                </CardHeader>
+                <CardContent className="p-6">
+                    <FooterSettingsForm settings={settings} />
+                </CardContent>
+            </Card>
+
+            <Card className="bg-white dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-sm">
+                <CardHeader className="border-b border-slate-100 dark:border-zinc-800/50 bg-slate-50/50 dark:bg-zinc-900/50 px-6 py-4">
+                    <CardTitle className="text-lg font-bold text-slate-900 dark:text-white">Admin WhatsApp (Floating Button)</CardTitle>
+                </CardHeader>
+                <CardContent className="p-6">
+                    <WhatsAppAdminCMS initialAdmins={whatsappAdmins} />
                 </CardContent>
             </Card>
         </div>

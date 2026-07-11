@@ -77,14 +77,14 @@ export function AddMemberModal({ teamId, positions }: AddMemberModalProps) {
                 <Plus className="w-4 h-4 mr-2 group-hover:rotate-90 transition-transform duration-300" />
                 Tambah Anggota
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[750px] w-[96vw] bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl p-0 overflow-hidden">
+            <DialogContent className="sm:max-w-[750px] w-[96vw] bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl p-0 max-h-[90vh] overflow-y-auto overflow-x-hidden hide-scrollbar">
                 <form onSubmit={handleSubmit}>
                     <input type="hidden" name="teamId" value={teamId} />
                     
                     <DialogHeader className="p-8 pb-0">
                         <DialogTitle className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight leading-none">Tambah Anggota Baru</DialogTitle>
                         <DialogDescription className="text-slate-500 dark:text-zinc-400 mt-3 text-sm">
-                            Lengkapi profil anggota tim Baroedak COMO dengan data premium.
+                            Lengkapi profil anggota tim PT Rizky Rijaya Karya dengan data premium.
                         </DialogDescription>
                     </DialogHeader>
 

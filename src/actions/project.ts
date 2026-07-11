@@ -20,7 +20,7 @@ export async function fetchOgData(url: string) {
 
 export async function getProjects() {
     return await prisma.project.findMany({
-        orderBy: { position: "asc" }
+        orderBy: { order: "asc" }
     });
 }
 
@@ -37,11 +37,9 @@ export async function createProject(formData: FormData) {
         imageUrl = ogData.imageUrl;
     }
 
-    const isFeatured = formData.get("isFeatured") === "true";
-
-    // Get max position
-    const maxPosition = await prisma.project.aggregate({
-        _max: { position: true }
+    // Get max order
+    const maxOrder = await prisma.project.aggregate({
+        _max: { order: true }
     });
 
     const project = await prisma.project.create({
@@ -50,8 +48,7 @@ export async function createProject(formData: FormData) {
             url,
             description,
             imageUrl,
-            isFeatured,
-            position: (maxPosition._max.position ?? -1) + 1,
+            order: (maxOrder._max.order ?? -1) + 1,
         }
     });
 
@@ -81,7 +78,7 @@ export async function reorderProjects(ids: string[]) {
     const transactions = ids.map((id, index) => 
         prisma.project.update({
             where: { id },
-            data: { position: index }
+            data: { order: index }
         })
     );
 

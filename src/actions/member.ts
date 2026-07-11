@@ -4,7 +4,8 @@ import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import QRCode from "qrcode";
 import { uploadFile } from "@/lib/upload";
-import cloudinary from "@/lib/cloudinary";
+import { promises as fs } from "fs";
+import path from "path";
 import { headers } from "next/headers";
 
 export async function getMembers() {
@@ -33,21 +34,14 @@ export async function generateMemberQR(memberId: string, slug: string) {
         margin: 2
     });
 
-    const qrCodeUrl = await new Promise<string>((resolve, reject) => {
-        const uploadStream = cloudinary.uploader.upload_stream(
-            {
-                folder: "baroedak-como/members/qr",
-                public_id: `${slug}-qr`,
-                overwrite: true,
-                resource_type: "image",
-            },
-            (error, result) => {
-                if (error) reject(error);
-                else resolve(result?.secure_url || "");
-            }
-        );
-        uploadStream.end(qrBuffer);
-    });
+    const uploadDir = path.join(process.cwd(), "public", "uploads", "members", "qr");
+    await fs.mkdir(uploadDir, { recursive: true });
+    
+    const fileName = `${slug}-qr.png`;
+    const filePath = path.join(uploadDir, fileName);
+    await fs.writeFile(filePath, qrBuffer);
+    
+    const qrCodeUrl = `/uploads/members/qr/${fileName}`;
 
     await prisma.member.update({
         where: { id: memberId },

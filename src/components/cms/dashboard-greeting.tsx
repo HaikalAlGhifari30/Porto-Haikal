@@ -7,10 +7,12 @@ export function DashboardGreeting() {
 
     useEffect(() => {
         const storedName = localStorage.getItem("adminName");
-        if (storedName) {
+        if (storedName && !storedName.toLowerCase().includes("como")) {
             setAdminName(storedName);
         } else {
-            setAdminName("Baroedak Como"); // Default value consistent with current branding
+            const newName = "Admin PT Rizky Rijaya Karya";
+            setAdminName(newName);
+            localStorage.setItem("adminName", newName);
         }
     }, []);
 

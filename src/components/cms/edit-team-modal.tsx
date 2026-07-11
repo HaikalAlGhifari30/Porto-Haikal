@@ -17,13 +17,17 @@ import { Pencil, Upload, X, Image as ImageIcon, Loader2 } from "lucide-react";
 import { updateTeamAction } from "@/actions/team";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { IconSelector } from "@/components/ui/icon-selector";
 
 interface EditTeamModalProps {
     team: {
         id: string;
         name: string;
+        nameEn?: string | null;
         slug: string;
         description: string | null;
+        descriptionEn?: string | null;
+        icon?: string | null;
         imageUrl: string | null;
         logoUrl: string | null;
         coverImage: string | null;
@@ -34,6 +38,7 @@ export function EditTeamModal({ team }: EditTeamModalProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [isPending, setIsPending] = useState(false);
     const [coverPreview, setCoverPreview] = useState<string | null>(team.coverImage || team.imageUrl);
+    const [icon, setIcon] = useState<string | null>(team.icon || null);
     const coverInputRef = useRef<HTMLInputElement>(null);
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,6 +63,16 @@ export function EditTeamModal({ team }: EditTeamModalProps) {
         setIsPending(true);
         const formData = new FormData(e.currentTarget);
         
+        if (!icon && !coverPreview) {
+            toast.error("Silakan unggah Gambar Ilustrasi Divisi atau pilih Ikon");
+            setIsPending(false);
+            return;
+        }
+
+        if (icon) {
+            formData.set("icon", icon);
+        }
+        
         try {
             await updateTeamAction(formData);
             setIsOpen(false);
@@ -77,14 +92,14 @@ export function EditTeamModal({ team }: EditTeamModalProps) {
                     <Button 
                         variant="ghost" 
                         size="icon" 
-                        className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-blue-600 transition-all"
+                        className="w-9 h-9 rounded-full bg-blue-500/10 backdrop-blur-md border border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-500 hover:bg-blue-600 hover:text-white transition-all"
                         onClick={(e) => e.stopPropagation()}
                     />
                 }
             >
                 <Pencil className="w-4 h-4" />
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[650px] bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl p-0 overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <DialogContent className="sm:max-w-[650px] bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl p-0 max-h-[90vh] overflow-y-auto overflow-x-hidden hide-scrollbar" onClick={(e) => e.stopPropagation()}>
                 <form onSubmit={handleSubmit}>
                     <input type="hidden" name="id" value={team.id} />
                     <DialogHeader className="p-8 pb-0">
@@ -132,14 +147,26 @@ export function EditTeamModal({ team }: EditTeamModalProps) {
                             </div>
                         </div>
 
-                        <div className="space-y-2">
-                            <Label className="text-[10px] text-slate-400 dark:text-zinc-500 uppercase font-bold tracking-[0.2em] pl-1">Nama Divisi</Label>
-                            <Input key={`name-${team.id}`} name="name" defaultValue={team.name || ""} required className="bg-slate-50 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 h-12 rounded-xl focus:ring-blue-500/20" />
+                        {/* Icon Selection Fallback */}
+                        <div>
+                            <Label className="block text-[10px] text-slate-400 dark:text-zinc-500 uppercase font-bold tracking-[0.2em] pl-1 mb-2">
+                                Pilih Ikon (Otomatis dipakai bila tidak ada gambar)
+                            </Label>
+                            <IconSelector value={icon} onChange={setIcon} />
                         </div>
 
-                        <div className="space-y-2">
-                            <Label className="text-[10px] text-slate-400 dark:text-zinc-500 uppercase font-bold tracking-[0.2em] pl-1">Deskripsi Singkat</Label>
-                            <Input key={`desc-${team.id}`} name="description" defaultValue={team.description || ""} placeholder="Ceritakan identitas visual dan misi divisi ini..." className="bg-slate-50 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 h-12 rounded-xl focus:ring-blue-500/20" />
+                        <div className="grid grid-cols-1 gap-6">
+                            <div className="space-y-2">
+                                <Label className="text-[10px] text-slate-400 dark:text-zinc-500 uppercase font-bold tracking-[0.2em] pl-1">Nama Divisi</Label>
+                                <Input key={`name-${team.id}`} name="name" defaultValue={team.name || ""} required className="bg-slate-50 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 h-12 rounded-xl focus:ring-blue-500/20" />
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-6">
+                            <div className="space-y-2">
+                                <Label className="text-[10px] text-slate-400 dark:text-zinc-500 uppercase font-bold tracking-[0.2em] pl-1">Deskripsi Singkat</Label>
+                                <Input key={`desc-${team.id}`} name="description" defaultValue={team.description || ""} placeholder="Ceritakan identitas visual dan misi divisi ini..." required className="bg-slate-50 dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 h-12 rounded-xl focus:ring-blue-500/20" />
+                            </div>
                         </div>
                     </div>
 

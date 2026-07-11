@@ -23,16 +23,7 @@ import { Button } from "@/components/ui/button";
 import { Save, Search as SearchIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ProjectStatsCMS } from "./project-stats-cms";
-
-interface Project {
-    id: string;
-    title: string;
-    url: string;
-    description: string | null;
-    imageUrl: string | null;
-    isFeatured: boolean;
-    position: number;
-}
+import { Project } from "@prisma/client";
 
 export function ProjectSortableList({ initialProjects }: { initialProjects: Project[] }) {
     const [projects, setProjects] = useState(initialProjects);

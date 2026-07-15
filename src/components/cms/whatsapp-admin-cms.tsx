@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Plus, Edit2, Trash2, Phone, GripVertical, Check, X, Loader2, Info } from "lucide-react";
+import { Plus, Edit2, Trash2, Phone, GripVertical, Check, X, Loader2, Info, AlertTriangle } from "lucide-react";
 import {
     Dialog,
     DialogContent,
@@ -64,12 +64,20 @@ export function WhatsAppAdminCMS({ initialAdmins }: { initialAdmins: Admin[] }) 
         }
     };
 
-    const handleDelete = async (id: string) => {
-        if (!confirm("Yakin ingin menghapus admin ini?")) return;
+    const [deleteId, setDeleteId] = useState<string | null>(null);
+
+    const handleDelete = (id: string) => {
+        setDeleteId(id);
+    };
+
+    const confirmDelete = async () => {
+        if (!deleteId) return;
+        const targetId = deleteId;
+        setDeleteId(null);
         try {
-            await deleteWhatsAppAdmin(id);
+            await deleteWhatsAppAdmin(targetId);
             toast.success("Admin berhasil dihapus");
-            setAdmins(admins.filter(a => a.id !== id));
+            setAdmins(admins.filter(a => a.id !== targetId));
         } catch (error) {
             toast.error("Gagal menghapus admin");
         }
@@ -223,6 +231,37 @@ export function WhatsAppAdminCMS({ initialAdmins }: { initialAdmins: Admin[] }) 
                             </Button>
                         </form>
                     )}
+                </DialogContent>
+            </Dialog>
+
+            {/* Delete Confirmation Modal */}
+            <Dialog open={deleteId !== null} onOpenChange={(open) => !open && setDeleteId(null)}>
+                <DialogContent className="sm:max-w-sm bg-white dark:bg-slate-900 border-slate-200 dark:border-zinc-800 rounded-[3rem] p-10 flex flex-col items-center text-center">
+                    <div className="w-24 h-24 rounded-[2rem] bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-8 text-red-500 border-2 border-red-500/20 shadow-xl shadow-red-500/5">
+                        <AlertTriangle className="w-12 h-12" />
+                    </div>
+                    <DialogHeader>
+                        <DialogTitle className="text-2xl font-black text-slate-900 dark:text-white mb-3">Hapus Admin?</DialogTitle>
+                    </DialogHeader>
+                    <p className="text-sm text-slate-500 dark:text-zinc-400 mb-10 leading-relaxed font-medium">
+                        Apakah Anda yakin ingin menghapus admin WhatsApp ini? Tindakan ini permanen.
+                    </p>
+                    <div className="flex w-full gap-4">
+                        <Button 
+                            variant="outline" 
+                            className="flex-1 h-14 rounded-2xl border-slate-200 dark:border-zinc-800 font-bold hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all"
+                            onClick={() => setDeleteId(null)}
+                        >
+                            Batal
+                        </Button>
+                        <Button 
+                            variant="destructive" 
+                            className="flex-1 h-14 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-black uppercase tracking-widest shadow-xl shadow-red-500/20 hover:shadow-red-500/40 hover:-translate-y-1 transition-all"
+                            onClick={confirmDelete}
+                        >
+                            Hapus
+                        </Button>
+                    </div>
                 </DialogContent>
             </Dialog>
         </div>

@@ -54,27 +54,15 @@ export function FooterSettingsForm({ settings }: { settings: any }) {
                 </div>
 
                 <div className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="footerAbout">Tentang Perusahaan di Footer (ID)</Label>
-                            <Textarea 
-                                id="footerAbout" 
-                                name="footerAbout" 
-                                defaultValue={settings?.footerAbout || ""} 
-                                placeholder="Contoh: PT Rizky Rijaya Karya adalah..."
-                                className="min-h-[100px]"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="footerAboutEn">Tentang Perusahaan di Footer (EN)</Label>
-                            <Textarea 
-                                id="footerAboutEn" 
-                                name="footerAboutEn" 
-                                defaultValue={(settings as any)?.footerAboutEn || ""} 
-                                placeholder="Example: PT Rizky Rijaya Karya is..."
-                                className="min-h-[100px]"
-                            />
-                        </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="footerAbout">Tentang Perusahaan di Footer</Label>
+                        <Textarea 
+                            id="footerAbout" 
+                            name="footerAbout" 
+                            defaultValue={settings?.footerAbout || ""} 
+                            placeholder="Contoh: PT Rizky Rijaya Karya adalah..."
+                            className="min-h-[100px]"
+                        />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -130,57 +118,27 @@ export function FooterSettingsForm({ settings }: { settings: any }) {
                         <p className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-zinc-500 pb-1">Halaman Legalitas</p>
 
                         {/* Syarat & Ketentuan */}
-                        <div className="space-y-3">
-                            <p className="text-sm font-bold text-slate-700 dark:text-zinc-300">Syarat &amp; Ketentuan</p>
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                <div className="space-y-1.5">
-                                    <Label htmlFor="termsText" className="text-xs text-slate-500">🇮🇩 Bahasa Indonesia</Label>
-                                    <Textarea
-                                        id="termsText"
-                                        name="termsText"
-                                        defaultValue={(settings as any)?.termsText || ""}
-                                        placeholder="Tulis isi Syarat & Ketentuan (ID)..."
-                                        className="min-h-[220px] text-sm"
-                                    />
-                                </div>
-                                <div className="space-y-1.5">
-                                    <Label htmlFor="termsTextEn" className="text-xs text-slate-500">🇬🇧 English</Label>
-                                    <Textarea
-                                        id="termsTextEn"
-                                        name="termsTextEn"
-                                        defaultValue={(settings as any)?.termsTextEn || ""}
-                                        placeholder="Write Terms & Conditions content (EN)..."
-                                        className="min-h-[220px] text-sm"
-                                    />
-                                </div>
-                            </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="termsText" className="text-sm font-bold text-slate-700 dark:text-zinc-300">Syarat &amp; Ketentuan</Label>
+                            <Textarea
+                                id="termsText"
+                                name="termsText"
+                                defaultValue={(settings as any)?.termsText || ""}
+                                placeholder="Tulis isi Syarat & Ketentuan..."
+                                className="min-h-[200px] text-sm"
+                            />
                         </div>
 
                         {/* Kebijakan Privasi */}
-                        <div className="space-y-3">
-                            <p className="text-sm font-bold text-slate-700 dark:text-zinc-300">Kebijakan Privasi</p>
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                <div className="space-y-1.5">
-                                    <Label htmlFor="privacyText" className="text-xs text-slate-500">🇮🇩 Bahasa Indonesia</Label>
-                                    <Textarea
-                                        id="privacyText"
-                                        name="privacyText"
-                                        defaultValue={(settings as any)?.privacyText || ""}
-                                        placeholder="Tulis isi Kebijakan Privasi (ID)..."
-                                        className="min-h-[220px] text-sm"
-                                    />
-                                </div>
-                                <div className="space-y-1.5">
-                                    <Label htmlFor="privacyTextEn" className="text-xs text-slate-500">🇬🇧 English</Label>
-                                    <Textarea
-                                        id="privacyTextEn"
-                                        name="privacyTextEn"
-                                        defaultValue={(settings as any)?.privacyTextEn || ""}
-                                        placeholder="Write Privacy Policy content (EN)..."
-                                        className="min-h-[220px] text-sm"
-                                    />
-                                </div>
-                            </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="privacyText" className="text-sm font-bold text-slate-700 dark:text-zinc-300">Kebijakan Privasi</Label>
+                            <Textarea
+                                id="privacyText"
+                                name="privacyText"
+                                defaultValue={(settings as any)?.privacyText || ""}
+                                placeholder="Tulis isi Kebijakan Privasi..."
+                                className="min-h-[200px] text-sm"
+                            />
                         </div>
                     </div>
                 </div>

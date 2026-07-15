@@ -47,7 +47,7 @@ export default function RootLayout({
     >
 
       <body className="min-h-full flex flex-col transition-colors duration-300">
-        <ThemeProvider defaultTheme="system">
+        <ThemeProvider defaultTheme="light">
             {children}
             <Toaster 
                 position="top-right" 

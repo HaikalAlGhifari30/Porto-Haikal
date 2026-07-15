@@ -2,10 +2,12 @@
 
 import { useState, useTransition } from "react";
 import * as Icons from "lucide-react";
-import { Pencil, Trash2, GripVertical, Eye, EyeOff } from "lucide-react";
+import { Pencil, Trash2, GripVertical, Eye, EyeOff, AlertTriangle } from "lucide-react";
 import { deleteBusinessSector, reorderBusinessSectors } from "@/actions/business-sector";
 import { toast } from "sonner";
 import { SectorFormModal } from "./sector-form-modal";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import {
     DndContext,
     closestCenter,
@@ -99,6 +101,7 @@ export function SectorSortableList({ initialSectors }: { initialSectors: Busines
     const [sectors, setSectors] = useState(initialSectors);
     const [editSector, setEditSector] = useState<BusinessSector | null>(null);
     const [isPending, startTransition] = useTransition();
+    const [deleteId, setDeleteId] = useState<string | null>(null);
 
     const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 8 } }));
 
@@ -122,17 +125,23 @@ export function SectorSortableList({ initialSectors }: { initialSectors: Busines
     }
 
     function handleDelete(id: string) {
-        if (!confirm("Hapus bidang usaha ini?")) return;
+        setDeleteId(id);
+    }
+
+    const confirmDelete = () => {
+        if (!deleteId) return;
+        const targetId = deleteId;
+        setDeleteId(null);
         startTransition(async () => {
             try {
-                await deleteBusinessSector(id);
-                setSectors(prev => prev.filter(s => s.id !== id));
+                await deleteBusinessSector(targetId);
+                setSectors(prev => prev.filter(s => s.id !== targetId));
                 toast.success("Bidang usaha berhasil dihapus");
             } catch {
                 toast.error("Gagal menghapus");
             }
         });
-    }
+    };
 
     return (
         <>
@@ -168,6 +177,39 @@ export function SectorSortableList({ initialSectors }: { initialSectors: Busines
                     </SortableContext>
                 </DndContext>
             )}
+
+            {/* Delete Confirmation Modal */}
+            <Dialog open={deleteId !== null} onOpenChange={(open) => !open && setDeleteId(null)}>
+                <DialogContent className="sm:max-w-sm bg-white dark:bg-slate-900 border-slate-200 dark:border-zinc-800 rounded-[3rem] p-10 flex flex-col items-center text-center">
+                    <div className="w-24 h-24 rounded-[2rem] bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-8 text-red-500 border-2 border-red-500/20 shadow-xl shadow-red-500/5">
+                        <AlertTriangle className="w-12 h-12" />
+                    </div>
+                    <DialogHeader>
+                        <DialogTitle className="text-2xl font-black text-slate-900 dark:text-white mb-3">Hapus Bidang Usaha?</DialogTitle>
+                    </DialogHeader>
+                    <p className="text-sm text-slate-500 dark:text-zinc-400 mb-10 leading-relaxed font-medium">
+                        Tindakan ini permanen. Bidang usaha yang dipilih akan dihapus selamanya dari sistem.
+                    </p>
+                    <div className="flex w-full gap-4">
+                        <Button 
+                            variant="outline" 
+                            className="flex-1 h-14 rounded-2xl border-slate-200 dark:border-zinc-800 font-bold hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all"
+                            onClick={() => setDeleteId(null)}
+                            disabled={isPending}
+                        >
+                            Batal
+                        </Button>
+                        <Button 
+                            variant="destructive" 
+                            className="flex-1 h-14 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-black uppercase tracking-widest shadow-xl shadow-red-500/20 hover:shadow-red-500/40 hover:-translate-y-1 transition-all"
+                            onClick={confirmDelete}
+                            disabled={isPending}
+                        >
+                            {isPending ? "..." : "Hapus"}
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </>
     );
 }

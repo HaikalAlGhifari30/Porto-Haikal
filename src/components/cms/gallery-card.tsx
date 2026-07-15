@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { Gallery } from "@prisma/client";
-import { Edit2, Eye, EyeOff, Trash2, Loader2 } from "lucide-react";
+import { Edit2, Eye, EyeOff, Trash2, Loader2, AlertTriangle } from "lucide-react";
 import { deleteGalleryItem, updateGalleryItem } from "@/actions/gallery";
 import { GalleryFormModal } from "./gallery-form-modal";
 import { toast } from "sonner";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 interface GalleryCardProps {
     item: Gallery;
@@ -16,13 +18,14 @@ export function GalleryCard({ item }: GalleryCardProps) {
     const [isEditing, setIsEditing] = useState(false);
     const [isToggling, setIsToggling] = useState(false);
     const [isVisible, setIsVisible] = useState(item.isVisible);
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
     const handleDelete = async () => {
-        if (!confirm(`Apakah Anda yakin ingin menghapus foto "${item.title}"?`)) return;
         setIsDeleting(true);
         try {
             await deleteGalleryItem(item.id);
             toast.success("Foto berhasil dihapus");
+            setIsDeleteOpen(false);
         } catch (error) {
             toast.error("Gagal menghapus foto");
             setIsDeleting(false);
@@ -72,7 +75,7 @@ export function GalleryCard({ item }: GalleryCardProps) {
                     <button onClick={handleToggleVisibility} disabled={isToggling} className="w-8 h-8 rounded-full bg-white/90 dark:bg-black/80 backdrop-blur-sm flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-zinc-800 shadow-sm border border-slate-200 dark:border-zinc-700 transition-colors disabled:opacity-50">
                         {isToggling ? <Loader2 className="w-4 h-4 animate-spin" /> : (isVisible ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />)}
                     </button>
-                    <button onClick={handleDelete} disabled={isDeleting} className="w-8 h-8 rounded-full bg-white/90 dark:bg-black/80 backdrop-blur-sm flex items-center justify-center text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 shadow-sm border border-red-200 dark:border-red-900/50 transition-colors disabled:opacity-50">
+                    <button onClick={() => setIsDeleteOpen(true)} disabled={isDeleting} className="w-8 h-8 rounded-full bg-white/90 dark:bg-black/80 backdrop-blur-sm flex items-center justify-center text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 shadow-sm border border-red-200 dark:border-red-900/50 transition-colors disabled:opacity-50">
                         <Trash2 className="w-4 h-4" />
                     </button>
                 </div>
@@ -100,6 +103,39 @@ export function GalleryCard({ item }: GalleryCardProps) {
                 onClose={() => setIsEditing(false)}
                 item={item}
             />
+
+            {/* Delete Confirmation Modal */}
+            <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
+                <DialogContent className="sm:max-w-sm bg-white dark:bg-slate-900 border-slate-200 dark:border-zinc-800 rounded-[3rem] p-10 flex flex-col items-center text-center">
+                    <div className="w-24 h-24 rounded-[2rem] bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-8 text-red-500 border-2 border-red-500/20 shadow-xl shadow-red-500/5">
+                        <AlertTriangle className="w-12 h-12" />
+                    </div>
+                    <DialogHeader>
+                        <DialogTitle className="text-2xl font-black text-slate-900 dark:text-white mb-3">Hapus Foto?</DialogTitle>
+                    </DialogHeader>
+                    <p className="text-sm text-slate-500 dark:text-zinc-400 mb-10 leading-relaxed font-medium">
+                        Tindakan ini permanen. Foto <span className="text-slate-900 dark:text-white font-bold">"{item.title}"</span> akan dihapus selamanya.
+                    </p>
+                    <div className="flex w-full gap-4">
+                        <Button 
+                            variant="outline" 
+                            className="flex-1 h-14 rounded-2xl border-slate-200 dark:border-zinc-800 font-bold hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all"
+                            onClick={() => setIsDeleteOpen(false)}
+                            disabled={isDeleting}
+                        >
+                            Batal
+                        </Button>
+                        <Button 
+                            variant="destructive" 
+                            className="flex-1 h-14 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-black uppercase tracking-widest shadow-xl shadow-red-500/20 hover:shadow-red-500/40 hover:-translate-y-1 transition-all"
+                            onClick={handleDelete}
+                            disabled={isDeleting}
+                        >
+                            {isDeleting ? "..." : "Hapus"}
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </>
     );
 }

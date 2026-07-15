@@ -18,12 +18,13 @@ import {
     useSortable
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Plus, Trash2, Settings2, GripVertical, ImageIcon, Loader2 } from "lucide-react";
+import { Plus, Trash2, Settings2, GripVertical, ImageIcon, Loader2, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { addHeroSlide, deleteHeroSlide, reorderHeroSlides, updateHeroSlide } from "@/actions/hero";
 import { SlideSettingsModal } from "./slide-settings-modal";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 interface HeroSlide {
     id: string;
@@ -46,6 +47,7 @@ export function HeroCarouselManager({ initialSlides }: HeroCarouselManagerProps)
     const [isSaving, setIsSaving] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const [deleteId, setDeleteId] = useState<string | null>(null);
 
     const sensors = useSensors(
         useSensor(PointerSensor),
@@ -101,14 +103,20 @@ export function HeroCarouselManager({ initialSlides }: HeroCarouselManagerProps)
         }
     };
 
-    const handleDelete = async (id: string) => {
-        if (!confirm("Hapus banner ini?")) return;
+    const handleDelete = (id: string) => {
+        setDeleteId(id);
+    };
+
+    const confirmDelete = async () => {
+        if (!deleteId) return;
+        const targetId = deleteId;
+        setDeleteId(null);
         
         const oldSlides = [...slides];
-        setSlides(slides.filter(s => s.id !== id));
+        setSlides(slides.filter(s => s.id !== targetId));
         
         try {
-            await deleteHeroSlide(id);
+            await deleteHeroSlide(targetId);
             toast.success("Banner dihapus");
         } catch (error) {
             setSlides(oldSlides);
@@ -227,6 +235,36 @@ export function HeroCarouselManager({ initialSlides }: HeroCarouselManagerProps)
                     </ul>
                 </div>
             </div>
+            {/* Delete Confirmation Modal */}
+            <Dialog open={deleteId !== null} onOpenChange={(open) => !open && setDeleteId(null)}>
+                <DialogContent className="sm:max-w-sm bg-white dark:bg-slate-900 border-slate-200 dark:border-zinc-800 rounded-[3rem] p-10 flex flex-col items-center text-center">
+                    <div className="w-24 h-24 rounded-[2rem] bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-8 text-red-500 border-2 border-red-500/20 shadow-xl shadow-red-500/5">
+                        <AlertTriangle className="w-12 h-12" />
+                    </div>
+                    <DialogHeader>
+                        <DialogTitle className="text-2xl font-black text-slate-900 dark:text-white mb-3">Hapus Banner?</DialogTitle>
+                    </DialogHeader>
+                    <p className="text-sm text-slate-500 dark:text-zinc-400 mb-10 leading-relaxed font-medium">
+                        Apakah Anda yakin ingin menghapus banner ini? Tindakan ini permanen.
+                    </p>
+                    <div className="flex w-full gap-4">
+                        <Button 
+                            variant="outline" 
+                            className="flex-1 h-14 rounded-2xl border-slate-200 dark:border-zinc-800 font-bold hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all"
+                            onClick={() => setDeleteId(null)}
+                        >
+                            Batal
+                        </Button>
+                        <Button 
+                            variant="destructive" 
+                            className="flex-1 h-14 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-black uppercase tracking-widest shadow-xl shadow-red-500/20 hover:shadow-red-500/40 hover:-translate-y-1 transition-all"
+                            onClick={confirmDelete}
+                        >
+                            Hapus
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }

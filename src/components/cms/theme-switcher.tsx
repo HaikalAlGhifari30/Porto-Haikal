@@ -8,9 +8,17 @@ import { cn } from "@/lib/utils";
 export function ThemeSwitcher() {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
+    const [systemPrefersDark, setSystemPrefersDark] = useState(false);
 
     useEffect(() => {
         setMounted(true);
+        if (typeof window !== "undefined") {
+            const media = window.matchMedia("(prefers-color-scheme: dark)");
+            setSystemPrefersDark(media.matches);
+            const listener = (e: MediaQueryListEvent) => setSystemPrefersDark(e.matches);
+            media.addEventListener("change", listener);
+            return () => media.removeEventListener("change", listener);
+        }
     }, []);
 
     if (!mounted) {
@@ -20,12 +28,14 @@ export function ThemeSwitcher() {
         );
     }
 
+    const isDark = theme === "system" ? systemPrefersDark : theme === "dark";
+
     return (
         <button 
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={() => setTheme(isDark ? 'light' : 'dark')}
             className={cn(
                 "relative flex items-center w-[60px] h-7 p-0.5 rounded-full transition-all duration-500 cursor-pointer overflow-hidden",
-                theme === 'dark' 
+                isDark 
                     ? "bg-slate-950 border border-slate-800 shadow-inner" 
                     : "bg-slate-200/50 border border-slate-300/50 shadow-inner"
             )}
@@ -34,18 +44,18 @@ export function ThemeSwitcher() {
             <div 
                 className={cn(
                     "absolute w-6 h-6 rounded-full transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex items-center justify-center shadow-md transform",
-                    theme === 'dark' 
+                    isDark 
                         ? "translate-x-0 bg-slate-800 text-blue-400 border border-slate-700" 
                         : "translate-x-8 bg-white text-orange-500 border border-slate-100"
                 )}
             >
-                {theme === 'dark' ? <Moon className="w-3 h-3 fill-blue-400/10" /> : <Sun className="w-3 h-3 fill-orange-400/10" />}
+                {isDark ? <Moon className="w-3 h-3 fill-blue-400/10" /> : <Sun className="w-3 h-3 fill-orange-400/10" />}
             </div>
 
             {/* Background Icons (Subtle) */}
             <div className="flex justify-between w-full px-2 opacity-30 pointer-events-none">
-                <Moon className={cn("w-3 h-3 transition-opacity", theme === 'dark' ? "opacity-0" : "opacity-100")} />
-                <Sun className={cn("w-3 h-3 transition-opacity", theme === 'light' ? "opacity-0" : "opacity-100")} />
+                <Moon className={cn("w-3 h-3 transition-opacity", isDark ? "opacity-0" : "opacity-100")} />
+                <Sun className={cn("w-3 h-3 transition-opacity", !isDark ? "opacity-0" : "opacity-100")} />
             </div>
         </button>
     );

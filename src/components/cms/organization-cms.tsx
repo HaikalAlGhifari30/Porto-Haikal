@@ -21,7 +21,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { updateTeamMemberOrder, createTeamMember, deleteTeamMember, updateTeamMember } from "@/actions/team-member";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Save, Search, GripVertical, Trash2, Edit2, Plus, Loader2 } from "lucide-react";
+import { Save, Search, GripVertical, Trash2, Edit2, Plus, Loader2, AlertTriangle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
@@ -140,11 +140,19 @@ export function OrganizationCms({ initialMembers }: { initialMembers: TeamMember
         setIsModalOpen(true);
     };
 
-    const handleDelete = async (id: string) => {
-        if (!confirm("Apakah Anda yakin ingin menghapus anggota ini?")) return;
+    const [deleteId, setDeleteId] = useState<string | null>(null);
+
+    const handleDelete = (id: string) => {
+        setDeleteId(id);
+    };
+
+    const confirmDelete = async () => {
+        if (!deleteId) return;
+        const targetId = deleteId;
+        setDeleteId(null);
         try {
-            await deleteTeamMember(id);
-            setMembers(members.filter(m => m.id !== id));
+            await deleteTeamMember(targetId);
+            setMembers(members.filter(m => m.id !== targetId));
             toast.success("Anggota berhasil dihapus");
         } catch {
             toast.error("Gagal menghapus anggota");
@@ -260,6 +268,37 @@ export function OrganizationCms({ initialMembers }: { initialMembers: TeamMember
                             </Button>
                         </DialogFooter>
                     </form>
+                </DialogContent>
+            </Dialog>
+
+            {/* Delete Confirmation Modal */}
+            <Dialog open={deleteId !== null} onOpenChange={(open) => !open && setDeleteId(null)}>
+                <DialogContent className="sm:max-w-sm bg-white dark:bg-slate-900 border-slate-200 dark:border-zinc-800 rounded-[3rem] p-10 flex flex-col items-center text-center">
+                    <div className="w-24 h-24 rounded-[2rem] bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-8 text-red-500 border-2 border-red-500/20 shadow-xl shadow-red-500/5">
+                        <AlertTriangle className="w-12 h-12" />
+                    </div>
+                    <DialogHeader>
+                        <DialogTitle className="text-2xl font-black text-slate-900 dark:text-white mb-3">Hapus Anggota?</DialogTitle>
+                    </DialogHeader>
+                    <p className="text-sm text-slate-500 dark:text-zinc-400 mb-10 leading-relaxed font-medium">
+                        Apakah Anda yakin ingin menghapus anggota ini? Tindakan ini permanen.
+                    </p>
+                    <div className="flex w-full gap-4">
+                        <Button 
+                            variant="outline" 
+                            className="flex-1 h-14 rounded-2xl border-slate-200 dark:border-zinc-800 font-bold hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all"
+                            onClick={() => setDeleteId(null)}
+                        >
+                            Batal
+                        </Button>
+                        <Button 
+                            variant="destructive" 
+                            className="flex-1 h-14 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-black uppercase tracking-widest shadow-xl shadow-red-500/20 hover:shadow-red-500/40 hover:-translate-y-1 transition-all"
+                            onClick={confirmDelete}
+                        >
+                            Hapus
+                        </Button>
+                    </div>
                 </DialogContent>
             </Dialog>
         </div>

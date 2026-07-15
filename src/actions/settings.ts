@@ -22,6 +22,27 @@ export async function getSettings() {
     return settings;
 }
 
+async function translateIdToEn(text: string): Promise<string> {
+    if (!text || text.trim() === "") return "";
+    try {
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=id&tl=en&dt=t&q=${encodeURIComponent(text)}`;
+        const res = await fetch(url, {
+            headers: {
+                "User-Agent": "Mozilla/5.0"
+            }
+        });
+        if (!res.ok) return text;
+        const data = await res.json();
+        if (data && data[0]) {
+            return data[0].map((sentence: any) => sentence[0]).join("");
+        }
+        return text;
+    } catch (e) {
+        console.error("Translation failed:", e);
+        return text;
+    }
+}
+
 export async function updateSettings(formData: FormData) {
     const settings = await getSettings();
     
@@ -37,17 +58,23 @@ export async function updateSettings(formData: FormData) {
         ? parseInt(heroOverlayOpacityStr as string) 
         : settings.heroOverlayOpacity;
 
-    const footerAbout = formData.get("footerAbout") as string ?? settings.footerAbout;
-    const footerAboutEn = formData.get("footerAboutEn") as string ?? (settings as any).footerAboutEn;
+    const footerAboutRaw = formData.get("footerAbout") as string | null;
+    const footerAbout = footerAboutRaw !== null ? footerAboutRaw : settings.footerAbout;
+    const footerAboutEn = footerAboutRaw !== null ? await translateIdToEn(footerAbout) : (settings as any).footerAboutEn;
+
     const address = formData.get("address") as string ?? settings.address;
     const phone = formData.get("phone") as string ?? settings.phone;
     const email = formData.get("email") as string ?? settings.email;
     const instagram = formData.get("instagram") as string ?? settings.instagram;
     const linkedin = formData.get("linkedin") as string ?? settings.linkedin;
-    const termsText = formData.get("termsText") as string ?? (settings as any).termsText;
-    const privacyText = formData.get("privacyText") as string ?? (settings as any).privacyText;
-    const termsTextEn = formData.get("termsTextEn") as string ?? (settings as any).termsTextEn;
-    const privacyTextEn = formData.get("privacyTextEn") as string ?? (settings as any).privacyTextEn;
+
+    const termsTextRaw = formData.get("termsText") as string | null;
+    const termsText = termsTextRaw !== null ? termsTextRaw : (settings as any).termsText;
+    const termsTextEn = termsTextRaw !== null ? await translateIdToEn(termsText) : (settings as any).termsTextEn;
+
+    const privacyTextRaw = formData.get("privacyText") as string | null;
+    const privacyText = privacyTextRaw !== null ? privacyTextRaw : (settings as any).privacyText;
+    const privacyTextEn = privacyTextRaw !== null ? await translateIdToEn(privacyText) : (settings as any).privacyTextEn;
 
     const aboutText = formData.get("aboutText") as string ?? settings.aboutText;
     const visionText = formData.get("visionText") as string ?? settings.visionText;

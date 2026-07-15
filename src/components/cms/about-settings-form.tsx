@@ -7,13 +7,14 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { updateSettings } from "@/actions/settings";
 import { toast } from "sonner";
-import { Loader2, Save, Plus, Trash2 } from "lucide-react";
+import { Loader2, Save, Plus, Trash2, AlertTriangle } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 
 export function AboutSettingsForm({ settings }: { settings: any }) {
     const [isSaving, setIsSaving] = useState(false);
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     const [formDataToSave, setFormDataToSave] = useState<FormData | null>(null);
+    const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
     // Fallbacks
     const defaultAboutText = "PT Rizky Rijaya Karya adalah perusahaan dibawah hukum negara kesatuan republik Indonesia yang didirikan secara resmi pada 05 september 2023 yang bergerak di bidang Perdagangan, Industri dan Jasa.";
     const defaultVisionText = "Menjadi Perusahaan berskala Nasional yang mampu melayani Kebutuhan Publik secara professional yang bertumpu pada Nilai Integritas, Kepuasan pelanggan, dan Sumber Daya Manusia.";
@@ -77,7 +78,14 @@ export function AboutSettingsForm({ settings }: { settings: any }) {
     };
 
     const removeCoreValue = (index: number) => {
-        setCoreValues(coreValues.filter((_, i) => i !== index));
+        setDeleteIndex(index);
+    };
+
+    const confirmDeleteCoreValue = () => {
+        if (deleteIndex !== null) {
+            setCoreValues(coreValues.filter((_, i) => i !== deleteIndex));
+            setDeleteIndex(null);
+        }
     };
 
     return (
@@ -217,6 +225,37 @@ export function AboutSettingsForm({ settings }: { settings: any }) {
                             className="flex-1 h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white border-none shadow-md shadow-blue-500/20"
                         >
                             {isSaving ? <Loader2 className="w-5 h-5 animate-spin" /> : "Ya, Simpan"}
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
+
+            {/* Delete Core Value Confirmation Modal */}
+            <Dialog open={deleteIndex !== null} onOpenChange={(open) => !open && setDeleteIndex(null)}>
+                <DialogContent className="sm:max-w-sm bg-white dark:bg-slate-900 border-slate-200 dark:border-zinc-800 rounded-[3rem] p-10 flex flex-col items-center text-center">
+                    <div className="w-24 h-24 rounded-[2rem] bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-8 text-red-500 border-2 border-red-500/20 shadow-xl shadow-red-500/5">
+                        <AlertTriangle className="w-12 h-12" />
+                    </div>
+                    <DialogHeader>
+                        <DialogTitle className="text-2xl font-black text-slate-900 dark:text-white mb-3">Hapus Core Value?</DialogTitle>
+                    </DialogHeader>
+                    <p className="text-sm text-slate-500 dark:text-zinc-400 mb-10 leading-relaxed font-medium">
+                        Apakah Anda yakin ingin menghapus nilai <strong className="text-slate-700 dark:text-white">&ldquo;{deleteIndex !== null ? coreValues[deleteIndex]?.title || 'ini' : ''}&rdquo;</strong>? Perubahan akan tersimpan saat Anda klik Simpan.
+                    </p>
+                    <div className="flex w-full gap-4">
+                        <Button 
+                            variant="outline" 
+                            className="flex-1 h-14 rounded-2xl border-slate-200 dark:border-zinc-800 font-bold hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all"
+                            onClick={() => setDeleteIndex(null)}
+                        >
+                            Batal
+                        </Button>
+                        <Button 
+                            variant="destructive" 
+                            className="flex-1 h-14 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-black uppercase tracking-widest shadow-xl shadow-red-500/20 hover:shadow-red-500/40 hover:-translate-y-1 transition-all"
+                            onClick={confirmDeleteCoreValue}
+                        >
+                            Hapus
                         </Button>
                     </div>
                 </DialogContent>

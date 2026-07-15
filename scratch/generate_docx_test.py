@@ -19,7 +19,7 @@ from docx.oxml import OxmlElement
 from PIL import Image
 
 SRC_FILE      = r'C:\Users\Haikal Al-Ghifari\.gemini\antigravity-ide\brain\4987b58e-f65c-4ba7-9cfe-908757d8bafe\Laporan_Lengkap.md'
-OUT_FILE      = r'd:\Data Joki\ComproRRK\public\Laporan_Kerja_Praktek.docx'
+OUT_FILE = r'D:\Data Joki\ComproRRK\public\Laporan_Kerja_Praktek_test.docx'
 LOGO_RRK_FILE = r'd:\Data Joki\ComproRRK\public\logo.png'
 LOGO_UNIKOM   = r'd:\Data Joki\ComproRRK\public\logo_unikom.png'
 SCREENSHOT_LOGIN_FILE     = r'C:\Users\Haikal Al-Ghifari\.gemini\antigravity-ide\brain\4987b58e-f65c-4ba7-9cfe-908757d8bafe\screenshot_login.png'
@@ -356,6 +356,9 @@ def add_table_from_md(doc, header_cells, rows, borderless=False):
     Rule 5: single-spacing cells.
     Plus: full-page-width table, narrow 'No' column, proportional others.
     """
+    from docx.oxml.ns import qn as _qn2
+    from docx.oxml    import OxmlElement as _OE2
+
     cols = len(header_cells)
     if cols == 0:
         return None
@@ -363,23 +366,43 @@ def add_table_from_md(doc, header_cells, rows, borderless=False):
     tbl = doc.add_table(rows=1 + len(rows), cols=cols)
     tbl.style     = 'Normal Table' if borderless else 'Table Grid'
     tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
-    tbl.autofit   = False
 
-    PAGE_W_CM = 14.0
+    # ── Force table to full usable-page width ────────────────────────────────
+    PAGE_W_CM = 14.0   # 21cm − 4cm left − 3cm right
+    # Disable autofit so our widths stick
+    tbl.autofit = False
+    tbl_pr = tbl._tbl.tblPr
+    tbl_w_el = _OE2('w:tblW')
+    tbl_w_el.set(_qn2('w:w'), str(int(PAGE_W_CM * 567)))  # twips (1cm ≈ 567 twips)
+    tbl_w_el.set(_qn2('w:type'), 'dxa')
+    # Remove existing tblW if any
+    for old in tbl_pr.findall(_qn2('w:tblW')):
+        tbl_pr.remove(old)
+    tbl_pr.append(tbl_w_el)
+
+    # ── Compute column widths ─────────────────────────────────────────────────
     NO_COLS   = {'no', 'no.', '#', 'nomor'}
     first_is_no = cols > 1 and clean_text(header_cells[0]).strip().lower() in NO_COLS
 
     if first_is_no:
-        no_w        = 1.2
+        no_w        = 1.2                          # cm for "No"
         other_w     = (PAGE_W_CM - no_w) / (cols - 1)
         col_widths  = [no_w] + [other_w] * (cols - 1)
     else:
         col_widths  = [PAGE_W_CM / cols] * cols
 
-    # Apply widths using built-in cell.width (which handles XML schema order safely)
+    # Apply widths to every cell in each column
     for ci, w_cm in enumerate(col_widths):
+        w_twips = str(int(w_cm * 567))
         for row in tbl.rows:
-            row.cells[ci].width = Cm(w_cm)
+            cell_el = row.cells[ci]._tc
+            tc_pr   = cell_el.get_or_add_tcPr()
+            tc_w    = _OE2('w:tcW')
+            tc_w.set(_qn2('w:w'),    w_twips)
+            tc_w.set(_qn2('w:type'), 'dxa')
+            for old in tc_pr.findall(_qn2('w:tcW')):
+                tc_pr.remove(old)
+            tc_pr.append(tc_w)
 
     # ── Cell paragraph formatter ──────────────────────────────────────────────
     def set_cell_para(para, bold=False, center=False):
@@ -396,6 +419,7 @@ def add_table_from_md(doc, header_cells, rows, borderless=False):
     for i, cell_text in enumerate(header_cells):
         cell = hdr_row.cells[i]
         cell.text = clean_text(cell_text)
+        # All header cells centered + bold
         set_cell_para(cell.paragraphs[0], bold=True, center=True)
 
     # ── Data rows ─────────────────────────────────────────────────────────────
@@ -404,6 +428,7 @@ def add_table_from_md(doc, header_cells, rows, borderless=False):
         for ci, cell_text in enumerate(row_data[:cols]):
             cell = row.cells[ci]
             cell.text = clean_text(cell_text)
+            # "No" column centered; others left-aligned
             is_no_col = first_is_no and ci == 0
             set_cell_para(cell.paragraphs[0], bold=False, center=is_no_col)
 
@@ -664,11 +689,13 @@ for si, section_text in enumerate(sections):
         add_toc(doc, field_code='TOC \\o "1-3" \\h \\z \\u')
         
         # 2. DAFTAR GAMBAR
+        page_break(doc)
         add_heading(doc, 'DAFTAR GAMBAR', level=1, center=True, size=14)
         doc.add_paragraph()
         add_toc(doc, field_code='TOC \\h \\z \\c "Gambar"')
         
         # 3. DAFTAR TABEL
+        page_break(doc)
         add_heading(doc, 'DAFTAR TABEL', level=1, center=True, size=14)
         doc.add_paragraph()
         add_toc(doc, field_code='TOC \\h \\z \\c "Tabel"')
@@ -1019,13 +1046,6 @@ for si, section_text in enumerate(sections):
             # Force page break / orientation change
             # Exempt 3.4.1 (Login Admin) so it stays on the intro page under 3.4
             is_activity_subheading = (level == 3) and text.strip().startswith('3.4.') and not text.strip().startswith('3.4.1')
-            is_sequence_subheading = False
-            if level == 3 and text.strip().startswith('3.5.'):
-                m_seq = re.match(r'^3\.5\.(\d+)', text.strip())
-                if m_seq:
-                    seq_num = int(m_seq.group(1))
-                    if seq_num >= 3 and seq_num % 2 == 1:
-                        is_sequence_subheading = True
             is_erd_heading = (level == 2) and text.strip().startswith('3.6')
             
             if is_erd_heading:
@@ -1040,7 +1060,7 @@ for si, section_text in enumerate(sections):
                 erd_sec.bottom_margin = Cm(2.5)
                 erd_sec.left_margin = Cm(2.5)
                 erd_sec.right_margin = Cm(2.5)
-            elif is_activity_subheading or is_sequence_subheading:
+            elif is_activity_subheading:
                 page_break(doc)
                 
             if level == 1:
@@ -1280,7 +1300,7 @@ def add_page_number_footer(section, fmt_switch=None):
 
 
 # Force Word to update fields (including Table of Contents and page numbers) on open
-doc.settings.update_fields = False
+doc.settings.update_fields = True
 
 # Apply page numbers to all sections EXCEPT Cover (Section 0)
 for sec_idx, sec in enumerate(doc.sections):
@@ -1300,36 +1320,3 @@ for sec_idx, sec in enumerate(doc.sections):
 # ─────────────────────────────────────────────────────────────
 doc.save(OUT_FILE)
 print(f"\nDone! Saved to {OUT_FILE}")
-
-# ─────────────────────────────────────────────────────────────
-# Convert to PDF using Word COM automation
-# ─────────────────────────────────────────────────────────────
-try:
-    import win32com.client
-    import os
-    docx_abs = os.path.abspath(OUT_FILE)
-    pdf_abs = docx_abs.replace('.docx', '.pdf')
-    print(f"Converting DOCX to PDF using Word COM...")
-    
-    word = None
-    doc_word = None
-    try:
-        word = win32com.client.DispatchEx("Word.Application")
-        word.Visible = False
-        word.DisplayAlerts = 0  # wdAlertsNone - disable all dialog boxes!
-        doc_word = word.Documents.Open(docx_abs, ConfirmConversions=False, ReadOnly=True)
-        doc_word.SaveAs(pdf_abs, FileFormat=17) # 17 is wdFormatPDF
-        print(f"PDF generated successfully at {pdf_abs}")
-    finally:
-        if doc_word:
-            try:
-                doc_word.Close(False) # wdDoNotSaveChanges
-            except:
-                pass
-        if word:
-            try:
-                word.Quit()
-            except:
-                pass
-except Exception as e:
-    print(f"Error converting to PDF: {e}")

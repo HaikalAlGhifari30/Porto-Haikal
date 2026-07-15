@@ -18,8 +18,8 @@ from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 from PIL import Image
 
-SRC_FILE      = r'C:\Users\Haikal Al-Ghifari\.gemini\antigravity-ide\brain\4987b58e-f65c-4ba7-9cfe-908757d8bafe\Laporan_Lengkap.md'
-OUT_FILE      = r'd:\Data Joki\ComproRRK\public\Laporan_Kerja_Praktek.docx'
+SRC_FILE      = r'C:\Users\Haikal Al-Ghifari\.gemini\antigravity-ide\brain\4987b58e-f65c-4ba7-9cfe-908757d8bafe\Laporan_Lengkap_no_table.md'
+OUT_FILE      = r'd:\Data Joki\ComproRRK\public\Laporan_Kerja_Praktek_no_table.docx'
 LOGO_RRK_FILE = r'd:\Data Joki\ComproRRK\public\logo.png'
 LOGO_UNIKOM   = r'd:\Data Joki\ComproRRK\public\logo_unikom.png'
 SCREENSHOT_LOGIN_FILE     = r'C:\Users\Haikal Al-Ghifari\.gemini\antigravity-ide\brain\4987b58e-f65c-4ba7-9cfe-908757d8bafe\screenshot_login.png'
@@ -356,6 +356,9 @@ def add_table_from_md(doc, header_cells, rows, borderless=False):
     Rule 5: single-spacing cells.
     Plus: full-page-width table, narrow 'No' column, proportional others.
     """
+    from docx.oxml.ns import qn as _qn2
+    from docx.oxml    import OxmlElement as _OE2
+
     cols = len(header_cells)
     if cols == 0:
         return None
@@ -363,23 +366,43 @@ def add_table_from_md(doc, header_cells, rows, borderless=False):
     tbl = doc.add_table(rows=1 + len(rows), cols=cols)
     tbl.style     = 'Normal Table' if borderless else 'Table Grid'
     tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
-    tbl.autofit   = False
 
-    PAGE_W_CM = 14.0
+    # ── Force table to full usable-page width ────────────────────────────────
+    PAGE_W_CM = 14.0   # 21cm − 4cm left − 3cm right
+    # Disable autofit so our widths stick
+    tbl.autofit = False
+    tbl_pr = tbl._tbl.tblPr
+    tbl_w_el = _OE2('w:tblW')
+    tbl_w_el.set(_qn2('w:w'), str(int(PAGE_W_CM * 567)))  # twips (1cm ≈ 567 twips)
+    tbl_w_el.set(_qn2('w:type'), 'dxa')
+    # Remove existing tblW if any
+    for old in tbl_pr.findall(_qn2('w:tblW')):
+        tbl_pr.remove(old)
+    tbl_pr.append(tbl_w_el)
+
+    # ── Compute column widths ─────────────────────────────────────────────────
     NO_COLS   = {'no', 'no.', '#', 'nomor'}
     first_is_no = cols > 1 and clean_text(header_cells[0]).strip().lower() in NO_COLS
 
     if first_is_no:
-        no_w        = 1.2
+        no_w        = 1.2                          # cm for "No"
         other_w     = (PAGE_W_CM - no_w) / (cols - 1)
         col_widths  = [no_w] + [other_w] * (cols - 1)
     else:
         col_widths  = [PAGE_W_CM / cols] * cols
 
-    # Apply widths using built-in cell.width (which handles XML schema order safely)
+    # Apply widths to every cell in each column
     for ci, w_cm in enumerate(col_widths):
+        w_twips = str(int(w_cm * 567))
         for row in tbl.rows:
-            row.cells[ci].width = Cm(w_cm)
+            cell_el = row.cells[ci]._tc
+            tc_pr   = cell_el.get_or_add_tcPr()
+            tc_w    = _OE2('w:tcW')
+            tc_w.set(_qn2('w:w'),    w_twips)
+            tc_w.set(_qn2('w:type'), 'dxa')
+            for old in tc_pr.findall(_qn2('w:tcW')):
+                tc_pr.remove(old)
+            tc_pr.append(tc_w)
 
     # ── Cell paragraph formatter ──────────────────────────────────────────────
     def set_cell_para(para, bold=False, center=False):
@@ -396,6 +419,7 @@ def add_table_from_md(doc, header_cells, rows, borderless=False):
     for i, cell_text in enumerate(header_cells):
         cell = hdr_row.cells[i]
         cell.text = clean_text(cell_text)
+        # All header cells centered + bold
         set_cell_para(cell.paragraphs[0], bold=True, center=True)
 
     # ── Data rows ─────────────────────────────────────────────────────────────
@@ -404,6 +428,7 @@ def add_table_from_md(doc, header_cells, rows, borderless=False):
         for ci, cell_text in enumerate(row_data[:cols]):
             cell = row.cells[ci]
             cell.text = clean_text(cell_text)
+            # "No" column centered; others left-aligned
             is_no_col = first_is_no and ci == 0
             set_cell_para(cell.paragraphs[0], bold=False, center=is_no_col)
 

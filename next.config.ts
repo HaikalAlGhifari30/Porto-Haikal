@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     },
   },
   typescript: {
+    // Mengabaikan error TypeScript saat build
     ignoreBuildErrors: true,
   },
   eslint: {

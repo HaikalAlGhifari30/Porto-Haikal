@@ -18,7 +18,7 @@ from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 from PIL import Image
 
-SRC_FILE      = r'C:\Users\Haikal Al-Ghifari\.gemini\antigravity-ide\brain\4987b58e-f65c-4ba7-9cfe-908757d8bafe\Laporan_Lengkap.md'
+SRC_FILE      = r'C:\Users\Haikal Al-Ghifari\.gemini\antigravity-ide\brain\0e56245d-303e-4e0e-a812-ea8f17fa3d46\Laporan_Lengkap.md'
 OUT_FILE      = r'd:\Data Joki\ComproRRK\public\Laporan_Kerja_Praktek.docx'
 LOGO_RRK_FILE = r'd:\Data Joki\ComproRRK\public\logo.png'
 LOGO_UNIKOM   = r'd:\Data Joki\ComproRRK\public\logo_unikom.png'
@@ -84,8 +84,8 @@ def render_mermaid(code):
                 "'noteBkgColor':'#ffffff','noteBorderColor':'#000000'}}}%%\n")
         code = init + code
     code = re.sub(r'fill:#(?!ffffff)[0-9a-fA-F]{6}', 'fill:#ffffff', code)
-    encoded = base64.urlsafe_b64encode(code.encode()).decode()
-    url = f'https://mermaid.ink/img/{encoded}?bgColor=ffffff&scale=3'
+    encoded = base64.urlsafe_b64encode(code.encode()).decode().rstrip('=')
+    url = f'https://mermaid.ink/img/{encoded}'
     return fetch_image(url)
 
 
@@ -426,21 +426,76 @@ def add_caption(doc, text, is_table=True):
     p.paragraph_format.keep_with_next = True
     
     # Split caption: bold label (e.g. "Tabel 3.1") + rest of text
-    m = re.match(r'^(\*{0,2}(?:Tabel|Gambar|Diagram|Grafik|Bagan)\s+[\d.]+\*{0,2})(.*)', text.strip())
+    m = re.match(r'^(\*{0,2}(Tabel|Gambar|Diagram|Grafik|Bagan)\s+(\d+)\.(\d+)\*{0,2})(.*)', text.strip(), flags=re.IGNORECASE)
     if m:
-        label = m.group(1).strip('*').strip()
-        rest  = m.group(2).strip()
-        r = p.add_run(label)
-        set_font(r, size=12, bold=True)
-        r.font.color.rgb = RGBColor(0, 0, 0)
+        type_word = m.group(2).strip().capitalize()
+        if type_word in ['Diagram', 'Grafik', 'Bagan']:
+            type_word = 'Gambar'
+        
+        ch_num = m.group(3)
+        idx = m.group(4)
+        rest  = m.group(5).strip()
+        
+        r1 = p.add_run(f'{type_word} {ch_num}.')
+        set_font(r1, size=12, bold=True)
+        r1.font.color.rgb = RGBColor(0, 0, 0)
+        
+        r_field = p.add_run()
+        set_font(r_field, size=12, bold=True)
+        r_field.font.color.rgb = RGBColor(0, 0, 0)
+        
+        instruction = f' SEQ {type_word} \\* ARABIC '
+        if str(idx) == '1':
+            instruction += '\\r 1 '
+            
+        def add_seq_field(run, instr, show_txt):
+            from docx.oxml import OxmlElement
+            from docx.oxml.ns import qn
+            
+            fldChar1 = OxmlElement('w:fldChar')
+            fldChar1.set(qn('w:fldCharType'), 'begin')
+            run._r.append(fldChar1)
+
+            instrText = OxmlElement('w:instrText')
+            instrText.set(qn('xml:space'), 'preserve')
+            instrText.text = instr
+            run._r.append(instrText)
+
+            fldChar2 = OxmlElement('w:fldChar')
+            fldChar2.set(qn('w:fldCharType'), 'separate')
+            run._r.append(fldChar2)
+
+            t = OxmlElement('w:t')
+            t.text = show_txt
+            run._r.append(t)
+
+            fldChar3 = OxmlElement('w:fldChar')
+            fldChar3.set(qn('w:fldCharType'), 'end')
+            run._r.append(fldChar3)
+            
+        add_seq_field(r_field, instruction, str(idx))
+        
         if rest:
             r2 = p.add_run(f' {rest}')
             set_font(r2, size=12)
             r2.font.color.rgb = RGBColor(0, 0, 0)
     else:
-        r = p.add_run(clean_text(text))
-        set_font(r, size=12, bold=True)
-        r.font.color.rgb = RGBColor(0, 0, 0)
+        # Fallback for old format
+        m_old = re.match(r'^(\*{0,2}(?:Tabel|Gambar|Diagram|Grafik|Bagan)\s+[\d.]+\*{0,2})(.*)', text.strip(), flags=re.IGNORECASE)
+        if m_old:
+            label = m_old.group(1).strip('*').strip()
+            rest  = m_old.group(2).strip()
+            r = p.add_run(label)
+            set_font(r, size=12, bold=True)
+            r.font.color.rgb = RGBColor(0, 0, 0)
+            if rest:
+                r2 = p.add_run(f' {rest}')
+                set_font(r2, size=12)
+                r2.font.color.rgb = RGBColor(0, 0, 0)
+        else:
+            r = p.add_run(clean_text(text))
+            set_font(r, size=12, bold=True)
+            r.font.color.rgb = RGBColor(0, 0, 0)
     return p
 
 
@@ -980,7 +1035,7 @@ for si, section_text in enumerate(sections):
                     m_h = 11.5   # Activity diagram fits comfortably with its caption on a single page
                     m_w = MAX_IMG_W_CM
                 elif is_sequence_diag:
-                    m_h = 8.5    # Sequence diagram fits 2 per page
+                    m_h = 7.5    # Sequence diagram fits 2 per page comfortably without overflow
                     m_w = MAX_IMG_W_CM
                 elif is_erd_diag:
                     m_h = 19.5   # ERD diagram occupies the full portrait page (very tall)
@@ -1317,7 +1372,19 @@ try:
         word = win32com.client.DispatchEx("Word.Application")
         word.Visible = False
         word.DisplayAlerts = 0  # wdAlertsNone - disable all dialog boxes!
-        doc_word = word.Documents.Open(docx_abs, ConfirmConversions=False, ReadOnly=True)
+        doc_word = word.Documents.Open(docx_abs, ConfirmConversions=False, ReadOnly=False)
+        
+        # Force update of all fields including TOC, TOF, TOT
+        try:
+            for toc in doc_word.TablesOfContents:
+                toc.Update()
+            for tof in doc_word.TablesOfFigures:
+                tof.Update()
+            doc_word.Save()
+            print("Fields updated and DOCX saved.")
+        except Exception as update_err:
+            print(f"Warning: Field update issue: {update_err}")
+
         doc_word.SaveAs(pdf_abs, FileFormat=17) # 17 is wdFormatPDF
         print(f"PDF generated successfully at {pdf_abs}")
     finally:

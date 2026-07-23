@@ -60,7 +60,7 @@ export async function updateSettings(formData: FormData) {
 
     const footerAboutRaw = formData.get("footerAbout") as string | null;
     const footerAbout = footerAboutRaw !== null ? footerAboutRaw : settings.footerAbout;
-    const footerAboutEn = footerAboutRaw !== null ? await translateIdToEn(footerAbout) : (settings as any).footerAboutEn;
+    const footerAboutEn = footerAboutRaw !== null ? await translateIdToEn(footerAbout as string) : (settings as any).footerAboutEn;
 
     const address = formData.get("address") as string ?? settings.address;
     const phone = formData.get("phone") as string ?? settings.phone;

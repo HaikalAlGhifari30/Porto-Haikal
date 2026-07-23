@@ -1,7 +1,7 @@
 "use client";
 
 import { Gallery } from "@prisma/client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import { TranslatedText } from "@/components/translated-text";
@@ -26,13 +26,22 @@ export function GallerySectionClient({ items }: GallerySectionClientProps) {
     // Lightbox handlers
     const openLightbox = (index: number) => {
         setLightboxIndex(index);
-        document.body.style.overflow = "hidden"; // Prevent scrolling
     };
 
     const closeLightbox = () => {
         setLightboxIndex(null);
-        document.body.style.overflow = "auto";
     };
+
+    useEffect(() => {
+        if (lightboxIndex !== null) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, [lightboxIndex]);
 
     const nextLightboxImage = (e: React.MouseEvent) => {
         e.stopPropagation();

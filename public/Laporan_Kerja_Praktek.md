@@ -196,7 +196,7 @@ Maksud dari pelaksanaan kerja praktek dan penyusunan laporan ini adalah untuk me
 ## 1.6 Metodologi Penelitian
 Metodologi yang digunakan adalah Metode Waterfall:
 1. **Analisis Kebutuhan:** Mengumpulkan spesifikasi sistem yang dibutuhkan oleh PT Rizky Rijaya Karya.
-2. **Desain Sistem:** Merancang arsitektur perangkat lunak, ERD, dan antarmuka pengguna (UML/UI Design).
+2. **Desain Sistem:** Merancang arsitektur perangkat lunak, Skema Relasi, dan antarmuka pengguna (UML/UI Design).
 3. **Implementasi:** Menulis kode program menggunakan TypeScript, Next.js, dan PostgreSQL.
 4. **Pengujian:** Melakukan Black Box Testing untuk memastikan seluruh fitur berjalan tanpa error.
 5. **Pemeliharaan:** Deployment ke server Vercel dan pemantauan kinerja aplikasi.
@@ -301,7 +301,7 @@ Cloudinary adalah platform berbasis *cloud* yang menyediakan layanan manajemen m
 1. **Use Case Diagram:** Menggambarkan hubungan interaksi antara aktor (pengguna) dengan fungsionalitas (*use case*) yang disediakan oleh sistem.
 2. **Activity Diagram:** Menggambarkan alur kerja langkah demi langkah (*workflow*) dari sebuah proses spesifik di dalam sistem, menjelaskan alur logika berjalannya suatu menu.
 3. **Sequence Diagram:** Menampilkan urutan interaksi antar komponen dalam sistem berdasarkan urutan waktu aliran data dan pertukaran pesan (message) antara entitas terkait.
-4. **Entity Relationship Diagram (ERD):** Pemodelan struktur logis dari basis data relasional yang mencakup entitas (tabel), relasi, dan atribut masing-masing tabel yang tersimpan di PostgreSQL.
+4. **Skema Relasi:** Pemodelan struktur logis dari basis data relasional yang mencakup entitas (tabel), relasi, dan atribut masing-masing tabel yang tersimpan di PostgreSQL.
 
 <div style="page-break-after: always;"></div>
 
@@ -469,7 +469,7 @@ Sequence diagram menggambarkan interaksi antar objek secara berurutan waktu. Pad
 <img src="https://mermaid.ink/img/c2VxdWVuY2VEaWFncmFtCiAgICBhY3RvciBBZG1pbgogICAgcGFydGljaXBhbnQgSGFsYW1hbiBQZW5nYXR1cmFuCiAgICBwYXJ0aWNpcGFudCBDbG91ZGluYXJ5IEFQSQogICAgcGFydGljaXBhbnQgRGF0YWJhc2UKCiAgICBBZG1pbi0-PkhhbGFtYW4gUGVuZ2F0dXJhbjogVWJhaCBUZWtzIEhlcm8sIEZvb3RlciwgS29udGFrCiAgICBBZG1pbi0-PkhhbGFtYW4gUGVuZ2F0dXJhbjogVW5nZ2FoIEJhbm5lciBCYXJ1CiAgICBBZG1pbi0-PkhhbGFtYW4gUGVuZ2F0dXJhbjogS2xpayAiU2ltcGFuIFBlbmdhdHVyYW4iCiAgICBIYWxhbWFuIFBlbmdhdHVyYW4tPj5DbG91ZGluYXJ5IEFQSTogVXBsb2FkIFN0cmVhbSBCYW5uZXIKICAgIENsb3VkaW5hcnkgQVBJLS0-PkhhbGFtYW4gUGVuZ2F0dXJhbjogS2VtYmFsaWthbiBVUkwgQmFubmVyCiAgICBIYWxhbWFuIFBlbmdhdHVyYW4tPj5EYXRhYmFzZTogU2ltcGFuIFVSTCAmIFRla3MgKFVQREFURSkKICAgIERhdGFiYXNlLS0-PkhhbGFtYW4gUGVuZ2F0dXJhbjogS29uZmlybWFzaSBUZXJzaW1wYW4KICAgIEhhbGFtYW4gUGVuZ2F0dXJhbi0tPj5BZG1pbjogVGFtcGlsa2FuIE5vdGlmaWthc2kgU3Vrc2Vz?bgColor=ffffff" alt="Diagram" style="max-width: 100%;" />
 </div>
 
-## 3.6 ERD (Entity Relationship Diagram)
+## 3.6 Skema Relasi
 
 <img src="/public/logo RRK.png" alt="Logo PT RRK" width="150" style="display:block; margin: 0 auto;"/>
 <br>

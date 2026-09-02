@@ -10,19 +10,19 @@ export default async function TeamsPage() {
         <div className="space-y-6">
             <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-8">
                 <div className="flex-1">
-                    <h2 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">Divisi & Anggota</h2>
+                    <h2 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">Kontak & Admin WhatsApp</h2>
                     <p className="text-sm text-slate-500 dark:text-zinc-400 mt-2 font-medium leading-relaxed max-w-2xl">
-                        Atur struktur organisasi, posisi jabatan, dan kelola seluruh anggota PT Rizky Rijaya Karya.
+                        Kelola nomor WhatsApp melayang (Floating Widget), saluran kontak, dan respon pesan default untuk pengunjung website.
                     </p>
                     
                     <div className="mt-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                         {/* Tutorial/Helper Section */}
-                        <div className="flex-1 bg-blue-500/[0.03] dark:bg-blue-500/[0.02] border border-blue-500/10 rounded-2xl p-5 animate-in fade-in slide-in-from-top-4 duration-700">
+                        <div className="flex-1 bg-cyan-500/[0.04] border border-cyan-500/20 rounded-2xl p-5 animate-in fade-in slide-in-from-top-4 duration-700">
                             <div className="flex items-center gap-3 mb-4">
-                                <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                                    <Lightbulb className="w-4 h-4 text-blue-500" />
+                                <div className="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center">
+                                    <Lightbulb className="w-4 h-4 text-cyan-400" />
                                 </div>
-                                <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Panduan Pengelolaan Divisi</h3>
+                                <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Panduan Widget Kontak WhatsApp</h3>
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
                                 <div className="flex items-start gap-3">

@@ -7,46 +7,24 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { updateSettings } from "@/actions/settings";
 import { toast } from "sonner";
-import { Loader2, Save, Plus, Trash2, AlertTriangle } from "lucide-react";
+import { Loader2, Save, Sparkles, UserCheck, Link2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 
 export function AboutSettingsForm({ settings }: { settings: any }) {
     const [isSaving, setIsSaving] = useState(false);
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     const [formDataToSave, setFormDataToSave] = useState<FormData | null>(null);
-    const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
-    // Fallbacks
-    const defaultAboutText = "PT Rizky Rijaya Karya adalah perusahaan dibawah hukum negara kesatuan republik Indonesia yang didirikan secara resmi pada 05 september 2023 yang bergerak di bidang Perdagangan, Industri dan Jasa.";
-    const defaultVisionText = "Menjadi Perusahaan berskala Nasional yang mampu melayani Kebutuhan Publik secara professional yang bertumpu pada Nilai Integritas, Kepuasan pelanggan, dan Sumber Daya Manusia.";
-    const defaultMissionText = "Menyediakan Barang dan Jasa dengan Harga kompetitif sesuai standar yang ditetapkan\nMemberikan Pelayanan Prima dan Solusi yang bernilai tambah kepada seluruh Konsumen.\nMenciptakan kondisi terbaik sebagai tempat kebanggaan untuk berkarya dan berprestasi.";
-    const defaultCoreValues = [
-        { title: "Integritas", description: "Bertindak jujur dan dapat dipercaya dalam setiap kesepakatan bisnis." },
-        { title: "Kompeten", description: "Bekerja dengan ahli dan profesional di bidangnya." },
-        { title: "Inovatif", description: "Terus berinovasi untuk memberikan solusi terbaik bagi konsumen." },
-        { title: "Kolaboratif", description: "Membangun kerja sama yang kuat dengan seluruh pemangku kepentingan." }
-    ];
 
-    let initialCoreValues = settings?.coreValues;
-    if (!initialCoreValues || (Array.isArray(initialCoreValues) && initialCoreValues.length === 0)) {
-        initialCoreValues = defaultCoreValues;
-    } else if (typeof initialCoreValues === 'string') {
-        try {
-            initialCoreValues = JSON.parse(initialCoreValues);
-        } catch (e) {
-            initialCoreValues = defaultCoreValues;
-        }
-    }
-
-    // Core values state
-    const [coreValues, setCoreValues] = useState<{title: string, description: string}[]>(
-        initialCoreValues as any
-    );
+    const defaultHeroTitle = "Halo, Saya Haikal Al Ghifari";
+    const defaultHeroTitleEn = "Hi, I'm Haikal Al Ghifari";
+    const defaultHeroSubtitle = "— Quality Assurance Engineer —";
+    const defaultHeroSubtitleEn = "— Quality Assurance Engineer —";
+    const defaultAboutText = "Lulusan S1 Teknik Informatika UNIKOM (IPK 3.46) yang berdedikasi tinggi sebagai Quality Assurance Engineer, dan saat ini sedang aktif bekerja di COMO 1907 (Global Media Visual). Berpengalaman dalam pengujian manual (manual testing) web & mobile, verifikasi alur pengguna end-to-end, regresi, serta pemodelan sistem. Memiliki pengalaman kepemimpinan sebagai mantan Ketua HMIF UNIKOM yang analitis, teliti, dan adaptif.";
+    const defaultAboutTextEn = "Informatics Engineering graduate from UNIKOM (GPA 3.46) dedicated as a Quality Assurance Engineer, currently actively working at COMO 1907 (Global Media Visual). Highly experienced in web & mobile manual testing, end-to-end user flow verification, regression, and system modeling. Former Chairman of HMIF UNIKOM with strong leadership, analytical precision, and adaptability.";
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        // Append coreValues as a JSON string
-        formData.set("coreValues", JSON.stringify(coreValues));
         setFormDataToSave(formData);
         setIsConfirmOpen(true);
     };
@@ -57,207 +35,203 @@ export function AboutSettingsForm({ settings }: { settings: any }) {
         setIsSaving(true);
         try {
             await updateSettings(formDataToSave);
-            toast.success("Profil Perusahaan berhasil disimpan");
+            toast.success("Pengaturan Hero & Biodata berhasil disimpan!");
             setIsConfirmOpen(false);
         } catch (error) {
             console.error(error);
-            toast.error("Gagal menyimpan profil perusahaan");
+            toast.error("Gagal menyimpan pengaturan biodata");
         } finally {
             setIsSaving(false);
         }
     }
 
-    const addCoreValue = () => {
-        setCoreValues([...coreValues, { title: "", description: "" }]);
-    };
-
-    const updateCoreValue = (index: number, field: "title" | "titleEn" | "description" | "descriptionEn", value: string) => {
-        const updated = [...coreValues];
-        (updated[index] as any)[field] = value;
-        setCoreValues(updated);
-    };
-
-    const removeCoreValue = (index: number) => {
-        setDeleteIndex(index);
-    };
-
-    const confirmDeleteCoreValue = () => {
-        if (deleteIndex !== null) {
-            setCoreValues(coreValues.filter((_, i) => i !== deleteIndex));
-            setDeleteIndex(null);
-        }
-    };
-
     return (
         <>
             <form onSubmit={handleSubmit} className="space-y-8">
+                {/* 1. Hero Section Headers */}
                 <div className="space-y-6">
-                    <div className="space-y-2">
-                        <Label htmlFor="aboutText" className="text-base font-bold text-slate-800 dark:text-white">Tentang Perusahaan</Label>
-                        <p className="text-xs text-slate-500 dark:text-zinc-400">Deskripsi utama mengenai perusahaan yang muncul di halaman pertama section Profil.</p>
-                        <Textarea 
-                            id="aboutText" 
-                            name="aboutText" 
-                            defaultValue={settings?.aboutText || defaultAboutText} 
-                            placeholder="Contoh: PT Rizky Rijaya Karya adalah..."
-                            className="min-h-[150px] resize-y"
-                        />
+                    <div className="flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-zinc-800">
+                        <Sparkles className="w-5 h-5 text-cyan-400" />
+                        <h3 className="text-lg font-black text-slate-900 dark:text-white">Pengaturan Teks Hero Utama</h3>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <Label htmlFor="visionText" className="text-base font-bold text-slate-800 dark:text-white">Visi Kami</Label>
-                            <p className="text-xs text-slate-500 dark:text-zinc-400">Tujuan jangka panjang perusahaan.</p>
-                            <Textarea 
-                                id="visionText" 
-                                name="visionText" 
-                                defaultValue={settings?.visionText || defaultVisionText} 
-                                placeholder="Contoh: Menjadi perusahaan terkemuka di bidang..."
-                                className="min-h-[150px] resize-y"
+                            <Label htmlFor="heroTitle" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Judul Utama Hero (Bahasa Indonesia)</Label>
+                            <Input 
+                                id="heroTitle" 
+                                name="heroTitle" 
+                                defaultValue={settings?.heroTitle || defaultHeroTitle} 
+                                placeholder="Halo, Saya Haikal Al Ghifari"
+                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
                             />
                         </div>
+
                         <div className="space-y-2">
-                            <Label htmlFor="missionText" className="text-base font-bold text-slate-800 dark:text-white">Misi Kami</Label>
-                            <p className="text-xs text-slate-500 dark:text-zinc-400">Pisahkan setiap poin misi dengan Enter (baris baru).</p>
-                            <Textarea 
-                                id="missionText" 
-                                name="missionText" 
-                                defaultValue={settings?.missionText || defaultMissionText} 
-                                placeholder="Memberikan pelayanan terbaik...&#10;Inovasi berkelanjutan..."
-                                className="min-h-[150px] resize-y"
+                            <Label htmlFor="heroTitleEn" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Hero Main Title (English)</Label>
+                            <Input 
+                                id="heroTitleEn" 
+                                name="heroTitleEn" 
+                                defaultValue={settings?.heroTitleEn || defaultHeroTitleEn} 
+                                placeholder="Hi, I'm Haikal Al Ghifari"
+                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
                             />
                         </div>
                     </div>
 
-                    <div className="space-y-4 pt-4 border-t border-slate-200 dark:border-zinc-800">
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <Label className="text-base font-bold text-slate-800 dark:text-white">Nilai-Nilai Perusahaan (Core Values)</Label>
-                                <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1">Tambahkan nilai utama perusahaan yang dijunjung tinggi.</p>
-                            </div>
-                            <Button type="button" onClick={addCoreValue} variant="outline" size="sm" className="h-9 gap-1">
-                                <Plus className="w-4 h-4" /> Tambah Nilai
-                            </Button>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                            <Label htmlFor="heroSubtitle" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Subtitle Profesi (Bahasa Indonesia)</Label>
+                            <Input 
+                                id="heroSubtitle" 
+                                name="heroSubtitle" 
+                                defaultValue={settings?.heroSubtitle || defaultHeroSubtitle} 
+                                placeholder="— Quality Assurance Engineer —"
+                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
+                            />
                         </div>
 
-                        <div className="space-y-3">
-                            {coreValues.length === 0 ? (
-                                <div className="text-center p-8 border border-dashed border-slate-300 dark:border-zinc-800 rounded-xl bg-slate-50 dark:bg-zinc-900/50">
-                                    <p className="text-sm text-slate-500 dark:text-zinc-400">Belum ada core values yang ditambahkan.</p>
-                                </div>
-                            ) : (
-                                coreValues.map((cv, index) => (
-                                    <div key={index} className="flex flex-col md:flex-row gap-3 p-4 bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl relative group">
-                                        <div className="flex-1 space-y-4">
-                                            <div className="grid grid-cols-1 gap-4">
-                                                <div className="space-y-1">
-                                                    <Label className="text-xs text-slate-500">Judul Nilai (🇮🇩 ID)</Label>
-                                                    <Input 
-                                                        value={cv.title} 
-                                                        onChange={(e) => updateCoreValue(index, "title", e.target.value)}
-                                                        placeholder="Contoh: Integritas"
-                                                        required
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="grid grid-cols-1 gap-4">
-                                                <div className="space-y-1">
-                                                    <Label className="text-xs text-slate-500">Deskripsi Singkat (🇮🇩 ID)</Label>
-                                                    <Textarea 
-                                                        value={cv.description} 
-                                                        onChange={(e) => updateCoreValue(index, "description", e.target.value)}
-                                                        placeholder="Bertindak jujur dan dapat dipercaya..."
-                                                        className="min-h-[60px] resize-none"
-                                                        required
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-start pt-6">
-                                            <Button 
-                                                type="button" 
-                                                variant="ghost" 
-                                                size="icon" 
-                                                onClick={() => removeCoreValue(index)}
-                                                className="text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
-                                            >
-                                                <Trash2 className="w-4 h-4" />
-                                            </Button>
-                                        </div>
-                                    </div>
-                                ))
-                            )}
+                        <div className="space-y-2">
+                            <Label htmlFor="heroSubtitleEn" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Professions Subtitle (English)</Label>
+                            <Input 
+                                id="heroSubtitleEn" 
+                                name="heroSubtitleEn" 
+                                defaultValue={settings?.heroSubtitleEn || defaultHeroSubtitleEn} 
+                                placeholder="— Quality Assurance Engineer —"
+                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
+                            />
                         </div>
                     </div>
                 </div>
 
-                <Button type="submit" disabled={isSaving} className="w-full md:w-auto h-12 px-8 bg-blue-600 hover:bg-blue-700">
-                    <Save className="w-4 h-4 mr-2" />
-                    Simpan Profil Perusahaan
-                </Button>
+                {/* 2. Professional Bio (About Me) */}
+                <div className="space-y-6 pt-4 border-t border-slate-200 dark:border-zinc-800">
+                    <div className="flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-zinc-800">
+                        <UserCheck className="w-5 h-5 text-cyan-400" />
+                        <h3 className="text-lg font-black text-slate-900 dark:text-white">Deskripsi Biodata (About Me)</h3>
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="aboutText" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Deskripsi Biodata (Bahasa Indonesia)</Label>
+                        <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">Teks paragraf ringkasan tentang profil profesional QA Anda di Landing Page.</p>
+                        <Textarea 
+                            id="aboutText" 
+                            name="aboutText" 
+                            defaultValue={settings?.aboutText || defaultAboutText} 
+                            placeholder="Lulusan S1 Teknik Informatika UNIKOM..."
+                            className="min-h-[120px] rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium leading-relaxed"
+                        />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="aboutTextEn" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">About Me Bio Description (English)</Label>
+                        <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">English version of your professional QA summary.</p>
+                        <Textarea 
+                            id="aboutTextEn" 
+                            name="aboutTextEn" 
+                            defaultValue={settings?.aboutTextEn || defaultAboutTextEn} 
+                            placeholder="Informatics Engineering graduate from UNIKOM..."
+                            className="min-h-[120px] rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium leading-relaxed"
+                        />
+                    </div>
+                </div>
+
+                {/* 3. Contact & Social Media Links */}
+                <div className="space-y-6 pt-4 border-t border-slate-200 dark:border-zinc-800">
+                    <div className="flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-zinc-800">
+                        <Link2 className="w-5 h-5 text-cyan-400" />
+                        <h3 className="text-lg font-black text-slate-900 dark:text-white">Kontak & Tautan Sosial Media</h3>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                            <Label htmlFor="email" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Alamat Email Kontak</Label>
+                            <Input 
+                                id="email" 
+                                name="email" 
+                                defaultValue={settings?.email || "alghifaribahren03@gmail.com"} 
+                                placeholder="alghifaribahren03@gmail.com"
+                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="phone" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Nomor Telepon / WhatsApp</Label>
+                            <Input 
+                                id="phone" 
+                                name="phone" 
+                                defaultValue={settings?.phone || "+62 813 880 583 31"} 
+                                placeholder="+62 813 880 583 31"
+                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="linkedin" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Tautan LinkedIn</Label>
+                            <Input 
+                                id="linkedin" 
+                                name="linkedin" 
+                                defaultValue={settings?.linkedin || "https://www.linkedin.com/in/haikalalghifari"} 
+                                placeholder="https://www.linkedin.com/in/haikalalghifari"
+                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="instagram" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Tautan Instagram</Label>
+                            <Input 
+                                id="instagram" 
+                                name="instagram" 
+                                defaultValue={settings?.instagram || "https://instagram.com/HaikalAlGhifari30"} 
+                                placeholder="https://instagram.com/HaikalAlGhifari30"
+                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex justify-end pt-4">
+                    <Button 
+                        type="submit" 
+                        className="h-12 px-8 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold tracking-wide shadow-lg shadow-cyan-500/25 transition-all active:scale-95 cursor-pointer"
+                    >
+                        <Save className="w-5 h-5 mr-2" /> Simpan Pengaturan Biodata
+                    </Button>
+                </div>
             </form>
 
+            {/* Confirmation Dialog */}
             <Dialog open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
-                <DialogContent className="sm:max-w-sm bg-white/90 dark:bg-slate-900/90 border-slate-200/50 dark:border-slate-800/50 rounded-[2rem] p-8 flex flex-col items-center text-center !backdrop-blur-xl shadow-2xl">
-                    <div className="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-500/10 flex items-center justify-center mb-6 text-blue-600 dark:text-blue-500 shadow-sm">
-                        <Save className="w-8 h-8" />
-                    </div>
+                <DialogContent className="sm:max-w-[420px] bg-white dark:bg-[#070e20] border-slate-200 dark:border-cyan-500/30 rounded-3xl p-6 shadow-2xl">
                     <DialogHeader>
-                        <DialogTitle className="text-xl font-bold text-slate-800 dark:text-white mb-2">Simpan Profil?</DialogTitle>
+                        <DialogTitle className="text-xl font-bold text-slate-900 dark:text-white">Konfirmasi Simpan Pengaturan</DialogTitle>
                     </DialogHeader>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 mb-8">
-                        Apakah Anda yakin ingin menyimpan perubahan profil perusahaan ini?
+                    <p className="text-sm text-slate-600 dark:text-zinc-300 py-2">
+                        Apakah Anda yakin ingin menyimpan perubahan teks Hero, Biodata, dan Kontak ini ke website utama?
                     </p>
-                    <div className="flex w-full gap-3">
+                    <DialogFooter className="flex gap-3 pt-4">
                         <Button 
-                            type="button" 
                             variant="outline" 
-                            onClick={() => setIsConfirmOpen(false)}
+                            onClick={() => setIsConfirmOpen(false)} 
                             disabled={isSaving}
-                            className="flex-1 h-12 rounded-xl border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                            className="rounded-xl border-slate-200 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 font-semibold"
                         >
                             Batal
                         </Button>
                         <Button 
-                            type="button" 
                             onClick={handleConfirmSave} 
                             disabled={isSaving}
-                            className="flex-1 h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white border-none shadow-md shadow-blue-500/20"
+                            className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold shadow-md shadow-cyan-500/25"
                         >
-                            {isSaving ? <Loader2 className="w-5 h-5 animate-spin" /> : "Ya, Simpan"}
+                            {isSaving ? (
+                                <>
+                                    <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Menyimpan...
+                                </>
+                            ) : (
+                                "Ya, Simpan Perubahan"
+                            )}
                         </Button>
-                    </div>
-                </DialogContent>
-            </Dialog>
-
-            {/* Delete Core Value Confirmation Modal */}
-            <Dialog open={deleteIndex !== null} onOpenChange={(open) => !open && setDeleteIndex(null)}>
-                <DialogContent className="sm:max-w-sm bg-white dark:bg-slate-900 border-slate-200 dark:border-zinc-800 rounded-[3rem] p-10 flex flex-col items-center text-center">
-                    <div className="w-24 h-24 rounded-[2rem] bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-8 text-red-500 border-2 border-red-500/20 shadow-xl shadow-red-500/5">
-                        <AlertTriangle className="w-12 h-12" />
-                    </div>
-                    <DialogHeader>
-                        <DialogTitle className="text-2xl font-black text-slate-900 dark:text-white mb-3">Hapus Core Value?</DialogTitle>
-                    </DialogHeader>
-                    <p className="text-sm text-slate-500 dark:text-zinc-400 mb-10 leading-relaxed font-medium">
-                        Apakah Anda yakin ingin menghapus nilai <strong className="text-slate-700 dark:text-white">&ldquo;{deleteIndex !== null ? coreValues[deleteIndex]?.title || 'ini' : ''}&rdquo;</strong>? Perubahan akan tersimpan saat Anda klik Simpan.
-                    </p>
-                    <div className="flex w-full gap-4">
-                        <Button 
-                            variant="outline" 
-                            className="flex-1 h-14 rounded-2xl border-slate-200 dark:border-zinc-800 font-bold hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all"
-                            onClick={() => setDeleteIndex(null)}
-                        >
-                            Batal
-                        </Button>
-                        <Button 
-                            variant="destructive" 
-                            className="flex-1 h-14 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-black uppercase tracking-widest shadow-xl shadow-red-500/20 hover:shadow-red-500/40 hover:-translate-y-1 transition-all"
-                            onClick={confirmDeleteCoreValue}
-                        >
-                            Hapus
-                        </Button>
-                    </div>
+                    </DialogFooter>
                 </DialogContent>
             </Dialog>
         </>

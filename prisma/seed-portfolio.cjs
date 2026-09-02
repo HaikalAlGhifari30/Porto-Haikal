@@ -54,10 +54,10 @@ async function main() {
   await prisma.settings.deleteMany();
   await prisma.settings.create({
     data: {
-      heroTitle: "Hi, Saya Haikal Al Ghifari",
+      heroTitle: "Halo, Saya Haikal Al Ghifari",
       heroTitleEn: "Hi, I'm Haikal Al Ghifari",
-      heroSubtitle: "Quality Assurance Engineer",
-      heroSubtitleEn: "Quality Assurance Engineer",
+      heroSubtitle: "— Quality Assurance Engineer —",
+      heroSubtitleEn: "— Quality Assurance Engineer —",
       heroCtaText: "Lihat Portofolio QA",
       heroCtaTextEn: "View QA Portfolio",
       heroCtaLink: "#projects",

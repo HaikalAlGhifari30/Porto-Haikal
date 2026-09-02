@@ -53,13 +53,13 @@ export function HeroSection({ settings }: HeroSectionProps) {
             {/* Main Headline & Greeting */}
             <div className="space-y-2">
               <p className="text-zinc-500 dark:text-zinc-400 text-sm font-semibold tracking-wider uppercase">
-                {greeting}
+                {isEn ? (settings?.heroTitleEn || "Hi, I'm") : (settings?.heroTitle || "Halo, Saya")}
               </p>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-900 dark:text-white leading-[1.1]">
                 Haikal <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-500 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-300">Al Ghifari</span>
               </h1>
               <p className="text-cyan-600 dark:text-cyan-400 text-base sm:text-xl font-bold tracking-wide pt-1">
-                — Quality Assurance Engineer —
+                {isEn ? (settings?.heroSubtitleEn || "— Quality Assurance Engineer —") : (settings?.heroSubtitle || "— Quality Assurance Engineer —")}
               </p>
             </div>
 

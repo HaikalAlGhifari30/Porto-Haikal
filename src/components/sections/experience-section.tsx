@@ -109,16 +109,18 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
     }));
   };
 
-  const expandAll = () => {
-    const allState: Record<number, boolean> = {};
-    items.forEach((_, idx) => {
-      allState[idx] = true;
-    });
-    setExpandedCards(allState);
-  };
+  const isAllExpanded = Object.keys(expandedCards).length === items.length && items.length > 0;
 
-  const collapseAll = () => {
-    setExpandedCards({});
+  const toggleExpandAll = () => {
+    if (isAllExpanded) {
+      setExpandedCards({});
+    } else {
+      const allState: Record<number, boolean> = {};
+      items.forEach((_, idx) => {
+        allState[idx] = true;
+      });
+      setExpandedCards(allState);
+    }
   };
 
   const getJobBadge = (company: string, index: number) => {
@@ -143,22 +145,22 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
           </p>
         </div>
 
-        {/* Global Expand / Collapse Control Pills */}
-        <div className="flex items-center justify-center gap-3 mb-8">
+        {/* Combined Single Expand / Collapse Toggle Pill */}
+        <div className="flex items-center justify-center mb-10">
           <button
-            onClick={expandAll}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/90 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 hover:border-cyan-500/50 text-zinc-800 dark:text-zinc-200 text-xs font-bold transition-all shadow-sm dark:shadow-md backdrop-blur-md"
+            onClick={toggleExpandAll}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/90 dark:bg-[#091124]/90 border border-slate-300 dark:border-cyan-500/30 hover:border-cyan-400 text-zinc-800 dark:text-zinc-200 text-xs font-bold transition-all shadow-md backdrop-blur-md hover:scale-105 cursor-pointer"
           >
-            <span>{isEn ? "Expand All Cards" : "Buka Semua Card"}</span>
-            <ChevronDown className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400" />
-          </button>
-
-          <button
-            onClick={collapseAll}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/90 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 hover:border-cyan-500/50 text-zinc-800 dark:text-zinc-200 text-xs font-bold transition-all shadow-sm dark:shadow-md backdrop-blur-md"
-          >
-            <span>{isEn ? "Collapse All" : "Tutup Semua"}</span>
-            <ChevronUp className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400" />
+            <span>
+              {isAllExpanded
+                ? (isEn ? "Collapse All Cards" : "Tutup Semua Card")
+                : (isEn ? "Expand All Cards" : "Buka Semua Card")}
+            </span>
+            {isAllExpanded ? (
+              <ChevronUp className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
+            ) : (
+              <ChevronDown className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
+            )}
           </button>
         </div>
 

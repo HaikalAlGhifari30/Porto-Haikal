@@ -56,7 +56,6 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                     { href: "/cms/company-profile", label: "Hero & Bio (About)", icon: User },
                     { href: "/cms/projects", label: "Portofolio Proyek", icon: FolderKanban },
                     { href: "/cms/organization", label: "Karir & Organisasi", icon: Network },
-                    { href: "/cms/teams", label: "Kontak & Admin WA", icon: MessageCircle },
                     { href: "/cms/gallery", label: "Galeri Screenshot", icon: ImageIcon },
                 ]
             },
@@ -224,7 +223,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                         { href: "/cms/company-profile", label: "Bio", icon: User },
                         { href: "/cms/projects", label: "Proyek", icon: FolderKanban },
                         { href: "/cms/organization", label: "Karir", icon: Network },
-                        { href: "/cms/teams", label: "Kontak", icon: MessageCircle },
+                        { href: "/cms/gallery", label: "Galeri", icon: ImageIcon },
                         { href: "/cms/settings", label: "Setting", icon: Settings },
                     ].map((item) => {
                         const isActive = pathname === item.href || (item.href !== "/cms" && pathname.startsWith(item.href));

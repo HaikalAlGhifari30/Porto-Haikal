@@ -321,6 +321,19 @@ async function main() {
     ],
   });
 
+  // 8. WhatsApp Admin (Floating Widget)
+  await prisma.whatsAppAdmin.deleteMany();
+  await prisma.whatsAppAdmin.create({
+    data: {
+      name: "Haikal Al Ghifari (QA Support)",
+      phone: "6281388058331",
+      message: "Halo Haikal Al Ghifari, saya melihat portofolio Anda dan ingin berdiskusi.",
+      isActive: true,
+      order: 0,
+    },
+  });
+  console.log("✅ Seeded WhatsApp Admin for +62 813-8805-8331");
+
   console.log("\n🎉 Portfolio Database Seeding Completed with FULL BILINGUAL ID & EN DATA!");
 }
 

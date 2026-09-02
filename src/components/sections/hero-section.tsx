@@ -38,8 +38,8 @@ export function HeroSection({ settings }: HeroSectionProps) {
       <div className="container-original relative z-10 mx-auto px-4 max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           
-          {/* Left Content Column */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+          {/* Left Content Column (2nd on Mobile, 1st on Desktop) */}
+          <div className="lg:col-span-7 space-y-6 text-center lg:text-left order-2 lg:order-1">
             
             {/* Available Status Pill Badge */}
             <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-400 text-xs font-semibold tracking-wide backdrop-blur-md">
@@ -133,8 +133,8 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
           </div>
 
-          {/* Right Visual / Personal Rectangular Portrait Photo Card with Floating Tech Pills */}
-          <div className="lg:col-span-5 flex justify-center relative">
+          {/* Right Visual / Personal Rectangular Portrait Photo Card (1st on Mobile, 2nd on Desktop) */}
+          <div className="lg:col-span-5 flex justify-center relative order-1 lg:order-2">
             <div className="relative group w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[400px]">
               
               {/* Outer Card Ambient Neon Glow */}

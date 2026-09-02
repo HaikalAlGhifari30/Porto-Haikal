@@ -196,7 +196,7 @@ async function main() {
     ],
   });
 
-  // 5. Work Experiences (Bilingual ID & EN)
+  // 5. Work Experiences (Bilingual ID & EN from Official CV)
   await prisma.experience.deleteMany();
   await prisma.experience.createMany({
     data: [
@@ -207,9 +207,9 @@ async function main() {
         companyEn: "COMO 1907 - Global Media Visual",
         period: "Apr 2026 — Sekarang · Jakarta, Indonesia",
         periodEn: "Apr 2026 — Present · Jakarta, Indonesia",
-        description: "• Melakukan pengujian regresi (regression testing), pengujian asap (smoke testing), dan UAT di berbagai platform digital, termasuk layanan web, seluler, streaming, dan media.\n• Melakukan manual testing, validasi formulir, serta verifikasi alur pengguna dari hulu ke hilir (end-to-end user flow) pada aplikasi web dan seluler.\n• Memantau fungsionalitas platform, responsivitas, kemudahan penggunaan (usability), dan pengalaman pengguna secara menyeluruh pada berbagai layanan digital.\n• Meninjau performa VOD (Video on Demand) dan siaran langsung untuk memastikan stabilitas, aksesibilitas, dan kualitas konten.\n• Mengidentifikasi, mendokumentasikan, melacak, dan melaporkan bug serta berkoordinasi dengan pengembang dan tim terkait untuk penyelesaian yang tepat waktu.\n• Mengumpulkan umpan balik pengguna akhir serta menyusun laporan pemantauan QA untuk mendukung peningkatan produk dan layanan.\n• Mendukung kegiatan validasi penyebaran (deployment), pemantauan pasca-rilis, dan kolaborasi QA lintas fungsi.",
+        description: "• Conduct regression, smoke, and UAT testing across multiple digital platforms, including web, mobile, streaming, and media services.\n• Perform manual testing, form validation, and end-to-end user flow verification for web and mobile applications.\n• Monitor platform functionality, responsiveness, usability, and overall user experience across various digital services.\n• Review VOD and live broadcast performance to ensure stability, accessibility, and content quality.\n• Identify, document, track, and report bugs while coordinating with developers and related teams for timely resolution.\n• Collect end-user feedback and prepare QA monitoring reports to support product and service improvements.\n• Support deployment validation, post-release monitoring, and cross-functional QA collaboration activities.",
         descriptionEn: "• Conduct regression, smoke, and UAT testing across multiple digital platforms, including web, mobile, streaming, and media services.\n• Perform manual testing, form validation, and end-to-end user flow verification for web and mobile applications.\n• Monitor platform functionality, responsiveness, usability, and overall user experience across various digital services.\n• Review VOD and live broadcast performance to ensure stability, accessibility, and content quality.\n• Identify, document, track, and report bugs while coordinating with developers and related teams for timely resolution.\n• Collect end-user feedback and prepare QA monitoring reports to support product and service improvements.\n• Support deployment validation, post-release monitoring, and cross-functional QA collaboration activities.",
-        technologies: "Regression Testing, Smoke Testing, UAT, Manual Testing, VOD Review, Bug Tracking, Post-Release Monitoring",
+        technologies: "Regression Testing, Smoke Testing, UAT, Manual Testing, VOD & Live Broadcast Review, Bug Tracking, Deployment Validation",
         order: 1,
       },
       {
@@ -219,9 +219,9 @@ async function main() {
         companyEn: "PT Artristik Studio Bandung",
         period: "Feb 2025 — Feb 2026 · Bandung, Indonesia",
         periodEn: "Feb 2025 — Feb 2026 · Bandung, Indonesia",
-        description: "• Melakukan pengujian manual untuk aplikasi seluler dan web untuk memastikan fungsionalitas, stabilitas, dan pengalaman pengguna.\n• Menganalisis fitur, mengidentifikasi bug/masalah, serta melakukan pengujian ulang dan pengujian regresi bersama klien dan pemangku kepentingan.\n• Mendokumentasikan bug dan berkoordinasi dengan pengembang untuk memastikan perbaikan yang tepat waktu.\n• Mengomunikasikan kemajuan proyek dan mengumpulkan persyaratan fitur tambahan dari klien.\n• Memberikan rekomendasi untuk peningkatan, perubahan logika, dan fitur baru berdasarkan hasil pengujian dan kebutuhan pengguna.\n• Bertindak sebagai penghubung (liaison) antara klien dan tim teknis untuk menjaga komunikasi yang efektif.\n• Mengendalikan dan melaksanakan sesi UAT dengan pihak DJK untuk sistem LIT NON-TR.",
+        description: "• Conducted manual testing for mobile and web applications to ensure functionality, stability, and user experience.\n• Analyzed features, identified bugs/issues, and performed regression and retesting with clients and stakeholders.\n• Documented bugs and coordinated with developers to ensure timely fixes.\n• Communicated project progress and gathered additional feature requirements from clients.\n• Provided recommendations for improvements, logic changes, and new features based on testing results and user needs.\n• Acted as a liaison between clients and the technical team to maintain effective communication.\n• Conducted UAT sessions with DJK for the LIT NON-TR system.",
         descriptionEn: "• Conducted manual testing for mobile and web applications to ensure functionality, stability, and user experience.\n• Analyzed features, identified bugs/issues, and performed regression and retesting with clients and stakeholders.\n• Documented bugs and coordinated with developers to ensure timely fixes.\n• Communicated project progress and gathered additional feature requirements from clients.\n• Provided recommendations for improvements, logic changes, and new features based on testing results and user needs.\n• Acted as a liaison between clients and the technical team to maintain effective communication.\n• Conducted UAT sessions with DJK for the LIT NON-TR system.",
-        technologies: "Manual Testing, Client Liaison, Bug Documentation, UAT Sessions with DJK (LIT NON-TR), Feature Requirement Gathering",
+        technologies: "Manual Testing, Client Liaison, Bug Documentation, UAT Sessions with DJK (LIT NON-TR), Requirement Gathering",
         order: 2,
       },
       {
@@ -229,9 +229,9 @@ async function main() {
         positionEn: "Volunteer",
         company: "By.U X Menjadi Manusia",
         companyEn: "By.U X Menjadi Manusia",
-        period: "Mar 2025 — Mar 2025 · Jakarta, Indonesia",
-        periodEn: "Mar 2025 — Mar 2025 · Jakarta, Indonesia",
-        description: "• Menyambut dan membantu pengunjung di stan (booth).\n• Memberikan informasi tentang kegiatan dan program di booth by.U x Menjadi Manusia.\n• Mendukung dan mengoordinasikan kegiatan booth selama acara berlangsung.",
+        period: "Mar 2025 · Jakarta, Indonesia",
+        periodEn: "Mar 2025 · Jakarta, Indonesia",
+        description: "• Welcomed and assisted visitors at the booth.\n• Provided information about activities and programs at the by.U x Menjadi Manusia booth.\n• Supported and coordinated booth activities during the event.",
         descriptionEn: "• Welcomed and assisted visitors at the booth.\n• Provided information about activities and programs at the by.U x Menjadi Manusia booth.\n• Supported and coordinated booth activities during the event.",
         technologies: "Public Relations, Event Coordination, Visitor Assistance",
         order: 3,
@@ -243,7 +243,7 @@ async function main() {
         companyEn: "KPU Provinsi Jawa Barat",
         period: "Sep 2023 — Oct 2023 · Bandung, Indonesia",
         periodEn: "Sep 2023 — Oct 2023 · Bandung, Indonesia",
-        description: "• Membantu Divisi SDM dalam rekapitulasi pendaftaran anggota PPPK KPU Jabar.\n• Membantu Divisi Keuangan dalam mengelola dan mencatat data keuangan KPU Jawa Barat.",
+        description: "• Assisted the HR Division in the registration recapitulation of PPPK KPU Jabar members.\n• Assisted the Finance Division in managing and recording financial data for KPU West Java.",
         descriptionEn: "• Assisted the HR Division in the registration recapitulation of PPPK KPU Jabar members.\n• Assisted the Finance Division in managing and recording financial data for KPU West Java.",
         technologies: "Data Recapitulation, HR Support, Finance Recording",
         order: 4,
@@ -255,7 +255,7 @@ async function main() {
         companyEn: "Danacita",
         period: "Jun 2022 — Sep 2023 · Bandung, Indonesia",
         periodEn: "Jun 2022 — Sep 2023 · Bandung, Indonesia",
-        description: "• Membantu mempromosikan program Danacita di lingkungan Universitas Komputer Indonesia (UNIKOM).\n• Mendukung Community PIC dalam merangkul organisasi mahasiswa di UNIKOM untuk berpartisipasi dalam program Danacita.\n• Membantu Danacita dalam mengorganisasi dan mendukung acara yang diselenggarakan di UNIKOM dan wilayah Bandung.\n• Mendukung keberhasilan inisiatif Danacita di berbagai kampus di wilayah Bandung.",
+        description: "• Assisted in promoting Danacita programs within the Universitas Komputer Indonesia (UNIKOM) environment.\n• Supported the Community PIC in engaging student organizations at UNIKOM to participate in Danacita programs.\n• Assisted Danacita in organizing and supporting events held at UNIKOM and across Bandung.\n• Supported the success of Danacita initiatives across various campuses in the Bandung area.",
         descriptionEn: "• Assisted in promoting Danacita programs within the Universitas Komputer Indonesia (UNIKOM) environment.\n• Supported the Community PIC in engaging student organizations at UNIKOM to participate in Danacita programs.\n• Assisted Danacita in organizing and supporting events held at UNIKOM and across Bandung.\n• Supported the success of Danacita initiatives across various campuses in the Bandung area.",
         technologies: "Campus Promotion, Community Engagement, Event Management",
         order: 5,

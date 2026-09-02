@@ -147,7 +147,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
                 <div className="relative aspect-[4/5] rounded-[1.8rem] overflow-hidden bg-slate-900 border border-slate-200/80 dark:border-zinc-800/80 shadow-inner">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/haikal-al-ghifari.jpg"
+                    src={settings?.heroBannerUrl || "/haikal-al-ghifari.jpg"}
                     alt="Haikal Al Ghifari Profile"
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                   />

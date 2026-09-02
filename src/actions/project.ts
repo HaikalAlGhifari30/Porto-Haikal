@@ -24,9 +24,16 @@ export async function getProjects() {
     });
 }
 
+export async function getProjectBySlug(slug: string) {
+    return await prisma.project.findUnique({
+        where: { slug }
+    });
+}
+
 export async function createProject(formData: FormData) {
     const url = formData.get("url") as string;
     let title = formData.get("title") as string;
+    const slug = formData.get("slug") as string || title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
     let description = "";
     let imageUrl = "";
 
@@ -37,7 +44,6 @@ export async function createProject(formData: FormData) {
         imageUrl = ogData.imageUrl;
     }
 
-    // Get max order
     const maxOrder = await prisma.project.aggregate({
         _max: { order: true }
     });
@@ -45,6 +51,7 @@ export async function createProject(formData: FormData) {
     const project = await prisma.project.create({
         data: {
             title: title || "Untitled Project",
+            slug,
             url,
             description,
             imageUrl,
@@ -55,6 +62,8 @@ export async function createProject(formData: FormData) {
     revalidatePath("/cms/projects");
     revalidatePath("/");
     revalidatePath("/projects");
+
+    return project;
 }
 
 export async function updateProject(id: string, data: any) {

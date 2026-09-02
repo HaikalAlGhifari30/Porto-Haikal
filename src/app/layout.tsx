@@ -23,14 +23,15 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "PT RIZKY RIJAYA KARYA",
-  description: "Official Platform of PT Rizky Rijaya Karya",
+  title: "Haikal Al Ghifari — Quality Assurance Engineer Portfolio",
+  description: "Bachelor of Informatics Engineering graduate from UNIKOM (GPA 3.46) specialized in Quality Assurance, Manual Testing, test case design, and software quality validation.",
   icons: {
     icon: [
-      { url: "/favicon.png?v=2" },
-      { url: "/favicon.png?v=2", sizes: "32x32", type: "image/png" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.png?v=3" },
+      { url: "/favicon.png?v=3", sizes: "32x32", type: "image/png" },
     ],
-    apple: "/favicon.png?v=2",
+    apple: "/icon.svg",
   }
 };
 
@@ -47,7 +48,7 @@ export default function RootLayout({
     >
 
       <body className="min-h-full flex flex-col transition-colors duration-300">
-        <ThemeProvider defaultTheme="light">
+        <ThemeProvider defaultTheme="dark">
             {children}
             <Toaster 
                 position="top-right" 

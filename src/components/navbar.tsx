@@ -10,9 +10,10 @@ import { login } from "@/actions/auth";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { Menu, X, LogIn, LayoutDashboard, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { Menu, X, LogIn, LayoutDashboard, Eye, EyeOff, Download, Home, User, Layers, Briefcase, FolderGit2, GraduationCap, Users, MessageSquare, ChevronRight } from "lucide-react";
 import { ThemeSwitcher } from "@/components/cms/theme-switcher";
 import { useSafeLang } from "@/store/lang";
+import { HagLogo } from "@/components/hag-logo";
 
 export function Navbar() {
     const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -23,7 +24,6 @@ export function Navbar() {
     const [isPending, setIsPending] = useState(false);
     const { lang, setLang, t } = useSafeLang();
     const router = useRouter();
-
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -57,136 +57,224 @@ export function Navbar() {
         }
     };
 
-    const NavLinks = ({ mobile = false }: { mobile?: boolean }) => {
-        const linkClass = cn(
-            "font-medium transition-colors",
-            mobile 
-                ? "block py-3 text-base text-zinc-800 dark:text-zinc-200 hover:text-primary dark:hover:text-primary" 
-                : "text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-        );
-        return (
-            <>
-                <Link href="/#home" onClick={() => setIsMenuOpen(false)} className={linkClass}>{translate('nav.home', 'Beranda')}</Link>
-                <Link href="/#about" onClick={() => setIsMenuOpen(false)} className={linkClass}>{translate('nav.about', 'Tentang Kami')}</Link>
-                <Link href="/#organization" onClick={() => setIsMenuOpen(false)} className={linkClass}>{translate('nav.organization', 'Organisasi')}</Link>
-                <Link href="/#projects" onClick={() => setIsMenuOpen(false)} className={linkClass}>{translate('nav.projects', 'Proyek')}</Link>
-                <Link href="/#gallery" onClick={() => setIsMenuOpen(false)} className={linkClass}>{translate('nav.gallery', 'Galeri')}</Link>
-                <Link href="/#divisions" onClick={() => setIsMenuOpen(false)} className={linkClass}>{translate('nav.divisions', 'Divisi')}</Link>
-            </>
-        );
-    };
+    const navItems = [
+        { href: "/#home", label: translate('nav.home', 'Beranda'), icon: <Home className="w-4 h-4 text-cyan-400" /> },
+        { href: "/#about", label: translate('nav.about', 'Tentang Saya'), icon: <User className="w-4 h-4 text-blue-400" /> },
+        { href: "/#skills", label: translate('nav.skills', 'Keahlian QA'), icon: <Layers className="w-4 h-4 text-indigo-400" /> },
+        { href: "/#experience", label: translate('nav.experience', 'Pengalaman'), icon: <Briefcase className="w-4 h-4 text-purple-400" /> },
+        { href: "/#projects", label: translate('nav.projects', 'Portofolio QA'), icon: <FolderGit2 className="w-4 h-4 text-cyan-400" /> },
+        { href: "/#education", label: translate('nav.education', 'Pendidikan'), icon: <GraduationCap className="w-4 h-4 text-emerald-400" /> },
+        { href: "/#organization", label: translate('nav.organization', 'Organisasi'), icon: <Users className="w-4 h-4 text-amber-400" /> },
+        { href: "/#contact", label: translate('nav.contact', 'Kontak'), icon: <MessageSquare className="w-4 h-4 text-rose-400" /> },
+    ];
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#040816]/80 backdrop-blur-md border-b border-slate-200/60 dark:border-white/[0.03] transition-all duration-500 h-14 md:h-16 flex items-center">
-            <div className="container-original flex items-center justify-between w-full relative z-10">
-                <Link href="/" className="flex items-center gap-3 shrink-0 group">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/logo.png" alt="PT Rizky Rijaya Karya Logo" className="h-7 md:h-8 lg:h-9 w-auto transition-transform group-hover:scale-105 dark:bg-white/95 dark:p-1.5 dark:rounded-lg" />
-                    <div className="flex flex-col justify-center gap-[1px] md:gap-[2px] transition-transform group-hover:translate-x-1 duration-500">
-                        <span className="text-[9px] md:text-[11px] font-black uppercase tracking-[0.25em] text-zinc-800 dark:text-white/90 leading-[1.1]">Rizky Rijaya</span>
-                        <span className="text-[9px] md:text-[11px] font-black uppercase tracking-[0.25em] text-primary leading-[1.1]">Karya</span>
-                    </div>
-                </Link>
+        <>
+            {/* Top Fixed Header Navbar (macOS Frosted Glassmorphism) */}
+            <nav className="fixed top-0 left-0 right-0 z-50 bg-white/65 dark:bg-[#070e20]/75 backdrop-blur-2xl border-b border-slate-200/70 dark:border-cyan-500/20 shadow-md shadow-slate-900/5 dark:shadow-cyan-950/30 transition-all duration-300 h-16 flex items-center">
+                <div className="container-original flex items-center justify-between w-full px-4 md:px-8 mx-auto">
+                    
+                    {/* Brand Logo Only */}
+                    <Link href="/" className="flex items-center gap-3 shrink-0 group" title="Haikal Al Ghifari — HAG">
+                        <HagLogo size="md" useImage={false} />
+                    </Link>
 
-                {/* Desktop Menu */}
-                <div className="hidden lg:flex items-center gap-4">
-                    <div className="flex items-center gap-4 mr-2">
-                        <NavLinks />
-                    </div>
+                    {/* Top Bar Action Cluster (Right Side) */}
+                    <div className="flex items-center gap-3">
+                        
+                        {/* Language Switcher */}
+                        <div className="flex items-center gap-1 bg-white/70 dark:bg-zinc-900/80 backdrop-blur-md p-1 rounded-full border border-slate-200/80 dark:border-zinc-800 shadow-2xs">
+                            <button 
+                                onClick={() => setLang('id')}
+                                className={cn("px-2.5 py-1 rounded-full text-xs font-bold transition-all flex items-center justify-center", (mounted ? lang === 'id' : true) ? "bg-blue-600 text-white shadow-sm" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white")}
+                                title="Bahasa Indonesia"
+                            >
+                                ID
+                            </button>
+                            <button 
+                                onClick={() => setLang('en')}
+                                className={cn("px-2.5 py-1 rounded-full text-xs font-bold transition-all flex items-center justify-center", (mounted ? lang === 'en' : false) ? "bg-blue-600 text-white shadow-sm" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white")}
+                                title="English"
+                            >
+                                EN
+                            </button>
+                        </div>
 
-                    <div className="flex items-center gap-1 bg-slate-100 dark:bg-white/5 p-1 rounded-full border border-slate-200 dark:border-white/10 mr-2">
-                        <button 
-                            onClick={() => setLang('id')}
-                            className={cn("px-3 py-1.5 rounded-full text-sm font-bold transition-all flex items-center justify-center", (mounted ? lang === 'id' : true) ? "bg-blue-50 dark:bg-blue-500/20 shadow-sm ring-1 ring-blue-200 dark:ring-blue-500/30" : "opacity-50 hover:opacity-100")}
-                            title="Bahasa Indonesia"
+                        {/* Theme Switcher */}
+                        <ThemeSwitcher />
+
+                        {/* Download CV CTA */}
+                        <a
+                            href="/cv-haikal-al-ghifari.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={cn(
+                                buttonVariants({ variant: "default" }),
+                                "hidden sm:flex rounded-full px-4 py-1.5 h-9 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold text-xs shadow-md shadow-blue-500/25 hover:shadow-cyan-500/40 transition-all duration-300 items-center gap-2"
+                            )}
                         >
-                            <img src="https://flagcdn.com/w20/id.png" srcSet="https://flagcdn.com/w40/id.png 2x" width="20" alt="Indonesia" className="rounded-sm" />
-                        </button>
-                        <button 
-                            onClick={() => setLang('en')}
-                            className={cn("px-3 py-1.5 rounded-full text-sm font-bold transition-all flex items-center justify-center", (mounted ? lang === 'en' : false) ? "bg-blue-50 dark:bg-blue-500/20 shadow-sm ring-1 ring-blue-200 dark:ring-blue-500/30" : "opacity-50 hover:opacity-100")}
-                            title="English"
+                            <Download className="w-3.5 h-3.5" />
+                            <span>{translate('nav.downloadCv', 'Unduh CV')}</span>
+                        </a>
+
+                        {/* Hamburger Button */}
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className="p-2.5 rounded-xl bg-white/70 dark:bg-zinc-900/80 backdrop-blur-md border border-slate-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 hover:text-blue-600 dark:hover:text-white hover:border-blue-500/40 transition-all duration-300 flex items-center gap-2 group shadow-2xs cursor-pointer"
+                            aria-label="Toggle Navigation Menu"
                         >
-                            <img src="https://flagcdn.com/w20/gb.png" srcSet="https://flagcdn.com/w40/gb.png 2x" width="20" alt="English" className="rounded-sm" />
-                        </button>
-                    </div>
-
-                    {/* Theme Switcher */}
-                    <ThemeSwitcher />
-
-                    {isLoggedIn ? (
-                        <Link href="/cms" className={cn(
-                            buttonVariants({ variant: "outline" }),
-                            "group relative rounded-full px-5 py-1.5 h-8.5 bg-black/5 dark:bg-white/5 border-slate-300/50 dark:border-white/10 hover:border-primary/50 hover:bg-primary/10 text-zinc-800 dark:text-white transition-all duration-500 overflow-hidden"
-                        )}>
-                            <span className="relative z-10 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.2em]">
-                                {translate('nav.dashboard', 'Dasbor')}
-                                <ArrowRight className="w-3 h-3 transition-transform duration-500 group-hover:translate-x-1" />
+                            <span className="hidden md:inline text-xs font-bold tracking-wide uppercase group-hover:text-blue-600 dark:group-hover:text-cyan-400">
+                                {isMenuOpen ? "Tutup" : "Menu"}
                             </span>
+                            {isMenuOpen ? (
+                                <X className="w-5 h-5 text-blue-600 dark:text-cyan-400 transition-transform group-hover:rotate-90" />
+                            ) : (
+                                <Menu className="w-5 h-5 text-blue-600 dark:text-cyan-400 transition-transform group-hover:scale-110" />
+                            )}
+                        </button>
+
+                    </div>
+
+                </div>
+            </nav>
+
+            {/* Slide-over Drawer Backdrop (Full Screen Fixed Z-50) */}
+            {isMenuOpen && (
+                <div
+                    className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md transition-opacity duration-300"
+                    onClick={() => setIsMenuOpen(false)}
+                />
+            )}
+
+            {/* Slide-over Drawer Panel (macOS Frosted Glass Drawer) */}
+            <aside
+                className={cn(
+                    "fixed top-0 right-0 bottom-0 z-50 w-80 md:w-96 bg-white/95 dark:bg-[#070e20]/95 text-zinc-900 dark:text-white border-l border-slate-200/80 dark:border-cyan-500/20 shadow-2xl p-6 flex flex-col justify-between overflow-y-auto backdrop-blur-3xl transition-transform duration-300 ease-in-out",
+                    isMenuOpen ? "translate-x-0" : "translate-x-full"
+                )}
+            >
+                {/* Drawer Top Header */}
+                <div className="space-y-6">
+                    <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-zinc-800/80 pb-4">
+                        <div className="flex items-center gap-3">
+                            <HagLogo size="sm" useImage={false} />
+                            <div className="flex flex-col">
+                                <span className="text-sm font-bold text-zinc-900 dark:text-white tracking-tight">Haikal Al Ghifari</span>
+                                <span className="text-[10px] text-blue-600 dark:text-cyan-400 font-semibold uppercase">Quality Assurance Engineer</span>
+                            </div>
+                        </div>
+                        <button
+                            onClick={() => setIsMenuOpen(false)}
+                            className="p-2 rounded-xl bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
+                        >
+                            <X className="w-5 h-5" />
+                        </button>
+                    </div>
+
+                    {/* Menu Navigation Links List */}
+                    <div className="space-y-1.5">
+                        {navItems.map((item, idx) => (
+                            <Link
+                                key={idx}
+                                href={item.href}
+                                onClick={() => setIsMenuOpen(false)}
+                                className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-100/90 dark:bg-zinc-900/60 border border-slate-200/80 dark:border-zinc-800/50 hover:border-blue-500/40 hover:bg-slate-200/80 dark:hover:bg-zinc-900 text-zinc-800 dark:text-zinc-200 hover:text-blue-600 dark:hover:text-white transition-all duration-200 group"
+                            >
+                                <div className="flex items-center gap-3">
+                                    <div className="p-2 rounded-xl bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 group-hover:scale-110 transition-transform shadow-2xs">
+                                        {item.icon}
+                                    </div>
+                                    <span className="text-sm font-semibold">{item.label}</span>
+                                </div>
+                                <ChevronRight className="w-4 h-4 text-zinc-400 dark:text-zinc-500 group-hover:text-blue-600 dark:group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" />
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Drawer Footer Actions */}
+                <div className="space-y-3 pt-6 border-t border-slate-200/80 dark:border-zinc-800/80 mt-6">
+                    <a
+                        href="/cv-haikal-al-ghifari.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(
+                            buttonVariants({ variant: "default" }),
+                            "w-full rounded-2xl py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
+                        )}
+                    >
+                        <Download className="w-4 h-4" />
+                        <span>{translate('nav.downloadCv', 'Unduh CV')}</span>
+                    </a>
+
+                    {/* Admin Access Button */}
+                    {isLoggedIn ? (
+                        <Link
+                            href="/cms"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="w-full py-2.5 rounded-2xl bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 hover:border-blue-500/40 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-white flex items-center justify-center gap-2 transition-all"
+                        >
+                            <LayoutDashboard className="w-4 h-4 text-blue-500 dark:text-blue-400" />
+                            <span>{translate('nav.dashboard', 'Dasbor CMS')}</span>
                         </Link>
                     ) : (
                         <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
                             <DialogTrigger render={
-                                <Button
-                                    variant="outline"
-                                    className="group relative rounded-full px-5 py-1.5 h-8.5 bg-black/5 dark:bg-white/5 border-slate-300/50 dark:border-white/10 hover:border-primary/50 hover:bg-primary/10 text-zinc-800 dark:text-white transition-all duration-500 overflow-hidden"
+                                <button
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="w-full py-2.5 rounded-2xl bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 hover:border-slate-300 dark:hover:border-zinc-700 text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white flex items-center justify-center gap-2 transition-all cursor-pointer"
                                 >
-                                    <span className="relative z-10 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.2em]">
-                                        {translate('nav.login', 'Masuk')}
-                                        <ArrowRight className="w-3 h-3 transition-transform duration-500 group-hover:translate-x-1" />
-                                    </span>
-                                </Button>
+                                    <LogIn className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />
+                                    <span>{translate('nav.login', 'Admin Login')}</span>
+                                </button>
                             } />
-                            <DialogContent className="sm:max-w-[440px] bg-white dark:bg-zinc-950 border-slate-200 dark:border-white/10 text-zinc-900 dark:text-white p-0 rounded-[2.5rem] shadow-2xl overflow-hidden border">
-                                <div className="p-8 md:p-10">
-                                    <DialogHeader className="mb-10 flex flex-col items-center">
-                                        <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 border border-primary/20">
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img src="/logo.png" alt="PT Rizky Rijaya Karya Logo" className="h-14 w-auto dark:bg-white/95 dark:p-1.5 dark:rounded-xl" />
-                                        </div>
-                                        <DialogTitle className="text-3xl font-bold tracking-tight">{translate('auth.loginTitle', 'Selamat Datang Kembali')}</DialogTitle>
-                                        <p className="text-zinc-500 text-sm mt-2 font-medium">{translate('auth.loginSubtitle', 'Silakan masuk ke akun Anda')}</p>
+                            <DialogContent className="sm:max-w-[420px] bg-zinc-950 border-zinc-800 text-white p-0 rounded-3xl shadow-2xl overflow-hidden border">
+                                <div className="p-8">
+                                    <DialogHeader className="mb-6 flex flex-col items-center text-center">
+                                        <HagLogo size="lg" useImage={false} className="mb-4" />
+                                        <DialogTitle className="text-2xl font-bold tracking-tight">{translate('auth.loginTitle', 'Selamat Datang Kembali')}</DialogTitle>
+                                        <p className="text-zinc-400 text-xs mt-1.5 font-medium">{translate('auth.loginSubtitle', 'Silakan masuk ke akun admin Anda')}</p>
                                     </DialogHeader>
-                                    <form action={handleLogin} className="space-y-6">
-                                        <div className="space-y-2.5">
-                                            <Label htmlFor="email" className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-black pl-1">{translate('auth.email', 'Alamat Email')}</Label>
+                                    <form action={handleLogin} className="space-y-4">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="email" className="text-xs font-semibold text-zinc-400">{translate('auth.email', 'Alamat Email')}</Label>
                                             <Input
                                                 id="email"
                                                 name="email"
                                                 type="email"
                                                 required
-                                                placeholder="admin@compro-rrk.com"
-                                                className="bg-slate-50 dark:bg-zinc-900/50 border-slate-200 dark:border-white/5 h-14 rounded-2xl focus:ring-4 focus:ring-primary/20 focus:border-primary/50 transition-all text-base px-5"
+                                                placeholder="admin@haikalalghifari.dev"
+                                                className="bg-zinc-900 border-zinc-800 h-11 rounded-xl text-sm px-4 text-white"
                                             />
                                         </div>
-                                        <div className="space-y-2.5">
-                                            <Label htmlFor="password" className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-black pl-1">{translate('auth.password', 'Kata Sandi')}</Label>
-                                            <div className="relative group">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="password" className="text-xs font-semibold text-zinc-400">{translate('auth.password', 'Kata Sandi')}</Label>
+                                            <div className="relative">
                                                 <Input
                                                     id="password"
                                                     name="password"
                                                     type={showPassword ? "text" : "password"}
                                                     required
                                                     placeholder="••••••••"
-                                                    className="bg-slate-50 dark:bg-zinc-900/50 border-slate-200 dark:border-white/5 h-14 rounded-2xl focus:ring-4 focus:ring-primary/20 focus:border-primary/50 transition-all text-base px-5 pr-12"
+                                                    className="bg-zinc-900 border-zinc-800 h-11 rounded-xl text-sm px-4 pr-10 text-white"
                                                 />
                                                 <button
                                                     type="button"
                                                     onClick={() => setShowPassword(!showPassword)}
-                                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-white transition-colors"
+                                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white"
                                                 >
-                                                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                                                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                                 </button>
                                             </div>
                                         </div>
                                         {error && (
-                                            <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-bold text-center">
+                                            <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium text-center">
                                                 {error}
                                             </div>
                                         )}
                                         <Button
                                             type="submit"
-                                            className="w-full bg-primary hover:bg-primary/90 h-14 rounded-2xl font-bold text-base shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all mt-4"
+                                            className="w-full bg-blue-600 hover:bg-blue-700 h-11 rounded-xl font-bold text-sm shadow-md shadow-blue-500/20 mt-2"
                                         >
                                             {isPending ? "Authenticating..." : translate('auth.loginBtn', 'Masuk')}
                                         </Button>
@@ -197,57 +285,7 @@ export function Navbar() {
                     )}
                 </div>
 
-                {/* Mobile Right Side - Theme Switcher + Hamburger */}
-                <div className="lg:hidden flex items-center gap-2">
-                    <ThemeSwitcher />
-                    <button
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="p-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
-                    >
-                        {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                    </button>
-                </div>
-            </div>
-
-            {/* Mobile Menu Overlay */}
-            {isMenuOpen && (
-                <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-zinc-950 border-b border-slate-200 dark:border-white/5 p-6 space-y-2 flex flex-col shadow-2xl animate-in slide-in-from-top duration-300">
-                    <NavLinks mobile />
-                    <div className="pt-4 border-t border-slate-200 dark:border-white/5 flex flex-col gap-4">
-                        {/* Mobile Language Switcher */}
-                        <div className="flex items-center gap-2 bg-slate-100 dark:bg-white/5 p-1 rounded-full border border-slate-200 dark:border-white/10 w-fit mx-auto">
-                            <button 
-                                onClick={() => setLang('id')}
-                                className={cn("px-6 py-2 rounded-full text-lg transition-all flex items-center justify-center", (mounted ? lang === 'id' : true) ? "bg-blue-50 dark:bg-blue-500/20 shadow-sm scale-110 ring-1 ring-blue-200 dark:ring-blue-500/30" : "opacity-50 hover:opacity-100")}
-                            >
-                                <img src="https://flagcdn.com/w40/id.png" width="24" alt="Indonesia" className="rounded-sm" />
-                            </button>
-                            <button 
-                                onClick={() => setLang('en')}
-                                className={cn("px-6 py-2 rounded-full text-lg transition-all flex items-center justify-center", (mounted ? lang === 'en' : false) ? "bg-blue-50 dark:bg-blue-500/20 shadow-sm scale-110 ring-1 ring-blue-200 dark:ring-blue-500/30" : "opacity-50 hover:opacity-100")}
-                            >
-                                <img src="https://flagcdn.com/w40/gb.png" width="24" alt="English" className="rounded-sm" />
-                            </button>
-                        </div>
-                        
-                        {isLoggedIn ? (
-                            <Link href="/cms" onClick={() => setIsMenuOpen(false)} className={cn(buttonVariants({ className: "w-full" }), "bg-primary hover:bg-primary/90 rounded-xl")}>
-                                <LayoutDashboard className="w-4 h-4 mr-2" /> {translate('nav.dashboard', 'Dasbor')}
-                            </Link>
-                        ) : (
-                            <Button
-                                onClick={() => {
-                                    setIsMenuOpen(false);
-                                    setIsLoginOpen(true);
-                                }}
-                                className="w-full bg-primary hover:bg-primary/90 rounded-xl"
-                            >
-                                <LogIn className="w-4 h-4 mr-2" /> {translate('nav.login', 'Masuk')}
-                            </Button>
-                        )}
-                    </div>
-                </div>
-            )}
-        </nav>
+            </aside>
+        </>
     );
 }

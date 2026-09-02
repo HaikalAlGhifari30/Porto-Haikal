@@ -1,6 +1,9 @@
 import { getProjects } from "@/actions/project";
 import { Navbar } from "@/components/navbar";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function ProjectsPage() {
     const projects = await getProjects();
     const visibleProjects = projects.filter(p => p.isVisible);
@@ -34,7 +37,7 @@ export default async function ProjectsPage() {
                                         {project.imageUrl ? (
                                             // eslint-disable-next-line @next/next/no-img-element
                                             <img
-                                                src={project.imageUrl}
+                                                src={project.imageUrl.split(',')[0]}
                                                 alt={project.title}
                                                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000"
                                             />

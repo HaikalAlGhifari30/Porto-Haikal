@@ -1,8 +1,7 @@
-import { prisma } from "@/lib/db";
+import { getSettings } from "@/actions/settings";
 import { FooterClient } from "./footer-client";
 
 export async function Footer() {
-    const settings = await prisma.settings.findFirst();
-
+    const settings = await getSettings();
     return <FooterClient settings={settings} />;
 }

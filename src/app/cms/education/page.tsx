@@ -1,25 +1,25 @@
-import { getOrganizations } from "@/actions/organization";
-import { OrganizationCmsClient } from "@/components/cms/organization-cms-client";
+import { getEducations } from "@/actions/education";
+import { EducationCmsClient } from "@/components/cms/education-cms-client";
 import { Card, CardContent } from "@/components/ui/card";
-import { Lightbulb, Users } from "lucide-react";
+import { Lightbulb, GraduationCap } from "lucide-react";
 
 export const metadata = {
-  title: "Pengalaman Organisasi | CMS",
+  title: "Pendidikan | CMS",
 };
 
-export default async function OrganizationPage() {
-  const organizations = await getOrganizations();
+export default async function EducationPage() {
+  const educations = await getEducations();
 
   return (
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
         <div>
           <h2 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase flex items-center gap-3">
-            <Users className="w-8 h-8 text-cyan-400" />
-            Pengalaman Organisasi (Organizational Experience)
+            <GraduationCap className="w-8 h-8 text-cyan-400" />
+            Riwayat Pendidikan (Education)
           </h2>
           <p className="text-sm text-slate-500 dark:text-zinc-400 mt-1 font-medium">
-            Kelola riwayat kepemimpinan organisasi kemahasiswaan (mantan Ketua HMIF UNIKOM & Kadiv PAO FKMTIK).
+            Kelola riwayat pendidikan tinggi (UNIKOM), gelar S.Kom, dan rincian skripsi.
           </p>
         </div>
       </div>
@@ -31,14 +31,14 @@ export default async function OrganizationPage() {
           </div>
           <p className="text-[11px] md:text-xs text-slate-600 dark:text-zinc-300 leading-relaxed font-medium">
             <span className="font-bold text-cyan-400 mr-1 uppercase tracking-widest">Panduan:</span>
-            Perubahan data pengalaman organisasi di sini akan langsung diperbarui pada seksi <strong className="text-slate-900 dark:text-slate-200">Pengalaman Organisasi</strong> di Landing Page.
+            Perubahan data pendidikan di sini akan langsung diperbarui pada seksi <strong className="text-slate-900 dark:text-slate-200">Riwayat Pendidikan (Education)</strong> di Landing Page.
           </p>
         </div>
       </div>
 
       <Card className="bg-white dark:bg-[#070e20]/90 border-slate-200 dark:border-cyan-500/20 rounded-3xl overflow-hidden shadow-sm">
         <CardContent className="p-6">
-          <OrganizationCmsClient initialItems={organizations} />
+          <EducationCmsClient initialItems={educations} />
         </CardContent>
       </Card>
     </div>

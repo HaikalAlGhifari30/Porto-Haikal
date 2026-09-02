@@ -11,9 +11,9 @@ export default async function ProjectsPage() {
             <div className="mb-10">
                 <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
                     <div className="flex-1">
-                        <h2 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">Manajemen Proyek</h2>
+                        <h2 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">Portofolio Proyek</h2>
                         <p className="text-sm text-slate-500 dark:text-zinc-400 mt-2 font-medium leading-relaxed max-w-2xl">
-                            Susun portofolio karya terbaik PT Rizky Rijaya Karya dan atur urutan tampilannya di landing page.
+                            Susun portofolio karya terbaik Haikal Al Ghifari (Baroedak COMO, Compro RRK, FinTrack, Silesin Combiphar) dan atur tampilan di landing page.
                         </p>
                     </div>
                 </div>

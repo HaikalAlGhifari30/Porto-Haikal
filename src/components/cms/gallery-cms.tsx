@@ -96,7 +96,7 @@ export function GalleryCms({ items: initialItems }: GalleryCmsProps) {
                     <p className="text-slate-500 dark:text-zinc-400 text-center max-w-md text-sm">
                         {searchQuery
                             ? `Tidak ada foto yang cocok dengan pencarian "${searchQuery}".`
-                            : "Mulai tambahkan foto proyek untuk menampilkan portofolio terbaik perusahaan Anda."}
+                            : "Mulai tambahkan foto screenshot proyek untuk menampilkan galeri pengujian QA dan hasil kerja terbaik Anda."}
                     </p>
                     {!searchQuery && (
                         <button

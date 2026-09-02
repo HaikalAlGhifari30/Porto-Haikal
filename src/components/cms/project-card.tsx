@@ -92,7 +92,7 @@ export function ProjectCard({ project }: { project: Project }) {
                     <div className="h-40 w-full bg-slate-100 dark:bg-zinc-950 relative overflow-hidden">
                         {project.imageUrl ? (
                             <img 
-                                src={project.imageUrl} 
+                                src={project.imageUrl.split(',')[0].trim()} 
                                 alt={project.title} 
                                 className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-110" 
                             />

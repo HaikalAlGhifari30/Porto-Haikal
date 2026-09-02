@@ -92,7 +92,7 @@ export default async function CMSDashboard() {
                             <div key={project.id} className="p-4 flex flex-col md:flex-row items-start md:items-center gap-4 group hover:bg-slate-50 dark:hover:bg-zinc-800/40 transition-all rounded-2xl border border-transparent hover:border-cyan-500/20">
                                 <div className="w-24 h-16 rounded-xl bg-slate-100 dark:bg-zinc-950 overflow-hidden border border-slate-200 dark:border-zinc-800 shrink-0 shadow-inner">
                                     {project.imageUrl ? (
-                                        <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                        <img src={project.imageUrl.split(',')[0].trim()} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                                     ) : (
                                         <div className="w-full h-full flex items-center justify-center text-[7px] font-bold text-slate-300 tracking-widest">NO IMAGE</div>
                                     )}

@@ -59,7 +59,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
                 Haikal <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-500 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-300">Al Ghifari</span>
               </h1>
               <p className="text-cyan-600 dark:text-cyan-400 text-base sm:text-xl font-bold tracking-wide pt-1">
-                — Quality Assurance Engineer & System Analyst —
+                — Quality Assurance Engineer —
               </p>
             </div>
 

@@ -56,8 +56,8 @@ async function main() {
     data: {
       heroTitle: "Hi, Saya Haikal Al Ghifari",
       heroTitleEn: "Hi, I'm Haikal Al Ghifari",
-      heroSubtitle: "Quality Assurance Engineer & IT Business Analyst",
-      heroSubtitleEn: "Quality Assurance Engineer & IT Business Analyst",
+      heroSubtitle: "Quality Assurance Engineer",
+      heroSubtitleEn: "Quality Assurance Engineer",
       heroCtaText: "Lihat Portofolio QA",
       heroCtaTextEn: "View QA Portfolio",
       heroCtaLink: "#projects",

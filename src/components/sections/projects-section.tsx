@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { useSafeLang } from "@/store/lang";
-import { ArrowUpRight, ExternalLink, FolderGit2, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ExternalLink, FolderGit2, Sparkles } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface ProjectItem {
   id?: string;
@@ -136,61 +136,16 @@ function ProjectCardItem({ proj, idx, isEn, t }: { proj: ProjectItem; idx: numbe
 
       </div>
 
-      {/* Right Image Showcase Frame (Multi-Image Carousel Support) */}
+      {/* Right Image Showcase Frame (Clean Single Photo on Landing) */}
       <div className={`lg:col-span-7 ${isEven ? "lg:order-2" : "lg:order-1"}`}>
         <div className="relative group/img rounded-3xl overflow-hidden bg-slate-900 border border-slate-200/90 dark:border-zinc-800/90 shadow-xl dark:shadow-2xl aspect-[16/10] backdrop-blur-2xl">
-          <AnimatePresence mode="wait">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <motion.img
-              key={activeImgIdx}
-              src={imageList[activeImgIdx]}
-              alt={`${title} Screenshot ${activeImgIdx + 1}`}
-              initial={{ opacity: 0, scale: 1.02 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.4 }}
-              className="w-full h-full object-cover opacity-95 group-hover/img:opacity-100"
-            />
-          </AnimatePresence>
-
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={imageList[0]}
+            alt={title}
+            className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700 opacity-95 group-hover/img:opacity-100"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
-
-          {/* Carousel Arrows (If multiple images) */}
-          {imageList.length > 1 && (
-            <>
-              <button
-                onClick={prevImage}
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-zinc-950/80 hover:bg-cyan-500 text-white border border-white/20 flex items-center justify-center backdrop-blur-md transition-all shadow-lg hover:scale-110 z-10"
-                title="Previous Image"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={nextImage}
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-zinc-950/80 hover:bg-cyan-500 text-white border border-white/20 flex items-center justify-center backdrop-blur-md transition-all shadow-lg hover:scale-110 z-10"
-                title="Next Image"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-
-              {/* Pagination Indicator Dots */}
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-950/75 border border-white/10 backdrop-blur-md z-10">
-                {imageList.map((_, dotIdx) => (
-                  <button
-                    key={dotIdx}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                      setActiveImgIdx(dotIdx);
-                    }}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      dotIdx === activeImgIdx ? "w-6 bg-cyan-400" : "w-2 bg-white/40 hover:bg-white/70"
-                    }`}
-                  />
-                ))}
-              </div>
-            </>
-          )}
         </div>
       </div>
     </div>

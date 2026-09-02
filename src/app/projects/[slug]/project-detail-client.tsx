@@ -1,11 +1,11 @@
-"use client";
-
+import { useState } from "react";
 import { Navbar } from "@/components/navbar";
 import { FooterClient } from "@/components/footer-client";
 import { useSafeLang } from "@/store/lang";
-import { ArrowLeft, ExternalLink, Layers, ShieldAlert, Sparkles, CheckCircle2, Wrench, User, Globe, Activity, ShieldCheck, Check } from "lucide-react";
+import { ArrowLeft, ExternalLink, Layers, ShieldAlert, Sparkles, CheckCircle2, Wrench, User, Globe, Activity, ShieldCheck, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ProjectDetailClientProps {
   project: any;
@@ -14,6 +14,20 @@ interface ProjectDetailClientProps {
 export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
   const { lang, t } = useSafeLang();
   const isEn = lang === "en";
+
+  const imageList = project?.imageUrl
+    ? project.imageUrl.split(",").map((s: string) => s.trim()).filter(Boolean)
+    : ["https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=80"];
+
+  const [activeImgIdx, setActiveImgIdx] = useState(0);
+
+  const prevImage = () => {
+    setActiveImgIdx((prev) => (prev === 0 ? imageList.length - 1 : prev - 1));
+  };
+
+  const nextImage = () => {
+    setActiveImgIdx((prev) => (prev === imageList.length - 1 ? 0 : prev + 1));
+  };
 
   if (!project) {
     return (
@@ -190,14 +204,56 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
             </div>
           </div>
 
-          {/* Image Showcase Frame */}
-          <div className="relative rounded-3xl overflow-hidden bg-zinc-900 border border-zinc-800 shadow-2xl aspect-[16/9]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={project.imageUrl || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=80"}
-              alt={title}
-              className="w-full h-full object-cover"
-            />
+          {/* Image Showcase Frame (Multi-Image Interactive Carousel) */}
+          <div className="relative group rounded-3xl overflow-hidden bg-zinc-900 border border-zinc-800/90 shadow-2xl aspect-[16/9] backdrop-blur-2xl">
+            <AnimatePresence mode="wait">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <motion.img
+                key={activeImgIdx}
+                src={imageList[activeImgIdx]}
+                alt={`${title} Screenshot ${activeImgIdx + 1}`}
+                initial={{ opacity: 0, scale: 1.02 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.4 }}
+                className="w-full h-full object-cover"
+              />
+            </AnimatePresence>
+
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
+
+            {/* Carousel Arrows (If multiple images) */}
+            {imageList.length > 1 && (
+              <>
+                <button
+                  onClick={prevImage}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-zinc-950/85 hover:bg-cyan-500 text-white border border-white/20 flex items-center justify-center backdrop-blur-md transition-all shadow-xl hover:scale-110 z-20 cursor-pointer"
+                  title="Previous Image"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-zinc-950/85 hover:bg-cyan-500 text-white border border-white/20 flex items-center justify-center backdrop-blur-md transition-all shadow-xl hover:scale-110 z-20 cursor-pointer"
+                  title="Next Image"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+
+                {/* Pagination Indicator Dots */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-950/80 border border-white/10 backdrop-blur-md z-20">
+                  {imageList.map((_: any, dotIdx: number) => (
+                    <button
+                      key={dotIdx}
+                      onClick={() => setActiveImgIdx(dotIdx)}
+                      className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                        dotIdx === activeImgIdx ? "w-8 bg-cyan-400" : "w-2.5 bg-white/40 hover:bg-white/70"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
 
           {/* If Baroedak Como, render the 11 Systems Showcase Grid */}

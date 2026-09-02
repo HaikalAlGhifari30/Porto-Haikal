@@ -181,7 +181,7 @@ async function main() {
         features: "Real-Time Bidding System, Machinery Inventory Management, Vendor Portal Access, Vendor Verification Audit",
         imageUrl: "/projects/silesin-login.png,/projects/silesin-dashboard.png",
         githubUrl: "https://github.com/HaikalAlGhifari30/lelang-mesin",
-        url: "https://github.com/HaikalAlGhifari30/lelang-mesin",
+        url: "https://lelang-mesin.vercel.app",
         order: 5,
         isVisible: true,
       },

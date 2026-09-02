@@ -172,20 +172,6 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
               </div>
 
-              {/* Floating Skill Badges Around Photo Card (Visible on Both Mobile & Desktop) */}
-              <div className="absolute -left-3 sm:-left-6 top-6 sm:top-8 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-zinc-950/90 dark:bg-[#061224]/90 border border-emerald-500/50 text-emerald-400 text-[10px] sm:text-xs font-extrabold backdrop-blur-md shadow-xl z-20 pointer-events-none animate-bounce duration-[3000ms]">
-                Manual Testing
-              </div>
-              <div className="absolute -right-3 sm:-right-6 top-14 sm:top-16 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-zinc-950/90 dark:bg-[#061224]/90 border border-cyan-500/50 text-cyan-400 text-[10px] sm:text-xs font-extrabold backdrop-blur-md shadow-xl z-20 pointer-events-none">
-                Postman & API
-              </div>
-              <div className="absolute -left-4 sm:-left-8 top-1/2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-zinc-950/90 dark:bg-[#061224]/90 border border-blue-500/50 text-blue-400 text-[10px] sm:text-xs font-extrabold backdrop-blur-md shadow-xl z-20 pointer-events-none">
-                IT Business Analyst
-              </div>
-              <div className="absolute -right-4 sm:-right-8 bottom-20 sm:bottom-24 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-zinc-950/90 dark:bg-[#061224]/90 border border-purple-500/50 text-purple-400 text-[10px] sm:text-xs font-extrabold backdrop-blur-md shadow-xl z-20 pointer-events-none">
-                DFD & ERD
-              </div>
-
             </div>
           </div>
 

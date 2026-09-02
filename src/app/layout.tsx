@@ -23,6 +23,7 @@ const instrumentSerif = Instrument_Serif({
 });
 
 import { FloatingButtonsServer } from "@/components/floating-buttons-server";
+import { DevNoticeModal } from "@/components/dev-notice-modal";
 
 export const metadata: Metadata = {
   title: "Haikal Al Ghifari — Quality Assurance Engineer Portfolio",
@@ -53,6 +54,7 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="dark">
             {children}
             <FloatingButtonsServer />
+            <DevNoticeModal />
             <Toaster 
                 position="top-right" 
                 duration={2000} 

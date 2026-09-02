@@ -16,7 +16,7 @@ export function AdminProfile() {
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [isLogoutOpen, setIsLogoutOpen] = useState(false);
     
-    const [adminName, setAdminName] = useState("Admin PT Rizky Rijaya Karya");
+    const [adminName, setAdminName] = useState("Haikal Al Ghifari");
     const [adminPhoto, setAdminPhoto] = useState<string | null>(null);
     const [previewPhoto, setPreviewPhoto] = useState<string | null>(null);
     const [tempName, setTempName] = useState("");
@@ -27,10 +27,10 @@ export function AdminProfile() {
     useEffect(() => {
         const storedName = localStorage.getItem("adminName");
         const storedPhoto = localStorage.getItem("adminPhoto");
-        if (storedName && !storedName.toLowerCase().includes("como")) {
+        if (storedName && !storedName.toLowerCase().includes("rizky") && !storedName.toLowerCase().includes("como")) {
             setAdminName(storedName);
         } else {
-            const newName = "Admin PT Rizky Rijaya Karya";
+            const newName = "Haikal Al Ghifari";
             setAdminName(newName);
             localStorage.setItem("adminName", newName);
         }
@@ -94,7 +94,7 @@ export function AdminProfile() {
             >
                 <div className="text-right hidden sm:block">
                     <p className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">{adminName}</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-500 font-medium">Superadmin</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold">QA Lead Admin</p>
                 </div>
                 <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold transition-all overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/5 to-indigo-500/5" />

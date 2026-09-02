@@ -62,7 +62,7 @@ function ProjectCardItem({ proj, idx, isEn, t }: { proj: ProjectItem; idx: numbe
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: idx * 0.1 }}
-      className="relative w-full py-12 md:py-20 border-b border-slate-200/60 dark:border-zinc-800/80 last:border-b-0 overflow-hidden"
+      className="relative w-full py-10 md:py-16 overflow-hidden"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center group relative z-10">
         {/* Text Content Column (Alternating Order on Desktop) */}

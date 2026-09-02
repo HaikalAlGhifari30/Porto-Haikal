@@ -1,130 +1,97 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { MessageCircle, ArrowUp, X, Phone } from "lucide-react";
+import { ArrowUp, MessageCircle } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 import { cn } from "@/lib/utils";
 import { useSafeLang } from "@/store/lang";
 
 interface WhatsAppAdmin {
-    id: string;
-    name: string;
-    phone: string;
-    message: string;
-    isActive: boolean;
+  id: string;
+  name: string;
+  phone: string;
+  message: string;
+  isActive: boolean;
 }
 
-export function FloatingButtons({ admins }: { admins: WhatsAppAdmin[] }) {
-    const { t } = useSafeLang();
-    const [showTopBtn, setShowTopBtn] = useState(false);
-    const [isWaOpen, setIsWaOpen] = useState(false);
+export function FloatingButtons({ admins = [] }: { admins?: WhatsAppAdmin[] }) {
+  const { lang, t } = useSafeLang();
+  const isEn = lang === "en";
+  const [showTopBtn, setShowTopBtn] = useState(false);
 
-    // Active admins only
-    const activeAdmins = admins.filter(admin => admin.isActive);
+  const phone = "6281388058331";
+  const defaultMsg = isEn
+    ? "Halo Haikal, I'm interested in your portfolio!"
+    : "Halo Haikal, saya tertarik dengan portofolio Anda!";
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 300) {
-                setShowTopBtn(true);
-            } else {
-                setShowTopBtn(false);
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setShowTopBtn(true);
+      } else {
+        setShowTopBtn(false);
+      }
     };
 
-    const handleAdminClick = (phone: string, message: string) => {
-        // Clean phone number: remove non-digits, leading zero replaced with 62 (if applicable)
-        let cleanedPhone = phone.replace(/\D/g, '');
-        if (cleanedPhone.startsWith('0')) {
-            cleanedPhone = '62' + cleanedPhone.slice(1);
-        }
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const handleWhatsAppClick = () => {
+    let targetPhone = phone;
+    let targetMsg = defaultMsg;
+
+    if (admins && admins.length > 0 && admins[0]?.isActive) {
+      targetPhone = admins[0].phone.replace(/\D/g, "");
+      if (targetPhone.startsWith("0")) {
+        targetPhone = "62" + targetPhone.slice(1);
+      }
+      if (admins[0].message) {
+        targetMsg = admins[0].message;
+      }
+    }
+
+    const text = encodeURIComponent(targetMsg);
+    window.open(`https://wa.me/${targetPhone}?text=${text}`, "_blank");
+  };
+
+  return (
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-auto">
+      {/* 1. Floating WhatsApp Button (Compro RRK Style) */}
+      <button
+        onClick={handleWhatsAppClick}
+        className="w-12 h-12 sm:w-13 sm:h-13 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center relative group cursor-pointer"
+        aria-label="Chat via WhatsApp"
+        title={isEn ? "Chat via WhatsApp" : "Hubungi via WhatsApp"}
+      >
+        <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-30 pointer-events-none" />
+        <FaWhatsapp className="w-6 h-6 text-white relative z-10" />
         
-        const text = encodeURIComponent(message || "Halo, saya ingin bertanya...");
-        window.open(`https://wa.me/${cleanedPhone}?text=${text}`, '_blank');
-        setIsWaOpen(false);
-    };
+        {/* Hover Tooltip Pill */}
+        <span className="absolute right-full mr-3 px-3 py-1.5 bg-slate-900/95 dark:bg-[#070e20]/95 border border-slate-700 dark:border-cyan-500/30 text-white text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-xl">
+          {isEn ? "Chat WhatsApp" : "Hubungi WhatsApp"}
+        </span>
+      </button>
 
-    return (
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4">
-            
-            {/* WhatsApp Modal Popup */}
-            {isWaOpen && (
-                <div className="absolute bottom-20 right-0 w-72 sm:w-80 bg-white dark:bg-zinc-950 rounded-2xl shadow-2xl border border-slate-200 dark:border-zinc-800 overflow-hidden animate-in fade-in zoom-in-95 duration-200 origin-bottom-right">
-                    <div className="bg-emerald-500 p-4 text-white flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                            <MessageCircle className="w-5 h-5" />
-                            <h3 className="font-bold">{t('chat.title')}</h3>
-                        </div>
-                        <button onClick={() => setIsWaOpen(false)} className="text-white/80 hover:text-white transition-colors">
-                            <X className="w-5 h-5" />
-                        </button>
-                    </div>
-                    
-                    <div className="p-4 bg-slate-50 dark:bg-zinc-900/50">
-                        <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium mb-3">{t('chat.desc')}</p>
-                        
-                        {activeAdmins.length === 0 ? (
-                            <p className="text-sm text-slate-400 text-center py-4 italic">{t('chat.noAdmin')}</p>
-                        ) : (
-                            <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-1">
-                                {activeAdmins.map((admin) => (
-                                    <button
-                                        key={admin.id}
-                                        onClick={() => handleAdminClick(admin.phone, admin.message)}
-                                        className="w-full flex items-center gap-3 p-3 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl hover:border-emerald-500/50 hover:shadow-md transition-all text-left group"
-                                    >
-                                        <div className="w-10 h-10 rounded-full bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center shrink-0 group-hover:bg-emerald-500 transition-colors">
-                                            <Phone className="w-4 h-4 text-emerald-600 dark:text-emerald-400 group-hover:text-white" />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm font-bold text-slate-800 dark:text-white">{admin.name}</p>
-                                            <p className="text-xs text-slate-500 font-medium">Online</p>
-                                        </div>
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
-
-            {/* WhatsApp Trigger Button */}
-            <button
-                onClick={() => setIsWaOpen(!isWaOpen)}
-                className="w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center relative group"
-                aria-label="WhatsApp Us"
-            >
-                <div className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-20"></div>
-                {isWaOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
-                
-                {/* Tooltip */}
-                {!isWaOpen && (
-                    <span className="absolute right-full mr-4 bg-slate-800 text-white text-xs font-medium px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                        {t('chat.tooltip')}
-                    </span>
-                )}
-            </button>
-
-            {/* Back to Top Button */}
-            <button
-                onClick={scrollToTop}
-                className={cn(
-                    "w-12 h-12 bg-slate-700 hover:bg-slate-800 dark:bg-zinc-700 dark:hover:bg-zinc-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center",
-                    showTopBtn ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
-                )}
-                aria-label="Back to top"
-            >
-                <ArrowUp className="w-5 h-5" />
-            </button>
-        </div>
-    );
+      {/* 2. Floating Back-to-Top Button (Compro RRK Style) */}
+      <button
+        onClick={scrollToTop}
+        className={cn(
+          "w-11 h-11 sm:w-12 sm:h-12 bg-slate-900/90 dark:bg-[#070e20]/90 hover:bg-cyan-500 dark:hover:bg-cyan-500 text-white border border-slate-300 dark:border-cyan-500/30 hover:border-cyan-400 rounded-full shadow-xl hover:shadow-cyan-500/30 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center cursor-pointer group",
+          showTopBtn ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+        )}
+        aria-label="Back to Top"
+        title={isEn ? "Back to Top" : "Kembali ke Atas"}
+      >
+        <ArrowUp className="w-5 h-5 text-zinc-300 group-hover:text-white transition-colors" />
+      </button>
+    </div>
+  );
 }

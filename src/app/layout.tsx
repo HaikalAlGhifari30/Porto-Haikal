@@ -22,6 +22,8 @@ const instrumentSerif = Instrument_Serif({
   style: ["normal", "italic"],
 });
 
+import { FloatingButtonsServer } from "@/components/floating-buttons-server";
+
 export const metadata: Metadata = {
   title: "Haikal Al Ghifari — Quality Assurance Engineer Portfolio",
   description: "Bachelor of Informatics Engineering graduate from UNIKOM (GPA 3.46) specialized in Quality Assurance, Manual Testing, test case design, and software quality validation.",
@@ -50,6 +52,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col transition-colors duration-300">
         <ThemeProvider defaultTheme="dark">
             {children}
+            <FloatingButtonsServer />
             <Toaster 
                 position="top-right" 
                 duration={2000} 

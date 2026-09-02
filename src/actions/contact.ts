@@ -13,7 +13,7 @@ export async function submitContactMessage(formData: FormData) {
     throw new Error("Formulir harus diisi dengan lengkap / Required fields missing.");
   }
 
-  await prisma.contactMessage.create({
+  const newMessage = await prisma.contactMessage.create({
     data: {
       name,
       email,
@@ -22,6 +22,34 @@ export async function submitContactMessage(formData: FormData) {
     },
   });
 
+  revalidatePath("/cms/messages");
   revalidatePath("/cms");
-  return { success: true };
+  return { success: true, data: newMessage };
+}
+
+export async function getContactMessages() {
+  return await prisma.contactMessage.findMany({
+    orderBy: { createdAt: "desc" }
+  });
+}
+
+export async function markMessageAsRead(id: string) {
+  await prisma.contactMessage.update({
+    where: { id },
+    data: { isRead: true }
+  });
+
+  revalidatePath("/cms/messages");
+  revalidatePath("/cms");
+  return true;
+}
+
+export async function deleteContactMessage(id: string) {
+  await prisma.contactMessage.delete({
+    where: { id }
+  });
+
+  revalidatePath("/cms/messages");
+  revalidatePath("/cms");
+  return true;
 }

@@ -48,6 +48,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                 title: "Utama",
                 items: [
                     { href: "/cms", label: "Dashboard", icon: LayoutDashboard },
+                    { href: "/cms/messages", label: "Pesan Masuk", icon: MessageCircle },
                 ]
             },
             {

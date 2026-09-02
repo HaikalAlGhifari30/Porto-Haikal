@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/db";
-import { FolderKanban, ArrowUpRight, Plus, Zap, Image as ImageIcon, Settings, CheckCircle2 } from "lucide-react";
+import { FolderKanban, ArrowUpRight, Plus, Zap, Image as ImageIcon, Settings, CheckCircle2, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ProjectActionMenu } from "@/components/cms/project-action-menu";
@@ -8,6 +8,8 @@ import { DashboardGreeting } from "@/components/cms/dashboard-greeting";
 export default async function CMSDashboard() {
     const totalProjects = await prisma.project.count();
     const totalGallery = await prisma.gallery.count();
+    const totalMessages = await prisma.contactMessage.count();
+    const unreadMessages = await prisma.contactMessage.count({ where: { isRead: false } });
 
     const recentProjects = await prisma.project.findMany({
         take: 6,
@@ -28,14 +30,14 @@ export default async function CMSDashboard() {
                         </div>
                         <DashboardGreeting />
                         <p className="text-zinc-300 text-sm md:text-base font-medium max-w-lg leading-relaxed pt-1">
-                            Kelola portofolio proyek, galeri screenshot, dan pengaturan website Anda secara terpusat.
+                            Kelola portofolio proyek, pesan masuk, galeri screenshot, dan pengaturan website Anda secara terpusat.
                         </p>
                     </div>
                     
                     <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
-                        <Link href="/cms/projects" className="flex-1 sm:flex-none">
+                        <Link href="/cms/messages" className="flex-1 sm:flex-none">
                             <Button className="w-full sm:w-auto h-12 px-8 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold border-none shadow-xl shadow-cyan-500/25 transition-all active:scale-95 cursor-pointer">
-                                <Plus className="w-5 h-5 mr-2" /> Proyek Baru
+                                <MessageSquare className="w-5 h-5 mr-2" /> Pesan Masuk {unreadMessages > 0 && `(${unreadMessages})`}
                             </Button>
                         </Link>
                         <Link href="/cms/settings" className="flex-1 sm:flex-none">
@@ -48,8 +50,9 @@ export default async function CMSDashboard() {
             </div>
 
             {/* Statistics Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-1">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 px-1">
                 {[
+                    { label: "Pesan Masuk", value: unreadMessages > 0 ? `${unreadMessages} Baru` : `${totalMessages} Pesan`, icon: MessageSquare, color: "blue", detail: "Formulir Kontak Public", href: "/cms/messages" },
                     { label: "Total Proyek", value: totalProjects, icon: FolderKanban, color: "cyan", detail: "Active Live Showcase", href: "/cms/projects" },
                     { label: "Galeri Screenshot", value: totalGallery, icon: ImageIcon, color: "emerald", detail: "Media Showcase", href: "/cms/gallery" },
                     { label: "Database Neon", value: "Online", icon: CheckCircle2, color: "indigo", detail: "PostgreSQL Synced", href: "/cms/settings" },

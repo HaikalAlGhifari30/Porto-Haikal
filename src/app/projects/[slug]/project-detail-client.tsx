@@ -258,67 +258,6 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
             )}
           </div>
 
-          {/* If Baroedak Como, render the 11 Systems Showcase Grid */}
-          {project.slug === "baroedak-como" && (
-            <div className="space-y-6 pt-4">
-              <div className="space-y-2 border-b border-zinc-800 pb-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-bold uppercase tracking-wider">
-                  <ShieldCheck className="w-4 h-4" />
-                  <span>COMO 1907 — 11 Digital Systems Tested</span>
-                </div>
-                <h3 className="text-2xl font-bold text-white tracking-tight">11 Systems Quality Assurance Audit Breakdown</h3>
-                <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">
-                  As part of the Quality Assurance team at Como 1907, Haikal conducted manual testing, user flow verification, regression testing, and quality audits across all 11 digital platforms below:
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {comoSystems.map((sys, idx) => (
-                  <div
-                    key={idx}
-                    className="p-5 rounded-2xl bg-zinc-900/80 border border-zinc-800/80 hover:border-cyan-500/40 transition-all duration-300 space-y-3 flex flex-col justify-between group"
-                  >
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-xs font-bold text-cyan-400">System #{idx + 1}</span>
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-bold">
-                          <Check className="w-3 h-3" />
-                          {sys.status}
-                        </span>
-                      </div>
-
-                      <h4 className="text-base font-bold text-white group-hover:text-cyan-400 transition-colors">
-                        {sys.name}
-                      </h4>
-                      <p className="text-xs text-zinc-400 leading-relaxed font-normal">
-                        {sys.desc}
-                      </p>
-                    </div>
-
-                    <div className="pt-3 border-t border-zinc-800/60 space-y-2">
-                      <div className="text-[11px] text-zinc-300">
-                        <strong className="text-blue-400">QA Scope:</strong> {sys.qaFocus}
-                      </div>
-
-                      {sys.url && sys.url !== "#" && (
-                        <a
-                          href={sys.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:underline pt-1"
-                        >
-                          <Globe className="w-3.5 h-3.5" />
-                          <span>Visit Live System</span>
-                          <ExternalLink className="w-3 h-3" />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
           {/* Problem & Solution Grid */}
           {(problem || solution) && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

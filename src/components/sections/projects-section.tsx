@@ -65,91 +65,94 @@ function ProjectCardItem({ proj, idx, isEn, t }: { proj: ProjectItem; idx: numbe
       className="relative w-full py-4 md:py-6 overflow-hidden"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center group relative z-10">
-        {/* Text Content Column (Alternating Order on Desktop) */}
-        <div className={`lg:col-span-5 space-y-5 flex flex-col justify-center ${isEven ? "lg:order-1" : "lg:order-2"}`}>
         
-        {/* Category Subtitle Tag */}
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-bold text-blue-600 dark:text-cyan-400 tracking-wider uppercase">
-            {cat}
-          </span>
-        </div>
-
-        {/* Title */}
-        <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors leading-snug">
-          {title}
-        </h3>
-
-        {/* Glass Description Container Box (Yofi Reference Style) */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-white/80 dark:bg-[#0c101d]/90 border border-slate-200/90 dark:border-zinc-800/90 backdrop-blur-xl shadow-md dark:shadow-xl text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm leading-relaxed font-normal">
-          <p>{desc}</p>
-        </div>
-
-        {/* Tech Stack Pills */}
-        {techList.length > 0 && (
-          <div className="flex flex-wrap gap-2 pt-1">
-            {techList.map((tech, tIdx) => (
-              <span
-                key={tIdx}
-                className="px-3 py-1 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-xs font-semibold text-zinc-700 dark:text-zinc-300 shadow-2xs"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {/* Action Buttons Row */}
-        <div className="flex items-center gap-3 pt-2">
-          <Link
-            href={`/projects/${proj.slug}`}
-            className="px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold text-xs flex items-center gap-2 shadow-md shadow-blue-500/20 transition-all hover:scale-102"
-          >
-            <span>{t('projects.viewDetail')}</span>
-            <ArrowUpRight className="w-4 h-4" />
+        {/* Image Showcase Frame Column */}
+        <div className={`lg:col-span-7 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
+          <Link href={`/projects/${proj.slug}`} className="block relative group/img rounded-3xl overflow-hidden bg-slate-900 border border-slate-200/90 dark:border-zinc-800/90 shadow-xl dark:shadow-2xl aspect-[16/10] backdrop-blur-2xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={imageList[0]}
+              alt={title}
+              className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700 opacity-95 group-hover/img:opacity-100"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent pointer-events-none" />
           </Link>
-
-          {proj.githubUrl && (
-            <a
-              href={proj.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all shadow-2xs hover:scale-105"
-              title="GitHub Repository"
-            >
-              <FaGithub className="w-4.5 h-4.5" />
-            </a>
-          )}
-
-          {proj.url && proj.url !== "#" && (
-            <a
-              href={proj.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all shadow-2xs hover:scale-105"
-              title="Live Demo"
-            >
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          )}
         </div>
 
-      </div>
+        {/* Text Content Column */}
+        <div className={`lg:col-span-5 space-y-5 flex flex-col justify-center ${isEven ? "lg:order-2" : "lg:order-1"}`}>
+          
+          {/* Category Subtitle Tag */}
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold text-blue-600 dark:text-cyan-400 tracking-wider uppercase">
+              {cat}
+            </span>
+          </div>
 
-      {/* Right Image Showcase Frame (Clean Single Photo on Landing) */}
-      <div className={`lg:col-span-7 ${isEven ? "lg:order-2" : "lg:order-1"}`}>
-        <div className="relative group/img rounded-3xl overflow-hidden bg-slate-900 border border-slate-200/90 dark:border-zinc-800/90 shadow-xl dark:shadow-2xl aspect-[16/10] backdrop-blur-2xl">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={imageList[0]}
-            alt={title}
-            className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700 opacity-95 group-hover/img:opacity-100"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
+          {/* Title */}
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-zinc-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors leading-snug">
+            <Link href={`/projects/${proj.slug}`}>
+              {title}
+            </Link>
+          </h3>
+
+          {/* Glass Description Container Box (Yofi Reference Style) */}
+          <div className="p-5 sm:p-6 rounded-2xl bg-white/80 dark:bg-[#0c101d]/90 border border-slate-200/90 dark:border-zinc-800/90 backdrop-blur-xl shadow-md dark:shadow-xl text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm leading-relaxed font-normal">
+            <p>{desc}</p>
+          </div>
+
+          {/* Tech Stack Pills */}
+          {techList.length > 0 && (
+            <div className="flex flex-wrap gap-2 pt-1">
+              {techList.map((tech, tIdx) => (
+                <span
+                  key={tIdx}
+                  className="px-3 py-1 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-xs font-semibold text-zinc-700 dark:text-zinc-300 shadow-2xs"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* Action Buttons Row */}
+          <div className="flex items-center gap-3 pt-2">
+            <Link
+              href={`/projects/${proj.slug}`}
+              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold text-xs flex items-center gap-2 shadow-md shadow-blue-500/20 transition-all hover:scale-102"
+            >
+              <span>{t('projects.viewDetail')}</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+
+            {proj.githubUrl && (
+              <a
+                href={proj.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all shadow-2xs hover:scale-105"
+                title="GitHub Repository"
+              >
+                <FaGithub className="w-4.5 h-4.5" />
+              </a>
+            )}
+
+            {proj.url && proj.url !== "#" && (
+              <a
+                href={proj.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all shadow-2xs hover:scale-105"
+                title="Live Demo"
+              >
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            )}
+          </div>
+
         </div>
       </div>
-    </div>
-  </motion.div>
+    </motion.div>
   );
 }
 

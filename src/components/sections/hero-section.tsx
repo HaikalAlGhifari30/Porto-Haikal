@@ -153,13 +153,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
                   />
                   
                   {/* Subtle Bottom Overlay Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent pointer-events-none" />
-                  
-                  {/* Small Verified Badge at Bottom Right of Photo */}
-                  <div className="absolute bottom-3 right-3 px-3 py-1 rounded-xl bg-zinc-950/90 backdrop-blur-md border border-white/15 text-cyan-400 flex items-center gap-1.5 shadow-lg">
-                    <ShieldCheck className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                    <span className="text-[10px] font-extrabold tracking-wider uppercase">Verified QA</span>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
                 </div>
 
                 {/* Bottom Badge Pill: Quality Assurance at COMO 1907 */}

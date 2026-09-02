@@ -41,14 +41,14 @@ export function ContactSection({ settings }: ContactSectionProps) {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden bg-transparent text-white transition-colors duration-500">
+    <section id="contact" className="py-12 lg:py-16 relative overflow-hidden bg-transparent text-white transition-colors duration-500">
       {/* Radial Background Orbs */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-blue-600/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="container-original relative z-10 mx-auto px-4 max-w-5xl">
         {/* Section Header */}
-        <div className="max-w-2xl space-y-3 mb-12 text-center mx-auto">
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-blue-900 to-cyan-800 dark:from-white dark:via-cyan-200 dark:to-cyan-400 bg-clip-text text-transparent pb-3 pt-1 leading-snug">
+        <div className="max-w-2xl space-y-2 mb-8 text-center mx-auto">
+          <h2 className="text-2xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-blue-900 to-cyan-800 dark:from-white dark:via-cyan-200 dark:to-cyan-400 bg-clip-text text-transparent pb-1 pt-1 leading-snug">
             {t('contact.getInTouch')}
           </h2>
           <p className="text-zinc-600 dark:text-zinc-400 text-xs md:text-sm leading-relaxed max-w-xl mx-auto font-medium">

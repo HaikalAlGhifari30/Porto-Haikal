@@ -27,19 +27,19 @@ export function HeroSection({ settings }: HeroSectionProps) {
   const emailUrl = settings?.email || "alghifaribahren03@gmail.com";
 
   return (
-    <section id="home" className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-16 overflow-hidden bg-transparent text-zinc-900 dark:text-white transition-colors duration-500">
+    <section id="home" className="relative min-h-[85vh] flex items-center justify-center pt-24 pb-12 lg:pt-28 lg:pb-14 overflow-hidden bg-transparent text-zinc-900 dark:text-white transition-colors duration-500">
       {/* Deep Background Decorative Grid Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#3b82f615_1px,transparent_1px)] dark:bg-[radial-gradient(#38bdf815_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
       
       {/* Dynamic Ambient Glow Orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-blue-600/10 dark:bg-cyan-500/15 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-indigo-600/10 dark:bg-blue-600/15 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 dark:bg-cyan-500/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-indigo-600/10 dark:bg-blue-600/15 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container-original relative z-10 mx-auto px-4 max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           
           {/* Left Content Column */}
-          <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
+          <div className="lg:col-span-7 space-y-4 text-center lg:text-left">
             
             {/* Available Status Pill Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-medium tracking-wide backdrop-blur-md">
@@ -55,10 +55,10 @@ export function HeroSection({ settings }: HeroSectionProps) {
               <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm font-medium tracking-wide">
                 {greeting}
               </p>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-white leading-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-white leading-tight">
                 Haikal <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-300">Al Ghifari</span>
               </h1>
-              <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base font-medium tracking-wide pt-1">
+              <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm font-medium tracking-wide pt-0.5">
                 — Quality Assurance Engineer —
               </p>
             </div>
@@ -133,7 +133,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
           {/* Right Visual / Personal Rectangular Portrait Photo Card (Non-Circular) */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative group w-full max-w-sm">
+            <div className="relative group w-full max-w-[280px] lg:max-w-[320px]">
               
               {/* Outer Card Ambient Neon Glow */}
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 rounded-[2.5rem] blur-2xl opacity-25 dark:opacity-40 group-hover:opacity-70 transition duration-700 pointer-events-none" />

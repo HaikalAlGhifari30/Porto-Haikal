@@ -64,50 +64,50 @@ function ProjectCardItem({ proj, idx, isEn, t }: { proj: ProjectItem; idx: numbe
       transition={{ duration: 0.6, delay: idx * 0.1 }}
       className="relative w-full py-4 md:py-6 overflow-hidden"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center group relative z-10">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center group relative z-10">
         
-        {/* Image Showcase Frame Column */}
-        <div className={`lg:col-span-7 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
-          <Link href={`/projects/${proj.slug}`} className="block relative group/img rounded-3xl overflow-hidden bg-slate-900 border border-slate-200/90 dark:border-zinc-800/90 shadow-xl dark:shadow-2xl aspect-[16/10] backdrop-blur-2xl">
+        {/* Image Showcase Frame Column (Compact 6-col) */}
+        <div className={`lg:col-span-6 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
+          <Link href={`/projects/${proj.slug}`} className="block relative group/img rounded-2xl overflow-hidden bg-slate-900 border border-slate-200/90 dark:border-zinc-800/90 shadow-lg dark:shadow-xl aspect-[16/9.5] backdrop-blur-2xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={imageList[0]}
               alt={title}
               className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700 opacity-95 group-hover/img:opacity-100"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
           </Link>
         </div>
 
-        {/* Text Content Column */}
-        <div className={`lg:col-span-5 space-y-5 flex flex-col justify-center ${isEven ? "lg:order-2" : "lg:order-1"}`}>
+        {/* Text Content Column (Compact 6-col) */}
+        <div className={`lg:col-span-6 space-y-4 flex flex-col justify-center ${isEven ? "lg:order-2" : "lg:order-1"}`}>
           
           {/* Category Subtitle Tag */}
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-blue-600 dark:text-cyan-400 tracking-wider uppercase">
+            <span className="text-[11px] font-bold text-blue-600 dark:text-cyan-400 tracking-wider uppercase">
               {cat}
             </span>
           </div>
 
           {/* Title */}
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-zinc-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors leading-snug">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors leading-snug">
             <Link href={`/projects/${proj.slug}`}>
               {title}
             </Link>
           </h3>
 
-          {/* Glass Description Container Box (Yofi Reference Style) */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-white/80 dark:bg-[#0c101d]/90 border border-slate-200/90 dark:border-zinc-800/90 backdrop-blur-xl shadow-md dark:shadow-xl text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm leading-relaxed font-normal">
+          {/* Glass Description Container Box (Compact Yofi Style) */}
+          <div className="p-4 sm:p-5 rounded-xl bg-white/80 dark:bg-[#0c101d]/90 border border-slate-200/90 dark:border-zinc-800/90 backdrop-blur-xl shadow-sm dark:shadow-md text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm leading-relaxed font-normal">
             <p>{desc}</p>
           </div>
 
           {/* Tech Stack Pills */}
           {techList.length > 0 && (
-            <div className="flex flex-wrap gap-2 pt-1">
+            <div className="flex flex-wrap gap-1.5 pt-0.5">
               {techList.map((tech, tIdx) => (
                 <span
                   key={tIdx}
-                  className="px-3 py-1 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-xs font-semibold text-zinc-700 dark:text-zinc-300 shadow-2xs"
+                  className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-[11px] font-semibold text-zinc-700 dark:text-zinc-300 shadow-2xs"
                 >
                   {tech}
                 </span>
@@ -116,13 +116,13 @@ function ProjectCardItem({ proj, idx, isEn, t }: { proj: ProjectItem; idx: numbe
           )}
 
           {/* Action Buttons Row */}
-          <div className="flex items-center gap-3 pt-2">
+          <div className="flex items-center gap-2.5 pt-1">
             <Link
               href={`/projects/${proj.slug}`}
-              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold text-xs flex items-center gap-2 shadow-md shadow-blue-500/20 transition-all hover:scale-102"
+              className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm shadow-blue-500/20 transition-all hover:scale-102"
             >
               <span>{t('projects.viewDetail')}</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
 
             {proj.githubUrl && (
@@ -130,10 +130,10 @@ function ProjectCardItem({ proj, idx, isEn, t }: { proj: ProjectItem; idx: numbe
                 href={proj.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all shadow-2xs hover:scale-105"
+                className="w-9 h-9 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all shadow-2xs hover:scale-105"
                 title="GitHub Repository"
               >
-                <FaGithub className="w-4.5 h-4.5" />
+                <FaGithub className="w-4 h-4" />
               </a>
             )}
 
@@ -142,10 +142,10 @@ function ProjectCardItem({ proj, idx, isEn, t }: { proj: ProjectItem; idx: numbe
                 href={proj.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all shadow-2xs hover:scale-105"
+                className="w-9 h-9 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all shadow-2xs hover:scale-105"
                 title="Live Demo"
               >
-                <ExternalLink className="w-4 h-4" />
+                <ExternalLink className="w-3.5 h-3.5" />
               </a>
             )}
           </div>

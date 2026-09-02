@@ -73,11 +73,6 @@ function ProjectCardItem({ proj, idx, isEn, t }: { proj: ProjectItem; idx: numbe
           <span className="text-xs font-bold text-blue-600 dark:text-cyan-400 tracking-wider uppercase">
             {cat}
           </span>
-          {imageList.length > 1 && (
-            <span className="px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-300 text-[10px] font-bold uppercase tracking-wider">
-              {imageList.length} Screenshots
-            </span>
-          )}
         </div>
 
         {/* Title */}

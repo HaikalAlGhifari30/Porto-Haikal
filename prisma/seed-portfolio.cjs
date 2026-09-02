@@ -23,13 +23,13 @@ async function main() {
 
   // 1. Admin User
   const email = "admin@haikalalghifari.dev";
-  const password = "admin123";
+  const password = "Lnfvjem";
   const name = "Haikal Al Ghifari, S.Kom";
 
-  const existingUser = await prisma.user.findUnique({ where: { email } });
-  if (!existingUser) {
-    const hashedPassword = await hashPassword(password);
-    const user = await prisma.user.create({
+  const hashedPassword = await hashPassword(password);
+  let user = await prisma.user.findUnique({ where: { email } });
+  if (!user) {
+    user = await prisma.user.create({
       data: {
         name,
         email,
@@ -37,18 +37,25 @@ async function main() {
         emailVerified: new Date(),
       },
     });
-    await prisma.account.create({
-      data: {
-        accountId: user.id,
-        providerId: "credential",
-        userId: user.id,
-        password: hashedPassword,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
+  } else {
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { name },
     });
-    console.log("✅ Admin account created:", email);
   }
+
+  await prisma.account.deleteMany({ where: { userId: user.id } });
+  await prisma.account.create({
+    data: {
+      accountId: user.id,
+      providerId: "credential",
+      userId: user.id,
+      password: hashedPassword,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  });
+  console.log("✅ Admin account password updated for:", email);
 
   // 2. Settings (Official CV Details)
   await prisma.settings.deleteMany();

@@ -62,7 +62,7 @@ function ProjectCardItem({ proj, idx, isEn, t }: { proj: ProjectItem; idx: numbe
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: idx * 0.1 }}
-      className="relative w-full py-10 md:py-16 overflow-hidden"
+      className="relative w-full py-4 md:py-6 overflow-hidden"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center group relative z-10">
         {/* Text Content Column (Alternating Order on Desktop) */}
@@ -209,7 +209,7 @@ export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
         </div>
 
         {/* Alternating Featured Projects Showcase (Yofi Reference Style) */}
-        <div className="space-y-28 md:space-y-36 isolate">
+        <div className="space-y-10 md:space-y-14 isolate">
           {filteredProjects.map((proj, idx) => (
             <ProjectCardItem key={proj.id || idx} proj={proj} idx={idx} isEn={isEn} t={t} />
           ))}

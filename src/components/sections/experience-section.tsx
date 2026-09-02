@@ -130,12 +130,12 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
   };
 
   return (
-    <section id="experience" className="py-12 lg:py-16 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white transition-colors duration-500">
+    <section id="experience" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white transition-colors duration-500">
       <div className="container-original relative z-10 mx-auto px-4 max-w-6xl">
         
         {/* Section Header */}
-        <div className="max-w-2xl space-y-2 mb-8 text-center mx-auto">
-          <h2 className="text-2xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-blue-900 to-cyan-800 dark:from-white dark:via-cyan-200 dark:to-cyan-400 bg-clip-text text-transparent pb-1 pt-1 leading-tight">
+        <div className="max-w-2xl space-y-3 mb-12 text-center mx-auto">
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-blue-900 to-cyan-800 dark:from-white dark:via-cyan-200 dark:to-cyan-400 bg-clip-text text-transparent pb-1 pt-1 leading-tight">
             {t('section.experience')}
           </h2>
           <p className="text-zinc-600 dark:text-zinc-400 text-xs md:text-sm leading-relaxed font-medium">

@@ -71,14 +71,14 @@ export function SkillsSection({ skills = [] }: SkillsSectionProps) {
   ];
 
   return (
-    <section id="skills" className="py-12 lg:py-16 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white transition-colors duration-500">
+    <section id="skills" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white transition-colors duration-500">
       {/* Background Gradients */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-blue-500/5 dark:bg-cyan-500/10 rounded-full blur-[130px] pointer-events-none" />
 
       <div className="container-original relative z-10 mx-auto px-4 max-w-6xl">
         {/* Section Header */}
-        <div className="max-w-2xl space-y-2 mb-10 text-center mx-auto">
-          <h2 className="text-2xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-blue-900 to-cyan-800 dark:from-white dark:via-cyan-200 dark:to-cyan-400 bg-clip-text text-transparent pb-1 pt-1 leading-tight">
+        <div className="max-w-2xl space-y-3 mb-14 text-center mx-auto">
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-blue-900 to-cyan-800 dark:from-white dark:via-cyan-200 dark:to-cyan-400 bg-clip-text text-transparent pb-1 pt-1 leading-tight">
             {t('section.skills')}
           </h2>
           <p className="text-zinc-600 dark:text-zinc-400 text-xs md:text-sm leading-relaxed font-medium">

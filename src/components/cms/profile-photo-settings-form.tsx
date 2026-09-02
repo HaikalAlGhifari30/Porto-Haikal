@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { updateSettings } from "@/actions/settings";
 import { toast } from "sonner";
-import { Loader2, Save, Upload, FileText, CheckCircle2, User } from "lucide-react";
+import { Loader2, Save, Upload, FileText, CheckCircle2, User, ImagePlus, FileUp } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 
 export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
@@ -16,6 +16,43 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
 
   const [heroBannerUrl, setHeroBannerUrl] = useState(settings?.heroBannerUrl || "/haikal-al-ghifari.jpg");
   const [cvLink, setCvLink] = useState(settings?.heroCtaLink || "/cv-haikal-al-ghifari.pdf");
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const cvFileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error("Ukuran file foto terlalu besar (Maksimal 5MB)");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64 = reader.result as string;
+        setHeroBannerUrl(base64);
+        toast.success("Foto profil baru berhasil dimuat! Klik 'Simpan Foto Profil & File CV' untuk menerapkan.");
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCvFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error("Ukuran file CV terlalu besar (Maksimal 10MB)");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64 = reader.result as string;
+        setCvLink(base64);
+        toast.success("File CV PDF baru berhasil dimuat! Klik 'Simpan Foto Profil & File CV' untuk menerapkan.");
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,9 +79,25 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
 
   return (
     <>
+      {/* Hidden File Inputs */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleImageFileChange}
+        accept="image/png, image/jpeg, image/webp, image/gif"
+        className="hidden"
+      />
+      <input
+        type="file"
+        ref={cvFileInputRef}
+        onChange={handleCvFileChange}
+        accept="application/pdf"
+        className="hidden"
+      />
+
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-          {/* Left Column: Profile Photo Preview */}
+          {/* Left Column: Profile Photo Upload & Preview */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-zinc-800">
               <User className="w-5 h-5 text-cyan-400" />
@@ -61,25 +114,36 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
               </div>
 
               <div className="space-y-3 flex-1 min-w-0">
-                <Label htmlFor="heroBannerUrl" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">
-                  URL / Path Foto Profil
-                </Label>
-                <Input
-                  id="heroBannerUrl"
-                  name="heroBannerUrl"
-                  value={heroBannerUrl}
-                  onChange={(e) => setHeroBannerUrl(e.target.value)}
-                  placeholder="/haikal-al-ghifari.jpg"
-                  className="h-10 rounded-xl bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 text-xs text-slate-900 dark:text-white"
-                />
+                <Button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="w-full h-11 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold rounded-xl shadow-md transition-all active:scale-95 cursor-pointer"
+                >
+                  <ImagePlus className="w-4 h-4 mr-2" /> Upload Foto Baru dari Perangkat
+                </Button>
+
+                <div className="space-y-1">
+                  <Label htmlFor="heroBannerUrl" className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider">
+                    URL / Base64 Foto Profil
+                  </Label>
+                  <Input
+                    id="heroBannerUrl"
+                    name="heroBannerUrl"
+                    value={heroBannerUrl}
+                    onChange={(e) => setHeroBannerUrl(e.target.value)}
+                    placeholder="/haikal-al-ghifari.jpg"
+                    className="h-9 rounded-xl bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 text-xs text-slate-900 dark:text-white font-mono"
+                  />
+                </div>
+
                 <p className="text-[11px] text-slate-500 dark:text-zinc-400 font-medium leading-relaxed">
-                  Foto ini akan tampil sebagai kartu profil potret utama pada Hero Section di Landing Page.
+                  Pilih foto dari komputer Anda. Foto ini akan tampil sebagai kartu potret utama di Hero Section.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Right Column: CV File Link & Status */}
+          {/* Right Column: CV File Link & Upload */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-zinc-800">
               <FileText className="w-5 h-5 text-cyan-400" />
@@ -87,8 +151,16 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#0c142c] border border-slate-200 dark:border-cyan-500/30 space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="heroCtaLink" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">
+              <Button
+                type="button"
+                onClick={() => cvFileInputRef.current?.click()}
+                className="w-full h-11 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-md transition-all active:scale-95 cursor-pointer"
+              >
+                <FileUp className="w-4 h-4 mr-2" /> Upload File CV PDF Baru
+              </Button>
+
+              <div className="space-y-1">
+                <Label htmlFor="heroCtaLink" className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider">
                   Tautan File CV PDF (Unduh CV)
                 </Label>
                 <Input
@@ -97,13 +169,13 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
                   value={cvLink}
                   onChange={(e) => setCvLink(e.target.value)}
                   placeholder="/cv-haikal-al-ghifari.pdf"
-                  className="h-10 rounded-xl bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 text-xs text-slate-900 dark:text-white"
+                  className="h-9 rounded-xl bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 text-xs text-slate-900 dark:text-white font-mono"
                 />
               </div>
 
               <div className="flex items-center gap-3 p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold">
                 <CheckCircle2 className="w-4 h-4 shrink-0" />
-                <span>Tombol &quot;Unduh CV&quot; di Navbar & Hero akan langsung mengarah ke file ini.</span>
+                <span>Tombol &quot;Unduh CV&quot; di Navbar & Hero akan langsung mengunduh file ini.</span>
               </div>
             </div>
           </div>
@@ -126,7 +198,7 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
             <DialogTitle className="text-xl font-bold text-slate-900 dark:text-white">Konfirmasi Perubahan</DialogTitle>
           </DialogHeader>
           <p className="text-sm text-slate-600 dark:text-zinc-300 py-2">
-            Apakah Anda yakin ingin memperbarui foto profil utama dan tautan dokumen CV?
+            Apakah Anda yakin ingin menyimpan perubahan foto profil utama dan tautan dokumen CV?
           </p>
           <DialogFooter className="flex gap-3 pt-4">
             <Button
@@ -147,7 +219,7 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Menyimpan...
                 </>
               ) : (
-                "Ya, Simpan"
+                "Ya, Simpan Perubahan"
               )}
             </Button>
           </DialogFooter>

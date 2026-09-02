@@ -137,11 +137,11 @@ export function HeroSection({ settings }: HeroSectionProps) {
           <div className="lg:col-span-5 flex justify-center relative order-1 lg:order-2">
             <div className="relative group w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[400px]">
               
-              {/* Outer Card Ambient Neon Glow */}
-              <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 rounded-[2.5rem] blur-2xl opacity-30 dark:opacity-50 group-hover:opacity-80 transition duration-700 pointer-events-none" />
+              {/* Outer Card Ambient Neon Glow (Vibrant on Mobile Touchscreens) */}
+              <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 rounded-[2.5rem] blur-2xl opacity-50 dark:opacity-75 group-hover:opacity-90 transition duration-700 pointer-events-none" />
               
               {/* Main Professional Glass Card */}
-              <div className="relative rounded-[2.2rem] bg-white/90 dark:bg-[#070e20]/95 border border-slate-200/90 dark:border-cyan-500/35 p-4 backdrop-blur-2xl shadow-2xl space-y-4 transition-all duration-500 hover:border-cyan-400/60">
+              <div className="relative rounded-[2.2rem] bg-white/95 dark:bg-[#070e20]/95 border border-slate-300 dark:border-cyan-400/50 p-4 backdrop-blur-2xl shadow-2xl space-y-4 transition-all duration-500 hover:border-cyan-400">
                 
                 {/* Rectangular Portrait Photo Viewport */}
                 <div className="relative aspect-[4/5] rounded-[1.8rem] overflow-hidden bg-slate-900 border border-slate-200/80 dark:border-zinc-800/80 shadow-inner">
@@ -164,7 +164,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
                 {/* Bottom Badge Pill: Quality Assurance at COMO 1907 */}
                 <div className="flex justify-center pb-1">
-                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-[#0c142c] border border-slate-200 dark:border-cyan-500/30 text-blue-600 dark:text-cyan-300 text-xs font-bold shadow-sm">
+                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-[#0c142c] border border-slate-200 dark:border-cyan-500/40 text-blue-600 dark:text-cyan-300 text-xs font-bold shadow-sm">
                     <CheckCircle2 className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
                     <span>Quality Assurance at COMO 1907</span>
                   </span>
@@ -172,17 +172,17 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
               </div>
 
-              {/* Floating Skill Badges Around Photo Card (Yofi Style) */}
-              <div className="hidden sm:block absolute -left-6 top-8 px-3 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold backdrop-blur-md shadow-lg pointer-events-none animate-bounce duration-[3000ms]">
+              {/* Floating Skill Badges Around Photo Card (Visible on Both Mobile & Desktop) */}
+              <div className="absolute -left-3 sm:-left-6 top-6 sm:top-8 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-zinc-950/90 dark:bg-[#061224]/90 border border-emerald-500/50 text-emerald-400 text-[10px] sm:text-xs font-extrabold backdrop-blur-md shadow-xl z-20 pointer-events-none animate-bounce duration-[3000ms]">
                 Manual Testing
               </div>
-              <div className="hidden sm:block absolute -right-6 top-16 px-3 py-1.5 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-xs font-bold backdrop-blur-md shadow-lg pointer-events-none">
+              <div className="absolute -right-3 sm:-right-6 top-14 sm:top-16 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-zinc-950/90 dark:bg-[#061224]/90 border border-cyan-500/50 text-cyan-400 text-[10px] sm:text-xs font-extrabold backdrop-blur-md shadow-xl z-20 pointer-events-none">
                 Postman & API
               </div>
-              <div className="hidden sm:block absolute -left-8 top-1/2 px-3 py-1.5 rounded-xl bg-blue-500/20 border border-blue-500/40 text-blue-300 text-xs font-bold backdrop-blur-md shadow-lg pointer-events-none">
+              <div className="absolute -left-4 sm:-left-8 top-1/2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-zinc-950/90 dark:bg-[#061224]/90 border border-blue-500/50 text-blue-400 text-[10px] sm:text-xs font-extrabold backdrop-blur-md shadow-xl z-20 pointer-events-none">
                 IT Business Analyst
               </div>
-              <div className="hidden sm:block absolute -right-8 bottom-24 px-3 py-1.5 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-300 text-xs font-bold backdrop-blur-md shadow-lg pointer-events-none">
+              <div className="absolute -right-4 sm:-right-8 bottom-20 sm:bottom-24 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-zinc-950/90 dark:bg-[#061224]/90 border border-purple-500/50 text-purple-400 text-[10px] sm:text-xs font-extrabold backdrop-blur-md shadow-xl z-20 pointer-events-none">
                 DFD & ERD
               </div>
 

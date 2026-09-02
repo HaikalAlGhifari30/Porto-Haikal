@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, ReactNode, useEffect, useCallback, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FolderKanban, Settings, ChevronLeft, ChevronRight, Image as ImageIcon } from "lucide-react";
+import { LayoutDashboard, FolderKanban, Settings, ChevronLeft, ChevronRight, Image as ImageIcon, User, Network, MessageCircle } from "lucide-react";
 import { CMSGuard } from "@/components/cms-guard";
 import { ThemeSwitcher } from "@/components/cms/theme-switcher";
 import { AdminProfile } from "@/components/cms/admin-profile";
@@ -51,16 +51,19 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                 ]
             },
             {
-                title: "Manajemen Konten",
+                title: "Seksi Landing Page",
                 items: [
+                    { href: "/cms/company-profile", label: "Hero & Bio (About)", icon: User },
                     { href: "/cms/projects", label: "Portofolio Proyek", icon: FolderKanban },
+                    { href: "/cms/organization", label: "Karir & Organisasi", icon: Network },
+                    { href: "/cms/teams", label: "Kontak & Admin WA", icon: MessageCircle },
                     { href: "/cms/gallery", label: "Galeri Screenshot", icon: ImageIcon },
                 ]
             },
             {
                 title: "Sistem",
                 items: [
-                    { href: "/cms/settings", label: "Pengaturan Portofolio", icon: Settings },
+                    { href: "/cms/settings", label: "Pengaturan Website", icon: Settings },
                 ]
             }
         ];
@@ -218,8 +221,10 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                 >
                     {[
                         { href: "/cms", label: "Home", icon: LayoutDashboard },
+                        { href: "/cms/company-profile", label: "Bio", icon: User },
                         { href: "/cms/projects", label: "Proyek", icon: FolderKanban },
-                        { href: "/cms/gallery", label: "Galeri", icon: ImageIcon },
+                        { href: "/cms/organization", label: "Karir", icon: Network },
+                        { href: "/cms/teams", label: "Kontak", icon: MessageCircle },
                         { href: "/cms/settings", label: "Setting", icon: Settings },
                     ].map((item) => {
                         const isActive = pathname === item.href || (item.href !== "/cms" && pathname.startsWith(item.href));

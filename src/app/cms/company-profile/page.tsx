@@ -4,7 +4,7 @@ import { AboutSettingsForm } from "@/components/cms/about-settings-form";
 import { Lightbulb } from "lucide-react";
 
 export const metadata = {
-    title: "Profil Perusahaan | CMS",
+    title: "Hero & Bio (About Me) | CMS",
 };
 
 export default async function CompanyProfilePage() {
@@ -14,19 +14,19 @@ export default async function CompanyProfilePage() {
         <div className="space-y-8">
             <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-8">
                 <div>
-                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Profil Perusahaan</h2>
-                    <p className="text-sm text-slate-500 dark:text-zinc-400 mt-1">Kelola informasi Tentang Kami, Visi Misi, dan Nilai-nilai perusahaan.</p>
+                    <h2 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900 dark:text-white">Hero & Biodata (About Me)</h2>
+                    <p className="text-sm text-slate-500 dark:text-zinc-400 mt-1">Kelola judul Hero, subtitle profesi QA Engineer, serta deskripsi lengkap biodata Anda.</p>
                 </div>
             </div>
 
             <div className="flex flex-col lg:flex-row lg:items-center gap-6 mb-8">
-                <div className="flex-1 flex items-center gap-4 p-5 rounded-[1.5rem] bg-blue-500/[0.03] dark:bg-blue-500/[0.02] border border-blue-500/10 animate-in fade-in slide-in-from-top-1 duration-500">
-                    <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 shrink-0">
+                <div className="flex-1 flex items-center gap-4 p-5 rounded-[1.5rem] bg-cyan-500/[0.04] border border-cyan-500/20 animate-in fade-in slide-in-from-top-1 duration-500">
+                    <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 shrink-0">
                         <Lightbulb className="w-5 h-5" />
                     </div>
-                    <p className="text-[11px] md:text-xs text-slate-600 dark:text-zinc-400 leading-relaxed font-medium">
-                        <span className="font-bold text-blue-600 dark:text-blue-400 mr-1 uppercase tracking-widest">Panduan:</span>
-                        Gunakan tombol <strong className="text-slate-900 dark:text-slate-200">Tambah Nilai</strong> untuk memasukkan lebih dari satu Core Values. Pada form Misi, pisahkan setiap poin misi dengan baris baru (Enter). Perubahan di sini akan langsung memperbarui konten di bagian Profil Perusahaan pada Landing Page.
+                    <p className="text-[11px] md:text-xs text-slate-600 dark:text-zinc-300 leading-relaxed font-medium">
+                        <span className="font-bold text-cyan-400 mr-1 uppercase tracking-widest">Panduan:</span>
+                        Perubahan teks judul Hero, subtitle, dan biodata di halaman ini akan langsung memperbarui tampilan pada Landing Page & Seksi Tentang Saya secara real-time.
                     </p>
                 </div>
             </div>

@@ -27,12 +27,11 @@ export function AdminProfile() {
     useEffect(() => {
         const storedName = localStorage.getItem("adminName");
         const storedPhoto = localStorage.getItem("adminPhoto");
-        if (storedName && !storedName.toLowerCase().includes("rizky") && !storedName.toLowerCase().includes("como")) {
-            setAdminName(storedName);
+        if (!storedName || storedName.includes("Rizk") || storedName.includes("Karya") || storedName.includes("Como") || storedName.includes("PT") || storedName.includes("Admin PT")) {
+            localStorage.setItem("adminName", "Haikal Al Ghifari");
+            setAdminName("Haikal Al Ghifari");
         } else {
-            const newName = "Haikal Al Ghifari";
-            setAdminName(newName);
-            localStorage.setItem("adminName", newName);
+            setAdminName(storedName);
         }
         if (storedPhoto) setAdminPhoto(storedPhoto);
 

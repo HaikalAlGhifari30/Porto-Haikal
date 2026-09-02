@@ -51,98 +51,100 @@ export function HeroSection({ settings }: HeroSectionProps) {
             </div>
 
             {/* Main Headline & Greeting */}
-            <div className="space-y-1">
-              <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm font-medium tracking-wide">
+            <div className="space-y-1.5">
+              <p className="text-zinc-500 dark:text-zinc-400 text-xs font-semibold tracking-wider uppercase">
                 {greeting}
               </p>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-white leading-tight">
-                Haikal <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-300">Al Ghifari</span>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-zinc-900 dark:text-white leading-tight">
+                Haikal <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-500 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-300">Al Ghifari</span>
               </h1>
-              <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm font-medium tracking-wide pt-0.5">
-                — Quality Assurance Engineer —
+              <p className="text-cyan-600 dark:text-cyan-400 text-xs sm:text-sm font-bold tracking-wide">
+                Quality Assurance Engineer & Manual Tester
               </p>
             </div>
 
             {/* Bio Description */}
-            <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm leading-relaxed max-w-lg font-normal mx-auto lg:mx-0">
+            <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm leading-relaxed max-w-md font-normal mx-auto lg:mx-0">
               {summary}
             </p>
 
-            {/* Action Buttons Row */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
-              <Link
-                href="#projects"
-                className="px-7 py-3 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-400 text-white font-medium text-xs sm:text-sm tracking-wide shadow-lg shadow-blue-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 group"
-              >
-                <span>{t('hero.viewProjects')}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+            {/* Action Buttons & Socials Row */}
+            <div className="pt-2 space-y-4">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+                <Link
+                  href="#projects"
+                  className="px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold text-xs tracking-wide shadow-md shadow-blue-500/20 hover:shadow-cyan-500/30 hover:scale-102 transition-all flex items-center gap-1.5 group"
+                >
+                  <span>{t('hero.viewProjects')}</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </Link>
 
-              <Link
-                href="#contact"
-                className="px-7 py-3 rounded-full bg-slate-100 dark:bg-zinc-900/80 hover:bg-slate-200 dark:hover:bg-zinc-800 border border-slate-300 dark:border-zinc-700/80 text-zinc-900 dark:text-white font-medium text-xs sm:text-sm tracking-wide hover:border-cyan-400/60 hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"
-              >
-                <MessageSquare className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
-                <span>{t('hero.contactMe')}</span>
-              </Link>
-            </div>
+                <Link
+                  href="#contact"
+                  className="px-5 py-2.5 rounded-full bg-slate-100 dark:bg-zinc-900/80 hover:bg-slate-200 dark:hover:bg-zinc-800 border border-slate-300 dark:border-zinc-800 text-zinc-900 dark:text-white font-semibold text-xs tracking-wide hover:border-cyan-400/50 hover:scale-102 transition-all flex items-center gap-1.5"
+                >
+                  <MessageSquare className="w-3.5 h-3.5 text-cyan-500 dark:text-cyan-400" />
+                  <span>{t('hero.contactMe')}</span>
+                </Link>
+              </div>
 
-            {/* Social Links Row */}
-            <div className="flex items-center justify-center lg:justify-start gap-2.5 pt-2">
-              <a
-                href="https://github.com/HaikalAlGhifari30"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub Profile"
-                className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-zinc-900/80 border border-slate-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-white hover:border-cyan-500/50 hover:bg-cyan-50 dark:hover:bg-cyan-600/20 flex items-center justify-center transition-all group"
-                title="GitHub Profile"
-              >
-                <FaGithub className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              </a>
-              <a
-                href={linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn Profile"
-                className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-zinc-900/80 border border-slate-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-white hover:border-cyan-500/50 hover:bg-cyan-50 dark:hover:bg-cyan-600/20 flex items-center justify-center transition-all group"
-                title="LinkedIn Profile"
-              >
-                <FaLinkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              </a>
-              <a
-                href={instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram Profile"
-                className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-zinc-900/80 border border-slate-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-white hover:border-cyan-500/50 hover:bg-cyan-50 dark:hover:bg-cyan-600/20 flex items-center justify-center transition-all group"
-                title="Instagram Profile"
-              >
-                <FaInstagram className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              </a>
-              <a
-                href={`mailto:${emailUrl}`}
-                aria-label="Send Email"
-                className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-zinc-900/80 border border-slate-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-white hover:border-cyan-500/50 hover:bg-cyan-50 dark:hover:bg-cyan-600/20 flex items-center justify-center transition-all group"
-                title="Send Email"
-              >
-                <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              </a>
+              {/* Social Links Row */}
+              <div className="flex items-center justify-center lg:justify-start gap-2 pt-1">
+                <a
+                  href="https://github.com/HaikalAlGhifari30"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub Profile"
+                  className="w-9 h-9 rounded-full bg-slate-100 dark:bg-zinc-900/80 border border-slate-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all group"
+                  title="GitHub Profile"
+                >
+                  <FaGithub className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                </a>
+                <a
+                  href={linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn Profile"
+                  className="w-9 h-9 rounded-full bg-slate-100 dark:bg-zinc-900/80 border border-slate-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all group"
+                  title="LinkedIn Profile"
+                >
+                  <FaLinkedin className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                </a>
+                <a
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram Profile"
+                  className="w-9 h-9 rounded-full bg-slate-100 dark:bg-zinc-900/80 border border-slate-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all group"
+                  title="Instagram Profile"
+                >
+                  <FaInstagram className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                </a>
+                <a
+                  href={`mailto:${emailUrl}`}
+                  aria-label="Send Email"
+                  className="w-9 h-9 rounded-full bg-slate-100 dark:bg-zinc-900/80 border border-slate-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all group"
+                  title="Send Email"
+                >
+                  <Mail className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+                </a>
+              </div>
             </div>
 
           </div>
 
-          {/* Right Visual / Personal Rectangular Portrait Photo Card (Non-Circular) */}
+          {/* Right Visual / Personal Rectangular Portrait Photo Card (Refined & Compact) */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative group w-full max-w-[280px] lg:max-w-[320px]">
+            <div className="relative group w-full max-w-[260px] lg:max-w-[280px]">
               
               {/* Outer Card Ambient Neon Glow */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 rounded-[2.5rem] blur-2xl opacity-25 dark:opacity-40 group-hover:opacity-70 transition duration-700 pointer-events-none" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 rounded-[2rem] blur-xl opacity-25 dark:opacity-40 group-hover:opacity-60 transition duration-700 pointer-events-none" />
               
-              {/* Main Professional Glass Card (Sleek Rectangular Portrait) */}
-              <div className="relative rounded-[2.2rem] bg-white/80 dark:bg-[#070e20]/90 border border-slate-200/90 dark:border-cyan-500/30 p-4 backdrop-blur-2xl shadow-xl dark:shadow-2xl space-y-4 transition-all duration-500 hover:border-cyan-400/60">
+              {/* Main Professional Glass Card */}
+              <div className="relative rounded-[1.8rem] bg-white/80 dark:bg-[#070e20]/90 border border-slate-200/90 dark:border-cyan-500/30 p-3.5 backdrop-blur-2xl shadow-lg dark:shadow-xl space-y-3 transition-all duration-500 hover:border-cyan-400/60">
                 
-                {/* Rectangular Portrait Photo Viewport (Non-Circular) */}
-                <div className="relative aspect-[4/5] rounded-[1.8rem] overflow-hidden bg-slate-900 border border-slate-200/80 dark:border-zinc-800/80 shadow-md">
+                {/* Rectangular Portrait Photo Viewport */}
+                <div className="relative aspect-[4/5] rounded-[1.4rem] overflow-hidden bg-slate-900 border border-slate-200/80 dark:border-zinc-800/80 shadow-sm">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/haikal-al-ghifari.jpg"
@@ -153,18 +155,18 @@ export function HeroSection({ settings }: HeroSectionProps) {
                   {/* Subtle Bottom Overlay Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none" />
                   
-                  {/* Small Verified Badge at Bottom Right of Photo */}
-                  <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-xl bg-zinc-950/85 backdrop-blur-md border border-white/10 text-cyan-400 flex items-center gap-1.5 shadow-lg">
-                    <ShieldCheck className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                    <span className="text-[10px] font-bold tracking-wider uppercase">Verified QA</span>
+                  {/* Small Verified Badge */}
+                  <div className="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-lg bg-zinc-950/85 backdrop-blur-md border border-white/10 text-cyan-400 flex items-center gap-1 shadow-md">
+                    <ShieldCheck className="w-3 h-3 text-cyan-400 shrink-0" />
+                    <span className="text-[9px] font-bold tracking-wider uppercase">Verified QA</span>
                   </div>
                 </div>
 
                 {/* Bottom Badge Pill: Quality Assurance at COMO 1907 */}
-                <div className="flex justify-center pb-1">
-                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-[#0c142c] border border-slate-200 dark:border-cyan-500/30 text-blue-600 dark:text-cyan-300 text-xs font-bold shadow-xs">
+                <div className="flex justify-center pb-0.5">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#0c142c] border border-slate-200 dark:border-cyan-500/30 text-blue-600 dark:text-cyan-300 text-[11px] font-bold shadow-xs">
                     <CheckCircle2 className="w-3.5 h-3.5 text-cyan-500 dark:text-cyan-400" />
-                    <span>Quality Assurance at COMO 1907</span>
+                    <span>QA at COMO 1907</span>
                   </span>
                 </div>
 

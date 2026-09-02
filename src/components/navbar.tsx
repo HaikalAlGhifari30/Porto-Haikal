@@ -228,27 +228,31 @@ export function Navbar() {
                                     <span>{translate('nav.login', 'Admin Login')}</span>
                                 </button>
                             } />
-                            <DialogContent className="sm:max-w-[420px] bg-zinc-950 border-zinc-800 text-white p-0 rounded-3xl shadow-2xl overflow-hidden border">
-                                <div className="p-8">
-                                    <DialogHeader className="mb-6 flex flex-col items-center text-center">
+                            <DialogContent className="sm:max-w-[420px] bg-[#070e20]/95 border border-cyan-500/30 text-white p-0 rounded-[2.2rem] shadow-[0_0_60px_rgba(34,211,238,0.2)] overflow-hidden backdrop-blur-2xl">
+                                <div className="p-8 relative">
+                                    {/* Ambient Glow Orbs */}
+                                    <div className="absolute -top-20 -left-20 w-40 h-40 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none" />
+                                    <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+
+                                    <DialogHeader className="mb-6 flex flex-col items-center text-center relative z-10">
                                         <HagLogo size="lg" useImage={false} className="mb-4" />
-                                        <DialogTitle className="text-2xl font-bold tracking-tight">{translate('auth.loginTitle', 'Selamat Datang Kembali')}</DialogTitle>
+                                        <DialogTitle className="text-2xl font-black tracking-tight text-white">{translate('auth.loginTitle', 'Selamat Datang Kembali')}</DialogTitle>
                                         <p className="text-zinc-400 text-xs mt-1.5 font-medium">{translate('auth.loginSubtitle', 'Silakan masuk ke akun admin Anda')}</p>
                                     </DialogHeader>
-                                    <form action={handleLogin} className="space-y-4">
+                                    <form action={handleLogin} className="space-y-4 relative z-10">
                                         <div className="space-y-2">
-                                            <Label htmlFor="email" className="text-xs font-semibold text-zinc-400">{translate('auth.email', 'Alamat Email')}</Label>
+                                            <Label htmlFor="email" className="text-xs font-semibold text-zinc-300">{translate('auth.email', 'Alamat Email')}</Label>
                                             <Input
                                                 id="email"
                                                 name="email"
                                                 type="email"
                                                 required
                                                 placeholder="admin@haikalalghifari.dev"
-                                                className="bg-zinc-900 border-zinc-800 h-11 rounded-xl text-sm px-4 text-white"
+                                                className="bg-[#0c142c] border border-slate-700/80 dark:border-cyan-500/30 h-11 rounded-xl text-sm px-4 text-white placeholder:text-zinc-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <Label htmlFor="password" className="text-xs font-semibold text-zinc-400">{translate('auth.password', 'Kata Sandi')}</Label>
+                                            <Label htmlFor="password" className="text-xs font-semibold text-zinc-300">{translate('auth.password', 'Kata Sandi')}</Label>
                                             <div className="relative">
                                                 <Input
                                                     id="password"
@@ -256,12 +260,12 @@ export function Navbar() {
                                                     type={showPassword ? "text" : "password"}
                                                     required
                                                     placeholder="••••••••"
-                                                    className="bg-zinc-900 border-zinc-800 h-11 rounded-xl text-sm px-4 pr-10 text-white"
+                                                    className="bg-[#0c142c] border border-slate-700/80 dark:border-cyan-500/30 h-11 rounded-xl text-sm px-4 pr-10 text-white placeholder:text-zinc-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                                                 />
                                                 <button
                                                     type="button"
                                                     onClick={() => setShowPassword(!showPassword)}
-                                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white"
+                                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-cyan-400 transition-colors"
                                                 >
                                                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                                 </button>
@@ -274,7 +278,7 @@ export function Navbar() {
                                         )}
                                         <Button
                                             type="submit"
-                                            className="w-full bg-blue-600 hover:bg-blue-700 h-11 rounded-xl font-bold text-sm shadow-md shadow-blue-500/20 mt-2"
+                                            className="w-full bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-400 h-11 rounded-xl font-bold text-sm text-white shadow-lg shadow-blue-500/25 hover:shadow-cyan-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all cursor-pointer mt-2"
                                         >
                                             {isPending ? "Authenticating..." : translate('auth.loginBtn', 'Masuk')}
                                         </Button>

@@ -13,8 +13,8 @@ export function AboutSectionClient({ settings }: AboutSectionClientProps) {
   const isEn = lang === "en";
 
   const bioText = isEn
-    ? (settings?.aboutTextEn || "Bachelor of Informatics Engineering graduate from Universitas Komputer Indonesia with a GPA of 3.46 and a core focus on Quality Assurance, IT Business Analysis, and System Analysis. Proficient in manual testing for web and mobile applications, business requirement gathering, and system modeling using DFD, ERD, and flowcharts. Experienced leader with strong communication, collaboration, and problem-solving skills.")
-    : (settings?.aboutText || "Lulusan S1 Teknik Informatika dari Universitas Komputer Indonesia (UNIKOM) dengan IPK 3.46 dan fokus utama pada Quality Assurance, IT Business Analysis, dan System Analysis. Mahir dalam pengujian manual (manual testing) untuk platform web dan seluler, analisis kebutuhan bisnis, serta pemodelan sistem menggunakan DFD, ERD, dan flowchart. Memiliki pengalaman kepemimpinan sebagai Ketua Himpunan Mahasiswa (HMIF UNIKOM), serta keahlian komunikasi, kolaborasi, dan pemecahan masalah yang kuat.");
+    ? (settings?.aboutTextEn || "Informatics Engineering graduate from UNIKOM (GPA 3.46) dedicated as a Quality Assurance Engineer, currently actively working at COMO 1907 (Global Media Visual). Highly experienced in web & mobile manual testing, end-to-end user flow verification, regression, and system modeling. Former Chairman of HMIF UNIKOM with strong leadership, analytical precision, and adaptability.")
+    : (settings?.aboutText || "Lulusan S1 Teknik Informatika UNIKOM (IPK 3.46) yang berdedikasi tinggi sebagai Quality Assurance Engineer, dan saat ini sedang aktif bekerja di COMO 1907 (Global Media Visual). Berpengalaman dalam pengujian manual (manual testing) web & mobile, verifikasi alur pengguna end-to-end, regresi, serta pemodelan sistem. Memiliki pengalaman kepemimpinan sebagai mantan Ketua HMIF UNIKOM yang analitis, teliti, dan adaptif.");
 
   const highlightCards = [
     {

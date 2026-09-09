@@ -1,7 +1,6 @@
 "use client";
 
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 import { useState, useEffect } from 'react';
 
 type Language = 'id' | 'en';
@@ -194,21 +193,14 @@ const dictionary: Record<Language, Record<string, string>> = {
     }
 };
 
-export const useLang = create<LangState>()(
-    persist(
-        (set, get) => ({
-            lang: 'id',
-            setLang: (lang) => set({ lang }),
-            t: (key: string) => {
-                const state = get();
-                return dictionary[state.lang][key] || key;
-            }
-        }),
-        {
-            name: 'rrk-lang-storage',
-        }
-    )
-);
+export const useLang = create<LangState>()((set, get) => ({
+    lang: 'en',
+    setLang: (lang) => set({ lang }),
+    t: (key: string) => {
+        const state = get();
+        return dictionary[state.lang][key] || key;
+    }
+}));
 
 export function useSafeLang() {
     const { lang, t, setLang } = useLang();
@@ -218,10 +210,10 @@ export function useSafeLang() {
         setMounted(true);
     }, []);
 
-    const safeLang = mounted ? lang : 'id';
+    const safeLang = mounted ? lang : 'en';
 
     const safet = (key: string, fallback?: string): string => {
-        if (!mounted) return fallback ?? dictionary['id'][key] ?? key;
+        if (!mounted) return fallback ?? dictionary['en'][key] ?? key;
         return t(key);
     };
 

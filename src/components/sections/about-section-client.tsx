@@ -212,7 +212,7 @@ export function AboutSectionClient({
       </div>
 
       {/* Tab Content Display Viewport Frame */}
-      <div className="w-full min-h-[410px] sm:h-[410px] flex flex-col justify-start sm:justify-center overflow-y-auto sm:overflow-hidden scrollbar-none">
+      <div className="w-full min-h-[410px] sm:h-[410px] flex flex-col justify-start pt-3 sm:pt-4 overflow-y-auto sm:overflow-hidden scrollbar-none">
         <AnimatePresence mode="wait">
           
           {/* TAB 1: PERSONAL INTRO */}

@@ -138,10 +138,10 @@ export function HeroSection({ settings }: HeroSectionProps) {
             <div className="relative group w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[400px]">
               
               {/* Outer Card Ambient Neon Glow */}
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 via-blue-600/30 to-indigo-600/30 rounded-[2.5rem] blur-xl opacity-60 dark:opacity-80 group-hover:opacity-100 transition duration-700 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/25 via-blue-600/25 to-indigo-600/25 rounded-[2.5rem] blur-lg sm:blur-xl opacity-60 dark:opacity-80 group-hover:opacity-100 transition duration-700 pointer-events-none" />
               
               {/* Main Professional Glass Card */}
-              <div className="relative rounded-[2.2rem] bg-white/95 dark:bg-[#070e20]/95 border border-slate-300 dark:border-cyan-400/50 p-4 backdrop-blur-2xl shadow-2xl space-y-4 transition-all duration-500 hover:border-cyan-400">
+              <div className="relative rounded-[2.2rem] bg-white/95 dark:bg-[#070e20]/95 border border-slate-300 dark:border-cyan-400/50 p-4 shadow-2xl space-y-4 transition-all duration-500 hover:border-cyan-400">
                 
                 {/* Rectangular Portrait Photo Viewport */}
                 <div className="relative aspect-[4/5] rounded-[1.8rem] overflow-hidden bg-slate-900 border border-slate-200/80 dark:border-zinc-800/80 shadow-inner">

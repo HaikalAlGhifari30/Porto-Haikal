@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
-import Script from "next/script";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 import "./globals.css";
@@ -59,29 +58,6 @@ export default function RootLayout({
       className={`dark ${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('ui-theme') || 'dark';
-                  var root = document.documentElement;
-                  root.classList.remove('light', 'dark');
-                  if (theme === 'system') {
-                    var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    root.classList.add(sysDark ? 'dark' : 'light');
-                  } else {
-                    root.classList.add(theme);
-                  }
-                } catch (e) {
-                  document.documentElement.classList.add('dark');
-                }
-              })();
-            `,
-          }}
-        />
-      </head>
       <body className="min-h-full flex flex-col bg-[#030712] text-slate-100 antialiased">
         <ThemeProvider defaultTheme="dark">
             {children}

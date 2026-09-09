@@ -296,6 +296,28 @@ async function main() {
         descriptionEn: "Focused studies in Natural Sciences (IPA), Mathematics, and Physics.",
         order: 2,
       },
+      {
+        institution: "SMPN 3 Karawang Barat",
+        institutionEn: "SMPN 3 Karawang Barat",
+        degree: "SMP / Sederajat",
+        degreeEn: "Junior High School",
+        period: "2014 — 2017 · Karawang, Indonesia",
+        periodEn: "2014 — 2017 · Karawang, Indonesia",
+        description: "Pendidikan Sekolah Menengah Pertama dengan pembentukan dasar akademis, logika, dan ilmu pengetahuan umum.",
+        descriptionEn: "Junior High School education focused on basic academic foundation, logic, and general sciences.",
+        order: 3,
+      },
+      {
+        institution: "SDN Karangpawitan I Karawang",
+        institutionEn: "SDN Karangpawitan I Karawang",
+        degree: "SD / Sederajat",
+        degreeEn: "Elementary School",
+        period: "2008 — 2014 · Karawang, Indonesia",
+        periodEn: "2008 — 2014 · Karawang, Indonesia",
+        description: "Pendidikan Sekolah Dasar dengan pembentukan dasar literasi, matematika, dan karakter umum.",
+        descriptionEn: "Elementary School education establishing primary foundation, literacy, mathematics, and character.",
+        order: 4,
+      },
     ],
   });
 
@@ -328,7 +350,41 @@ async function main() {
     ],
   });
 
-  // 8. WhatsApp Admin (Floating Widget)
+  // 8. Certificates (Bilingual ID & EN from CV)
+  await prisma.certificate.deleteMany();
+  await prisma.certificate.createMany({
+    data: [
+      {
+        title: "Junior Web Developer",
+        titleEn: "Junior Web Developer",
+        issuer: "Badan Nasional Sertifikasi Profesi (BNSP)",
+        issuerEn: "National Professional Certification Board (BNSP)",
+        period: "2024",
+        periodEn: "2024",
+        description: "Sertifikasi kompetensi resmi dalam standar pemrograman web nasional, mencakup algoritma, pemrograman terstruktur, dan analisis kode.",
+        descriptionEn: "Official competency certification in national web programming standards, covering algorithms, structured programming, and code analysis.",
+        badge: "Sertifikasi Kompetensi Nasional",
+        badgeEn: "National Competency",
+        order: 1,
+      },
+      {
+        title: "Cisco CCNAv7: Introduction to Networks",
+        titleEn: "Cisco CCNAv7: Introduction to Networks",
+        issuer: "Cisco Networking Academy",
+        issuerEn: "Cisco Networking Academy",
+        period: "Feb 2023",
+        periodEn: "Feb 2023",
+        description: "Pemahaman arsitektur jaringan, protokol komunikasi data, IPv4/IPv6 sub-netting, ethernet switching, dan security fundamentals.",
+        descriptionEn: "Understanding of network architecture, data communication protocols, IPv4/IPv6 subnetting, ethernet switching, and security fundamentals.",
+        badge: "Networking Fundamental",
+        badgeEn: "Networking Fundamental",
+        order: 2,
+      },
+    ],
+  });
+  console.log("✅ Seeded Certificates.");
+
+  // 9. WhatsApp Admin (Floating Widget)
   await prisma.whatsAppAdmin.deleteMany();
   await prisma.whatsAppAdmin.create({
     data: {

@@ -20,6 +20,7 @@ interface PortfolioSceneContainerProps {
   skills?: any[];
   experiences?: any[];
   educations?: any[];
+  certificates?: any[];
   organizations?: any[];
 }
 
@@ -38,6 +39,7 @@ export function PortfolioSceneContainer({
   skills = [],
   experiences = [],
   educations = [],
+  certificates = [],
   organizations = [],
 }: PortfolioSceneContainerProps) {
   const [activeSceneIndex, setActiveSceneIndex] = useState(0);
@@ -284,7 +286,7 @@ export function PortfolioSceneContainer({
             className="w-full h-full overflow-y-auto scrollbar-none hide-scrollbar flex flex-col items-center justify-start pb-20 sm:pb-6"
           >
             {activeSceneIndex !== 5 ? (
-              <div className="w-full max-w-6xl my-auto py-8 px-3 sm:px-6">
+              <div className="w-full max-w-6xl my-auto py-6 sm:py-8 px-3 sm:px-6">
                 {activeSceneIndex === 0 && (
                   <HeroSection settings={settings} onNavigateScene={goToScene} />
                 )}
@@ -293,6 +295,7 @@ export function PortfolioSceneContainer({
                   <AboutSectionClient
                     settings={settings}
                     educations={educations}
+                    certificates={certificates}
                     organizations={organizations}
                     onNavigateScene={goToScene}
                   />

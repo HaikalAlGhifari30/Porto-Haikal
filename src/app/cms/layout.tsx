@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, ReactNode, useEffect, useCallback, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FolderKanban, Settings, ChevronLeft, ChevronRight, Image as ImageIcon, User, Network, MessageCircle, Briefcase, GraduationCap, Users } from "lucide-react";
+import { LayoutDashboard, FolderKanban, Settings, ChevronLeft, ChevronRight, Image as ImageIcon, User, Network, MessageCircle, Briefcase, GraduationCap, Users, Award } from "lucide-react";
 import { CMSGuard } from "@/components/cms-guard";
 import { ThemeSwitcher } from "@/components/cms/theme-switcher";
 import { AdminProfile } from "@/components/cms/admin-profile";
@@ -58,6 +58,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                     { href: "/cms/projects", label: "Portofolio Proyek", icon: FolderKanban },
                     { href: "/cms/experience", label: "Pengalaman Karir", icon: Briefcase },
                     { href: "/cms/education", label: "Riwayat Pendidikan", icon: GraduationCap },
+                    { href: "/cms/certificates", label: "Sertifikasi & Lisensi", icon: Award },
                     { href: "/cms/organization", label: "Pengalaman Organisasi", icon: Users },
                     { href: "/cms/gallery", label: "Galeri Screenshot", icon: ImageIcon },
                 ]

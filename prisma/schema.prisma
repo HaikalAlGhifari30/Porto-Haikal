@@ -312,3 +312,22 @@ model Gallery {
   updatedAt   DateTime @updatedAt
 }
 
+model Certificate {
+  id            String   @id @default(cuid())
+  title         String
+  titleEn       String?
+  issuer        String
+  issuerEn      String?
+  period        String
+  periodEn      String?
+  description   String?
+  descriptionEn String?
+  badge         String?
+  badgeEn       String?
+  credentialUrl String?
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+

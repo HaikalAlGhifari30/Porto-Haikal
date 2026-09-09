@@ -1,68 +1,76 @@
 import { getProjects } from "@/actions/project";
+import { getSettings } from "@/actions/settings";
 import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function ProjectsPage() {
-    const projects = await getProjects();
+    const [projects, settings] = await Promise.all([
+        getProjects(),
+        getSettings()
+    ]);
     const visibleProjects = projects.filter(p => p.isVisible);
 
     return (
-        <>
-            <Navbar />
-            <main className="flex-1 py-32 px-6 relative overflow-hidden bg-zinc-950">
+        <div className="bg-slate-50 dark:bg-[#030712] text-slate-900 dark:text-white min-h-screen flex flex-col transition-colors duration-300">
+            <Navbar settings={settings} />
+            
+            <main className="flex-1 py-28 md:py-32 px-4 sm:px-6 relative overflow-hidden">
                 {/* Background Glows */}
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] -z-10" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px] -z-10" />
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
+                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
 
-                <div className="container mx-auto max-w-7xl">
-                    <div className="mb-24 text-center max-w-3xl mx-auto">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-[10px] font-bold text-blue-400 uppercase tracking-[0.3em] mb-6">
+                <div className="container-original mx-auto max-w-7xl">
+                    <div className="mb-16 md:mb-24 text-center max-w-3xl mx-auto space-y-4">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-widest">
                             Showcase Portfolio
                         </div>
-                        <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 bg-gradient-to-br from-white via-white to-white/40 bg-clip-text text-transparent leading-none">
-                            Our <span className="text-blue-500 italic">Masterpieces</span>
+                        <h1 className="text-4xl md:text-7xl font-black tracking-tight text-slate-900 dark:text-white leading-none">
+                            Portofolio <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 dark:from-cyan-400 dark:to-blue-400">Proyek QA</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed">
-                            Membangun pengalaman digital yang menginspirasi dan memberdayakan melalui inovasi kreatif.
+                        <p className="text-sm md:text-xl text-slate-600 dark:text-zinc-300 font-normal leading-relaxed">
+                            Membangun & menguji pengalaman digital berkualitas tinggi dengan pendekatan Quality Assurance terukur.
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {visibleProjects.map(project => (
-                            <a href={project.url || "#"} target="_blank" rel="noreferrer" key={project.id} className="group block relative">
-                                <div className="h-full rounded-[2.5rem] border border-white/5 overflow-hidden bg-zinc-900/40 backdrop-blur-sm hover:border-blue-500/30 transition-all duration-500 shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2">
-                                    <div className="aspect-[16/10] bg-zinc-950 relative overflow-hidden">
+                            <a href={`/projects/${project.slug || project.id}`} key={project.id} className="group block relative">
+                                <div className="h-full rounded-3xl border border-slate-200 dark:border-cyan-500/20 overflow-hidden bg-white dark:bg-[#070e20]/90 backdrop-blur-xl hover:border-cyan-400 transition-all duration-500 shadow-lg hover:shadow-cyan-500/10 hover:-translate-y-1.5 flex flex-col">
+                                    <div className="aspect-[16/10] bg-slate-900 relative overflow-hidden">
                                         {project.imageUrl ? (
                                             // eslint-disable-next-line @next/next/no-img-element
                                             <img
                                                 src={project.imageUrl.split(',')[0]}
                                                 alt={project.title}
-                                                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000"
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                                             />
                                         ) : (
-                                            <div className="flex items-center justify-center w-full h-full text-zinc-600 bg-gradient-to-tr from-zinc-900 to-zinc-800">
-                                                <span className="text-[10px] font-bold uppercase tracking-widest">No Preview</span>
+                                            <div className="flex items-center justify-center w-full h-full text-zinc-500 bg-slate-900">
+                                                <span className="text-xs font-bold uppercase tracking-widest">No Preview</span>
                                             </div>
                                         )}
-                                        {/* Overlay Glow */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity" />
-
-                                        {/* Removed Featured Badge */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity" />
                                     </div>
-                                    <div className="p-8">
-                                        <div className="flex items-start justify-between gap-4 mb-3">
-                                            <h3 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors leading-tight">
+                                    <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                                        <div>
+                                            <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 block mb-1">
+                                                {project.category || "QA Testing"}
+                                            </span>
+                                            <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors leading-tight">
                                                 {project.title}
                                             </h3>
-                                            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300">
-                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                            </div>
+                                            <p className="text-slate-600 dark:text-zinc-400 font-normal leading-relaxed line-clamp-2 text-xs mt-2">
+                                                {project.description || "Digital experience built and tested with precision."}
+                                            </p>
                                         </div>
-                                        <p className="text-zinc-400 font-light leading-relaxed line-clamp-2 text-sm">
-                                            {project.description || "Digital experience built with precision and passion."}
-                                        </p>
+
+                                        <div className="flex items-center gap-2 text-xs font-bold text-blue-600 dark:text-cyan-400 group-hover:translate-x-1 transition-transform">
+                                            <span>Lihat Detail QA</span>
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -70,6 +78,8 @@ export default async function ProjectsPage() {
                     </div>
                 </div>
             </main>
-        </>
+
+            <Footer />
+        </div>
     );
 }

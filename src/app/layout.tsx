@@ -28,14 +28,23 @@ import { DevNoticeModal } from "@/components/dev-notice-modal";
 export const metadata: Metadata = {
   title: "Haikal Al Ghifari — Quality Assurance Engineer Portfolio",
   description: "Bachelor of Informatics Engineering graduate from UNIKOM (GPA 3.46) specialized in Quality Assurance, Manual Testing, test case design, and software quality validation.",
+  manifest: "/site.webmanifest",
   icons: {
     icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.png?v=3" },
-      { url: "/favicon.png?v=3", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.png?v=4", sizes: "512x512", type: "image/png" },
+      { url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
     ],
-    apple: "/icon.svg",
-  }
+    shortcut: "/favicon.png?v=4",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon-precomposed.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  appleWebApp: {
+    title: "Haikal AG Portfolio",
+    statusBarStyle: "black-translucent",
+    capable: true,
+  },
 };
 
 export default function RootLayout({
@@ -46,11 +55,33 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
+      className={`dark ${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-
-      <body className="min-h-full flex flex-col transition-colors duration-300">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('ui-theme') || 'dark';
+                  var root = document.documentElement;
+                  root.classList.remove('light', 'dark');
+                  if (theme === 'system') {
+                    var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    root.classList.add(sysDark ? 'dark' : 'light');
+                  } else {
+                    root.classList.add(theme);
+                  }
+                } catch (e) {
+                  document.documentElement.classList.add('dark');
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-[#030712] text-slate-100 antialiased">
         <ThemeProvider defaultTheme="dark">
             {children}
             <FloatingButtonsServer />

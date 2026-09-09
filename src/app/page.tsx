@@ -29,13 +29,13 @@ export default async function Home() {
     const visibleProjects = projects.filter(p => p.isVisible);
 
     return (
-        <div className="bg-[#030712] text-white min-h-screen w-full flex flex-col transition-colors duration-300 relative overflow-x-hidden">
+        <div className="bg-[#030712] text-white min-h-screen w-full flex flex-col relative overflow-x-hidden">
             {/* Animated Cosmic Starfield Background (Like Yofi's Portfolio) */}
             <AnimatedBackground />
 
             {/* Main Interactive Interface Layer */}
             <div className="relative z-10 flex flex-col min-h-screen">
-                <Navbar />
+                <Navbar settings={settings} />
 
                 <main className="flex-1">
                     {/* Hero Section */}

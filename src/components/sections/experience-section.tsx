@@ -132,7 +132,7 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
   };
 
   return (
-    <section id="experience" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white transition-colors duration-500">
+    <section id="experience" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white">
       <div className="container-original relative z-10 mx-auto px-4 max-w-6xl">
         
         {/* Section Header */}

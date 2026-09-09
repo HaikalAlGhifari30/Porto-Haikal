@@ -41,7 +41,7 @@ export function ContactSection({ settings }: ContactSectionProps) {
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-white transition-colors duration-500">
+    <section id="contact" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-white">
       {/* Radial Background Orbs */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-blue-600/10 rounded-full blur-[160px] pointer-events-none" />
 
@@ -57,7 +57,7 @@ export function ContactSection({ settings }: ContactSectionProps) {
         </div>
 
         {/* Outer Adaptive Glass Card */}
-        <div className="rounded-[2.5rem] bg-white/90 dark:bg-[#070e20]/90 border border-slate-200/90 dark:border-cyan-500/20 backdrop-blur-2xl p-6 sm:p-10 shadow-xl dark:shadow-2xl shadow-cyan-950/20 relative overflow-hidden text-zinc-900 dark:text-white transition-colors duration-500">
+        <div className="rounded-[2.5rem] bg-white/90 dark:bg-[#070e20]/90 border border-slate-200/90 dark:border-cyan-500/20 backdrop-blur-2xl p-6 sm:p-10 shadow-xl dark:shadow-2xl shadow-cyan-950/20 relative overflow-hidden text-zinc-900 dark:text-white">
           {/* Subtle Ambient Glows Inside Card */}
           <div className="absolute -top-32 -left-32 w-72 h-72 bg-blue-600/10 dark:bg-blue-600/15 rounded-full blur-[100px] pointer-events-none" />
           <div className="absolute -bottom-32 -right-32 w-72 h-72 bg-cyan-500/10 dark:bg-cyan-500/15 rounded-full blur-[100px] pointer-events-none" />

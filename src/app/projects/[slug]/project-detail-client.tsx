@@ -4,16 +4,17 @@ import { useState } from "react";
 import { Navbar } from "@/components/navbar";
 import { FooterClient } from "@/components/footer-client";
 import { useSafeLang } from "@/store/lang";
-import { ArrowLeft, ExternalLink, Layers, ShieldAlert, Sparkles, CheckCircle2, Wrench, User, Globe, Activity, ShieldCheck, Check, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ExternalLink, ShieldAlert, Sparkles, CheckCircle2, Wrench, User, ChevronLeft, ChevronRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ProjectDetailClientProps {
   project: any;
+  settings?: any;
 }
 
-export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
+export function ProjectDetailClient({ project, settings }: ProjectDetailClientProps) {
   const { lang, t } = useSafeLang();
   const isEn = lang === "en";
 
@@ -33,17 +34,17 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-slate-950 text-white flex flex-col justify-between">
-        <Navbar />
+      <div className="min-h-screen bg-slate-50 dark:bg-[#030712] text-slate-900 dark:text-white flex flex-col justify-between transition-colors duration-300">
+        <Navbar settings={settings} />
         <main className="flex-1 flex items-center justify-center p-8">
           <div className="text-center space-y-4">
-            <h1 className="text-3xl font-bold">Project Not Found</h1>
-            <Link href="/#projects" className="text-cyan-400 font-semibold underline">
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Project Not Found</h1>
+            <Link href="/#projects" className="text-cyan-600 dark:text-cyan-400 font-semibold underline">
               Return to Portfolio
             </Link>
           </div>
         </main>
-        <FooterClient />
+        <FooterClient settings={settings} />
       </div>
     );
   }
@@ -58,93 +59,13 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
   const techList = project.techStack ? project.techStack.split(",").map((s: string) => s.trim()) : [];
   const featureList = project.features ? project.features.split(",").map((s: string) => s.trim()) : [];
 
-  const comoSystems = [
-    {
-      name: "Como Football Official Portal",
-      desc: "Official club web platform for match fixtures, news, and fan engagement.",
-      url: "https://comofootball.com/en/",
-      qaFocus: "Cross-browser regression, i18n content sync, & matchday traffic stability",
-      status: "Verified QA",
-    },
-    {
-      name: "Sent Entertainment Media Hub",
-      desc: "Digital broadcast and media rights distribution platform for Como 1907.",
-      url: "https://www.sententertainment.com/",
-      qaFocus: "Media playback performance, VOD streaming stability, & UI responsiveness",
-      status: "Verified QA",
-    },
-    {
-      name: "Como Ticketing & Pass System",
-      desc: "E-commerce ticket sales, seat selection, and digital pass verification.",
-      url: "https://tickets.comofootball.com/",
-      qaFocus: "Payment gateway integration, seat selection validation, & ticket barcode audit",
-      status: "Verified QA",
-    },
-    {
-      name: "Curva Sud Fan Platform",
-      desc: "Fan community hub, official merch, and supporter engagement portal.",
-      url: "https://baroedak-como.vercel.app/#divisions",
-      qaFocus: "Community form validation, merch cart checkout flow, & asset optimization",
-      status: "Verified QA",
-    },
-    {
-      name: "EdVentura Educational Portal",
-      desc: "Youth training and sports education management system.",
-      url: "https://edventura.it/",
-      qaFocus: "Course enrolment user flows, document downloads, & form validation",
-      status: "Verified QA",
-    },
-    {
-      name: "Baroedak Como Identity Platform",
-      desc: "Centralized identity hub unifying all 11 digital systems under Como 1907.",
-      url: "https://baroedak-como.vercel.app/",
-      qaFocus: "Single-sign-on (SSO) flow, system link integrity, & dark UI testing",
-      status: "Verified QA & Built",
-    },
-    {
-      name: "Como TV & VOD Streaming Platform",
-      desc: "Exclusive video-on-demand match highlights and live stream service.",
-      url: "https://baroedak-como.vercel.app/",
-      qaFocus: "Video buffer quality, live stream latency monitoring, & player controls",
-      status: "Verified QA",
-    },
-    {
-      name: "Como Stadium Access Control",
-      desc: "Turnstile gate scanning and matchday QR ticket validation system.",
-      url: "https://baroedak-como.vercel.app/",
-      qaFocus: "QR scan response time, offline gate validation, & access log audits",
-      status: "Verified QA",
-    },
-    {
-      name: "Como Press & Media Accreditation Hub",
-      desc: "Journalist credential application and press pass management.",
-      url: "https://baroedak-como.vercel.app/",
-      qaFocus: "Form file attachment validation, approval workflow, & email dispatch",
-      status: "Verified QA",
-    },
-    {
-      name: "Como Youth Academy Scouting Database",
-      desc: "Player performance tracking and youth recruitment analytics.",
-      url: "https://baroedak-como.vercel.app/",
-      qaFocus: "Data input integrity, statistical calculation audit, & role-based access",
-      status: "Verified QA",
-    },
-    {
-      name: "Como Retail E-Commerce Portal",
-      desc: "Official club merchandise shop and global shipping checkout.",
-      url: "https://baroedak-como.vercel.app/",
-      qaFocus: "Stock availability sync, international address validation, & invoice audit",
-      status: "Verified QA",
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-slate-950 text-white flex flex-col justify-between">
-      <Navbar />
+    <div className="min-h-screen bg-slate-50 dark:bg-[#030712] text-slate-900 dark:text-white flex flex-col justify-between transition-colors duration-300">
+      <Navbar settings={settings} />
 
       <main className="flex-1 pt-28 pb-20 relative overflow-hidden">
-        {/* Glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
+        {/* Glow Background Elements */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-blue-600/10 dark:bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="container-original relative z-10 mx-auto px-4 max-w-5xl space-y-12">
           
@@ -152,7 +73,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
           <div>
             <Link
               href="/#projects"
-              className="inline-flex items-center gap-2 text-xs font-semibold text-zinc-400 hover:text-cyan-400 transition-colors p-2 rounded-xl bg-zinc-900/60 border border-zinc-800"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 dark:text-zinc-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors p-2.5 rounded-xl bg-white dark:bg-[#070e20]/90 border border-slate-200 dark:border-cyan-500/30 shadow-xs"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>{t('projects.back')}</span>
@@ -161,24 +82,24 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
 
           {/* Title Banner Header */}
           <div className="space-y-4">
-            <span className="px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-cyan-400 text-xs font-bold uppercase tracking-wider">
+            <span className="px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-wider">
               {category}
             </span>
 
-            <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight">
+            <h1 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
               {title}
             </h1>
 
-            <p className="text-zinc-300 text-sm md:text-base leading-relaxed font-normal">
+            <p className="text-slate-600 dark:text-zinc-300 text-sm md:text-base leading-relaxed font-normal">
               {description}
             </p>
 
             {/* Quick Spec Tags */}
-            <div className="pt-4 flex flex-wrap items-center gap-4 border-t border-zinc-800/80 text-xs text-zinc-400">
+            <div className="pt-4 flex flex-wrap items-center gap-4 border-t border-slate-200 dark:border-zinc-800/80 text-xs text-slate-600 dark:text-zinc-400">
               {role && (
                 <div className="flex items-center gap-1.5">
-                  <User className="w-4 h-4 text-cyan-400" />
-                  <span>{t('projects.role')}: <strong className="text-white">{role}</strong></span>
+                  <User className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+                  <span>{t('projects.role')}: <strong className="text-slate-900 dark:text-white">{role}</strong></span>
                 </div>
               )}
               {project.githubUrl && (
@@ -186,7 +107,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-cyan-400 hover:underline font-semibold"
+                  className="flex items-center gap-1.5 text-cyan-600 dark:text-cyan-400 hover:underline font-semibold"
                 >
                   <FaGithub className="w-4 h-4" />
                   <span>{t('projects.github')}</span>
@@ -197,7 +118,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-cyan-400 hover:underline font-semibold"
+                  className="flex items-center gap-1.5 text-cyan-600 dark:text-cyan-400 hover:underline font-semibold"
                 >
                   <ExternalLink className="w-4 h-4" />
                   <span>{t('projects.liveDemo')}</span>
@@ -207,7 +128,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
           </div>
 
           {/* Image Showcase Frame (Multi-Image Interactive Carousel) */}
-          <div className="relative group rounded-3xl overflow-hidden bg-zinc-900 border border-zinc-800/90 shadow-2xl aspect-[16/9] backdrop-blur-2xl">
+          <div className="relative group rounded-3xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-cyan-500/30 shadow-2xl aspect-[16/9] backdrop-blur-2xl">
             <AnimatePresence mode="wait">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <motion.img
@@ -229,21 +150,21 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
               <>
                 <button
                   onClick={prevImage}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-zinc-950/85 hover:bg-cyan-500 text-white border border-white/20 flex items-center justify-center backdrop-blur-md transition-all shadow-xl hover:scale-110 z-20 cursor-pointer"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/85 hover:bg-cyan-500 text-white border border-white/20 flex items-center justify-center backdrop-blur-md transition-all shadow-xl hover:scale-110 z-20 cursor-pointer"
                   title="Previous Image"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
                 <button
                   onClick={nextImage}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-zinc-950/85 hover:bg-cyan-500 text-white border border-white/20 flex items-center justify-center backdrop-blur-md transition-all shadow-xl hover:scale-110 z-20 cursor-pointer"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/85 hover:bg-cyan-500 text-white border border-white/20 flex items-center justify-center backdrop-blur-md transition-all shadow-xl hover:scale-110 z-20 cursor-pointer"
                   title="Next Image"
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
 
                 {/* Pagination Indicator Dots */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-950/80 border border-white/10 backdrop-blur-md z-20">
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/80 border border-white/10 backdrop-blur-md z-20">
                   {imageList.map((_: any, dotIdx: number) => (
                     <button
                       key={dotIdx}
@@ -262,24 +183,24 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
           {(problem || solution) && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {problem && (
-                <div className="p-6 md:p-8 rounded-3xl bg-zinc-900/80 border border-zinc-800/80 space-y-3">
-                  <div className="flex items-center gap-2 text-rose-400 font-bold text-sm">
+                <div className="p-6 md:p-8 rounded-3xl bg-white dark:bg-[#070e20]/90 border border-slate-200 dark:border-cyan-500/20 shadow-sm space-y-3">
+                  <div className="flex items-center gap-2 text-rose-500 dark:text-rose-400 font-bold text-sm">
                     <ShieldAlert className="w-4 h-4" />
                     <span>{t('projects.problem')}</span>
                   </div>
-                  <p className="text-xs md:text-sm text-zinc-300 leading-relaxed font-normal">
+                  <p className="text-xs md:text-sm text-slate-600 dark:text-zinc-300 leading-relaxed font-normal">
                     {problem}
                   </p>
                 </div>
               )}
 
               {solution && (
-                <div className="p-6 md:p-8 rounded-3xl bg-zinc-900/80 border border-zinc-800/80 space-y-3">
-                  <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm">
+                <div className="p-6 md:p-8 rounded-3xl bg-white dark:bg-[#070e20]/90 border border-slate-200 dark:border-cyan-500/20 shadow-sm space-y-3">
+                  <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
                     <Sparkles className="w-4 h-4" />
                     <span>{t('projects.solution')}</span>
                   </div>
-                  <p className="text-xs md:text-sm text-zinc-300 leading-relaxed font-normal">
+                  <p className="text-xs md:text-sm text-slate-600 dark:text-zinc-300 leading-relaxed font-normal">
                     {solution}
                   </p>
                 </div>
@@ -289,16 +210,16 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
 
           {/* Key Features */}
           {featureList.length > 0 && (
-            <div className="p-6 md:p-8 rounded-3xl bg-zinc-900/80 border border-zinc-800/80 space-y-4">
-              <div className="flex items-center gap-2 text-cyan-400 font-bold text-sm">
+            <div className="p-6 md:p-8 rounded-3xl bg-white dark:bg-[#070e20]/90 border border-slate-200 dark:border-cyan-500/20 shadow-sm space-y-4">
+              <div className="flex items-center gap-2 text-blue-600 dark:text-cyan-400 font-bold text-sm">
                 <CheckCircle2 className="w-4 h-4" />
                 <span>{t('projects.features')}</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {featureList.map((feat: string, idx: number) => (
-                  <div key={idx} className="flex items-center gap-2 text-xs text-zinc-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
+                  <div key={idx} className="flex items-center gap-2 text-xs text-slate-700 dark:text-zinc-300">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-cyan-400 shrink-0" />
                     <span>{feat}</span>
                   </div>
                 ))}
@@ -308,8 +229,8 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
 
           {/* Tech Stack Bar */}
           {techList.length > 0 && (
-            <div className="p-6 md:p-8 rounded-3xl bg-zinc-900/80 border border-zinc-800/80 space-y-4">
-              <div className="flex items-center gap-2 text-blue-400 font-bold text-sm">
+            <div className="p-6 md:p-8 rounded-3xl bg-white dark:bg-[#070e20]/90 border border-slate-200 dark:border-cyan-500/20 shadow-sm space-y-4">
+              <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold text-sm">
                 <Wrench className="w-4 h-4" />
                 <span>{t('projects.techStack')}</span>
               </div>
@@ -318,7 +239,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
                 {techList.map((tech: string, idx: number) => (
                   <span
                     key={idx}
-                    className="px-3 py-1.5 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-semibold text-zinc-200"
+                    className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-xs font-semibold text-slate-800 dark:text-zinc-200"
                   >
                     {tech}
                   </span>
@@ -328,10 +249,10 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
           )}
 
           {/* Bottom Action Footer */}
-          <div className="pt-6 flex flex-wrap items-center justify-between gap-4 border-t border-zinc-800/80">
+          <div className="pt-6 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200 dark:border-zinc-800/80">
             <Link
               href="/#projects"
-              className="inline-flex items-center gap-2 text-xs font-semibold text-zinc-400 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>{t('projects.back')}</span>
@@ -343,7 +264,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-bold text-zinc-300 hover:text-white flex items-center gap-2"
+                  className="px-4 py-2.5 rounded-xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-xs font-bold text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white flex items-center gap-2 shadow-xs"
                 >
                   <FaGithub className="w-4 h-4" />
                   <span>Repository</span>
@@ -354,7 +275,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-xs font-bold text-white flex items-center gap-2 shadow-lg shadow-blue-500/20"
+                  className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-xs font-bold text-white flex items-center gap-2 shadow-lg shadow-blue-500/20"
                 >
                   <ExternalLink className="w-4 h-4" />
                   <span>{t('projects.liveDemo')}</span>
@@ -366,7 +287,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
         </div>
       </main>
 
-      <FooterClient />
+      <FooterClient settings={settings} />
     </div>
   );
 }

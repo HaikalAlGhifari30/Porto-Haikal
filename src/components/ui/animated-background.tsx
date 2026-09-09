@@ -2,15 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 
-interface Star {
+interface Particle {
   x: number;
   y: number;
+  originX: number;
+  originY: number;
+  vx: number;
+  vy: number;
   size: number;
   baseAlpha: number;
   alpha: number;
   twinkleSpeed: number;
-  vx: number;
-  vy: number;
   color: string;
 }
 
@@ -18,8 +20,17 @@ export function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [isDark, setIsDark] = useState(true);
 
+  // Smooth mouse tracking state
+  const mouseRef = useRef({
+    x: -1000,
+    y: -1000,
+    targetX: -1000,
+    targetY: -1000,
+    active: false,
+  });
+
   useEffect(() => {
-    // Check initial dark mode state & listen to theme changes
+    // Check initial dark mode state & listen to theme mutations
     const checkDark = () => {
       setIsDark(document.documentElement.classList.contains("dark"));
     };
@@ -39,6 +50,40 @@ export function AnimatedBackground() {
   }, []);
 
   useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current.targetX = e.clientX;
+      mouseRef.current.targetY = e.clientY;
+      mouseRef.current.active = true;
+    };
+
+    const handleMouseLeave = () => {
+      mouseRef.current.active = false;
+      mouseRef.current.targetX = -1000;
+      mouseRef.current.targetY = -1000;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        mouseRef.current.targetX = e.touches[0].clientX;
+        mouseRef.current.targetY = e.touches[0].clientY;
+        mouseRef.current.active = true;
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchstart", handleTouchMove, { passive: true });
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchstart", handleTouchMove);
+    };
+  }, []);
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -53,68 +98,181 @@ export function AnimatedBackground() {
       if (!canvas) return;
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-      initStars();
+      initParticles();
     };
 
     window.addEventListener("resize", handleResize);
 
-    // Color palettes for dark vs light mode
-    const darkColors = ["#38bdf8", "#818cf8", "#c084fc", "#ec4899", "#60a5fa", "#ffffff"];
+    // Dynamic color palettes
+    const darkColors = ["#38bdf8", "#818cf8", "#c084fc", "#22d3ee", "#60a5fa", "#ffffff"];
     const lightColors = ["#0284c7", "#4f46e5", "#2563eb", "#0d9488", "#7c3aed", "#0369a1"];
 
-    let stars: Star[] = [];
+    let particles: Particle[] = [];
 
-    const initStars = () => {
-      stars = [];
-      const starCount = Math.floor((width * height) / 8500);
+    const initParticles = () => {
+      particles = [];
+      // Adjust density for smooth 60fps
+      const count = Math.floor((width * height) / 7500);
       const activeColors = isDark ? darkColors : lightColors;
 
-      for (let i = 0; i < starCount; i++) {
-        const baseAlpha = isDark ? Math.random() * 0.7 + 0.2 : Math.random() * 0.5 + 0.25;
-        stars.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          size: isDark ? Math.random() * 2 + 0.6 : Math.random() * 2.5 + 0.8,
+      for (let i = 0; i < count; i++) {
+        const x = Math.random() * width;
+        const y = Math.random() * height;
+        const baseAlpha = isDark ? Math.random() * 0.65 + 0.25 : Math.random() * 0.5 + 0.3;
+
+        particles.push({
+          x,
+          y,
+          originX: x,
+          originY: y,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          size: isDark ? Math.random() * 2.2 + 0.8 : Math.random() * 2.8 + 1,
           baseAlpha,
           alpha: baseAlpha,
           twinkleSpeed: (Math.random() * 0.02 + 0.005) * (Math.random() > 0.5 ? 1 : -1),
-          vx: (Math.random() - 0.5) * 0.15,
-          vy: (Math.random() - 0.5) * 0.15,
           color: activeColors[Math.floor(Math.random() * activeColors.length)],
         });
       }
     };
 
-    initStars();
+    initParticles();
 
+    // Main 60FPS Interactive Render Loop
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      stars.forEach((star) => {
-        star.x += star.vx;
-        star.y += star.vy;
+      // Smooth mouse interpolation (LERP)
+      const mouse = mouseRef.current;
+      mouse.x += (mouse.targetX - mouse.x) * 0.15;
+      mouse.y += (mouse.targetY - mouse.y) * 0.15;
 
-        if (star.x < 0) star.x = width;
-        if (star.x > width) star.x = 0;
-        if (star.y < 0) star.y = height;
-        if (star.y > height) star.y = 0;
+      const interactionRadius = 200;
+      const interactionRadiusSq = interactionRadius * interactionRadius;
 
-        star.alpha += star.twinkleSpeed;
-        if (star.alpha > (isDark ? 0.95 : 0.8) || star.alpha < 0.15) {
-          star.twinkleSpeed = -star.twinkleSpeed;
+      // Draw Cursor Ambient Light Spotlight Aura
+      if (mouse.active && mouse.x > 0 && mouse.y > 0) {
+        const spotlightGradient = ctx.createRadialGradient(
+          mouse.x,
+          mouse.y,
+          0,
+          mouse.x,
+          mouse.y,
+          240
+        );
+        if (isDark) {
+          spotlightGradient.addColorStop(0, "rgba(34, 211, 238, 0.12)");
+          spotlightGradient.addColorStop(0.5, "rgba(99, 102, 241, 0.05)");
+          spotlightGradient.addColorStop(1, "rgba(3, 7, 18, 0)");
+        } else {
+          spotlightGradient.addColorStop(0, "rgba(2, 132, 199, 0.14)");
+          spotlightGradient.addColorStop(0.5, "rgba(79, 70, 229, 0.06)");
+          spotlightGradient.addColorStop(1, "rgba(248, 250, 252, 0)");
         }
 
         ctx.save();
-        ctx.globalAlpha = Math.max(0.15, Math.min(1, star.alpha));
-        ctx.fillStyle = star.color;
-        ctx.shadowBlur = star.size * (isDark ? 3 : 2);
-        ctx.shadowColor = star.color;
-
+        ctx.fillStyle = spotlightGradient;
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.arc(mouse.x, mouse.y, 240, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
-      });
+      }
+
+      // Update & Draw Interactive Vector Field Particles
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        // 1. Natural drift
+        p.originX += p.vx;
+        p.originY += p.vy;
+
+        if (p.originX < 0) p.originX = width;
+        if (p.originX > width) p.originX = 0;
+        if (p.originY < 0) p.originY = height;
+        if (p.originY > height) p.originY = 0;
+
+        // 2. Interactive Mouse Repulsion / Distortion (Motion.dev Vector Field style)
+        let targetX = p.originX;
+        let targetY = p.originY;
+        let scaleFactor = 1;
+
+        if (mouse.active) {
+          const dx = mouse.x - p.originX;
+          const dy = mouse.y - p.originY;
+          const distSq = dx * dx + dy * dy;
+
+          if (distSq < interactionRadiusSq && distSq > 0) {
+            const dist = Math.sqrt(distSq);
+            const force = (1 - dist / interactionRadius);
+            
+            // Push particle away from cursor proportional to distance
+            const pushDistance = force * 60;
+            const angle = Math.atan2(dy, dx);
+            
+            targetX = p.originX - Math.cos(angle) * pushDistance;
+            targetY = p.originY - Math.sin(angle) * pushDistance;
+            
+            // Brighten and scale particle near cursor
+            scaleFactor = 1 + force * 1.5;
+          }
+        }
+
+        // Smooth spring movement to target position
+        p.x += (targetX - p.x) * 0.1;
+        p.y += (targetY - p.y) * 0.1;
+
+        // Twinkle effect
+        p.alpha += p.twinkleSpeed;
+        if (p.alpha > (isDark ? 0.95 : 0.85) || p.alpha < 0.2) {
+          p.twinkleSpeed = -p.twinkleSpeed;
+        }
+
+        // 3. Render Particle
+        ctx.save();
+        ctx.globalAlpha = Math.max(0.15, Math.min(1, p.alpha));
+        ctx.fillStyle = p.color;
+
+        const currentSize = p.size * scaleFactor;
+        ctx.shadowBlur = currentSize * (isDark ? 3.5 : 2);
+        ctx.shadowColor = p.color;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, currentSize, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // 4. Draw Interactive Constellation Vector Lines between nearby particles near cursor
+        if (mouse.active) {
+          const distToMouseSq = (p.x - mouse.x) ** 2 + (p.y - mouse.y) ** 2;
+          if (distToMouseSq < interactionRadiusSq) {
+            for (let j = i + 1; j < particles.length; j++) {
+              const p2 = particles[j];
+              const p2DistToMouseSq = (p2.x - mouse.x) ** 2 + (p2.y - mouse.y) ** 2;
+              
+              if (p2DistToMouseSq < interactionRadiusSq) {
+                const pdx = p.x - p2.x;
+                const pdy = p.y - p2.y;
+                const pDistSq = pdx * pdx + pdy * pdy;
+                const maxLineDistSq = 90 * 90;
+
+                if (pDistSq < maxLineDistSq) {
+                  const lineAlpha = (1 - Math.sqrt(pDistSq) / 90) * 0.35;
+                  ctx.save();
+                  ctx.globalAlpha = lineAlpha;
+                  ctx.strokeStyle = isDark ? "#38bdf8" : "#0284c7";
+                  ctx.lineWidth = 0.8;
+                  ctx.beginPath();
+                  ctx.moveTo(p.x, p.y);
+                  ctx.lineTo(p2.x, p2.y);
+                  ctx.stroke();
+                  ctx.restore();
+                }
+              }
+            }
+          }
+        }
+
+      }
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -128,17 +286,17 @@ export function AnimatedBackground() {
   }, [isDark]);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden transition-colors duration-500">
-      {/* Background Layer (Dark: Cosmic #030712 | Light: Pearl Slate #f8fafc) */}
-      <div className="absolute inset-0 bg-[#f8fafc] dark:bg-[#030712] transition-colors duration-500" />
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      {/* Background Base Color Layer */}
+      <div className="absolute inset-0 bg-[#f8fafc] dark:bg-[#030712]" />
 
-      {/* Floating Gradient Nebulas (Adapts to Light & Dark) */}
-      <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-cyan-200/40 dark:bg-purple-900/15 rounded-full blur-[140px] animate-pulse transition-colors duration-500" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-blue-200/40 dark:bg-cyan-900/15 rounded-full blur-[140px] animate-pulse transition-colors duration-500" />
-      <div className="absolute top-[40%] right-[20%] w-[35vw] h-[35vw] bg-indigo-200/30 dark:bg-indigo-900/15 rounded-full blur-[160px] transition-colors duration-500" />
+      {/* Floating Ambient Nebulas */}
+      <div className="absolute top-[-10%] left-[-10%] w-[55vw] h-[55vw] bg-cyan-300/35 dark:bg-purple-900/18 rounded-full blur-[140px] animate-pulse" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] bg-blue-300/35 dark:bg-cyan-900/18 rounded-full blur-[140px] animate-pulse" />
+      <div className="absolute top-[35%] right-[15%] w-[40vw] h-[40vw] bg-indigo-300/25 dark:bg-indigo-900/18 rounded-full blur-[160px]" />
 
-      {/* Canvas Layer for Starfield Particles */}
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-90 transition-opacity duration-500" />
+      {/* Interactive 60FPS Canvas Layer */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-95" />
     </div>
   );
 }

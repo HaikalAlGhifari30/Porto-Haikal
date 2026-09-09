@@ -71,7 +71,7 @@ export function SkillsSection({ skills = [] }: SkillsSectionProps) {
   ];
 
   return (
-    <section id="skills" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white transition-colors duration-500">
+    <section id="skills" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white">
       {/* Background Gradients */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-blue-500/5 dark:bg-cyan-500/10 rounded-full blur-[130px] pointer-events-none" />
 

@@ -54,7 +54,7 @@ export function OrganizationsSection({ organizations = [] }: OrganizationsSectio
   const items = organizations.length > 0 ? organizations : defaultOrgs;
 
   return (
-    <section id="organization" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white transition-colors duration-500">
+    <section id="organization" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white">
       {/* Ambient Glow */}
       <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-cyan-500/5 dark:bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
 

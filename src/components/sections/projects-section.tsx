@@ -174,7 +174,7 @@ export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
   });
 
   return (
-    <section id="projects" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white transition-colors duration-500">
+    <section id="projects" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white">
       {/* Glow Effects */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-cyan-500/5 dark:bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none" />
 

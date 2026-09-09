@@ -27,7 +27,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
   const emailUrl = settings?.email || "alghifaribahren03@gmail.com";
 
   return (
-    <section id="home" className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-transparent text-zinc-900 dark:text-white transition-colors duration-500">
+    <section id="home" className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-transparent text-zinc-900 dark:text-white">
       {/* Deep Background Decorative Grid Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#3b82f615_1px,transparent_1px)] dark:bg-[radial-gradient(#38bdf815_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
       
@@ -38,8 +38,8 @@ export function HeroSection({ settings }: HeroSectionProps) {
       <div className="container-original relative z-10 mx-auto px-4 max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           
-          {/* Left Content Column (2nd on Mobile, 1st on Desktop) */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left order-2 lg:order-1">
+          {/* Left Content Column (Headline, Greeting, Bio, CTAs & Socials) */}
+          <div className="lg:col-span-7 space-y-6 text-center lg:text-left order-1">
             
             {/* Available Status Pill Badge */}
             <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-400 text-xs font-semibold tracking-wide backdrop-blur-md">
@@ -55,7 +55,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
               <p className="text-zinc-500 dark:text-zinc-400 text-sm font-semibold tracking-wider uppercase">
                 {isEn ? (settings?.heroTitleEn || "Hi, I'm") : (settings?.heroTitle || "Halo, Saya")}
               </p>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-900 dark:text-white leading-[1.1]">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-900 dark:text-white leading-[1.1]">
                 Haikal <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-500 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-300">Al Ghifari</span>
               </h1>
               <p className="text-cyan-600 dark:text-cyan-400 text-base sm:text-xl font-bold tracking-wide pt-1">
@@ -133,12 +133,12 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
           </div>
 
-          {/* Right Visual / Personal Rectangular Portrait Photo Card (1st on Mobile, 2nd on Desktop) */}
-          <div className="lg:col-span-5 flex justify-center relative order-1 lg:order-2">
-            <div className="relative group w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[400px]">
+          {/* Right Visual / Personal Rectangular Portrait Photo Card */}
+          <div className="lg:col-span-5 flex justify-center relative order-2">
+            <div className="relative group w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[400px]">
               
-              {/* Outer Card Ambient Neon Glow (Vibrant on Mobile Touchscreens) */}
-              <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 rounded-[2.5rem] blur-2xl opacity-50 dark:opacity-75 group-hover:opacity-90 transition duration-700 pointer-events-none" />
+              {/* Outer Card Ambient Neon Glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 via-blue-600/30 to-indigo-600/30 rounded-[2.5rem] blur-xl opacity-60 dark:opacity-80 group-hover:opacity-100 transition duration-700 pointer-events-none" />
               
               {/* Main Professional Glass Card */}
               <div className="relative rounded-[2.2rem] bg-white/95 dark:bg-[#070e20]/95 border border-slate-300 dark:border-cyan-400/50 p-4 backdrop-blur-2xl shadow-2xl space-y-4 transition-all duration-500 hover:border-cyan-400">

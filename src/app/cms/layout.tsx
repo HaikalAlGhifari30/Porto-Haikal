@@ -114,7 +114,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
     };
 
     return (
-        <div className="flex h-screen bg-[#F8FAFC] dark:bg-zinc-950 text-slate-900 dark:text-slate-50 overflow-hidden font-sans transition-colors duration-300 relative">
+        <div className="flex h-screen bg-[#F8FAFC] dark:bg-zinc-950 text-slate-900 dark:text-slate-50 overflow-hidden font-sans relative">
             {/* Desktop Sidebar (Left) */}
             <aside 
                 className={cn(

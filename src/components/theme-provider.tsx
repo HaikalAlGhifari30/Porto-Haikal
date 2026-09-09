@@ -42,18 +42,17 @@ export function ThemeProvider({
     useIsomorphicLayoutEffect(() => {
         const root = window.document.documentElement;
         
-        root.classList.remove("light", "dark");
-
+        let targetTheme = theme;
         if (theme === "system") {
-            const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-                .matches
+            targetTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
                 ? "dark"
                 : "light";
-            root.classList.add(systemTheme);
-            return;
         }
 
-        root.classList.add(theme);
+        if (!root.classList.contains(targetTheme)) {
+            root.classList.remove("light", "dark");
+            root.classList.add(targetTheme);
+        }
     }, [theme]);
 
     const value = {

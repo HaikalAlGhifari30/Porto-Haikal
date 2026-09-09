@@ -22,7 +22,7 @@ export function FooterClient({ settings }: FooterClientProps) {
   };
 
   return (
-    <footer className="bg-white/65 dark:bg-[#070e20]/80 backdrop-blur-2xl text-zinc-900 dark:text-white border-t border-slate-200/70 dark:border-cyan-500/20 py-8 sm:py-10 relative overflow-hidden shadow-2xl shadow-slate-900/5 dark:shadow-cyan-950/30 transition-all duration-500">
+    <footer className="bg-white/65 dark:bg-[#070e20]/80 backdrop-blur-2xl text-zinc-900 dark:text-white border-t border-slate-200/70 dark:border-cyan-500/20 py-8 sm:py-10 relative overflow-hidden shadow-2xl shadow-slate-900/5 dark:shadow-cyan-950/30">
       <div className="container-original mx-auto px-4 max-w-6xl relative z-10 space-y-6">
         {/* Main Row: Brand - Nav Links - Social Icons */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-200/80 dark:border-blue-500/10">

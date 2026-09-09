@@ -52,7 +52,7 @@ export function EducationSection({ educations = [] }: EducationSectionProps) {
   const items = educations.length > 0 ? educations : defaultEducations;
 
   return (
-    <section id="education" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white transition-colors duration-500">
+    <section id="education" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white">
       {/* Background Orbs */}
       <div className="absolute top-1/2 right-1/4 w-80 h-80 bg-blue-500/5 dark:bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
 

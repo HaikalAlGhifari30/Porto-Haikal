@@ -15,7 +15,14 @@ import { ThemeSwitcher } from "@/components/cms/theme-switcher";
 import { useSafeLang } from "@/store/lang";
 import { HagLogo } from "@/components/hag-logo";
 
-export function Navbar() {
+interface NavbarProps {
+    settings?: any;
+}
+
+export function Navbar({ settings }: NavbarProps) {
+    const cvUrl = (settings?.heroCtaLink && settings.heroCtaLink !== "#" && settings.heroCtaLink !== "#projects")
+        ? settings.heroCtaLink
+        : "/cv-haikal-al-ghifari.pdf";
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
@@ -105,7 +112,7 @@ export function Navbar() {
 
                         {/* Download CV CTA */}
                         <a
-                            href="/cv-haikal-al-ghifari.pdf"
+                            href={cvUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className={cn(
@@ -195,7 +202,7 @@ export function Navbar() {
                 {/* Drawer Footer Actions */}
                 <div className="space-y-3 pt-6 border-t border-slate-200/80 dark:border-zinc-800/80 mt-6">
                     <a
-                        href="/cv-haikal-al-ghifari.pdf"
+                        href={cvUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={cn(

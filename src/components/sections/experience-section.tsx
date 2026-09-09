@@ -212,8 +212,8 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
                     isEven ? "md:mr-auto md:text-left" : "md:ml-auto md:text-left"
                   }`}
                 >
-                  {/* Card Container (Slim, Sleek & Compact) */}
-                  <div className="group relative rounded-2xl bg-white/80 dark:bg-[#070e20]/80 border border-slate-200/90 dark:border-cyan-500/20 hover:border-blue-500/50 dark:hover:border-cyan-400/50 transition-all duration-300 shadow-md dark:shadow-xl overflow-hidden backdrop-blur-2xl p-5 sm:p-6 space-y-3.5">
+                  {/* Card Container (Slim, Sleek & Compact Glass) */}
+                  <div className="group relative rounded-2xl bg-white/40 dark:bg-[#070e20]/80 border border-white/70 dark:border-cyan-500/20 hover:border-blue-500/50 dark:hover:border-cyan-400/50 transition-all duration-300 shadow-2xl shadow-blue-900/5 dark:shadow-xl overflow-hidden backdrop-blur-2xl p-5 sm:p-6 space-y-3.5">
                     
                     {/* Header Bar: Job Type Badge & Icon-only Toggle Chevron Button */}
                     <div className="flex items-center justify-between gap-3">
@@ -226,44 +226,44 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
                         type="button"
                         aria-label="Toggle details"
                         title={isExpanded ? "Tutup Rincian" : "Buka Rincian"}
-                        className="p-1.5 rounded-xl bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-all flex items-center justify-center shadow-2xs group/btn cursor-pointer"
+                        className="p-1.5 rounded-xl bg-white/60 dark:bg-zinc-900/90 border border-white/80 dark:border-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-all flex items-center justify-center shadow-2xs group/btn cursor-pointer backdrop-blur-xs"
                       >
                         {isExpanded ? (
                           <ChevronUp className="w-4 h-4 text-blue-600 dark:text-cyan-400 transition-transform group-hover/btn:-translate-y-0.5" />
                         ) : (
-                          <ChevronDown className="w-4 h-4 text-zinc-500 dark:text-zinc-400 group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition-transform group-hover/btn:translate-y-0.5" />
+                          <ChevronDown className="w-4 h-4 text-slate-600 dark:text-zinc-400 group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition-transform group-hover/btn:translate-y-0.5" />
                         )}
                       </button>
                     </div>
 
                     {/* Position & Company Title with Logo */}
                     <div className="space-y-1.5">
-                      <h3 className="text-lg md:text-xl font-bold text-zinc-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors">
+                      <h3 className="text-lg md:text-xl font-black text-slate-950 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors">
                         {pos}
                       </h3>
 
                       <div className="flex items-center gap-2.5">
                         {logo ? (
-                          <div className="w-7 h-7 rounded-lg bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-0.5 flex items-center justify-center shrink-0 shadow-2xs overflow-hidden">
+                          <div className="w-7 h-7 rounded-lg bg-white p-0.5 flex items-center justify-center shrink-0 shadow-2xs border border-slate-200 overflow-hidden">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img src={logo} alt={comp} className="w-full h-full object-contain rounded-md" />
                           </div>
                         ) : (
                           <Briefcase className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 shrink-0" />
                         )}
-                        <p className="text-xs font-semibold text-zinc-600 dark:text-zinc-400">{comp}</p>
+                        <p className="text-xs font-bold text-slate-800 dark:text-zinc-300">{comp}</p>
                       </div>
                     </div>
 
                     {/* Meta Line: Period & Location */}
-                    <div className="flex items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-400 font-medium">
+                    <div className="flex items-center gap-1.5 text-xs text-slate-700 dark:text-zinc-400 font-semibold">
                       <Clock className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 shrink-0" />
                       <span>{per}</span>
                     </div>
 
                     {/* Concise Summary Description */}
                     {bullets.length > 0 && !isExpanded && (
-                      <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed font-normal pt-2.5 border-t border-slate-200/80 dark:border-zinc-800/80">
+                      <p className="text-xs text-slate-900 dark:text-zinc-300 leading-relaxed font-medium pt-2.5 border-t border-slate-200/80 dark:border-zinc-800/80">
                         {bullets[0]}
                       </p>
                     )}
@@ -271,14 +271,14 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
                     {/* Expanded Detail Dropdown */}
                     {isExpanded && (
                       <div className="pt-3 border-t border-slate-200/80 dark:border-zinc-800/80 space-y-3 animate-in fade-in slide-in-from-top-2 duration-300">
-                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-blue-600 dark:text-cyan-400 flex items-center gap-1.5">
+                        <p className="text-[10px] font-black uppercase tracking-widest text-blue-700 dark:text-cyan-400 flex items-center gap-1.5">
                           <Sparkles className="w-3.5 h-3.5" />
                           <span>{isEn ? "AUDIT SCOPE & RESPONSIBILITIES:" : "CAKUPAN PENGUJIAN & TANGGUNG JAWAB AUDIT:"}</span>
                         </p>
 
                         <ul className="space-y-2">
                           {bullets.map((bullet, bIdx) => (
-                            <li key={bIdx} className="flex items-start gap-2 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal">
+                            <li key={bIdx} className="flex items-start gap-2 text-xs text-slate-900 dark:text-zinc-300 leading-relaxed font-medium">
                               <ChevronRight className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 shrink-0 mt-0.5" />
                               <span>{bullet}</span>
                             </li>
@@ -289,11 +289,11 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
 
                     {/* Skill Tags at Bottom */}
                     {techList.length > 0 && (
-                      <div className="flex flex-wrap gap-1.5 pt-2.5 border-t border-slate-200/60 dark:border-zinc-800/60">
+                      <div className="flex flex-wrap gap-1.5 pt-2.5 border-t border-slate-200/80 dark:border-zinc-800/60">
                         {techList.map((tech, tIdx) => (
                           <span
                             key={tIdx}
-                            className="px-2.5 py-0.5 rounded-lg bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-[10px] text-zinc-700 dark:text-zinc-300 font-semibold shadow-2xs"
+                            className="px-2.5 py-0.5 rounded-lg bg-white/55 dark:bg-zinc-900/90 border border-white/80 dark:border-zinc-800 text-[10px] text-slate-900 dark:text-zinc-200 font-extrabold shadow-2xs backdrop-blur-xs"
                           >
                             {tech}
                           </span>

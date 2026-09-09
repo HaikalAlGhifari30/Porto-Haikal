@@ -146,7 +146,7 @@
 
   html,
   body {
-    @apply overflow-x-hidden bg-[#030712] text-slate-100;
+    @apply overflow-x-hidden bg-slate-50 dark:bg-[#030712] text-slate-900 dark:text-slate-100;
   }
 
   * {
@@ -154,7 +154,7 @@
   }
 
   body {
-    @apply bg-[#030712] text-slate-100;
+    @apply bg-slate-50 dark:bg-[#030712] text-slate-900 dark:text-slate-100;
   }
 }
 
@@ -206,37 +206,15 @@
 }
 
 @layer utilities {
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
+  .hide-scrollbar::-webkit-scrollbar,
+  .scrollbar-none::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  .hide-scrollbar,
+  .scrollbar-none {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
   }
-}
-
-/* ── Custom Dark Scrollbar ── */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #090d16;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 9999px;
-  border: 2px solid #090d16;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #06b6d4;
-}
-
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #1e293b #090d16;
 }

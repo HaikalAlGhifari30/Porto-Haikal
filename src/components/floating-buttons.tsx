@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { ArrowUp, MessageCircle } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { ArrowUp, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { cn } from "@/lib/utils";
 import { useSafeLang } from "@/store/lang";
+import Image from "next/image";
 
 interface WhatsAppAdmin {
   id: string;
@@ -15,14 +16,19 @@ interface WhatsAppAdmin {
 }
 
 export function FloatingButtons({ admins = [] }: { admins?: WhatsAppAdmin[] }) {
-  const { lang, t } = useSafeLang();
+  const { lang } = useSafeLang();
   const isEn = lang === "en";
   const [showTopBtn, setShowTopBtn] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const chatRef = useRef<HTMLDivElement>(null);
 
   const phone = "6281388058331";
+  const activeAdmin = admins && admins.length > 0 && admins[0]?.isActive ? admins[0] : null;
+  const adminName = activeAdmin?.name ? activeAdmin.name.split(" ")[0] : "Haikal";
   const defaultMsg = isEn
     ? "Halo Haikal, I'm interested in your portfolio!"
     : "Halo Haikal, saya tertarik dengan portofolio Anda!";
+  const targetMsg = activeAdmin?.message || defaultMsg;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +43,25 @@ export function FloatingButtons({ admins = [] }: { admins?: WhatsAppAdmin[] }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close chat popup when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (chatRef.current && !chatRef.current.contains(event.target as Node)) {
+        setIsChatOpen(false);
+      }
+    };
+
+    if (isChatOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isChatOpen]);
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -44,43 +69,99 @@ export function FloatingButtons({ admins = [] }: { admins?: WhatsAppAdmin[] }) {
     });
   };
 
-  const handleWhatsAppClick = () => {
+  const handleStartChat = () => {
     let targetPhone = phone;
-    let targetMsg = defaultMsg;
-
-    if (admins && admins.length > 0 && admins[0]?.isActive) {
-      targetPhone = admins[0].phone.replace(/\D/g, "");
+    if (activeAdmin) {
+      targetPhone = activeAdmin.phone.replace(/\D/g, "");
       if (targetPhone.startsWith("0")) {
         targetPhone = "62" + targetPhone.slice(1);
-      }
-      if (admins[0].message) {
-        targetMsg = admins[0].message;
       }
     }
 
     const text = encodeURIComponent(targetMsg);
     window.open(`https://wa.me/${targetPhone}?text=${text}`, "_blank");
+    setIsChatOpen(false);
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-auto">
-      {/* 1. Floating WhatsApp Button (Compro RRK Style) */}
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-auto" ref={chatRef}>
+      
+      {/* WhatsApp Chat Popup Box (Frosted Glassmorphism Theme) */}
+      {isChatOpen && (
+        <div className="w-64 sm:w-72 bg-white/40 dark:bg-slate-950/85 text-slate-900 dark:text-white border border-white/70 dark:border-cyan-500/30 backdrop-blur-2xl rounded-[2.2rem] p-5 shadow-2xl shadow-blue-900/10 dark:shadow-cyan-950/50 animate-in fade-in slide-in-from-bottom-5 duration-300 relative flex flex-col items-center justify-between mb-1">
+          
+          {/* Close Button */}
+          <button
+            onClick={() => setIsChatOpen(false)}
+            className="absolute top-3.5 right-3.5 p-1.5 rounded-full bg-white/60 dark:bg-slate-900/80 border border-white/80 dark:border-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 transition-colors cursor-pointer z-20 backdrop-blur-xs shadow-2xs"
+            aria-label="Close Chat Popup"
+          >
+            <X className="w-4 h-4" />
+          </button>
+
+          {/* Header Title */}
+          <div className="text-center pt-1 w-full space-y-0.5">
+            <span className="text-[11px] font-black text-blue-700 dark:text-cyan-400 uppercase tracking-widest block">
+              {isEn ? "Chat with" : "Chat bersama"}
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-black text-slate-950 dark:text-white tracking-tight text-center">
+              {adminName}
+            </h3>
+          </div>
+
+          {/* Center Portrait Container */}
+          <div className="relative w-48 h-52 my-3 rounded-2xl overflow-hidden border border-white/80 dark:border-zinc-800 bg-white/50 dark:bg-slate-900/70 flex items-center justify-center shadow-2xs backdrop-blur-xs">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/chat-avatar-illustration.jpg"
+              alt={adminName}
+              className="w-full h-full object-cover object-top rounded-xl"
+            />
+          </div>
+
+          {/* Bottom Gradient Pill Button ("Let's Chat!") */}
+          <button
+            onClick={handleStartChat}
+            className="w-full py-2.5 px-6 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-400 text-white font-extrabold text-xs uppercase tracking-wider rounded-full shadow-lg shadow-blue-500/25 hover:shadow-cyan-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer mt-1"
+          >
+            <FaWhatsapp className="w-4 h-4 text-white" />
+            <span>{isEn ? "Let's Chat!" : "Mulai Chat!"}</span>
+          </button>
+
+        </div>
+      )}
+
+      {/* 1. Floating WhatsApp Trigger Button */}
       <button
-        onClick={handleWhatsAppClick}
-        className="w-12 h-12 sm:w-13 sm:h-13 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center relative group cursor-pointer"
+        onClick={() => setIsChatOpen(!isChatOpen)}
+        className={cn(
+          "w-12 h-12 sm:w-13 sm:h-13 text-white rounded-full shadow-lg transition-all duration-300 flex items-center justify-center relative group cursor-pointer",
+          isChatOpen
+            ? "bg-zinc-900 dark:bg-zinc-800 text-white shadow-zinc-900/40 border-2 border-zinc-900"
+            : "bg-[#25D366] hover:bg-[#20bd5a] shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-110 active:scale-95"
+        )}
         aria-label="Chat via WhatsApp"
         title={isEn ? "Chat via WhatsApp" : "Hubungi via WhatsApp"}
       >
-        <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-30 pointer-events-none" />
-        <FaWhatsapp className="w-6 h-6 text-white relative z-10" />
+        {!isChatOpen && (
+          <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-30 pointer-events-none" />
+        )}
+        
+        {isChatOpen ? (
+          <X className="w-6 h-6 text-white" />
+        ) : (
+          <FaWhatsapp className="w-6 h-6 text-white relative z-10" />
+        )}
         
         {/* Hover Tooltip Pill */}
-        <span className="absolute right-full mr-3 px-3 py-1.5 bg-slate-900/95 dark:bg-[#070e20]/95 border border-slate-700 dark:border-cyan-500/30 text-white text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-xl">
-          {isEn ? "Chat WhatsApp" : "Hubungi WhatsApp"}
-        </span>
+        {!isChatOpen && (
+          <span className="absolute right-full mr-3 px-3 py-1.5 bg-slate-900/95 dark:bg-[#070e20]/95 border border-slate-700 dark:border-cyan-500/30 text-white text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-xl">
+            {isEn ? "Chat WhatsApp" : "Hubungi WhatsApp"}
+          </span>
+        )}
       </button>
 
-      {/* 2. Floating Back-to-Top Button (Compro RRK Style) */}
+      {/* 2. Floating Back-to-Top Button */}
       <button
         onClick={scrollToTop}
         className={cn(
@@ -92,6 +173,9 @@ export function FloatingButtons({ admins = [] }: { admins?: WhatsAppAdmin[] }) {
       >
         <ArrowUp className="w-5 h-5 text-zinc-300 group-hover:text-white transition-colors" />
       </button>
+
     </div>
   );
 }
+
+

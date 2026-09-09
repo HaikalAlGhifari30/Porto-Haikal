@@ -1,14 +1,13 @@
 "use client";
 
 import { useSafeLang } from "@/store/lang";
-import { Code2, Database, Layers, Wrench, CheckCircle2, ShieldCheck, FileSpreadsheet, Cpu, Sparkles } from "lucide-react";
+import { ShieldCheck, Cpu, Wrench, Sparkles, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface SkillItem {
   name: string;
   category: "Frontend" | "Backend" | "Database" | "Tools";
   icon?: string;
-  proficiency?: number;
 }
 
 interface SkillsSectionProps {
@@ -20,29 +19,29 @@ export function SkillsSection({ skills = [] }: SkillsSectionProps) {
   const isEn = lang === "en";
 
   const defaultSkills: SkillItem[] = [
-    // Category 1: Frontend (Metodologi & Pengujian QA)
-    { name: "QA Manual Testing", category: "Frontend", proficiency: 96 },
-    { name: "Test Case Design & Execution", category: "Frontend", proficiency: 95 },
-    { name: "Regression & Smoke Testing", category: "Frontend", proficiency: 94 },
-    { name: "EFM & Live Broadcast Review", category: "Frontend", proficiency: 92 },
+    // QA Skills & Testing
+    { name: "QA Manual Testing", category: "Frontend" },
+    { name: "Test Case Design & Execution", category: "Frontend" },
+    { name: "Regression & Smoke Testing", category: "Frontend" },
+    { name: "EFM & Live Broadcast Review", category: "Frontend" },
 
-    // Category 2: Backend (Analisis Sistem & Pemodelan DFD/ERD)
-    { name: "IT Business Analysis", category: "Backend", proficiency: 94 },
-    { name: "System Analysis", category: "Backend", proficiency: 92 },
-    { name: "ERD & DFD System Modeling", category: "Backend", proficiency: 90 },
-    { name: "Flowchart & BPMN Mapping", category: "Backend", proficiency: 94 },
+    // Systems & Analysis
+    { name: "IT Business Analysis", category: "Backend" },
+    { name: "System Analysis", category: "Backend" },
+    { name: "ERD & DFD System Modeling", category: "Backend" },
+    { name: "Flowchart & BPMN Mapping", category: "Backend" },
 
-    // Category 3: Database (Perangkat Uji & Validasi API)
-    { name: "Postman API Testing", category: "Database", proficiency: 88 },
-    { name: "Jira & Trello Bug Tracking", category: "Database", proficiency: 95 },
-    { name: "Figma & Draw.io Diagramming", category: "Database", proficiency: 90 },
-    { name: "MsWord & Google Sheets", category: "Database", proficiency: 95 },
+    // Testing Tools & Validation
+    { name: "Postman API Testing", category: "Database" },
+    { name: "Jira & Trello Bug Tracking", category: "Database" },
+    { name: "Figma & Draw.io Diagramming", category: "Database" },
+    { name: "MsWord & Google Sheets", category: "Database" },
 
-    // Category 4: Tools (Kepemimpinan & Soft Skills)
-    { name: "Organizational Leadership", category: "Tools", proficiency: 96 },
-    { name: "Client Liaison & Communication", category: "Tools", proficiency: 95 },
-    { name: "Problem Solving & Critical Thinking", category: "Tools", proficiency: 95 },
-    { name: "Team Coordination & Collaboration", category: "Tools", proficiency: 94 },
+    // Leadership & Soft Skills
+    { name: "Organizational Leadership", category: "Tools" },
+    { name: "Client Liaison & Communication", category: "Tools" },
+    { name: "Problem Solving & Critical Thinking", category: "Tools" },
+    { name: "Team Coordination & Collaboration", category: "Tools" },
   ];
 
   const skillData = skills.length > 0 ? skills : defaultSkills;
@@ -50,91 +49,77 @@ export function SkillsSection({ skills = [] }: SkillsSectionProps) {
   const categories = [
     {
       key: "Frontend",
-      title: isEn ? "Quality Assurance & Testing" : "Metodologi & Pengujian QA",
-      icon: <ShieldCheck className="w-5 h-5 text-blue-600 dark:text-cyan-400" />,
+      title: isEn ? "QA SKILLS & TESTING" : "METODOLOGI & PENGUJIAN QA",
+      icon: <ShieldCheck className="w-5 h-5 text-cyan-400" />,
     },
     {
       key: "Backend",
-      title: isEn ? "IT Business & System Analysis" : "Analisis Sistem & Pemodelan DFD/ERD",
-      icon: <Cpu className="w-5 h-5 text-blue-600 dark:text-blue-400" />,
+      title: isEn ? "SYSTEM ANALYSIS & MODELING" : "ANALISIS SISTEM & DFD/ERD",
+      icon: <Cpu className="w-5 h-5 text-blue-400" />,
     },
     {
       key: "Database",
-      title: isEn ? "Testing Tools & API Validation" : "Perangkat Uji & Validasi API",
-      icon: <Wrench className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />,
+      title: isEn ? "TESTING TOOLS & API VALIDATION" : "PERANGKAT UJI & VALIDASI API",
+      icon: <Wrench className="w-5 h-5 text-indigo-400" />,
     },
     {
       key: "Tools",
-      title: isEn ? "Leadership & Soft Skills" : "Kepemimpinan & Soft Skills",
-      icon: <Sparkles className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />,
+      title: isEn ? "LEADERSHIP & SOFT SKILLS" : "KEPEMIMPINAN & SOFT SKILLS",
+      icon: <Sparkles className="w-5 h-5 text-emerald-400" />,
     },
   ];
 
   return (
-    <section id="skills" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white">
-      {/* Background Gradients */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-blue-500/5 dark:bg-cyan-500/10 rounded-full blur-[130px] pointer-events-none" />
+    <section className="w-full max-w-5xl mx-auto px-4 py-4 sm:py-6 flex flex-col justify-center items-center text-zinc-900 dark:text-white my-auto">
+      {/* Header */}
+      <div className="max-w-2xl space-y-2 mb-6 text-center mx-auto">
+        <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-700 to-cyan-600 dark:from-white dark:via-cyan-200 dark:to-cyan-400">
+          {t('section.skills')}
+        </h2>
+        <p className="text-slate-600 dark:text-zinc-400 text-xs leading-relaxed font-medium">
+          Technical competencies, quality assurance methodologies, and professional tooling
+        </p>
+      </div>
 
-      <div className="container-original relative z-10 mx-auto px-4 max-w-6xl">
-        {/* Section Header */}
-        <div className="max-w-2xl space-y-3 mb-14 text-center mx-auto">
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-blue-900 to-cyan-800 dark:from-white dark:via-cyan-200 dark:to-cyan-400 bg-clip-text text-transparent pb-1 pt-1 leading-tight">
-            {t('section.skills')}
-          </h2>
-          <p className="text-zinc-600 dark:text-zinc-400 text-xs md:text-sm leading-relaxed font-medium">
-            {t('section.skills.desc')}
-          </p>
-        </div>
+      {/* Categorized Skills Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+        {categories.map((cat, cIdx) => {
+          let catSkills = skillData.filter((s) => s.category === cat.key);
+          if (catSkills.length === 0) {
+            catSkills = defaultSkills.filter((s) => s.category === cat.key);
+          }
 
-        {/* Categorized Skills Grid with Framer Motion */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {categories.map((cat, cIdx) => {
-            let catSkills = skillData.filter((s) => s.category === cat.key);
-            if (catSkills.length === 0) {
-              catSkills = defaultSkills.filter((s) => s.category === cat.key);
-            }
-            return (
-              <motion.div
-                key={cat.key}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: cIdx * 0.15 }}
-                whileHover={{ y: -6, scale: 1.01 }}
-                className="p-7 md:p-8 rounded-[2rem] bg-white/80 dark:bg-zinc-950/80 border border-slate-200/80 dark:border-zinc-800/80 hover:border-cyan-400 dark:hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(34,211,238,0.3)] backdrop-blur-2xl space-y-6 transition-all duration-500 shadow-sm dark:shadow-2xl group relative overflow-hidden"
-              >
-                <div className="flex items-center gap-3 border-b border-slate-200 dark:border-zinc-800/80 pb-4">
-                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
-                    {cat.icon}
+          return (
+            <motion.div
+              key={cat.key}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: cIdx * 0.1 }}
+              className="p-5 sm:p-6 rounded-[2rem] bg-white/40 dark:bg-slate-950/75 border border-white/70 dark:border-cyan-500/25 backdrop-blur-2xl space-y-4 shadow-2xl shadow-blue-900/5 dark:shadow-cyan-950/40 hover:border-cyan-400 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-3 border-b border-slate-200/80 dark:border-zinc-800 pb-3">
+                <div className="w-9 h-9 rounded-xl bg-white/60 dark:bg-slate-900 border border-white/80 dark:border-zinc-800 flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform backdrop-blur-xs">
+                  {cat.icon}
+                </div>
+                <h3 className="text-xs font-black text-blue-700 dark:text-cyan-300 tracking-wider uppercase">{cat.title}</h3>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {catSkills.map((sk, i) => (
+                  <div
+                    key={i}
+                    className="p-3 rounded-xl bg-white/50 dark:bg-slate-900/70 border border-white/80 dark:border-zinc-800/80 hover:border-cyan-400/60 transition-all flex items-center gap-2.5 group/item shadow-2xs backdrop-blur-xs"
+                  >
+                    <CheckCircle2 className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0 opacity-80 group-hover/item:opacity-100" />
+                    <span className="text-xs font-bold text-slate-900 dark:text-zinc-200 group-hover/item:text-blue-700 dark:group-hover/item:text-white transition-colors">
+                      {sk.name}
+                    </span>
                   </div>
-                  <h3 className="text-base md:text-lg font-bold text-zinc-900 dark:text-white tracking-tight">{cat.title}</h3>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {catSkills.map((sk, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ scale: 1.02 }}
-                      className="p-3 rounded-2xl bg-slate-50 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800/80 hover:border-cyan-400 transition-all flex items-center justify-between group/item shadow-2xs"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-cyan-400 opacity-70 group-hover/item:opacity-100 transition-opacity shrink-0" />
-                        <span className="text-xs font-semibold text-zinc-800 dark:text-zinc-200 group-hover/item:text-blue-600 dark:group-hover/item:text-white transition-colors">
-                          {sk.name}
-                        </span>
-                      </div>
-                      {sk.proficiency && (
-                        <span className="text-[10px] font-bold text-cyan-500 dark:text-cyan-400">
-                          {sk.proficiency}%
-                        </span>
-                      )}
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
+                ))}
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );

@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { useSafeLang } from "@/store/lang";
-import { ArrowUpRight, ExternalLink, FolderGit2, Sparkles } from "lucide-react";
+import { ArrowUpRight, ExternalLink, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ProjectItem {
   id?: string;
@@ -20,201 +20,202 @@ interface ProjectItem {
   url?: string;
   githubUrl?: string;
   techStack?: string;
-  problem?: string;
-  problemEn?: string;
-  solution?: string;
-  solutionEn?: string;
 }
 
 interface ProjectsSectionProps {
   projects?: ProjectItem[];
+  onNavigateScene?: (index: number) => void;
 }
 
-function ProjectCardItem({ proj, idx, isEn, t }: { proj: ProjectItem; idx: number; isEn: boolean; t: (key: string) => string }) {
-  const title = isEn && proj.titleEn ? proj.titleEn : proj.title;
-  const cat = isEn && proj.categoryEn ? proj.categoryEn : proj.category || "Web Development";
-  const desc = isEn && proj.descriptionEn ? proj.descriptionEn : proj.description;
-  const techList = proj.techStack ? proj.techStack.split(",").map((t) => t.trim()) : [];
-  const isEven = idx % 2 === 0;
-
-  // Multi-image parsing (comma-separated or single)
-  const imageList = proj.imageUrl
-    ? proj.imageUrl.split(",").map((img) => img.trim()).filter(Boolean)
-    : ["https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=80"];
-
-  const [activeImgIdx, setActiveImgIdx] = useState(0);
-
-  const prevImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setActiveImgIdx((prev) => (prev === 0 ? imageList.length - 1 : prev - 1));
-  };
-
-  const nextImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setActiveImgIdx((prev) => (prev === imageList.length - 1 ? 0 : prev + 1));
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 35 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: idx * 0.1 }}
-      className="relative w-full py-4 md:py-6 overflow-hidden"
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center group relative z-10">
-        
-        {/* Image Showcase Frame Column (Compact 6-col) */}
-        <div className={`lg:col-span-6 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
-          <Link href={`/projects/${proj.slug}`} className="block relative group/img rounded-2xl overflow-hidden bg-slate-900 border border-slate-200/90 dark:border-zinc-800/90 shadow-lg dark:shadow-xl aspect-[16/9.5] backdrop-blur-2xl">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={imageList[0]}
-              alt={title}
-              className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700 opacity-95 group-hover/img:opacity-100"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
-          </Link>
-        </div>
-
-        {/* Text Content Column (Compact 6-col) */}
-        <div className={`lg:col-span-6 space-y-4 flex flex-col justify-center ${isEven ? "lg:order-2" : "lg:order-1"}`}>
-          
-          {/* Category Subtitle Tag */}
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] font-bold text-blue-600 dark:text-cyan-400 tracking-wider uppercase">
-              {cat}
-            </span>
-          </div>
-
-          {/* Title */}
-          <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors leading-snug">
-            <Link href={`/projects/${proj.slug}`}>
-              {title}
-            </Link>
-          </h3>
-
-          {/* Glass Description Container Box (Compact Yofi Style) */}
-          <div className="p-4 sm:p-5 rounded-xl bg-white/80 dark:bg-[#0c101d]/90 border border-slate-200/90 dark:border-zinc-800/90 backdrop-blur-xl shadow-sm dark:shadow-md text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm leading-relaxed font-normal">
-            <p>{desc}</p>
-          </div>
-
-          {/* Tech Stack Pills */}
-          {techList.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 pt-0.5">
-              {techList.map((tech, tIdx) => (
-                <span
-                  key={tIdx}
-                  className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-[11px] font-semibold text-zinc-700 dark:text-zinc-300 shadow-2xs"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          )}
-
-          {/* Action Buttons Row */}
-          <div className="flex items-center gap-2.5 pt-1">
-            <Link
-              href={`/projects/${proj.slug}`}
-              className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm shadow-blue-500/20 transition-all hover:scale-102"
-            >
-              <span>{t('projects.viewDetail')}</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
-
-            {proj.githubUrl && (
-              <a
-                href={proj.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all shadow-2xs hover:scale-105"
-                title="GitHub Repository"
-              >
-                <FaGithub className="w-4 h-4" />
-              </a>
-            )}
-
-            {proj.url && proj.url !== "#" && (
-              <a
-                href={proj.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-slate-100 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all shadow-2xs hover:scale-105"
-                title="Live Demo"
-              >
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            )}
-          </div>
-
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
+export function ProjectsSection({ projects = [], onNavigateScene }: ProjectsSectionProps) {
   const { lang, t } = useSafeLang();
   const isEn = lang === "en";
-  const [activeTab, setActiveTab] = useState<string>("all");
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const categories = [
-    { key: "all", label: isEn ? "All Projects" : "Semua Proyek" },
-    { key: "web", label: isEn ? "Web Development" : "Web Development" },
+  const items = projects.length > 0 ? projects : [
+    {
+      title: "FinTrack - Personal Finance Management",
+      slug: "fintrack",
+      category: "Web Application",
+      description: "A comprehensive financial dashboard built to track income, expenses, monthly budgets, and automated analytics.",
+      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&auto=format&fit=crop&q=80",
+      techStack: "Next.js, PostgreSQL, Prisma, TailwindCSS, Chart.js",
+      url: "#",
+      githubUrl: "#",
+    },
   ];
 
-  const filteredProjects = projects.filter((proj) => {
-    if (activeTab === "all") return true;
-    const cat = (proj.category || "").toLowerCase();
-    if (activeTab === "web") return cat.includes("web") || cat.includes("development") || cat.includes("full-stack");
-    return true;
-  });
+  const total = items.length;
+  const currentProj = items[activeIndex] || items[0];
+
+  const title = isEn && currentProj.titleEn ? currentProj.titleEn : currentProj.title;
+  const cat = isEn && currentProj.categoryEn ? currentProj.categoryEn : currentProj.category || "Featured Project";
+  const desc = isEn && currentProj.descriptionEn ? currentProj.descriptionEn : currentProj.description;
+  const techList = currentProj.techStack ? currentProj.techStack.split(",").map((t) => t.trim()) : [];
+  const imageList = currentProj.imageUrl
+    ? currentProj.imageUrl.split(",").map((img) => img.trim()).filter(Boolean)
+    : ["https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=80"];
+
+  const prevProject = () => {
+    setActiveIndex((prev) => (prev === 0 ? total - 1 : prev - 1));
+  };
+
+  const nextProject = () => {
+    setActiveIndex((prev) => (prev === total - 1 ? 0 : prev + 1));
+  };
 
   return (
-    <section id="projects" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white">
-      {/* Glow Effects */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-cyan-500/5 dark:bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none" />
+    <section className="w-full max-w-5xl mx-auto px-4 py-4 sm:py-6 flex flex-col justify-center items-center text-zinc-900 dark:text-white my-auto">
+      {/* Header */}
+      <div className="max-w-2xl space-y-2 mb-4 text-center mx-auto">
+        <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-700 to-cyan-600 dark:from-white dark:via-cyan-200 dark:to-cyan-400">
+          {t('section.projects')}
+        </h2>
+        <p className="text-slate-600 dark:text-zinc-400 text-xs leading-relaxed font-medium">
+          Interactive showcase of curated software & testing projects
+        </p>
+      </div>
 
-      <div className="container-original relative z-10 mx-auto px-4 max-w-6xl">
-        {/* Section Header */}
-        <div className="max-w-2xl space-y-3 mb-14 text-center mx-auto">
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-blue-900 to-cyan-800 dark:from-white dark:via-cyan-200 dark:to-cyan-400 bg-clip-text text-transparent pb-1 pt-1 leading-tight">
-            {t('section.projects')}
-          </h2>
-          <p className="text-zinc-600 dark:text-zinc-400 text-xs md:text-sm leading-relaxed font-medium">
-            {t('section.projects.desc')}
-          </p>
-        </div>
+      {/* Interactive Project Showcase Viewport Box */}
+      <div className="w-full relative">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeIndex}
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.4 }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center rounded-[2.2rem] bg-white/35 dark:bg-slate-950/75 border border-white/70 dark:border-cyan-500/30 p-5 sm:p-7 backdrop-blur-2xl shadow-2xl shadow-blue-900/5 dark:shadow-cyan-950/40 relative overflow-hidden"
+          >
+            {/* Image Preview Frame (Left 6 Columns) */}
+            <div className="lg:col-span-6">
+              <Link href={`/projects/${currentProj.slug}`} className="block relative group rounded-2xl overflow-hidden bg-slate-900 border border-slate-200/80 dark:border-zinc-800 shadow-xl aspect-[16/10]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={imageList[0]}
+                  alt={title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-95"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" />
+              </Link>
+            </div>
 
-        {/* Category Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-16">
-          {categories.map((tab) => {
-            const isActive = activeTab === tab.key;
-            return (
+            {/* Right Details Column (Right 6 Columns) */}
+            <div className="lg:col-span-6 space-y-4 flex flex-col justify-center">
+              
+              {/* Counter Step & Category Tag */}
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-black text-blue-700 dark:text-cyan-400 uppercase tracking-widest">
+                  {cat}
+                </span>
+                <span className="text-xs font-mono font-extrabold text-slate-800 dark:text-zinc-300 bg-white/50 dark:bg-slate-900/60 px-3 py-1 rounded-full border border-white/70 dark:border-zinc-800 shadow-2xs backdrop-blur-xs">
+                  0{activeIndex + 1} / 0{total}
+                </span>
+              </div>
+
+              {/* Title */}
+              <h3 className="text-xl sm:text-2xl font-black text-slate-950 dark:text-white tracking-tight hover:text-blue-600 dark:hover:text-cyan-300 transition-colors leading-snug">
+                <Link href={`/projects/${currentProj.slug}`}>
+                  {title}
+                </Link>
+              </h3>
+
+              {/* Glass Description Box */}
+              <div className="p-4 rounded-xl bg-white/45 dark:bg-slate-900/65 border border-white/70 dark:border-zinc-800/90 text-slate-900 dark:text-zinc-200 text-xs sm:text-sm leading-relaxed font-medium backdrop-blur-md shadow-2xs">
+                <p>{desc}</p>
+              </div>
+
+              {/* Tech Stack Pills */}
+              {techList.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {techList.map((tech, tIdx) => (
+                    <span
+                      key={tIdx}
+                      className="px-2.5 py-0.5 rounded-full bg-white/55 dark:bg-slate-900/70 border border-white/80 dark:border-zinc-800 text-[11px] font-extrabold text-blue-800 dark:text-cyan-300 shadow-2xs backdrop-blur-xs"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Action Buttons Row */}
+              <div className="flex items-center gap-3 pt-2">
+                <Link
+                  href={`/projects/${currentProj.slug}`}
+                  className="px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-400 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-md shadow-blue-500/20 transition-all hover:scale-105"
+                >
+                  <span>{t('projects.viewDetail')}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+
+                {currentProj.githubUrl && (
+                  <a
+                    href={currentProj.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 rounded-full bg-white/60 dark:bg-slate-900/70 border border-white/80 dark:border-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:bg-white dark:hover:bg-slate-800 flex items-center justify-center transition-all shadow-2xs backdrop-blur-xs hover:scale-105"
+                    title="GitHub Repository"
+                  >
+                    <FaGithub className="w-4 h-4" />
+                  </a>
+                )}
+
+                {currentProj.url && currentProj.url !== "#" && (
+                  <a
+                    href={currentProj.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 rounded-full bg-white/60 dark:bg-slate-900/70 border border-white/80 dark:border-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:bg-white dark:hover:bg-slate-800 flex items-center justify-center transition-all shadow-2xs backdrop-blur-xs hover:scale-105"
+                    title="Live Demo"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
+              </div>
+
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Carousel Navigation Footer Controls (Dot Indicators on Left, Arrows on Right) */}
+        <div className="flex items-center justify-between mt-4 px-2">
+          {/* Dots Indicator */}
+          <div className="flex items-center gap-2">
+            {items.map((_, idx) => (
               <button
-                key={tab.key}
-                onClick={() => setActiveTab(tab.key)}
-                className={`px-5 py-2 rounded-full text-xs font-bold transition-all duration-300 ${
-                  isActive
-                    ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md shadow-cyan-500/25 scale-105"
-                    : "bg-white/80 dark:bg-zinc-900/80 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white border border-slate-200 dark:border-zinc-800 backdrop-blur-md"
+                key={idx}
+                onClick={() => setActiveIndex(idx)}
+                className={`h-2 rounded-full transition-all cursor-pointer ${
+                  idx === activeIndex
+                    ? "w-8 bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.8)]"
+                    : "w-2 bg-slate-300 dark:bg-zinc-700 hover:bg-slate-400 dark:hover:bg-zinc-500"
                 }`}
-              >
-                {tab.label}
-              </button>
-            );
-          })}
+                title={`Go to project ${idx + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Arrow Buttons */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={prevProject}
+              className="p-2.5 rounded-full bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-pointer shadow-md"
+              title="Previous Project"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+
+            <button
+              onClick={nextProject}
+              className="p-2.5 rounded-full bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-pointer shadow-md"
+              title="Next Project"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
-        {/* Alternating Featured Projects Showcase (Yofi Reference Style) */}
-        <div className="space-y-10 md:space-y-14 isolate">
-          {filteredProjects.map((proj, idx) => (
-            <ProjectCardItem key={proj.id || idx} proj={proj} idx={idx} isEn={isEn} t={t} />
-          ))}
-        </div>
       </div>
     </section>
   );

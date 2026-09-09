@@ -15,10 +15,10 @@ interface LangState {
 const dictionary: Record<Language, Record<string, string>> = {
     id: {
         'nav.home': 'Beranda',
-        'nav.about': 'Tentang Saya',
-        'nav.skills': 'Keahlian QA',
+        'nav.about': 'Tentang',
+        'nav.skills': 'Keahlian',
         'nav.experience': 'Pengalaman',
-        'nav.projects': 'Portofolio Proyek',
+        'nav.projects': 'Proyek',
         'nav.education': 'Pendidikan',
         'nav.organization': 'Organisasi',
         'nav.contact': 'Kontak',
@@ -105,9 +105,9 @@ const dictionary: Record<Language, Record<string, string>> = {
     en: {
         'nav.home': 'Home',
         'nav.about': 'About',
-        'nav.skills': 'QA Skills',
+        'nav.skills': 'Skills',
         'nav.experience': 'Experience',
-        'nav.projects': 'Featured Projects',
+        'nav.projects': 'Projects',
         'nav.education': 'Education',
         'nav.organization': 'Organization',
         'nav.contact': 'Contact',

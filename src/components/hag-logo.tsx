@@ -33,27 +33,21 @@ export function HagLogo({ className, size = "md", useImage = false }: HagLogoPro
     <div className={cn("relative rounded-2xl p-[1.5px] bg-gradient-to-tr from-cyan-400 via-blue-500 to-indigo-600 shadow-lg shadow-blue-500/25 shrink-0 group-hover:scale-105 transition-transform duration-300", sizeClasses[size], className)}>
       <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center p-1.5 backdrop-blur-md">
         <svg
-          viewBox="0 0 100 130"
+          viewBox="0 0 120 120"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full text-cyan-400 stroke-current"
         >
-          {/* H Top */}
+          {/* H Left Vertical Stem */}
           <path
-            d="M24 15V60M76 15V60M24 38H76"
+            d="M 22 18 V 78"
             strokeWidth="9"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          {/* A Middle bar */}
+          {/* H Crossbar -> Center Stem -> G Bottom -> G Right Wall -> G Top Shelf */}
           <path
-            d="M24 55H76"
-            strokeWidth="7"
-            strokeLinecap="round"
-          />
-          {/* G Bottom square */}
-          <path
-            d="M76 60V115H24V75H76V95H52"
+            d="M 22 48 H 65 V 102 H 102 V 68 H 75"
             strokeWidth="9"
             strokeLinecap="round"
             strokeLinejoin="round"

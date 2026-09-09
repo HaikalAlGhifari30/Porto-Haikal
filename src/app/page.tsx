@@ -29,7 +29,7 @@ export default async function Home() {
     const visibleProjects = projects.filter(p => p.isVisible);
 
     return (
-        <div className="bg-[#030712] text-white min-h-screen w-full flex flex-col relative overflow-x-hidden">
+        <div className="bg-[#f8fafc] dark:bg-[#030712] text-zinc-900 dark:text-white min-h-screen w-full flex flex-col relative overflow-x-hidden">
             {/* Animated Cosmic Starfield Background (Like Yofi's Portfolio) */}
             <AnimatedBackground />
 

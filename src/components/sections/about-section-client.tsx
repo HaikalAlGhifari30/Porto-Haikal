@@ -43,8 +43,8 @@ export function AboutSectionClient({ settings }: AboutSectionClientProps) {
   return (
     <section id="about" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white">
       {/* Glow Effects */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-500/5 dark:bg-cyan-500/10 rounded-full blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-cyan-500/5 dark:bg-blue-600/10 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[70vw] sm:w-96 h-[70vw] sm:h-96 bg-blue-500/5 dark:bg-cyan-500/10 rounded-full blur-[60px] sm:blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-[70vw] sm:w-96 h-[70vw] sm:h-96 bg-cyan-500/5 dark:bg-blue-600/10 rounded-full blur-[60px] sm:blur-[130px] pointer-events-none" />
 
       <div className="container-original relative z-10 mx-auto px-4 max-w-6xl">
         {/* Section Header */}

@@ -20,7 +20,7 @@ export function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [isDark, setIsDark] = useState(true);
 
-  // Smooth mouse tracking state
+  // Smooth mouse/touch tracking state
   const mouseRef = useRef({
     x: -1000,
     y: -1000,
@@ -70,16 +70,26 @@ export function AnimatedBackground() {
       }
     };
 
+    const handleTouchEnd = () => {
+      mouseRef.current.active = false;
+      mouseRef.current.targetX = -1000;
+      mouseRef.current.targetY = -1000;
+    };
+
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     window.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
     window.addEventListener("touchstart", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
+    window.addEventListener("touchcancel", handleTouchEnd, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchstart", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("touchcancel", handleTouchEnd);
     };
   }, []);
 
@@ -91,14 +101,34 @@ export function AnimatedBackground() {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    const setupCanvasSize = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+    };
+
+    setupCanvasSize();
+
+    // Track previous width to avoid particle reset on mobile address bar show/hide
+    let lastWidth = width;
 
     const handleResize = () => {
       if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      initParticles();
+      const newWidth = window.innerWidth;
+      setupCanvasSize();
+      // Only re-init particles if screen width changes (orientation or window resize), not on mobile height shifts
+      if (Math.abs(newWidth - lastWidth) > 30) {
+        lastWidth = newWidth;
+        initParticles();
+      }
     };
 
     window.addEventListener("resize", handleResize);
@@ -111,8 +141,9 @@ export function AnimatedBackground() {
 
     const initParticles = () => {
       particles = [];
-      // Adjust density for smooth 60fps
-      const count = Math.floor((width * height) / 7500);
+      const isMobile = width < 768;
+      // Adjust particle count for mobile vs desktop for smooth performance
+      const count = Math.floor((width * height) / (isMobile ? 6500 : 7500));
       const activeColors = isDark ? darkColors : lightColors;
 
       for (let i = 0; i < count; i++) {
@@ -127,7 +158,9 @@ export function AnimatedBackground() {
           originY: y,
           vx: (Math.random() - 0.5) * 0.3,
           vy: (Math.random() - 0.5) * 0.3,
-          size: isDark ? Math.random() * 2.2 + 0.8 : Math.random() * 2.8 + 1,
+          size: isDark 
+            ? (isMobile ? Math.random() * 1.8 + 1 : Math.random() * 2.2 + 0.8)
+            : (isMobile ? Math.random() * 2.2 + 1.2 : Math.random() * 2.8 + 1),
           baseAlpha,
           alpha: baseAlpha,
           twinkleSpeed: (Math.random() * 0.02 + 0.005) * (Math.random() > 0.5 ? 1 : -1),
@@ -140,6 +173,8 @@ export function AnimatedBackground() {
 
     // Main 60FPS Interactive Render Loop
     const render = () => {
+      ctx.save();
+      ctx.scale(dpr, dpr);
       ctx.clearRect(0, 0, width, height);
 
       // Smooth mouse interpolation (LERP)
@@ -147,33 +182,35 @@ export function AnimatedBackground() {
       mouse.x += (mouse.targetX - mouse.x) * 0.15;
       mouse.y += (mouse.targetY - mouse.y) * 0.15;
 
-      const interactionRadius = 200;
+      const isMobile = width < 768;
+      const interactionRadius = isMobile ? 140 : 200;
       const interactionRadiusSq = interactionRadius * interactionRadius;
 
       // Draw Cursor Ambient Light Spotlight Aura
       if (mouse.active && mouse.x > 0 && mouse.y > 0) {
+        const auraRadius = isMobile ? 170 : 240;
         const spotlightGradient = ctx.createRadialGradient(
           mouse.x,
           mouse.y,
           0,
           mouse.x,
           mouse.y,
-          240
+          auraRadius
         );
         if (isDark) {
-          spotlightGradient.addColorStop(0, "rgba(34, 211, 238, 0.12)");
-          spotlightGradient.addColorStop(0.5, "rgba(99, 102, 241, 0.05)");
+          spotlightGradient.addColorStop(0, "rgba(34, 211, 238, 0.16)");
+          spotlightGradient.addColorStop(0.5, "rgba(99, 102, 241, 0.06)");
           spotlightGradient.addColorStop(1, "rgba(3, 7, 18, 0)");
         } else {
-          spotlightGradient.addColorStop(0, "rgba(2, 132, 199, 0.14)");
-          spotlightGradient.addColorStop(0.5, "rgba(79, 70, 229, 0.06)");
+          spotlightGradient.addColorStop(0, "rgba(2, 132, 199, 0.18)");
+          spotlightGradient.addColorStop(0.5, "rgba(79, 70, 229, 0.07)");
           spotlightGradient.addColorStop(1, "rgba(248, 250, 252, 0)");
         }
 
         ctx.save();
         ctx.fillStyle = spotlightGradient;
         ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, 240, 0, Math.PI * 2);
+        ctx.arc(mouse.x, mouse.y, auraRadius, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }
@@ -191,7 +228,7 @@ export function AnimatedBackground() {
         if (p.originY < 0) p.originY = height;
         if (p.originY > height) p.originY = 0;
 
-        // 2. Interactive Mouse Repulsion / Distortion (Motion.dev Vector Field style)
+        // 2. Interactive Mouse/Touch Repulsion / Distortion (Motion.dev Vector Field style)
         let targetX = p.originX;
         let targetY = p.originY;
         let scaleFactor = 1;
@@ -206,7 +243,7 @@ export function AnimatedBackground() {
             const force = (1 - dist / interactionRadius);
             
             // Push particle away from cursor proportional to distance
-            const pushDistance = force * 60;
+            const pushDistance = force * (isMobile ? 40 : 60);
             const angle = Math.atan2(dy, dx);
             
             targetX = p.originX - Math.cos(angle) * pushDistance;
@@ -253,10 +290,11 @@ export function AnimatedBackground() {
                 const pdx = p.x - p2.x;
                 const pdy = p.y - p2.y;
                 const pDistSq = pdx * pdx + pdy * pdy;
-                const maxLineDistSq = 90 * 90;
+                const maxLineDist = isMobile ? 70 : 90;
+                const maxLineDistSq = maxLineDist * maxLineDist;
 
                 if (pDistSq < maxLineDistSq) {
-                  const lineAlpha = (1 - Math.sqrt(pDistSq) / 90) * 0.35;
+                  const lineAlpha = (1 - Math.sqrt(pDistSq) / maxLineDist) * 0.35;
                   ctx.save();
                   ctx.globalAlpha = lineAlpha;
                   ctx.strokeStyle = isDark ? "#38bdf8" : "#0284c7";
@@ -274,6 +312,7 @@ export function AnimatedBackground() {
 
       }
 
+      ctx.restore();
       animationFrameId = requestAnimationFrame(render);
     };
 
@@ -290,13 +329,14 @@ export function AnimatedBackground() {
       {/* Background Base Color Layer */}
       <div className="absolute inset-0 bg-[#f8fafc] dark:bg-[#030712]" />
 
-      {/* Floating Ambient Nebulas */}
-      <div className="absolute top-[-10%] left-[-10%] w-[55vw] h-[55vw] bg-cyan-300/35 dark:bg-purple-900/18 rounded-full blur-[140px] animate-pulse" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] bg-blue-300/35 dark:bg-cyan-900/18 rounded-full blur-[140px] animate-pulse" />
-      <div className="absolute top-[35%] right-[15%] w-[40vw] h-[40vw] bg-indigo-300/25 dark:bg-indigo-900/18 rounded-full blur-[160px]" />
+      {/* Floating Ambient Nebulas (Scaled & Blurred responsively to prevent mobile WebKit square edge box artifacts) */}
+      <div className="absolute top-[-10%] left-[-10%] w-[80vw] sm:w-[55vw] h-[80vw] sm:h-[55vw] bg-cyan-300/30 dark:bg-purple-900/18 rounded-full blur-[70px] sm:blur-[140px] animate-pulse pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[80vw] sm:w-[55vw] h-[80vw] sm:h-[55vw] bg-blue-300/30 dark:bg-cyan-900/18 rounded-full blur-[70px] sm:blur-[140px] animate-pulse pointer-events-none" />
+      <div className="absolute top-[35%] right-[5%] w-[60vw] sm:w-[40vw] h-[60vw] sm:h-[40vw] bg-indigo-300/20 dark:bg-indigo-900/18 rounded-full blur-[80px] sm:blur-[160px] pointer-events-none" />
 
-      {/* Interactive 60FPS Canvas Layer */}
+      {/* Interactive 60FPS High-DPI Canvas Layer */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-95" />
     </div>
   );
 }
+

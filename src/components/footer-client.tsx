@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, ArrowUp } from "lucide-react";
+import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa6";
 import { useSafeLang } from "@/store/lang";
 import { HagLogo } from "@/components/hag-logo";
@@ -16,10 +16,6 @@ export function FooterClient({ settings }: FooterClientProps) {
   const linkedinUrl = settings?.linkedin || "https://www.linkedin.com/in/haikalalghifari/";
   const instagramUrl = settings?.instagram || "https://www.instagram.com/alghfri_bhren/";
   const emailUrl = settings?.email || "alghifaribahren03@gmail.com";
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <footer className="bg-white/65 dark:bg-[#070e20]/80 backdrop-blur-2xl text-zinc-900 dark:text-white border-t border-slate-200/70 dark:border-cyan-500/20 py-8 sm:py-10 relative overflow-hidden shadow-2xl shadow-slate-900/5 dark:shadow-cyan-950/30">
@@ -85,17 +81,9 @@ export function FooterClient({ settings }: FooterClientProps) {
           </div>
         </div>
 
-        {/* Bottom Sub-row: Copyright & Back to Top */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-medium">
+        {/* Bottom Sub-row: Copyright */}
+        <div className="flex items-center justify-center sm:justify-between text-xs text-zinc-500 font-medium">
           <p>© {new Date().getFullYear()} Haikal Al Ghifari, S.Kom. Hak Cipta Dilindungi Undang-Undang.</p>
-          
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 dark:bg-zinc-900/80 border border-slate-200/80 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 transition-all group cursor-pointer shadow-2xs"
-          >
-            <span>Back to Top</span>
-            <ArrowUp className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform" />
-          </button>
         </div>
       </div>
     </footer>

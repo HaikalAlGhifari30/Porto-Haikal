@@ -43,7 +43,7 @@ export function ContactSection({ settings }: ContactSectionProps) {
   return (
     <section id="contact" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-white">
       {/* Radial Background Orbs */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-blue-600/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] sm:w-[650px] h-[70vw] sm:h-[450px] bg-blue-600/10 rounded-full blur-[70px] sm:blur-[140px] pointer-events-none" />
 
       <div className="container-original relative z-10 mx-auto px-4 max-w-5xl">
         {/* Section Header */}

@@ -28,9 +28,6 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
   return (
     <section id="home" className="relative min-h-[90vh] flex items-center justify-center pt-36 sm:pt-36 lg:pt-40 pb-16 lg:pb-24 overflow-hidden bg-transparent text-zinc-900 dark:text-white">
-      {/* Deep Background Decorative Grid Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(#3b82f615_1px,transparent_1px)] dark:bg-[radial-gradient(#38bdf815_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-      
       {/* Dynamic Ambient Glow Orbs */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] sm:w-[650px] h-[90vw] sm:h-[650px] bg-blue-600/10 dark:bg-cyan-500/15 rounded-full blur-[70px] sm:blur-[140px] pointer-events-none" />
       <div className="absolute top-1/3 left-1/4 w-[70vw] sm:w-[450px] h-[70vw] sm:h-[450px] bg-indigo-600/10 dark:bg-blue-600/15 rounded-full blur-[60px] sm:blur-[120px] pointer-events-none" />

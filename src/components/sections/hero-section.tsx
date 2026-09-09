@@ -133,37 +133,29 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
           </div>
 
-          {/* Right Visual / Personal Rectangular Portrait Photo Card */}
+          {/* Right Visual / Single Clean Portrait Photo Frame (Matching ChatGPT Reference Design) */}
           <div className="lg:col-span-5 flex justify-center relative order-1 lg:order-2">
-            <div className="relative group w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[400px]">
+            <div className="relative group w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[380px]">
               
-              {/* Outer Card Ambient Neon Glow */}
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/25 via-blue-600/25 to-indigo-600/25 rounded-[2.5rem] blur-lg sm:blur-xl opacity-60 dark:opacity-80 group-hover:opacity-100 transition duration-700 pointer-events-none" />
+              {/* Subtle Outer Neon Glow Spread */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/30 via-blue-600/30 to-indigo-600/30 rounded-[2.5rem] blur-xl opacity-60 dark:opacity-80 group-hover:opacity-100 transition duration-700 pointer-events-none" />
               
-              {/* Main Professional Glass Card */}
-              <div className="relative rounded-[2.2rem] bg-white/40 dark:bg-[#070e20]/30 border border-slate-300/60 dark:border-cyan-400/40 p-4 backdrop-blur-md shadow-[0_0_30px_rgba(34,211,238,0.15)] space-y-4 transition-all duration-500 hover:border-cyan-400">
+              {/* Single Clean Photo Viewport Frame (Zero outer padding container!) */}
+              <div className="relative aspect-[4/5] rounded-[2.2rem] overflow-hidden border border-slate-300/80 dark:border-cyan-400/50 shadow-[0_0_40px_rgba(34,211,238,0.2)] bg-slate-900 group-hover:border-cyan-400 transition-all duration-500">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={settings?.heroBannerUrl || "/haikal-al-ghifari.jpg"}
+                  alt="Haikal Al Ghifari Profile"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                />
                 
-                {/* Rectangular Portrait Photo Viewport */}
-                <div className="relative aspect-[4/5] rounded-[1.8rem] overflow-hidden bg-slate-900 border border-slate-200/80 dark:border-zinc-800/80 shadow-inner">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={settings?.heroBannerUrl || "/haikal-al-ghifari.jpg"}
-                    alt="Haikal Al Ghifari Profile"
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                  />
-                  
-                  {/* Subtle Bottom Overlay Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
-                </div>
-
-                {/* Bottom Badge Pill: Quality Assurance at COMO 1907 */}
-                <div className="flex justify-center pb-1">
-                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100/60 dark:bg-[#0c142c]/50 backdrop-blur-md border border-slate-200/60 dark:border-cyan-500/40 text-blue-600 dark:text-cyan-300 text-xs font-bold shadow-sm">
+                {/* Overlay Bottom Gradient & Integrated Badge Pill */}
+                <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent flex justify-center pt-12 pointer-events-none">
+                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100/90 dark:bg-[#070e20]/80 backdrop-blur-md border border-slate-200/80 dark:border-cyan-500/40 text-blue-600 dark:text-cyan-300 text-xs font-bold shadow-lg pointer-events-auto">
                     <CheckCircle2 className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
                     <span>Quality Assurance at COMO 1907</span>
                   </span>
                 </div>
-
               </div>
 
             </div>

@@ -61,15 +61,15 @@ async function main() {
   await prisma.settings.deleteMany();
   await prisma.settings.create({
     data: {
-      heroTitle: "Halo, Saya Haikal Al Ghifari",
-      heroTitleEn: "Hi, I'm Haikal Al Ghifari",
+      heroTitle: "Halo, Saya",
+      heroTitleEn: "Hi, I'm",
       heroSubtitle: "— Quality Assurance Engineer —",
       heroSubtitleEn: "— Quality Assurance Engineer —",
       heroCtaText: "Lihat Portofolio QA",
       heroCtaTextEn: "View QA Portfolio",
       heroCtaLink: "#projects",
-      aboutText: "Lulusan S1 Teknik Informatika UNIKOM (IPK 3.46) yang berdedikasi tinggi sebagai Quality Assurance Engineer, dan saat ini sedang aktif bekerja di COMO 1907 (Global Media Visual). Berpengalaman dalam pengujian manual (manual testing) web & mobile, verifikasi alur pengguna end-to-end, regresi, serta pemodelan sistem. Memiliki pengalaman kepemimpinan sebagai mantan Ketua HMIF UNIKOM yang analitis, teliti, dan adaptif.",
-      aboutTextEn: "Informatics Engineering graduate from UNIKOM (GPA 3.46) dedicated as a Quality Assurance Engineer, currently actively working at COMO 1907 (Global Media Visual). Highly experienced in web & mobile manual testing, end-to-end user flow verification, regression, and system modeling. Former Chairman of HMIF UNIKOM with strong leadership, analytical precision, and adaptability.",
+      aboutText: "Quality Assurance Engineer berdedikasi yang saat ini aktif bekerja di COMO 1907 (Global Media Visual). Berpengalaman dalam pengujian manual (manual testing) web & mobile, verifikasi alur pengguna end-to-end, uji regresi, serta pemodelan sistem. Memiliki ketelitian analitis tinggi dan pengalaman kepemimpinan yang adaptif.",
+      aboutTextEn: "Dedicated Quality Assurance Engineer currently actively working at COMO 1907 (Global Media Visual). Highly experienced in web & mobile manual testing, end-to-end user flow verification, regression testing, and system modeling. Proven track record in analytical precision, software quality control, and cross-functional leadership.",
       email: "alghifaribahren03@gmail.com",
       phone: "+62 813 880 583 31",
       instagram: "https://instagram.com/HaikalAlGhifari30",

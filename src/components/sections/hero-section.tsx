@@ -28,10 +28,6 @@ export function HeroSection({ settings }: HeroSectionProps) {
 
   return (
     <section id="home" className="relative min-h-[90vh] flex items-center justify-center pt-36 sm:pt-36 lg:pt-40 pb-16 lg:pb-24 overflow-hidden bg-transparent text-zinc-900 dark:text-white">
-      {/* Dynamic Ambient Glow Orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] sm:w-[650px] h-[90vw] sm:h-[650px] bg-blue-600/10 dark:bg-cyan-500/15 rounded-full blur-[70px] sm:blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/3 left-1/4 w-[70vw] sm:w-[450px] h-[70vw] sm:h-[450px] bg-indigo-600/10 dark:bg-blue-600/15 rounded-full blur-[60px] sm:blur-[120px] pointer-events-none" />
-
       <div className="container-original relative z-10 mx-auto px-4 max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-10 items-center">
           
@@ -161,8 +157,6 @@ export function HeroSection({ settings }: HeroSectionProps) {
         </div>
       </div>
 
-      {/* Bottom Smooth Transition Mask to Next Section */}
-      <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent pointer-events-none" />
     </section>
   );
 }

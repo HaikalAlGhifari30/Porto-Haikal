@@ -1,7 +1,13 @@
-<svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="512" height="512" rx="100" fill="#090d16"/>
-  <path d="M160 80V240M352 80V240M160 160H352" stroke="#22d3ee" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M160 220L256 120L352 220" stroke="#22d3ee" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M210 170H302" stroke="#22d3ee" stroke-width="24" stroke-linecap="round"/>
-  <path d="M352 240V430H160V310H352V380H260" stroke="#22d3ee" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="120" rx="28" fill="#030712"/>
+  <rect x="2" y="2" width="116" height="116" rx="26" fill="none" stroke="url(#grad)" stroke-width="3"/>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+  <path d="M 22 18 V 78" stroke="url(#grad)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 22 48 H 65 V 102 H 102 V 68 H 75" stroke="url(#grad)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

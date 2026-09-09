@@ -27,17 +27,18 @@ import { DevNoticeModal } from "@/components/dev-notice-modal";
 
 export const metadata: Metadata = {
   title: "Haikal Al Ghifari — Quality Assurance Engineer Portfolio",
-  description: "Bachelor of Informatics Engineering graduate from UNIKOM (GPA 3.46) specialized in Quality Assurance, Manual Testing, test case design, and software quality validation.",
+  description: "Dedicated Quality Assurance Engineer currently actively working at COMO 1907 (Global Media Visual). Specialized in manual testing, end-to-end user flow verification, regression testing, and software quality validation.",
   manifest: "/site.webmanifest",
   icons: {
     icon: [
-      { url: "/favicon.png?v=4", sizes: "512x512", type: "image/png" },
-      { url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon.ico?v=5" },
+      { url: "/favicon.png?v=5", sizes: "512x512", type: "image/png" },
+      { url: "/android-chrome-192x192.png?v=5", sizes: "192x192", type: "image/png" },
     ],
-    shortcut: "/favicon.png?v=4",
+    shortcut: "/favicon.ico?v=5",
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-      { url: "/apple-touch-icon-precomposed.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png?v=5", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon-precomposed.png?v=5", sizes: "180x180", type: "image/png" },
     ],
   },
   appleWebApp: {

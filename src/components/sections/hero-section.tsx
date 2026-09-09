@@ -27,7 +27,7 @@ export function HeroSection({ settings }: HeroSectionProps) {
   const emailUrl = settings?.email || "alghifaribahren03@gmail.com";
 
   return (
-    <section id="home" className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-transparent text-zinc-900 dark:text-white">
+    <section id="home" className="relative min-h-[90vh] flex items-center justify-center pt-36 sm:pt-36 lg:pt-40 pb-16 lg:pb-24 overflow-hidden bg-transparent text-zinc-900 dark:text-white">
       {/* Deep Background Decorative Grid Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#3b82f615_1px,transparent_1px)] dark:bg-[radial-gradient(#38bdf815_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
       
@@ -36,13 +36,13 @@ export function HeroSection({ settings }: HeroSectionProps) {
       <div className="absolute top-1/3 left-1/4 w-[70vw] sm:w-[450px] h-[70vw] sm:h-[450px] bg-indigo-600/10 dark:bg-blue-600/15 rounded-full blur-[60px] sm:blur-[120px] pointer-events-none" />
 
       <div className="container-original relative z-10 mx-auto px-4 max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-10 items-center">
           
           {/* Left Content Column (Headline, Greeting, Bio, CTAs & Socials) */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left order-2 lg:order-1">
             
             {/* Available Status Pill Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-400 text-xs font-semibold tracking-wide backdrop-blur-md">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-400 text-xs font-semibold tracking-wide">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />

@@ -5,8 +5,8 @@ import { prisma } from "@/lib/db";
 import { PortfolioSceneContainer } from "@/components/portfolio-scene-container";
 
 export const dynamic = "force-dynamic";
+// Revalidate certificates order: 1. BNSP JWD, 2. TOEFL English Test, 3. Cisco CCNAv7, 4. MSIB Batch 4
 export const revalidate = 0;
-
 export default async function Home() {
     const [settings, projects, skills, experiences, educations, organizations, certificates] = await Promise.all([
         getSettings(),

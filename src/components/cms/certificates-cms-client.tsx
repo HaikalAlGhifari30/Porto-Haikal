@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { createCertificate, updateCertificate, deleteCertificate } from "@/actions/certificate";
+import { createCertificate, updateCertificate, deleteCertificate, parseAndUploadCertificateFile } from "@/actions/certificate";
 import { toast } from "sonner";
-import { Plus, Trash2, Edit2, Award, Calendar, Save, Loader2, ExternalLink, ShieldCheck } from "lucide-react";
+import { Plus, Trash2, Edit2, Award, Calendar, Save, Loader2, ExternalLink, ShieldCheck, FileUp, Sparkles, Upload, FileText } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 
 interface CertificatesCmsClientProps {
@@ -20,6 +20,7 @@ export function CertificatesCmsClient({ initialItems }: CertificatesCmsClientPro
   const [editingItem, setEditingItem] = useState<any | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [isParsingPdf, setIsParsingPdf] = useState(false);
 
   // Form State
   const [title, setTitle] = useState("");
@@ -33,6 +34,8 @@ export function CertificatesCmsClient({ initialItems }: CertificatesCmsClientPro
   const [badge, setBadge] = useState("");
   const [badgeEn, setBadgeEn] = useState("");
   const [credentialUrl, setCredentialUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [secondaryImageUrl, setSecondaryImageUrl] = useState("");
 
   const resetForm = () => {
     setTitle("");
@@ -46,6 +49,8 @@ export function CertificatesCmsClient({ initialItems }: CertificatesCmsClientPro
     setBadge("");
     setBadgeEn("");
     setCredentialUrl("");
+    setImageUrl("");
+    setSecondaryImageUrl("");
   };
 
   const handleOpenAdd = () => {
@@ -67,7 +72,48 @@ export function CertificatesCmsClient({ initialItems }: CertificatesCmsClientPro
     setBadge(item.badge || "");
     setBadgeEn(item.badgeEn || "");
     setCredentialUrl(item.credentialUrl || "");
+    setImageUrl(item.imageUrl || "");
+    setSecondaryImageUrl(item.secondaryImageUrl || "");
     setIsAddOpen(true);
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, fieldName: 'pdf' | 'img1' | 'img2') => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsParsingPdf(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await parseAndUploadCertificateFile(formData);
+      if (res.success && res.data) {
+        if (fieldName === 'pdf') {
+          if (res.data.title) setTitle(res.data.title);
+          if (res.data.issuer) setIssuer(res.data.issuer);
+          if (res.data.period) setPeriod(res.data.period);
+          if (res.data.badge) setBadge(res.data.badge);
+          if (res.data.description) setDescription(res.data.description);
+          if (res.data.credentialUrl) setCredentialUrl(res.data.credentialUrl);
+          if (res.data.imageUrl) setImageUrl(res.data.imageUrl);
+
+          toast.success("✨ Sertifikat berhasil diunggah! Semua keterangan terisi otomatis.");
+        } else if (fieldName === 'img1') {
+          setImageUrl(res.url);
+          toast.success("Gambar Hal 1 berhasil diunggah!");
+        } else if (fieldName === 'img2') {
+          setSecondaryImageUrl(res.url);
+          toast.success("Gambar Hal 2 berhasil diunggah!");
+        }
+      } else {
+        toast.error(res.error || "Gagal mengunggah file");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Terjadi kesalahan saat memproses file");
+    } finally {
+      setIsParsingPdf(false);
+    }
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -87,6 +133,8 @@ export function CertificatesCmsClient({ initialItems }: CertificatesCmsClientPro
           badge,
           badgeEn,
           credentialUrl,
+          imageUrl,
+          secondaryImageUrl,
         });
         setItems(items.map((i) => (i.id === editingItem.id ? updated : i)));
         toast.success("Data sertifikasi berhasil diperbarui!");
@@ -103,6 +151,8 @@ export function CertificatesCmsClient({ initialItems }: CertificatesCmsClientPro
           badge,
           badgeEn,
           credentialUrl,
+          imageUrl,
+          secondaryImageUrl,
         });
         setItems([...items, newItem]);
         toast.success("Data sertifikasi baru berhasil ditambahkan!");
@@ -169,7 +219,7 @@ export function CertificatesCmsClient({ initialItems }: CertificatesCmsClientPro
                   <Calendar className="w-3.5 h-3.5 text-cyan-400" /> {item.period}
                 </p>
                 {item.description && (
-                  <p className="text-xs text-slate-600 dark:text-zinc-300 pt-2 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-zinc-300 pt-2 leading-relaxed whitespace-pre-line">
                     {item.description}
                   </p>
                 )}
@@ -200,12 +250,42 @@ export function CertificatesCmsClient({ initialItems }: CertificatesCmsClientPro
 
       {/* Add / Edit Dialog */}
       <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
-        <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto bg-white dark:bg-[#070e20] border-slate-200 dark:border-cyan-500/30 rounded-3xl p-6">
+        <DialogContent className="sm:max-w-[650px] max-h-[90vh] overflow-y-auto bg-white dark:bg-[#070e20] border-slate-200 dark:border-cyan-500/30 rounded-3xl p-6">
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold text-slate-900 dark:text-white">
+            <DialogTitle className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Award className="w-5 h-5 text-cyan-400" />
               {editingItem ? "Edit Data Sertifikasi" : "Tambah Data Sertifikasi"}
             </DialogTitle>
           </DialogHeader>
+
+          {/* Auto Extract PDF Upload Area */}
+          <div className="relative overflow-hidden rounded-2xl border-2 border-dashed border-cyan-500/40 bg-cyan-500/5 dark:bg-cyan-500/10 p-5 text-center transition-all hover:bg-cyan-500/15">
+            <input
+              type="file"
+              accept=".pdf,.png,.jpg,.jpeg"
+              onChange={(e) => handleFileUpload(e, 'pdf')}
+              disabled={isParsingPdf}
+              className="absolute inset-0 z-10 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed"
+            />
+            {isParsingPdf ? (
+              <div className="flex flex-col items-center justify-center py-3 space-y-2">
+                <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
+                <p className="text-xs font-bold text-cyan-400">Mengekstrak data PDF & mengunggah file...</p>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center space-y-1.5 pointer-events-none">
+                <div className="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center mb-1">
+                  <Sparkles className="w-5 h-5 animate-pulse" />
+                </div>
+                <h5 className="text-xs font-black uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
+                  <FileUp className="w-4 h-4" /> Auto Generate dari PDF / File Sertifikat
+                </h5>
+                <p className="text-[11px] text-slate-600 dark:text-zinc-300 font-medium">
+                  Klik atau Drop PDF di sini. Keterangan, judul, penerbit & unit kompetensi akan terisi otomatis!
+                </p>
+              </div>
+            )}
+          </div>
 
           <form onSubmit={handleSave} className="space-y-4 py-2">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -237,9 +317,55 @@ export function CertificatesCmsClient({ initialItems }: CertificatesCmsClientPro
               <Input value={credentialUrl} onChange={(e) => setCredentialUrl(e.target.value)} placeholder="https://..." className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
             </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label className="text-xs font-bold uppercase">Gambar Sertifikat / PDF (Hal 1)</Label>
+                <div className="flex gap-2">
+                  <Input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="/uploads/certificates/cert.png" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
+                  <label className="relative inline-flex items-center justify-center px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl cursor-pointer text-xs font-bold shrink-0">
+                    <Upload className="w-3.5 h-3.5" />
+                    <input type="file" accept="image/*,.pdf" onChange={(e) => handleFileUpload(e, 'img1')} className="hidden" />
+                  </label>
+                </div>
+                {imageUrl && (
+                  <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-slate-200 dark:border-zinc-800 bg-slate-900 flex items-center justify-center">
+                    {imageUrl.endsWith(".pdf") ? (
+                      <div className="flex items-center gap-2 text-cyan-400 font-bold text-xs p-4">
+                        <FileText className="w-6 h-6" /> Document PDF Linked
+                      </div>
+                    ) : (
+                      <img src={imageUrl} alt="Preview 1" className="w-full h-full object-cover" />
+                    )}
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label className="text-xs font-bold uppercase">Gambar Halaman 2 (Opsional)</Label>
+                <div className="flex gap-2">
+                  <Input value={secondaryImageUrl} onChange={(e) => setSecondaryImageUrl(e.target.value)} placeholder="/uploads/certificates/units.png" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
+                  <label className="relative inline-flex items-center justify-center px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl cursor-pointer text-xs font-bold shrink-0">
+                    <Upload className="w-3.5 h-3.5" />
+                    <input type="file" accept="image/*,.pdf" onChange={(e) => handleFileUpload(e, 'img2')} className="hidden" />
+                  </label>
+                </div>
+                {secondaryImageUrl && (
+                  <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-slate-200 dark:border-zinc-800 bg-slate-900 flex items-center justify-center">
+                    {secondaryImageUrl.endsWith(".pdf") ? (
+                      <div className="flex items-center gap-2 text-cyan-400 font-bold text-xs p-4">
+                        <FileText className="w-6 h-6" /> Document PDF Linked
+                      </div>
+                    ) : (
+                      <img src={secondaryImageUrl} alt="Preview 2" className="w-full h-full object-cover" />
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+
             <div className="space-y-2">
               <Label className="text-xs font-bold uppercase">Deskripsi Sertifikasi</Label>
-              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Sertifikasi resmi kompetensi..." className="min-h-[100px] rounded-xl bg-slate-50 dark:bg-zinc-950" />
+              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Sertifikasi resmi kompetensi..." className="min-h-[120px] rounded-xl bg-slate-50 dark:bg-zinc-950" />
             </div>
 
             <DialogFooter className="pt-4">
@@ -251,6 +377,7 @@ export function CertificatesCmsClient({ initialItems }: CertificatesCmsClientPro
           </form>
         </DialogContent>
       </Dialog>
+
 
       {/* Delete Confirmation */}
       <Dialog open={!!deletingId} onOpenChange={() => setDeletingId(null)}>

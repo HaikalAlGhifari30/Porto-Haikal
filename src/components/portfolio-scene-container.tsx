@@ -334,7 +334,7 @@ export function PortfolioSceneContainer({
             className="w-full h-full overflow-y-auto scrollbar-none hide-scrollbar flex flex-col items-center justify-start pb-20 sm:pb-6"
           >
             {activeSceneIndex !== 5 ? (
-              <div className="w-full max-w-6xl my-auto py-6 sm:py-8 px-3 sm:px-6">
+              <div className="w-full max-w-6xl m-auto py-4 sm:py-6 px-3 sm:px-6">
                 {activeSceneIndex === 0 && (
                   <HeroSection settings={settings} onNavigateScene={goToScene} />
                 )}

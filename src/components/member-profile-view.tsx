@@ -83,13 +83,13 @@ export function MemberProfileView({ member }: MemberProfileViewProps) {
                                 {/* Social Icons */}
                                 <div className="flex items-center gap-3 mb-8">
                                     {[
-                                        { id: 'email', icon: Mail, url: member.email ? `mailto:${member.email}` : null },
+                                        { id: 'email', icon: Mail, url: member.email ? `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(member.email)}&su=${encodeURIComponent("Portfolio Inquiry")}` : null },
                                         { id: 'instagram', icon: FaInstagram, url: member.instagram },
                                         { id: 'facebook', icon: FaFacebookF, url: member.facebook },
                                         { id: 'linkedin', icon: FaLinkedinIn, url: member.linkedin },
                                         { id: 'website', icon: FaGlobe, url: member.website },
                                     ].filter(s => s.url).map(social => (
-                                        <a key={social.id} href={social.url!} target={social.id !== 'email' ? "_blank" : undefined} rel={social.id !== 'email' ? "noreferrer" : undefined} className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-500 hover:text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300">
+                                        <a key={social.id} href={social.url!} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-500 hover:text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300">
                                             <social.icon className="text-base" />
                                         </a>
                                     ))}

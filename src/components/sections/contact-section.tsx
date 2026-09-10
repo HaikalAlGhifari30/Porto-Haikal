@@ -69,7 +69,9 @@ export function ContactSection({ settings }: ContactSectionProps) {
               {/* Direct Contact Cards */}
               <div className="space-y-3 pt-2">
                 <a
-                  href={`mailto:${email}`}
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent("Portfolio Inquiry")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/50 dark:bg-slate-900/80 border border-white/80 dark:border-zinc-800 hover:border-blue-500/40 dark:hover:border-cyan-500/40 transition-all group shadow-2xs backdrop-blur-xs"
                 >
                   <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/30 group-hover:scale-105 transition-transform">

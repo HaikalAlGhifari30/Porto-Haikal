@@ -119,7 +119,9 @@ export function HeroSection({ settings, onNavigateScene }: HeroSectionProps) {
                 <FaInstagram className="w-4 h-4 group-hover:scale-110 transition-transform" />
               </a>
               <a
-                href={`mailto:${emailUrl}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailUrl)}&su=${encodeURIComponent("Portfolio Inquiry")}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Send Email"
                 className="w-9 h-9 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-slate-300 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 flex items-center justify-center transition-all group shadow-2xs"
                 title="Send Email"

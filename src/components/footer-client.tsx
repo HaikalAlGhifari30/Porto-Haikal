@@ -86,7 +86,9 @@ export function FooterClient({ settings, onNavigateScene }: FooterClientProps) {
               <FaInstagram className="w-3.5 h-3.5" />
             </a>
             <a
-              href={`mailto:${emailUrl}`}
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailUrl)}&su=${encodeURIComponent("Portfolio Inquiry")}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="p-1.5 rounded-lg bg-white/60 dark:bg-slate-900/80 border border-white/80 dark:border-zinc-800 text-slate-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-all shadow-2xs backdrop-blur-xs"
               aria-label="Email Direct"
               title="Send Email"
@@ -134,7 +136,9 @@ export function FooterClient({ settings, onNavigateScene }: FooterClientProps) {
             <FaInstagram className="w-3.5 h-3.5" />
           </a>
           <a
-            href={`mailto:${emailUrl}`}
+            href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailUrl)}&su=${encodeURIComponent("Portfolio Inquiry")}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="p-1.5 rounded-lg bg-white/60 dark:bg-slate-900/80 border border-white/80 dark:border-zinc-800 text-slate-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-all shadow-2xs backdrop-blur-xs"
             aria-label="Email Direct"
             title="Send Email"

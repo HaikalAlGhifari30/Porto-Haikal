@@ -14,7 +14,7 @@ export async function uploadFile(file: File, folder: string): Promise<string> {
     return new Promise((resolve, reject) => {
         const uploadStream = cloudinary.uploader.upload_stream(
             {
-                folder: `compro-rrk/${folder}`,
+                folder: `porto-haikal/${folder}`,
                 resource_type: 'auto',
             },
             (error, result) => {

@@ -140,7 +140,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
 
       <div
         data-no-scene-scroll="true"
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-24 z-[60] flex flex-col items-end pointer-events-auto ai-assistant-modal-container"
+        className="fixed bottom-4 left-4 sm:left-auto sm:right-6 sm:bottom-6 z-[60] flex flex-col items-start sm:items-end pointer-events-auto ai-assistant-modal-container"
         ref={modalRef}
         onWheel={(e) => e.stopPropagation()}
         onTouchStart={(e) => e.stopPropagation()}
@@ -154,7 +154,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
             onWheel={(e) => e.stopPropagation()}
             onTouchStart={(e) => e.stopPropagation()}
             onTouchMove={(e) => e.stopPropagation()}
-            className="fixed top-1/2 -translate-y-1/2 left-4 right-4 mx-auto sm:top-auto sm:translate-y-0 sm:left-auto sm:right-24 sm:bottom-22 z-[60] w-[calc(100vw-2rem)] max-w-[380px] sm:w-[390px] h-[510px] max-h-[80vh] sm:max-h-[70vh] bg-slate-900/95 dark:bg-[#070e20]/95 backdrop-blur-2xl border border-cyan-500/30 text-white rounded-3xl shadow-2xl shadow-cyan-950/80 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 slide-in-from-bottom-5 duration-300"
+            className="fixed top-1/2 -translate-y-1/2 left-4 right-4 mx-auto sm:top-auto sm:translate-y-0 sm:left-auto sm:right-6 sm:bottom-24 z-[60] w-[calc(100vw-2rem)] max-w-[380px] sm:w-[390px] h-[510px] max-h-[80vh] sm:max-h-[70vh] bg-slate-900/95 dark:bg-[#070e20]/95 backdrop-blur-2xl border border-cyan-500/30 text-white rounded-3xl shadow-2xl shadow-cyan-950/80 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 slide-in-from-bottom-5 duration-300"
           >
           
           {/* Top Header */}
@@ -327,7 +327,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
 
         {/* Hover Tooltip Label ("Ask Brokal AI") */}
         {!isOpen && (
-          <span className="absolute bottom-full mb-2.5 left-0 sm:left-auto sm:right-0 px-3 py-1.5 bg-slate-900/95 dark:bg-[#070e20]/95 border border-slate-700 dark:border-cyan-500/30 text-cyan-300 text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-xl">
+          <span className="absolute left-full ml-3 sm:left-auto sm:right-full sm:ml-0 sm:mr-3 px-3 py-1.5 bg-slate-900/95 dark:bg-[#070e20]/95 border border-slate-700 dark:border-cyan-500/30 text-cyan-300 text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-xl">
             Ask Brokal AI ✨
           </span>
         )}

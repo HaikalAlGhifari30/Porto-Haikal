@@ -127,7 +127,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
   return (
     <div
       data-no-scene-scroll="true"
-      className="fixed bottom-20 left-4 sm:bottom-6 sm:left-auto sm:right-24 z-50 flex flex-col items-start sm:items-end pointer-events-auto ai-assistant-modal-container"
+      className="fixed bottom-28 left-4 sm:bottom-6 sm:left-auto sm:right-24 z-50 flex flex-col items-start sm:items-end pointer-events-auto ai-assistant-modal-container"
       ref={modalRef}
       onWheel={(e) => e.stopPropagation()}
       onTouchStart={(e) => e.stopPropagation()}
@@ -141,7 +141,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
           onWheel={(e) => e.stopPropagation()}
           onTouchStart={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()}
-          className="w-[calc(100vw-2rem)] max-w-[370px] sm:w-[390px] h-[520px] max-h-[75vh] bg-slate-900/95 dark:bg-[#070e20]/95 backdrop-blur-2xl border border-cyan-500/30 text-white rounded-3xl shadow-2xl shadow-cyan-950/50 flex flex-col overflow-hidden mb-3 animate-in fade-in slide-in-from-bottom-5 duration-300"
+          className="w-[calc(100vw-2rem)] max-w-[370px] sm:w-[390px] h-[500px] max-h-[70vh] bg-slate-900/95 dark:bg-[#070e20]/95 backdrop-blur-2xl border border-cyan-500/30 text-white rounded-3xl shadow-2xl shadow-cyan-950/50 flex flex-col overflow-hidden mb-3 animate-in fade-in slide-in-from-bottom-5 duration-300"
         >
           
           {/* Top Header */}

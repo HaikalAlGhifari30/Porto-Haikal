@@ -125,24 +125,37 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
   const emailUrl = `mailto:${emailAddress}?subject=Portfolio%20Inquiry`;
 
   return (
-    <div
-      data-no-scene-scroll="true"
-      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-24 z-50 flex flex-col items-end pointer-events-auto ai-assistant-modal-container"
-      ref={modalRef}
-      onWheel={(e) => e.stopPropagation()}
-      onTouchStart={(e) => e.stopPropagation()}
-      onTouchMove={(e) => e.stopPropagation()}
-    >
-      
-      {/* ── Chat Panel Window ── */}
+    <>
+      {/* ── Fullscreen Blurred Backdrop Overlay ── */}
       {isOpen && (
         <div
           data-no-scene-scroll="true"
+          onClick={() => setIsOpen(false)}
           onWheel={(e) => e.stopPropagation()}
           onTouchStart={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()}
-          className="fixed bottom-20 left-4 right-4 mx-auto sm:mx-0 sm:left-auto sm:right-24 sm:bottom-22 z-50 w-[calc(100vw-2rem)] max-w-[370px] sm:w-[390px] h-[480px] max-h-[66vh] bg-slate-900/95 dark:bg-[#070e20]/95 backdrop-blur-2xl border border-cyan-500/30 text-white rounded-3xl shadow-2xl shadow-cyan-950/50 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300"
-        >
+          className="fixed inset-0 bg-slate-950/75 backdrop-blur-md z-40 animate-in fade-in duration-300 pointer-events-auto"
+        />
+      )}
+
+      <div
+        data-no-scene-scroll="true"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-24 z-50 flex flex-col items-end pointer-events-auto ai-assistant-modal-container"
+        ref={modalRef}
+        onWheel={(e) => e.stopPropagation()}
+        onTouchStart={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
+      >
+        
+        {/* ── Chat Panel Window ── */}
+        {isOpen && (
+          <div
+            data-no-scene-scroll="true"
+            onWheel={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
+            className="fixed top-1/2 -translate-y-1/2 left-4 right-4 mx-auto sm:top-auto sm:translate-y-0 sm:left-auto sm:right-24 sm:bottom-22 z-50 w-[calc(100vw-2rem)] max-w-[380px] sm:w-[390px] h-[510px] max-h-[80vh] sm:max-h-[70vh] bg-slate-900/95 dark:bg-[#070e20]/95 backdrop-blur-2xl border border-cyan-500/30 text-white rounded-3xl shadow-2xl shadow-cyan-950/80 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 slide-in-from-bottom-5 duration-300"
+          >
           
           {/* Top Header */}
           <div className="p-4 border-b border-slate-800 dark:border-cyan-500/20 bg-slate-950/70 flex items-center justify-between">
@@ -321,5 +334,6 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
       </button>
 
     </div>
+    </>
   );
 }

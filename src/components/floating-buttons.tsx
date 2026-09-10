@@ -84,7 +84,7 @@ export function FloatingButtons({ admins = [] }: { admins?: WhatsAppAdmin[] }) {
   };
 
   return (
-    <div className="fixed bottom-3.5 right-3.5 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-2.5 sm:gap-3 pointer-events-auto" ref={chatRef}>
+    <div className="fixed bottom-4 left-4 sm:left-auto sm:right-6 sm:bottom-6 z-50 flex flex-col items-start sm:items-end gap-2.5 sm:gap-3 pointer-events-auto" ref={chatRef}>
       
       {/* WhatsApp Chat Popup Box (Frosted Glassmorphism Theme) */}
       {isChatOpen && (
@@ -135,7 +135,7 @@ export function FloatingButtons({ admins = [] }: { admins?: WhatsAppAdmin[] }) {
       <button
         onClick={() => setIsChatOpen(!isChatOpen)}
         className={cn(
-          "w-12 h-12 sm:w-13 sm:h-13 text-white rounded-full shadow-lg transition-all duration-300 flex items-center justify-center relative group cursor-pointer",
+          "w-11 h-11 sm:w-13 sm:h-13 text-white rounded-full shadow-lg transition-all duration-300 flex items-center justify-center relative group cursor-pointer",
           isChatOpen
             ? "bg-zinc-900 dark:bg-zinc-800 text-white shadow-zinc-900/40 border-2 border-zinc-900"
             : "bg-[#25D366] hover:bg-[#20bd5a] shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-110 active:scale-95"
@@ -148,14 +148,14 @@ export function FloatingButtons({ admins = [] }: { admins?: WhatsAppAdmin[] }) {
         )}
         
         {isChatOpen ? (
-          <X className="w-6 h-6 text-white" />
+          <X className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
         ) : (
-          <FaWhatsapp className="w-6 h-6 text-white relative z-10" />
+          <FaWhatsapp className="w-5 h-5 sm:w-6 sm:h-6 text-white relative z-10" />
         )}
         
         {/* Hover Tooltip Pill */}
         {!isChatOpen && (
-          <span className="absolute right-full mr-3 px-3 py-1.5 bg-slate-900/95 dark:bg-[#070e20]/95 border border-slate-700 dark:border-cyan-500/30 text-white text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-xl">
+          <span className="absolute left-full ml-3 sm:left-auto sm:right-full sm:ml-0 sm:mr-3 px-3 py-1.5 bg-slate-900/95 dark:bg-[#070e20]/95 border border-slate-700 dark:border-cyan-500/30 text-white text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-xl">
             {isEn ? "Chat WhatsApp" : "Hubungi WhatsApp"}
           </span>
         )}

@@ -181,7 +181,7 @@ export function ProjectsSection({ projects = [], onNavigateScene }: ProjectsSect
         </AnimatePresence>
 
         {/* Carousel Navigation Footer Controls (Dot Indicators on Left, Arrows on Right) */}
-        <div className="flex items-center justify-between mt-4 px-2 pl-14 sm:pl-2">
+        <div className="flex items-center justify-between mt-4 px-2 pl-14 pr-14 sm:px-2">
           {/* Dots Indicator */}
           <div className="flex items-center gap-2">
             {items.map((_, idx) => (

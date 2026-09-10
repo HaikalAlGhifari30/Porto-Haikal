@@ -127,7 +127,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
   return (
     <div
       data-no-scene-scroll="true"
-      className="fixed bottom-28 left-4 sm:bottom-6 sm:left-auto sm:right-24 z-50 flex flex-col items-start sm:items-end pointer-events-auto ai-assistant-modal-container"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-24 z-50 flex flex-col items-end pointer-events-auto ai-assistant-modal-container"
       ref={modalRef}
       onWheel={(e) => e.stopPropagation()}
       onTouchStart={(e) => e.stopPropagation()}

@@ -84,7 +84,7 @@ export function FloatingButtons({ admins = [] }: { admins?: WhatsAppAdmin[] }) {
   };
 
   return (
-    <div className="fixed bottom-20 left-4 sm:left-auto sm:right-6 sm:bottom-24 z-40 flex flex-col items-start sm:items-end gap-2.5 sm:gap-3 pointer-events-auto" ref={chatRef}>
+    <div className="fixed bottom-[72px] left-4 sm:left-auto sm:right-6 sm:bottom-[86px] z-40 flex flex-col items-start sm:items-end gap-2.5 sm:gap-3 pointer-events-auto" ref={chatRef}>
       
       {/* WhatsApp Chat Popup Box (Frosted Glassmorphism Theme) */}
       {isChatOpen && (

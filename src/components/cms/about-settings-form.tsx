@@ -57,7 +57,7 @@ export function AboutSettingsForm({ settings }: { settings: any }) {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <Label htmlFor="heroTitle" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Judul Utama Hero (Bahasa Indonesia)</Label>
+                            <Label htmlFor="heroTitle" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Judul Utama Hero</Label>
                             <Input 
                                 id="heroTitle" 
                                 name="heroTitle" 
@@ -68,35 +68,11 @@ export function AboutSettingsForm({ settings }: { settings: any }) {
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="heroTitleEn" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Hero Main Title (English)</Label>
-                            <Input 
-                                id="heroTitleEn" 
-                                name="heroTitleEn" 
-                                defaultValue={settings?.heroTitleEn || defaultHeroTitleEn} 
-                                placeholder="Hi, I'm Haikal Al Ghifari"
-                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                            <Label htmlFor="heroSubtitle" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Subtitle Profesi (Bahasa Indonesia)</Label>
+                            <Label htmlFor="heroSubtitle" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Subtitle Profesi</Label>
                             <Input 
                                 id="heroSubtitle" 
                                 name="heroSubtitle" 
                                 defaultValue={settings?.heroSubtitle || defaultHeroSubtitle} 
-                                placeholder="— Quality Assurance Engineer —"
-                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <Label htmlFor="heroSubtitleEn" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Professions Subtitle (English)</Label>
-                            <Input 
-                                id="heroSubtitleEn" 
-                                name="heroSubtitleEn" 
-                                defaultValue={settings?.heroSubtitleEn || defaultHeroSubtitleEn} 
                                 placeholder="— Quality Assurance Engineer —"
                                 className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
                             />
@@ -112,26 +88,14 @@ export function AboutSettingsForm({ settings }: { settings: any }) {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="aboutText" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Deskripsi Biodata (Bahasa Indonesia)</Label>
-                        <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">Teks paragraf ringkasan tentang profil profesional QA Anda di Landing Page.</p>
+                        <Label htmlFor="aboutText" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Deskripsi Biodata (About Me)</Label>
+                        <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">Teks ringkasan tentang profil profesional QA Anda di Landing Page.</p>
                         <Textarea 
                             id="aboutText" 
                             name="aboutText" 
                             defaultValue={settings?.aboutText || defaultAboutText} 
                             placeholder="Lulusan S1 Teknik Informatika UNIKOM..."
-                            className="min-h-[120px] rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium leading-relaxed"
-                        />
-                    </div>
-
-                    <div className="space-y-2">
-                        <Label htmlFor="aboutTextEn" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">About Me Bio Description (English)</Label>
-                        <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">English version of your professional QA summary.</p>
-                        <Textarea 
-                            id="aboutTextEn" 
-                            name="aboutTextEn" 
-                            defaultValue={settings?.aboutTextEn || defaultAboutTextEn} 
-                            placeholder="Informatics Engineering graduate from UNIKOM..."
-                            className="min-h-[120px] rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium leading-relaxed"
+                            className="min-h-[140px] rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium leading-relaxed"
                         />
                     </div>
                 </div>

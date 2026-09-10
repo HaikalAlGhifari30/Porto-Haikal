@@ -36,7 +36,7 @@ export function BusinessSectorsClient({ initialSectors }: { initialSectors: Busi
                         </div>
                         <p className="text-[11px] md:text-xs text-slate-600 dark:text-zinc-400 leading-relaxed font-medium">
                             <span className="font-bold text-blue-600 dark:text-blue-400 mr-1 uppercase tracking-widest">Tips:</span>
-                            Gunakan fitur <strong className="text-slate-900 dark:text-slate-200">Drag &amp; Drop</strong> pada daftar di bawah untuk mengatur urutan tampil. Isi kolom &quot;English&quot; agar tampil dwibahasa.
+                            Gunakan fitur <strong className="text-slate-900 dark:text-slate-200">Drag &amp; Drop</strong> pada daftar di bawah untuk mengatur urutan tampil.
                         </p>
                     </div>
 

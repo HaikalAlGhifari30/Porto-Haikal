@@ -178,48 +178,24 @@ export function EducationCmsClient({ initialItems }: EducationCmsClientProps) {
           <form onSubmit={handleSave} className="space-y-4 py-2">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Nama Institusi (🇮🇩 ID)</Label>
+                <Label className="text-xs font-bold uppercase">Nama Institusi</Label>
                 <Input value={institution} onChange={(e) => setInstitution(e.target.value)} placeholder="Universitas Komputer Indonesia (UNIKOM)" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Institution Name (🇬🇧 EN)</Label>
-                <Input value={institutionEn} onChange={(e) => setInstitutionEn(e.target.value)} placeholder="Universitas Komputer Indonesia (UNIKOM)" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Gelar / Jurusan (🇮🇩 ID)</Label>
+                <Label className="text-xs font-bold uppercase">Gelar / Jurusan</Label>
                 <Input value={degree} onChange={(e) => setDegree(e.target.value)} placeholder="S1 Teknik Informatika (S.Kom) — IPK 3.46" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
               </div>
-
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Degree / Major (🇬🇧 EN)</Label>
-                <Input value={degreeEn} onChange={(e) => setDegreeEn(e.target.value)} placeholder="Bachelor of Informatics Engineering (S.Kom) — GPA 3.46" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Periode Studi (🇮🇩 ID)</Label>
-                <Input value={period} onChange={(e) => setPeriod(e.target.value)} placeholder="Sep 2020 — Feb 2025 · Bandung, Indonesia" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
-
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Study Period (🇬🇧 EN)</Label>
-                <Input value={periodEn} onChange={(e) => setPeriodEn(e.target.value)} placeholder="Sep 2020 — Feb 2025 · Bandung, Indonesia" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
             </div>
 
             <div className="space-y-2">
-              <Label className="text-xs font-bold uppercase">Deskripsi / Skripsi (🇮🇩 Bahasa Indonesia)</Label>
-              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Judul Skripsi / Bidang Minat..." className="min-h-[90px] rounded-xl bg-slate-50 dark:bg-zinc-950" />
+              <Label className="text-xs font-bold uppercase">Periode Studi</Label>
+              <Input value={period} onChange={(e) => setPeriod(e.target.value)} placeholder="Sep 2020 — Feb 2025 · Bandung, Indonesia" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
             </div>
 
             <div className="space-y-2">
-              <Label className="text-xs font-bold uppercase">Description / Thesis (🇬🇧 English)</Label>
-              <Textarea value={descriptionEn} onChange={(e) => setDescriptionEn(e.target.value)} placeholder="Thesis title / Key Interests..." className="min-h-[90px] rounded-xl bg-slate-50 dark:bg-zinc-950" />
+              <Label className="text-xs font-bold uppercase">Deskripsi / Skripsi</Label>
+              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Judul Skripsi / Bidang Minat..." className="min-h-[100px] rounded-xl bg-slate-50 dark:bg-zinc-950" />
             </div>
 
             <DialogFooter className="pt-4">

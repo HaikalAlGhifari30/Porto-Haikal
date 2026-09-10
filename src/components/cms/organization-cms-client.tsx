@@ -178,48 +178,24 @@ export function OrganizationCmsClient({ initialItems }: OrganizationCmsClientPro
           <form onSubmit={handleSave} className="space-y-4 py-2">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Peran / Jabatan (🇮🇩 ID)</Label>
+                <Label className="text-xs font-bold uppercase">Peran / Jabatan</Label>
                 <Input value={role} onChange={(e) => setRole(e.target.value)} placeholder="Ketua Umum" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Role / Position (🇬🇧 EN)</Label>
-                <Input value={roleEn} onChange={(e) => setRoleEn(e.target.value)} placeholder="Chairperson" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Nama Organisasi (🇮🇩 ID)</Label>
+                <Label className="text-xs font-bold uppercase">Nama Organisasi</Label>
                 <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Himpunan Mahasiswa Teknik Informatika (HMIF UNIKOM)" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
               </div>
-
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Organization Name (🇬🇧 EN)</Label>
-                <Input value={nameEn} onChange={(e) => setNameEn(e.target.value)} placeholder="Informatics Student Association (HMIF UNIKOM)" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Periode Kepengurusan (🇮🇩 ID)</Label>
-                <Input value={period} onChange={(e) => setPeriod(e.target.value)} placeholder="Nov 2022 — Nov 2023" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
-
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Tenure Period (🇬🇧 EN)</Label>
-                <Input value={periodEn} onChange={(e) => setPeriodEn(e.target.value)} placeholder="Nov 2022 — Nov 2023" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
             </div>
 
             <div className="space-y-2">
-              <Label className="text-xs font-bold uppercase">Tanggung Jawab & Pencapaian (🇮🇩 Bahasa Indonesia)</Label>
-              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="• Merencanakan dan mengawasi..." className="min-h-[100px] rounded-xl bg-slate-50 dark:bg-zinc-950" />
+              <Label className="text-xs font-bold uppercase">Periode Kepengurusan</Label>
+              <Input value={period} onChange={(e) => setPeriod(e.target.value)} placeholder="Nov 2022 — Nov 2023" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
             </div>
 
             <div className="space-y-2">
-              <Label className="text-xs font-bold uppercase">Responsibilities & Achievements (🇬🇧 English)</Label>
-              <Textarea value={descriptionEn} onChange={(e) => setDescriptionEn(e.target.value)} placeholder="• Planned and supervised..." className="min-h-[100px] rounded-xl bg-slate-50 dark:bg-zinc-950" />
+              <Label className="text-xs font-bold uppercase">Tanggung Jawab & Pencapaian</Label>
+              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="• Merencanakan dan mengawasi..." className="min-h-[120px] rounded-xl bg-slate-50 dark:bg-zinc-950" />
             </div>
 
             <DialogFooter className="pt-4">

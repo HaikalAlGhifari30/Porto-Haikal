@@ -210,49 +210,25 @@ export function CertificatesCmsClient({ initialItems }: CertificatesCmsClientPro
           <form onSubmit={handleSave} className="space-y-4 py-2">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Nama Sertifikasi (🇮🇩 ID)</Label>
+                <Label className="text-xs font-bold uppercase">Nama Sertifikasi</Label>
                 <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Junior Web Programmer" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Certification Title (🇬🇧 EN)</Label>
-                <Input value={titleEn} onChange={(e) => setTitleEn(e.target.value)} placeholder="Junior Web Programmer" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Penerbit / Organisasi (🇮🇩 ID)</Label>
+                <Label className="text-xs font-bold uppercase">Penerbit / Organisasi</Label>
                 <Input value={issuer} onChange={(e) => setIssuer(e.target.value)} placeholder="Badan Nasional Sertifikasi Profesi (BNSP)" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
               </div>
-
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Issuer / Organization (🇬🇧 EN)</Label>
-                <Input value={issuerEn} onChange={(e) => setIssuerEn(e.target.value)} placeholder="National Professional Certification Board (BNSP)" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Periode / Tahun (🇮🇩 ID)</Label>
+                <Label className="text-xs font-bold uppercase">Periode / Tahun</Label>
                 <Input value={period} onChange={(e) => setPeriod(e.target.value)} placeholder="2024" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Period / Year (🇬🇧 EN)</Label>
-                <Input value={periodEn} onChange={(e) => setPeriodEn(e.target.value)} placeholder="2024" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Label Badge (🇮🇩 ID)</Label>
+                <Label className="text-xs font-bold uppercase">Label Badge</Label>
                 <Input value={badge} onChange={(e) => setBadge(e.target.value)} placeholder="Sertifikasi Kompetensi Nasional" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
-
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Badge Label (🇬🇧 EN)</Label>
-                <Input value={badgeEn} onChange={(e) => setBadgeEn(e.target.value)} placeholder="National Competency" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
               </div>
             </div>
 
@@ -262,13 +238,8 @@ export function CertificatesCmsClient({ initialItems }: CertificatesCmsClientPro
             </div>
 
             <div className="space-y-2">
-              <Label className="text-xs font-bold uppercase">Deskripsi (🇮🇩 Bahasa Indonesia)</Label>
-              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Sertifikasi resmi kompetensi..." className="min-h-[90px] rounded-xl bg-slate-50 dark:bg-zinc-950" />
-            </div>
-
-            <div className="space-y-2">
-              <Label className="text-xs font-bold uppercase">Description (🇬🇧 English)</Label>
-              <Textarea value={descriptionEn} onChange={(e) => setDescriptionEn(e.target.value)} placeholder="Official competency certification..." className="min-h-[90px] rounded-xl bg-slate-50 dark:bg-zinc-950" />
+              <Label className="text-xs font-bold uppercase">Deskripsi Sertifikasi</Label>
+              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Sertifikasi resmi kompetensi..." className="min-h-[100px] rounded-xl bg-slate-50 dark:bg-zinc-950" />
             </div>
 
             <DialogFooter className="pt-4">

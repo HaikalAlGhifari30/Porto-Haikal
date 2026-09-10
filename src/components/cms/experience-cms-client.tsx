@@ -183,48 +183,24 @@ export function ExperienceCmsClient({ initialItems }: ExperienceCmsClientProps) 
           <form onSubmit={handleSave} className="space-y-4 py-2">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Posisi / Jabatan (🇮🇩 ID)</Label>
+                <Label className="text-xs font-bold uppercase">Posisi / Jabatan</Label>
                 <Input value={position} onChange={(e) => setPosition(e.target.value)} placeholder="QA Manual Tester EFM" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Position / Role (🇬🇧 EN)</Label>
-                <Input value={positionEn} onChange={(e) => setPositionEn(e.target.value)} placeholder="QA Manual Tester EFM" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Perusahaan / Instansi (🇮🇩 ID)</Label>
+                <Label className="text-xs font-bold uppercase">Perusahaan / Instansi</Label>
                 <Input value={company} onChange={(e) => setCompany(e.target.value)} placeholder="COMO 1907 - Global Media Visual" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
               </div>
-
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Company Name (🇬🇧 EN)</Label>
-                <Input value={companyEn} onChange={(e) => setCompanyEn(e.target.value)} placeholder="COMO 1907 - Global Media Visual" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Periode Kerja (🇮🇩 ID)</Label>
-                <Input value={period} onChange={(e) => setPeriod(e.target.value)} placeholder="Apr 2026 — Sekarang · Jakarta, Indonesia" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
-
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase">Period (🇬🇧 EN)</Label>
-                <Input value={periodEn} onChange={(e) => setPeriodEn(e.target.value)} placeholder="Apr 2026 — Present · Jakarta, Indonesia" className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
-              </div>
             </div>
 
             <div className="space-y-2">
-              <Label className="text-xs font-bold uppercase">Deskripsi Tanggung Jawab QA (🇮🇩 Bahasa Indonesia)</Label>
-              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="• Conduct regression, smoke, and UAT testing..." className="min-h-[100px] rounded-xl bg-slate-50 dark:bg-zinc-950" />
+              <Label className="text-xs font-bold uppercase">Periode Kerja</Label>
+              <Input value={period} onChange={(e) => setPeriod(e.target.value)} placeholder="Apr 2026 — Sekarang · Jakarta, Indonesia" required className="rounded-xl bg-slate-50 dark:bg-zinc-950" />
             </div>
 
             <div className="space-y-2">
-              <Label className="text-xs font-bold uppercase">QA Responsibility Description (🇬🇧 English)</Label>
-              <Textarea value={descriptionEn} onChange={(e) => setDescriptionEn(e.target.value)} placeholder="• Conduct regression, smoke, and UAT testing..." className="min-h-[100px] rounded-xl bg-slate-50 dark:bg-zinc-950" />
+              <Label className="text-xs font-bold uppercase">Deskripsi Tanggung Jawab QA</Label>
+              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="• Conducting regression, smoke, and UAT testing..." className="min-h-[120px] rounded-xl bg-slate-50 dark:bg-zinc-950" />
             </div>
 
             <div className="space-y-2">

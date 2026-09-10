@@ -39,9 +39,13 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
   useEffect(() => {
     setMounted(true);
     if (typeof window !== "undefined") {
-      const admin = localStorage.getItem("isAdmin");
-      if (admin === "true") {
-        setIsLoggedIn(true);
+      try {
+        const admin = localStorage.getItem("isAdmin");
+        if (admin === "true") {
+          setIsLoggedIn(true);
+        }
+      } catch {
+        // Ignore storage error in restricted webviews
       }
     }
   }, []);

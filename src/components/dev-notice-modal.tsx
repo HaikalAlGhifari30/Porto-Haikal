@@ -11,15 +11,22 @@ export function DevNoticeModal() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Check if user has already dismissed the notice in this session
-    const hasSeen = sessionStorage.getItem("hasSeenDevNotice");
-    if (!hasSeen) {
+    try {
+      const hasSeen = sessionStorage.getItem("hasSeenDevNotice");
+      if (!hasSeen) {
+        setIsOpen(true);
+      }
+    } catch {
       setIsOpen(true);
     }
   }, []);
 
   const handleDismiss = () => {
-    sessionStorage.setItem("hasSeenDevNotice", "true");
+    try {
+      sessionStorage.setItem("hasSeenDevNotice", "true");
+    } catch {
+      // Ignore storage error in restricted webviews
+    }
     setIsOpen(false);
   };
 

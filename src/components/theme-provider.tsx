@@ -31,10 +31,14 @@ export function ThemeProvider({
     const [theme, setTheme] = useState<Theme>(defaultTheme);
 
     useIsomorphicLayoutEffect(() => {
-        const stored = localStorage.getItem("ui-theme") as Theme | null;
-        if (stored) {
-            setTheme(stored);
-        } else {
+        try {
+            const stored = localStorage.getItem("ui-theme") as Theme | null;
+            if (stored) {
+                setTheme(stored);
+            } else {
+                setTheme(defaultTheme);
+            }
+        } catch {
             setTheme(defaultTheme);
         }
     }, [defaultTheme]);
@@ -44,9 +48,13 @@ export function ThemeProvider({
         
         let targetTheme = theme;
         if (theme === "system") {
-            targetTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-                ? "dark"
-                : "light";
+            try {
+                targetTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+                    ? "dark"
+                    : "light";
+            } catch {
+                targetTheme = "dark";
+            }
         }
 
         if (!root.classList.contains(targetTheme)) {
@@ -58,7 +66,11 @@ export function ThemeProvider({
     const value = {
         theme,
         setTheme: (newTheme: Theme) => {
-            localStorage.setItem("ui-theme", newTheme);
+            try {
+                localStorage.setItem("ui-theme", newTheme);
+            } catch {
+                // Ignore storage errors in restricted webviews
+            }
             if (!document.startViewTransition) {
                 setTheme(newTheme);
             } else {

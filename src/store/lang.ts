@@ -207,7 +207,11 @@ export const useLang = create<LangState>()((set, get) => ({
     lang: 'id',
     setLang: (lang) => {
         if (typeof window !== 'undefined') {
-            localStorage.setItem('app_lang', lang);
+            try {
+                localStorage.setItem('app_lang', lang);
+            } catch {
+                // Ignore storage error
+            }
         }
         set({ lang });
     },
@@ -224,11 +228,15 @@ export function useSafeLang() {
     useEffect(() => {
         setMounted(true);
         if (typeof window !== 'undefined') {
-            const stored = localStorage.getItem('app_lang') as Language;
-            if (stored === 'id' || stored === 'en') {
-                if (stored !== lang) {
-                    setLang(stored);
+            try {
+                const stored = localStorage.getItem('app_lang') as Language;
+                if (stored === 'id' || stored === 'en') {
+                    if (stored !== lang) {
+                        setLang(stored);
+                    }
                 }
+            } catch {
+                // Ignore storage error
             }
         }
     }, [lang, setLang]);

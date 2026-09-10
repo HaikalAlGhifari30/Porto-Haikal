@@ -229,14 +229,17 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
           </div>
 
           {/* Suggested Chips Area */}
-          <div className="px-3 pt-2 pb-1 border-t border-slate-800/80 bg-slate-950/40">
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none hide-scrollbar">
+          <div className="p-3 border-t border-slate-800/80 bg-slate-950/70 flex flex-col gap-1.5">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-0.5">
+              {isEn ? "Suggested Questions" : "Pertanyaan Rekomendasi"}
+            </span>
+            <div className="flex flex-wrap gap-1.5 max-h-[140px] overflow-y-auto scrollbar-none hide-scrollbar">
               {SUGGESTED_QUESTIONS.map((q, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSendMessage(q)}
                   disabled={isTyping}
-                  className="shrink-0 text-[11px] font-medium py-1.5 px-3 rounded-full bg-slate-800/80 hover:bg-cyan-500/20 border border-slate-700 dark:border-cyan-500/30 text-cyan-300 hover:text-white transition-all cursor-pointer disabled:opacity-50 whitespace-nowrap"
+                  className="text-[11px] font-medium py-1.5 px-3 rounded-xl bg-slate-800/90 hover:bg-cyan-500/20 border border-slate-700/80 dark:border-cyan-500/30 text-cyan-300 hover:text-white transition-all cursor-pointer disabled:opacity-50 text-left leading-snug"
                 >
                   {q}
                 </button>

@@ -35,8 +35,8 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
         id: "initial-msg",
         sender: "bot",
         text: isEn
-          ? "Hi! I'm Haikal's virtual assistant 👋\nWhat would you like to know about Haikal?"
-          : "Halo! Saya asisten virtual Haikal 👋\nApa yang ingin Anda ketahui tentang Haikal?",
+          ? "Hi! I'm Brokal, Haikal's virtual assistant 👋\nWhat would you like to know about Haikal?"
+          : "Halo! Saya Brokal, asisten virtual Haikal 👋\nApa yang ingin Anda ketahui tentang Haikal?",
       },
     ]);
   }, [isEn]);
@@ -106,8 +106,8 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
         id: `initial-msg-${Date.now()}`,
         sender: "bot",
         text: isEn
-          ? "Hi! I'm Haikal's virtual assistant 👋\nWhat would you like to know about Haikal?"
-          : "Halo! Saya asisten virtual Haikal 👋\nApa yang ingin Anda ketahui tentang Haikal?",
+          ? "Hi! I'm Brokal, Haikal's virtual assistant 👋\nWhat would you like to know about Haikal?"
+          : "Halo! Saya Brokal, asisten virtual Haikal 👋\nApa yang ingin Anda ketahui tentang Haikal?",
       },
     ]);
   };
@@ -140,7 +140,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
               </div>
               <div>
                 <h3 className="text-sm font-bold text-white tracking-tight flex items-center gap-1.5">
-                  Haikal Assistant
+                  Brokal Assistant
                   <span className="text-[10px] px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 font-mono">AI</span>
                 </h3>
                 <p className="text-[11px] text-slate-400 font-medium">
@@ -160,7 +160,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
               <button
                 onClick={() => setIsOpen(false)}
                 className="p-2 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-colors cursor-pointer"
-                title={isEn ? "Close assistant" : "Tutup asisten"}
+                title={isEn ? "Tutup Brokal AI" : "Tutup Brokal AI"}
               >
                 <X className="w-4 h-4" />
               </button>
@@ -281,8 +281,8 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
             ? "bg-slate-900 border-2 border-cyan-500 text-cyan-400 shadow-cyan-500/30"
             : "bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 hover:scale-110 active:scale-95 shadow-[0_0_25px_rgba(34,211,238,0.45)] border border-cyan-300/40"
         )}
-        aria-label="Ask Haikal AI"
-        title="Ask Haikal AI"
+        aria-label="Ask Brokal AI"
+        title="Ask Brokal AI"
       >
         {!isOpen && (
           <span className="absolute inset-0 rounded-full bg-cyan-400 animate-ping opacity-25 pointer-events-none" />
@@ -294,10 +294,10 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
           <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-white relative z-10 animate-pulse" />
         )}
 
-        {/* Hover Tooltip Label ("Ask Haikal AI") */}
+        {/* Hover Tooltip Label ("Ask Brokal AI") */}
         {!isOpen && (
           <span className="absolute bottom-full mb-2.5 right-0 px-3 py-1.5 bg-slate-900/95 dark:bg-[#070e20]/95 border border-slate-700 dark:border-cyan-500/30 text-cyan-300 text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-xl">
-            Ask Haikal AI ✨
+            Ask Brokal AI ✨
           </span>
         )}
       </button>

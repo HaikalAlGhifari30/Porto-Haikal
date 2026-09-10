@@ -17,7 +17,7 @@ const INTENTS = [
   {
     intent: "greeting",
     keywords: ["hi", "hello", "halo", "hei", "hey", "pagi", "siang", "sore", "malam", "greetings"],
-    response: "Hello! 👋 I'm Haikal's virtual assistant. How can I help you today? Feel free to ask about Haikal's experience, QA skills, projects, education, or how to reach him!",
+    response: "Hello! 👋 I'm Brokal, Haikal's virtual assistant. How can I help you today? Feel free to ask about Haikal's experience, QA skills, projects, education, or how to reach him!",
   },
   {
     intent: "about",

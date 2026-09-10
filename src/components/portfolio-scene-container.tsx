@@ -87,6 +87,11 @@ export function PortfolioSceneContainer({
     const handleWheel = (e: WheelEvent) => {
       if (isTransitioningRef.current) return;
 
+      const targetEl = e.target as HTMLElement | null;
+      if (targetEl && targetEl.closest("[data-no-scene-scroll], .ai-assistant-modal-container")) {
+        return;
+      }
+
       const el = sceneContentRef.current;
       if (el) {
         const isScrollable = el.scrollHeight > el.clientHeight + 15;
@@ -127,6 +132,11 @@ export function PortfolioSceneContainer({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (isTransitioningRef.current) return;
 
+      const targetEl = e.target as HTMLElement | null;
+      if (targetEl && targetEl.closest("[data-no-scene-scroll], .ai-assistant-modal-container, input, textarea")) {
+        return;
+      }
+
       const el = sceneContentRef.current;
       if (el) {
         const isScrollable = el.scrollHeight > el.clientHeight + 15;
@@ -159,11 +169,22 @@ export function PortfolioSceneContainer({
 
   // Touch Swipe Handler (Mobile)
   const handleTouchStart = (e: React.TouchEvent) => {
+    const targetEl = e.target as HTMLElement | null;
+    if (targetEl && targetEl.closest("[data-no-scene-scroll], .ai-assistant-modal-container")) {
+      touchStartRef.current = null;
+      return;
+    }
     touchStartRef.current = e.touches[0].clientY;
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (touchStartRef.current === null || isTransitioningRef.current) return;
+    const targetEl = e.target as HTMLElement | null;
+    if (targetEl && targetEl.closest("[data-no-scene-scroll], .ai-assistant-modal-container")) {
+      touchStartRef.current = null;
+      return;
+    }
+
     const touchEnd = e.changedTouches[0].clientY;
     const diff = touchStartRef.current - touchEnd;
 

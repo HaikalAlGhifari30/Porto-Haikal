@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Navbar } from "@/components/navbar";
 import { AnimatedBackground } from "@/components/ui/animated-background";
+import { AIAssistantModal } from "@/components/ai-assistant-modal";
 import { HeroSection } from "@/components/sections/hero-section";
 import { AboutSectionClient } from "@/components/sections/about-section-client";
 import { SkillsSection } from "@/components/sections/skills-section";
@@ -202,6 +203,9 @@ export function PortfolioSceneContainer({
     >
       {/* Persistent Starfield Galaxy Background */}
       <AnimatedBackground />
+
+      {/* Interactive AI Assistant Floating Orb */}
+      <AIAssistantModal settings={settings} />
 
       {/* Top Fixed Frosted Glass Header */}
       <Navbar

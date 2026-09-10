@@ -2,6 +2,7 @@ import { getProjects } from "@/actions/project";
 import { getSettings } from "@/actions/settings";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { AIAssistantModal } from "@/components/ai-assistant-modal";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -16,6 +17,7 @@ export default async function ProjectsPage() {
     return (
         <div className="bg-slate-50 dark:bg-[#030712] text-slate-900 dark:text-white min-h-screen flex flex-col transition-colors duration-300">
             <Navbar settings={settings} />
+            <AIAssistantModal settings={settings} />
             
             <main className="flex-1 py-28 md:py-32 px-4 sm:px-6 relative overflow-hidden">
                 {/* Background Glows */}

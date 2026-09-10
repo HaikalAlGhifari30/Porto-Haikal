@@ -126,7 +126,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
 
   return (
     <>
-      {/* ── Fullscreen Blurred Backdrop Overlay ── */}
+      {/* ── Fullscreen Blurred Backdrop Overlay (Mobile Only) ── */}
       {isOpen && (
         <div
           data-no-scene-scroll="true"
@@ -134,7 +134,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
           onWheel={(e) => e.stopPropagation()}
           onTouchStart={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()}
-          className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 animate-in fade-in duration-300 pointer-events-auto"
+          className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 animate-in fade-in duration-300 pointer-events-auto sm:hidden"
         />
       )}
 

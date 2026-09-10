@@ -141,7 +141,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
           onWheel={(e) => e.stopPropagation()}
           onTouchStart={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()}
-          className="w-[calc(100vw-2rem)] max-w-[370px] sm:w-[390px] h-[500px] max-h-[70vh] bg-slate-900/95 dark:bg-[#070e20]/95 backdrop-blur-2xl border border-cyan-500/30 text-white rounded-3xl shadow-2xl shadow-cyan-950/50 flex flex-col overflow-hidden mb-3 animate-in fade-in slide-in-from-bottom-5 duration-300"
+          className="fixed bottom-20 left-4 right-4 mx-auto sm:mx-0 sm:left-auto sm:right-24 sm:bottom-22 z-50 w-[calc(100vw-2rem)] max-w-[370px] sm:w-[390px] h-[480px] max-h-[66vh] bg-slate-900/95 dark:bg-[#070e20]/95 backdrop-blur-2xl border border-cyan-500/30 text-white rounded-3xl shadow-2xl shadow-cyan-950/50 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300"
         >
           
           {/* Top Header */}

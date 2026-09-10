@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useSafeLang } from "@/store/lang";
-import { UserCheck, GraduationCap, ShieldCheck, Target, Users, Calendar, CheckCircle2, Award, BookOpen } from "lucide-react";
+import { UserCheck, GraduationCap, ShieldCheck, Target, Users, Calendar, CheckCircle2, Award, BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -24,6 +24,7 @@ export function AboutSectionClient({
   const { lang, t } = useSafeLang();
   const isEn = lang === "en";
   const [activeTab, setActiveTab] = useState<"intro" | "education" | "certificates" | "organization">("intro");
+  const [eduPage, setEduPage] = useState(0);
 
   const bioText = isEn
     ? (settings?.aboutTextEn || "Informatics Engineering graduate from UNIKOM dedicated as a Quality Assurance Engineer, currently actively working at COMO 1907 (Global Media Visual). Highly experienced in web & mobile manual testing, end-to-end user flow verification, regression, and system modeling. Former Chairman of HMIF UNIKOM with strong leadership, analytical precision, and adaptability.")
@@ -269,63 +270,101 @@ export function AboutSectionClient({
 
           {/* TAB 2: EDUCATION */}
           {activeTab === "education" && (
-            <motion.div
-              key="education"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.3 }}
-              className={cn(
-                "grid gap-3 sm:gap-3.5 w-full max-w-4xl mx-auto",
-                eduItems.length >= 4
-                  ? "grid-cols-1 md:grid-cols-2"
-                  : eduItems.length === 3
-                  ? "grid-cols-1 md:grid-cols-3"
-                  : "grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto"
-              )}
-            >
-              {eduItems.map((edu: any, idx: number) => {
-                const inst = isEn && edu.institutionEn ? edu.institutionEn : edu.institution;
-                const deg = isEn && edu.degreeEn ? edu.degreeEn : edu.degree;
-                const per = isEn && edu.periodEn ? edu.periodEn : edu.period;
-                const desc = isEn && edu.descriptionEn ? edu.descriptionEn : edu.description;
-                let logo = edu.logo || "/logo_unikom.png";
-                if (inst.includes("SDN") || inst.includes("Karangpawitan")) logo = "/education/sdnkarangpawitan1.jpg";
-                else if (inst.includes("SMPN 3") || inst.includes("SMP")) logo = "/education/smpn3karawang.jpg";
-                else if (inst.includes("SMAN 3")) logo = "/education/sman3karawang.png";
+            <div className="w-full max-w-4xl mx-auto flex flex-col justify-between space-y-3">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={eduPage}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4 w-full"
+                >
+                  {eduItems
+                    .slice(eduPage * 2, eduPage * 2 + 2)
+                    .map((edu: any, idx: number) => {
+                      const inst = isEn && edu.institutionEn ? edu.institutionEn : edu.institution;
+                      const deg = isEn && edu.degreeEn ? edu.degreeEn : edu.degree;
+                      const per = isEn && edu.periodEn ? edu.periodEn : edu.period;
+                      const desc = isEn && edu.descriptionEn ? edu.descriptionEn : edu.description;
+                      let logo = edu.logo || "/logo_unikom.png";
+                      if (inst.includes("SDN") || inst.includes("Karangpawitan")) logo = "/education/sdnkarangpawitan1.jpg";
+                      else if (inst.includes("SMPN 3") || inst.includes("SMP")) logo = "/education/smpn3karawang.jpg";
+                      else if (inst.includes("SMAN 3")) logo = "/education/sman3karawang.png";
 
-                return (
-                  <div
-                    key={idx}
-                    className="p-3.5 sm:p-4 rounded-2xl bg-white/40 dark:bg-slate-950/75 border border-white/70 dark:border-cyan-500/25 backdrop-blur-2xl space-y-2 shadow-lg flex flex-col justify-between group hover:border-cyan-400 transition-all"
-                  >
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-10 h-10 rounded-xl bg-white p-1 flex items-center justify-center shrink-0 shadow-md border border-slate-200 overflow-hidden">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={logo} alt={inst} className="w-full h-full object-contain" />
+                      return (
+                        <div
+                          key={idx}
+                          className="p-4 sm:p-5 rounded-2xl bg-white/40 dark:bg-slate-950/75 border border-white/70 dark:border-cyan-500/25 backdrop-blur-2xl space-y-2.5 shadow-lg flex flex-col justify-between group hover:border-cyan-400 transition-all"
+                        >
+                          <div className="space-y-2.5">
+                            <div className="flex items-center gap-3">
+                              <div className="w-12 h-12 rounded-xl bg-white p-1 flex items-center justify-center shrink-0 shadow-md border border-slate-200 overflow-hidden">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img src={logo} alt={inst} className="w-full h-full object-contain" />
+                              </div>
+                              <div>
+                                <h3 className="text-xs sm:text-sm font-bold text-slate-950 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors line-clamp-1">{inst}</h3>
+                                <p className="text-[11px] font-extrabold text-blue-700 dark:text-cyan-400 line-clamp-1">{deg}</p>
+                              </div>
+                            </div>
+
+                            <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/60 dark:bg-slate-900 border border-white/80 dark:border-zinc-800 text-slate-900 dark:text-zinc-300 text-[10px] font-bold backdrop-blur-xs">
+                              <Calendar className="w-2.5 h-2.5 text-cyan-600 dark:text-cyan-400" />
+                              <span>{per}</span>
+                            </div>
+
+                            {desc && (
+                              <p className="text-[11px] text-slate-900 dark:text-zinc-300 leading-relaxed pt-2 border-t border-slate-200/80 dark:border-zinc-800/80 font-medium line-clamp-3">
+                                {desc}
+                              </p>
+                            )}
+                          </div>
                         </div>
-                        <div>
-                          <h3 className="text-xs sm:text-sm font-bold text-slate-950 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors line-clamp-1">{inst}</h3>
-                          <p className="text-[11px] font-extrabold text-blue-700 dark:text-cyan-400 line-clamp-1">{deg}</p>
-                        </div>
-                      </div>
+                      );
+                    })}
+                </motion.div>
+              </AnimatePresence>
 
-                      <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/60 dark:bg-slate-900 border border-white/80 dark:border-zinc-800 text-slate-900 dark:text-zinc-300 text-[10px] font-bold backdrop-blur-xs">
-                        <Calendar className="w-2.5 h-2.5 text-cyan-600 dark:text-cyan-400" />
-                        <span>{per}</span>
-                      </div>
-
-                      {desc && (
-                        <p className="text-[11px] text-slate-900 dark:text-zinc-300 leading-relaxed pt-1.5 border-t border-slate-200/80 dark:border-zinc-800/80 font-medium line-clamp-2">
-                          {desc}
-                        </p>
-                      )}
-                    </div>
+              {/* Carousel Controls for Education Cards */}
+              {eduItems.length > 2 && (
+                <div className="flex items-center justify-between pt-1 px-1">
+                  {/* Dots Indicator */}
+                  <div className="flex items-center gap-2">
+                    {Array.from({ length: Math.ceil(eduItems.length / 2) }).map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setEduPage(idx)}
+                        className={`h-2 rounded-full transition-all cursor-pointer ${
+                          idx === eduPage
+                            ? "w-8 bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.8)]"
+                            : "w-2 bg-slate-300 dark:bg-zinc-700 hover:bg-slate-400 dark:hover:bg-zinc-500"
+                        }`}
+                        title={`Page ${idx + 1}`}
+                      />
+                    ))}
                   </div>
-                );
-              })}
-            </motion.div>
+
+                  {/* Prev / Next Arrows */}
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setEduPage((prev) => (prev === 0 ? Math.ceil(eduItems.length / 2) - 1 : prev - 1))}
+                      className="p-2 rounded-full bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-pointer shadow-md"
+                      title={isEn ? "Previous" : "Sebelumnya"}
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => setEduPage((prev) => (prev === Math.ceil(eduItems.length / 2) - 1 ? 0 : prev + 1))}
+                      className="p-2 rounded-full bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-pointer shadow-md"
+                      title={isEn ? "Next" : "Selanjutnya"}
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           )}
 
           {/* TAB 3: CERTIFICATES */}

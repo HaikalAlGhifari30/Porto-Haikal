@@ -87,22 +87,32 @@ export function AboutSectionClient({
 
   const defaultCertificates = [
     {
-      title: "Junior Web Developer",
-      issuer: "Badan Nasional Sertifikasi Profesi (BNSP)",
-      period: "2024",
+      title: isEn ? "Junior Web Developer (BNSP Certified)" : "Pengembang Web Pratama (Junior Web Developer)",
+      titleEn: "Junior Web Developer (BNSP Certified)",
+      issuer: isEn ? "Indonesian Professional Certification Authority (BNSP) — LSP Teknologi Digital" : "Badan Nasional Sertifikasi Profesi (BNSP) — LSP Teknologi Digital",
+      issuerEn: "Indonesian Professional Certification Authority (BNSP) — LSP Teknologi Digital",
+      period: "20 Mar 2025 — 2028",
+      periodEn: "20 Mar 2025 — 2028",
       description: isEn
-        ? "Official competency certification in national web programming standards, covering algorithms, structured programming, and code analysis."
-        : "Sertifikasi kompetensi resmi dalam standar pemrograman web nasional, mencakup algoritma, pemrograman terstruktur, dan analisis kode.",
-      badge: isEn ? "National Competency" : "Sertifikasi Kompetensi Nasional",
+        ? "Official National Competency Certificate from BNSP & LSP Teknologi Digital (Reg. No. TIK 1565 20938 2025). Certified competent in 6 unit competencies: User Interface Implementation, Text/Graphics/Multimedia Programming, Neat Code Architecture, Best Practices & Guidelines, Structured Programming, and Library Usage."
+        : "Sertifikat Kompetensi Resmi BNSP & LSP Teknologi Digital (No. Reg. TIK 1565 20938 2025). Teruji kompeten pada 6 unit kompetensi: Implementasi User Interface, Pemrograman Text/Grafik/Multimedia, Struktur Kode Rapih, Best Practices & Guidelines, Pemrograman Terstruktur, serta Penggunaan Library.",
+      descriptionEn: "Official National Competency Certificate from BNSP & LSP Teknologi Digital (Reg. No. TIK 1565 20938 2025). Certified competent in 6 unit competencies: User Interface Implementation, Text/Graphics/Multimedia Programming, Neat Code Architecture, Best Practices & Guidelines, Structured Programming, and Library Usage.",
+      badge: isEn ? "BNSP National Competency" : "Sertifikasi Kompetensi BNSP",
+      badgeEn: "BNSP National Competency",
     },
     {
-      title: "Cisco CCNAv7: Introduction to Networks",
+      title: "CCNAv7: Introduction to Networks",
+      titleEn: "CCNAv7: Introduction to Networks",
       issuer: "Cisco Networking Academy",
-      period: "Feb 2023",
+      issuerEn: "Cisco Networking Academy",
+      period: "15 Feb 2023",
+      periodEn: "15 Feb 2023",
       description: isEn
-        ? "Understanding of network architecture, data communication protocols, IPv4/IPv6 subnetting, ethernet switching, and security fundamentals."
-        : "Pemahaman arsitektur jaringan, protokol komunikasi data, IPv4/IPv6 sub-netting, ethernet switching, dan security fundamentals.",
-      badge: "Networking Fundamental",
+        ? "Official Completion Certificate from Cisco Networking Academy program signed by Director Lynn Bloomer. Mastered computer network architecture, data communication protocols, IPv4/IPv6 subnetting, ethernet switching, and network security fundamentals."
+        : "Sertifikat Kelulusan Resmi Cisco Networking Academy disahkan oleh Director Lynn Bloomer. Menguasai arsitektur jaringan komputer, protokol komunikasi data, subnetting IPv4/IPv6, ethernet switching, serta fondasi keamanan jaringan.",
+      descriptionEn: "Official Completion Certificate from Cisco Networking Academy program signed by Director Lynn Bloomer. Mastered computer network architecture, data communication protocols, IPv4/IPv6 subnetting, ethernet switching, and network security fundamentals.",
+      badge: isEn ? "Cisco Certified" : "Sertifikasi Resmi Cisco",
+      badgeEn: "Cisco Certified",
     },
   ];
 

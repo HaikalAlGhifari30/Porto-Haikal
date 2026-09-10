@@ -55,17 +55,15 @@ export function ContactSection({ settings }: ContactSectionProps) {
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
             <div className="space-y-4">
               <span className="text-[11px] font-extrabold text-blue-700 dark:text-cyan-400 uppercase tracking-widest">
-                CLOSING SCENE
+                {t('contact.scene', 'PENUTUP')}
               </span>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.08] text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-700 to-cyan-600 dark:from-white dark:via-cyan-100 dark:to-cyan-300">
-                LET&apos;S BUILD <br />
-                SOMETHING <br />
-                TOGETHER.
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.08] text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-700 to-cyan-600 dark:from-white dark:via-cyan-100 dark:to-cyan-300 uppercase">
+                {t('contact.letsWorkTogether', 'MARI BEKERJA SAMA')}
               </h2>
 
               <p className="text-slate-800 dark:text-zinc-400 text-xs sm:text-sm leading-relaxed font-medium">
-                Have a project, quality assurance inquiry, or collaboration opportunity in mind?
+                {t('section.contact.desc', 'Punya proyek, pengujian QA, atau peluang kolaborasi dalam pikiran Anda?')}
               </p>
 
               {/* Direct Contact Cards */}
@@ -194,7 +192,7 @@ export function ContactSection({ settings }: ContactSectionProps) {
                 className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-blue-500/25 hover:shadow-cyan-500/40 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 active:scale-[0.99] cursor-pointer"
               >
                 <Send className="w-4 h-4" />
-                <span>{isPending ? t('contact.sending') : "LET'S TALK"}</span>
+                <span>{isPending ? t('contact.sending') : t('contact.send')}</span>
               </button>
             </form>
           </div>

@@ -152,7 +152,9 @@ export function AboutSectionClient({
           {t('section.about')}
         </h2>
         <p className="text-slate-600 dark:text-zinc-400 text-xs leading-relaxed font-medium w-full max-w-xl mx-auto px-2 break-words">
-          Personal background, academic foundation, certifications, and leadership journey
+          {isEn
+            ? "Personal background, academic foundation, certifications, and leadership journey"
+            : "Latar belakang pribadi, fondasi akademik, sertifikasi, serta perjalanan organisasi"}
         </p>
 
         {/* Compact Sub-Navigation Tabs inside ABOUT Section (Responsive Grid on Mobile) */}
@@ -167,7 +169,7 @@ export function AboutSectionClient({
             )}
           >
             <UserCheck className="w-3.5 h-3.5" />
-            <span>INTRO</span>
+            <span>{isEn ? "INTRO" : "PROFIL"}</span>
           </button>
 
           <button
@@ -180,7 +182,7 @@ export function AboutSectionClient({
             )}
           >
             <GraduationCap className="w-3.5 h-3.5" />
-            <span>EDUCATION</span>
+            <span>{isEn ? "EDUCATION" : "PENDIDIKAN"}</span>
           </button>
 
           <button
@@ -193,7 +195,7 @@ export function AboutSectionClient({
             )}
           >
             <Award className="w-3.5 h-3.5" />
-            <span>CERTIFICATES</span>
+            <span>{isEn ? "CERTIFICATES" : "SERTIFIKASI"}</span>
           </button>
 
           <button
@@ -206,7 +208,7 @@ export function AboutSectionClient({
             )}
           >
             <Users className="w-3.5 h-3.5" />
-            <span>ORGANIZATION</span>
+            <span>{isEn ? "ORGANIZATION" : "ORGANISASI"}</span>
           </button>
         </div>
       </div>

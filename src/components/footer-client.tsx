@@ -98,7 +98,7 @@ export function FooterClient({ settings, onNavigateScene }: FooterClientProps) {
 
         {/* Center Copyright Notice */}
         <p className="text-[11px] text-slate-800 dark:text-zinc-400 font-bold text-center order-last sm:order-none">
-          © {new Date().getFullYear()} Haikal Al Ghifari. All rights reserved.
+          © {new Date().getFullYear()} Haikal Al Ghifari. {t('footer.copyright', 'Hak Cipta Dilindungi Undang-Undang.')}
         </p>
 
         {/* Social Icons (Desktop sm+ view) */}

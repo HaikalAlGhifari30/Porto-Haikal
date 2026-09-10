@@ -77,7 +77,9 @@ export function SkillsSection({ skills = [] }: SkillsSectionProps) {
           {t('section.skills')}
         </h2>
         <p className="text-slate-600 dark:text-zinc-400 text-xs leading-relaxed font-medium">
-          Technical competencies, quality assurance methodologies, and professional tooling
+          {isEn
+            ? "Technical competencies, quality assurance methodologies, and professional tooling"
+            : "Kompetensi teknis, metodologi pengujian mutu, dan perangkat pengujian profesional"}
         </p>
       </div>
 

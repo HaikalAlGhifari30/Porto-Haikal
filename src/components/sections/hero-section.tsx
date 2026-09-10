@@ -45,7 +45,7 @@ export function HeroSection({ settings, onNavigateScene }: HeroSectionProps) {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
             </span>
-            <span>Available for opportunities</span>
+            <span>{isEn ? "Available for opportunities" : "Terbuka untuk peluang kerja"}</span>
           </div>
 
           {/* Main Headline */}
@@ -73,7 +73,7 @@ export function HeroSection({ settings, onNavigateScene }: HeroSectionProps) {
                 onClick={() => onNavigateScene && onNavigateScene(4)}
                 className="px-6 py-3.5 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-400 text-white font-extrabold text-xs tracking-wider uppercase shadow-lg shadow-blue-500/25 hover:shadow-cyan-500/40 hover:scale-105 transition-all flex items-center gap-2 group cursor-pointer"
               >
-                <span>VIEW MY WORK</span>
+                <span>{isEn ? "VIEW MY WORK" : "LIHAT PORTOFOLIO"}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
 
@@ -82,7 +82,7 @@ export function HeroSection({ settings, onNavigateScene }: HeroSectionProps) {
                 className="px-6 py-3.5 rounded-full bg-white/80 dark:bg-slate-900/60 hover:bg-white dark:hover:bg-slate-900/90 border border-slate-300 dark:border-cyan-500/30 text-slate-800 dark:text-white font-extrabold text-xs tracking-wider uppercase hover:border-cyan-400 hover:scale-105 transition-all flex items-center gap-2 backdrop-blur-md cursor-pointer shadow-sm"
               >
                 <User className="w-4 h-4 text-blue-600 dark:text-cyan-400" />
-                <span>ABOUT ME</span>
+                <span>{isEn ? "ABOUT ME" : "TENTANG SAYA"}</span>
               </button>
             </div>
 

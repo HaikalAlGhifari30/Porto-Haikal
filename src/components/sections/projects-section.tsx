@@ -72,7 +72,9 @@ export function ProjectsSection({ projects = [], onNavigateScene }: ProjectsSect
           {t('section.projects')}
         </h2>
         <p className="text-slate-600 dark:text-zinc-400 text-xs leading-relaxed font-medium">
-          Interactive showcase of curated software & testing projects
+          {isEn
+            ? "Interactive showcase of curated software & testing projects"
+            : "Showcase interaktif proyek perangkat lunak & pengujian pilihan"}
         </p>
       </div>
 

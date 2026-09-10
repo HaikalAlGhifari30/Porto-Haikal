@@ -97,6 +97,11 @@ const dictionary: Record<Language, Record<string, string>> = {
         'contact.success': 'Pesan berhasil terkirim! Terima kasih telah menghubungi.',
         'contact.error': 'Gagal mengirim pesan. Silakan coba lagi.',
         
+        'options.title': 'Opsi',
+        'options.lang': 'Bahasa',
+        'options.theme': 'Tema',
+        'contact.scene': 'PENUTUP',
+
         'footer.copyright': 'Hak Cipta Dilindungi Undang-Undang.',
         'footer.designedBy': 'Dirancang & Dikembangkan oleh',
 
@@ -114,6 +119,11 @@ const dictionary: Record<Language, Record<string, string>> = {
         'nav.downloadCv': 'Download CV',
         'nav.login': 'Admin Login',
         'nav.dashboard': 'Dashboard',
+
+        'options.title': 'Options',
+        'options.lang': 'Language',
+        'options.theme': 'Theme',
+        'contact.scene': 'CLOSING SCENE',
         
         'hero.badge': 'Quality Assurance Engineer & Web Developer',
         'hero.greeting': "Hi, I'm",
@@ -194,11 +204,16 @@ const dictionary: Record<Language, Record<string, string>> = {
 };
 
 export const useLang = create<LangState>()((set, get) => ({
-    lang: 'en',
-    setLang: (lang) => set({ lang }),
+    lang: 'id',
+    setLang: (lang) => {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('app_lang', lang);
+        }
+        set({ lang });
+    },
     t: (key: string) => {
         const state = get();
-        return dictionary[state.lang][key] || key;
+        return dictionary[state.lang]?.[key] || dictionary['id']?.[key] || dictionary['en']?.[key] || key;
     }
 }));
 
@@ -208,12 +223,22 @@ export function useSafeLang() {
 
     useEffect(() => {
         setMounted(true);
-    }, []);
+        if (typeof window !== 'undefined') {
+            const stored = localStorage.getItem('app_lang') as Language;
+            if (stored === 'id' || stored === 'en') {
+                if (stored !== lang) {
+                    setLang(stored);
+                }
+            }
+        }
+    }, [lang, setLang]);
 
-    const safeLang = mounted ? lang : 'en';
+    const safeLang = mounted ? lang : 'id';
 
     const safet = (key: string, fallback?: string): string => {
-        if (!mounted) return fallback ?? dictionary['en'][key] ?? key;
+        if (!mounted) {
+            return dictionary['id'][key] ?? fallback ?? dictionary['en'][key] ?? key;
+        }
         return t(key);
     };
 

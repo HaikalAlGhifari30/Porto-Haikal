@@ -61,10 +61,28 @@ export function PortfolioSceneContainer({
     }, 600);
   }, [activeSceneIndex]);
 
-  // Sync hash changes on initial load
+  // Initial load check & PWA / Home Screen reset
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const isPWA =
+        window.matchMedia("(display-mode: standalone)").matches ||
+        (navigator as any).standalone === true ||
+        window.location.search.includes("mode=pwa");
+
+      const isFreshSession = !sessionStorage.getItem("app_loaded");
+      sessionStorage.setItem("app_loaded", "true");
+
       const hash = window.location.hash.replace("#", "").toLowerCase();
+
+      // If launched from Home Screen PWA shortcut or fresh session with #contact, force start at Home scene!
+      if (isPWA || (isFreshSession && (hash === "contact" || hash === ""))) {
+        if (hash) {
+          window.history.replaceState(null, "", window.location.pathname);
+        }
+        setActiveSceneIndex(0);
+        return;
+      }
+
       if (hash) {
         const foundIdx = SCENES.findIndex((s) => s.id === hash);
         if (foundIdx !== -1) {
@@ -78,7 +96,12 @@ export function PortfolioSceneContainer({
   useEffect(() => {
     if (typeof window !== "undefined") {
       const currentHash = SCENES[activeSceneIndex].id;
-      window.history.replaceState(null, "", `#${currentHash}`);
+      if (activeSceneIndex === 0) {
+        // Clean URL for home scene so Add-to-Home-Screen saves clean root URL
+        window.history.replaceState(null, "", window.location.pathname);
+      } else {
+        window.history.replaceState(null, "", `#${currentHash}`);
+      }
     }
   }, [activeSceneIndex]);
 

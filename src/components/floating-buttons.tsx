@@ -84,12 +84,12 @@ export function FloatingButtons({ admins = [] }: { admins?: WhatsAppAdmin[] }) {
   };
 
   return (
-    <div className="fixed bottom-[72px] left-4 sm:left-auto sm:right-6 sm:bottom-[86px] z-40 flex flex-col items-start sm:items-end gap-2.5 sm:gap-3 pointer-events-auto" ref={chatRef}>
-      
+    <div className="fixed bottom-4 left-4 sm:left-auto sm:right-6 sm:bottom-6 z-40 flex flex-col items-start sm:items-end gap-2.5 sm:gap-3 pointer-events-auto" ref={chatRef}>
+
       {/* WhatsApp Chat Popup Box (Frosted Glassmorphism Theme) */}
       {isChatOpen && (
         <div className="w-[calc(100vw-2.5rem)] max-w-[280px] sm:w-72 bg-white/40 dark:bg-slate-950/85 text-slate-900 dark:text-white border border-white/70 dark:border-cyan-500/30 backdrop-blur-2xl rounded-[2.2rem] p-4 sm:p-5 shadow-2xl shadow-blue-900/10 dark:shadow-cyan-950/50 animate-in fade-in slide-in-from-bottom-5 duration-300 relative flex flex-col items-center justify-between mb-1">
-          
+
           {/* Close Button */}
           <button
             onClick={() => setIsChatOpen(false)}
@@ -146,13 +146,13 @@ export function FloatingButtons({ admins = [] }: { admins?: WhatsAppAdmin[] }) {
         {!isChatOpen && (
           <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-30 pointer-events-none" />
         )}
-        
+
         {isChatOpen ? (
           <X className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
         ) : (
           <FaWhatsapp className="w-5 h-5 sm:w-6 sm:h-6 text-white relative z-10" />
         )}
-        
+
         {/* Hover Tooltip Pill */}
         {!isChatOpen && (
           <span className="absolute left-full ml-3 sm:left-auto sm:right-full sm:ml-0 sm:mr-3 px-3 py-1.5 bg-slate-900/95 dark:bg-[#070e20]/95 border border-slate-700 dark:border-cyan-500/30 text-white text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-xl">

@@ -57,8 +57,8 @@ const SUGGESTED_INTENT_MAP: Array<{ intent: string; responseEn: string; response
   // 5: Contact
   {
     intent: "contact",
-    responseId: "Anda dapat menghubungi Haikal secara langsung melalui WhatsApp atau Email:\n\n• WhatsApp: +62 813-8805-8331\n• Email: haikal.alghifari300602@gmail.com\n• Lokasi: Jakarta, Indonesia",
-    responseEn: "You can reach Haikal directly via WhatsApp or Email:\n\n• WhatsApp: +62 813-8805-8331\n• Email: haikal.alghifari300602@gmail.com\n• Location: Jakarta, Indonesia",
+    responseId: "Anda dapat menghubungi Haikal secara langsung melalui WhatsApp atau Email:\n\n• WhatsApp: +62 813-8805-8331\n• Email: alghifaribahren03@gmail.com\n• Lokasi: Jakarta, Indonesia",
+    responseEn: "You can reach Haikal directly via WhatsApp or Email:\n\n• WhatsApp: +62 813-8805-8331\n• Email: alghifaribahren03@gmail.com\n• Location: Jakarta, Indonesia",
     showContactButtons: true,
   },
 ];

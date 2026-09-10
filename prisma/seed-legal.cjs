@@ -23,7 +23,7 @@ Penggunaan Data: Informasi yang kami kumpulkan digunakan semata-mata untuk meres
 
 Keamanan Data: Kami menerapkan langkah-langkah keamanan untuk menjaga kerahasiaan data Anda dan tidak akan membagikan, menjual, atau menyewakan informasi pribadi Anda kepada pihak ketiga tanpa izin, kecuali diwajibkan oleh hukum.
 
-Kontak: Jika Anda memiliki pertanyaan mengenai privasi data, silakan hubungi kami di rizkyrijayakarya@gmail.com.`;
+Kontak: Jika Anda memiliki pertanyaan mengenai privasi data, silakan hubungi kami di alghifaribahren03@gmail.com.`;
 
 async function main() {
   const settings = await prisma.settings.findFirst();

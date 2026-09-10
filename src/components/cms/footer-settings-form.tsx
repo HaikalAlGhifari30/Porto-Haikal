@@ -90,7 +90,7 @@ export function FooterSettingsForm({ settings }: { settings: any }) {
                                 id="email" 
                                 name="email" 
                                 defaultValue={settings?.email || ""} 
-                                placeholder="Contoh: rizkyrijayakarya@gmail.com"
+                                placeholder="Contoh: alghifaribahren03@gmail.com"
                             />
                         </div>
                         <div className="space-y-2">

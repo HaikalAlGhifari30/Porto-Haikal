@@ -23,7 +23,7 @@ Use of Data: The information we collect is used solely to respond to service req
 
 Data Security: We implement security measures to maintain the confidentiality of your data and will not share, sell, or rent your personal information to third parties without permission, unless required by law.
 
-Contact: If you have questions regarding data privacy, please contact us at rizkyrijayakarya@gmail.com.`;
+Contact: If you have questions regarding data privacy, please contact us at alghifaribahren03@gmail.com.`;
 
 async function main() {
   const settings = await prisma.settings.findFirst();

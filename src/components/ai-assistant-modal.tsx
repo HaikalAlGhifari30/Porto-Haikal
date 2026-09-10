@@ -121,7 +121,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
       ? "Halo Haikal, I'm interested in your portfolio!"
       : "Halo Haikal, saya tertarik dengan portofolio Anda!"
   )}`;
-  const emailAddress = settings?.email || "haikal.alghifari300602@gmail.com";
+  const emailAddress = settings?.email || "alghifaribahren03@gmail.com";
   const emailUrl = `mailto:${emailAddress}?subject=Portfolio%20Inquiry`;
 
   return (

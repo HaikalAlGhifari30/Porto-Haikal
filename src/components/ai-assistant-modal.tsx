@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Sparkles, X, Send, RotateCcw, Mail } from "lucide-react";
 import { FaWhatsapp as FaWhatsappIcon } from "react-icons/fa6";
 import { cn } from "@/lib/utils";
-import { getAIResponse, SUGGESTED_QUESTIONS, AIResponse } from "@/lib/ai-assistant-intents";
+import { getAIResponse, SUGGESTED_QUESTIONS_EN, SUGGESTED_QUESTIONS_ID, AIResponse } from "@/lib/ai-assistant-intents";
 import { useSafeLang } from "@/store/lang";
 
 interface Message {
@@ -27,6 +27,8 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
+
+  const suggestedQuestions = isEn ? SUGGESTED_QUESTIONS_EN : SUGGESTED_QUESTIONS_ID;
 
   // Initialize initial opening message
   useEffect(() => {
@@ -87,7 +89,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
 
     // Simulated natural AI typing response delay (600ms)
     setTimeout(() => {
-      const response: AIResponse = getAIResponse(query);
+      const response: AIResponse = getAIResponse(query, isEn);
       const botMessage: Message = {
         id: `bot-${Date.now()}`,
         sender: "bot",
@@ -247,7 +249,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
               {isEn ? "Suggested Questions" : "Pertanyaan Rekomendasi"}
             </span>
             <div className="flex flex-wrap gap-1.5 max-h-[130px] overflow-y-auto scrollbar-none hide-scrollbar">
-              {SUGGESTED_QUESTIONS.map((q, idx) => (
+              {suggestedQuestions.map((q, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSendMessage(q)}

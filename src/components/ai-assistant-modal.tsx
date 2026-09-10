@@ -123,7 +123,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
   const emailUrl = `mailto:${emailAddress}?subject=Portfolio%20Inquiry`;
 
   return (
-    <div className="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 z-40 pointer-events-auto" ref={modalRef}>
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-24 z-50 flex flex-col items-end pointer-events-auto" ref={modalRef}>
       
       {/* ── Chat Panel Window ── */}
       {isOpen && (
@@ -296,7 +296,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
 
         {/* Hover Tooltip Label ("Ask Haikal AI") */}
         {!isOpen && (
-          <span className="absolute right-full mr-3 px-3 py-1.5 bg-slate-900/95 dark:bg-[#070e20]/95 border border-slate-700 dark:border-cyan-500/30 text-cyan-300 text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-xl">
+          <span className="absolute bottom-full mb-2.5 right-0 px-3 py-1.5 bg-slate-900/95 dark:bg-[#070e20]/95 border border-slate-700 dark:border-cyan-500/30 text-cyan-300 text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-xl">
             Ask Haikal AI ✨
           </span>
         )}

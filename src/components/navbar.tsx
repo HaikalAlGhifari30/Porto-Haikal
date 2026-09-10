@@ -71,14 +71,18 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
     setIsPending(true);
     setError("");
     try {
-      await login(formData);
+      const res = await login(formData);
+      if (!res.success) {
+        setError(res.error || "Email atau password yang Anda masukkan salah.");
+        return;
+      }
       localStorage.setItem("isAdmin", "true");
       setIsLoggedIn(true);
       setIsLoginOpen(false);
       toast.success("Login Berhasil");
       router.push("/cms");
     } catch (e: any) {
-      setError(e.message || "Login failed");
+      setError(e.message || "Gagal masuk. Silakan coba lagi.");
     } finally {
       setIsPending(false);
     }

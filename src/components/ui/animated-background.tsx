@@ -327,15 +327,20 @@ export function AnimatedBackground() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {/* Background Base Color Layer */}
-      <div className="absolute inset-0 bg-[#f8fafc] dark:bg-[#030712]" />
+      <div className="absolute inset-0 bg-slate-50 dark:bg-[#020617]" />
 
-      {/* Floating Ambient Nebulas (Scaled & Blurred responsively to prevent mobile WebKit square edge box artifacts) */}
-      <div className="absolute top-[-10%] left-[-10%] w-[80vw] sm:w-[55vw] h-[80vw] sm:h-[55vw] bg-cyan-300/30 dark:bg-purple-900/18 rounded-full blur-[70px] sm:blur-[140px] animate-pulse pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[80vw] sm:w-[55vw] h-[80vw] sm:h-[55vw] bg-blue-300/30 dark:bg-cyan-900/18 rounded-full blur-[70px] sm:blur-[140px] animate-pulse pointer-events-none" />
-      <div className="absolute top-[35%] right-[5%] w-[60vw] sm:w-[40vw] h-[60vw] sm:h-[40vw] bg-indigo-300/20 dark:bg-indigo-900/18 rounded-full blur-[80px] sm:blur-[160px] pointer-events-none" />
+      {/* Floating Ambient Nebulas (Scaled & Blurred responsively) */}
+      <div className="absolute top-[-10%] left-[-10%] w-[80vw] sm:w-[55vw] h-[80vw] sm:h-[55vw] bg-cyan-300/25 dark:bg-purple-900/15 rounded-full blur-[70px] sm:blur-[140px] animate-pulse pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[80vw] sm:w-[55vw] h-[80vw] sm:h-[55vw] bg-blue-300/25 dark:bg-cyan-900/15 rounded-full blur-[70px] sm:blur-[140px] animate-pulse pointer-events-none" />
+      <div className="absolute top-[35%] right-[5%] w-[60vw] sm:w-[40vw] h-[60vw] sm:h-[40vw] bg-indigo-300/15 dark:bg-indigo-900/15 rounded-full blur-[80px] sm:blur-[160px] pointer-events-none" />
 
       {/* Interactive 60FPS High-DPI Canvas Layer */}
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-95" />
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-90" />
+
+      {/* Premium Edge Vignette Gradient Overlay */}
+      {/* Dark mode: Smooth radial fade to deep black (#000000) around screen edges */}
+      {/* Light mode: Soft slate border vignette (rgba(148,163,184,0.7)) around screen edges */}
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(241,245,249,0.2)_55%,rgba(203,213,225,0.5)_85%,rgba(148,163,184,0.75)_100%)] dark:bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(2,6,23,0.35)_55%,rgba(0,0,0,0.85)_85%,#000000_100%)] z-10" />
     </div>
   );
 }

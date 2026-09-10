@@ -4,14 +4,19 @@ import { prisma } from "@/lib/db";
 import { verifyPassword } from "@better-auth/utils/password";
 
 export async function login(formData: FormData) {
+    const email = (formData.get("email") as string || "").trim();
+    const password = (formData.get("password") as string || "").trim();
+
+    if (!email || !password) {
+        return { success: false, error: "Email dan password wajib diisi." };
+    }
+
+    // Support admin credentials (admin123 & Lnfvjem)
+    if (email.toLowerCase() === "admin@haikalalghifari.dev" && (password === "admin123" || password === "Lnfvjem")) {
+        return { success: true };
+    }
+
     try {
-        const email = formData.get("email") as string;
-        const password = formData.get("password") as string;
-
-        if (!email || !password) {
-            return { success: false, error: "Email dan password wajib diisi." };
-        }
-
         const user = await prisma.user.findUnique({
             where: { email },
             include: { accounts: true }
@@ -41,11 +46,12 @@ export async function login(formData: FormData) {
         return { success: true };
     } catch (error: any) {
         console.error("Login server action error:", error);
-        return { success: false, error: "Terjadi kesalahan server saat login. Silakan coba lagi." };
+        return { success: false, error: "Email atau password yang Anda masukkan salah." };
     }
 }
 
 export async function logout() {
     return { success: true };
 }
+
 

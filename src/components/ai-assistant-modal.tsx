@@ -123,11 +123,11 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
   const emailUrl = `mailto:${emailAddress}?subject=Portfolio%20Inquiry`;
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-24 z-50 flex flex-col items-end pointer-events-auto" ref={modalRef}>
+    <div className="fixed bottom-20 left-4 sm:bottom-6 sm:left-auto sm:right-24 z-50 flex flex-col items-start sm:items-end pointer-events-auto" ref={modalRef}>
       
       {/* ── Chat Panel Window ── */}
       {isOpen && (
-        <div className="w-[calc(100vw-2rem)] max-w-[370px] sm:w-[390px] h-[520px] max-h-[80vh] bg-slate-900/95 dark:bg-[#070e20]/95 backdrop-blur-2xl border border-cyan-500/30 text-white rounded-3xl shadow-2xl shadow-cyan-950/50 flex flex-col overflow-hidden mb-3 animate-in fade-in slide-in-from-bottom-5 duration-300">
+        <div className="w-[calc(100vw-2rem)] max-w-[370px] sm:w-[390px] h-[520px] max-h-[75vh] bg-slate-900/95 dark:bg-[#070e20]/95 backdrop-blur-2xl border border-cyan-500/30 text-white rounded-3xl shadow-2xl shadow-cyan-950/50 flex flex-col overflow-hidden mb-3 animate-in fade-in slide-in-from-bottom-5 duration-300">
           
           {/* Top Header */}
           <div className="p-4 border-b border-slate-800 dark:border-cyan-500/20 bg-slate-950/70 flex items-center justify-between">
@@ -233,7 +233,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-0.5">
               {isEn ? "Suggested Questions" : "Pertanyaan Rekomendasi"}
             </span>
-            <div className="flex flex-wrap gap-1.5 max-h-[140px] overflow-y-auto scrollbar-none hide-scrollbar">
+            <div className="flex flex-wrap gap-1.5 max-h-[130px] overflow-y-auto scrollbar-none hide-scrollbar">
               {SUGGESTED_QUESTIONS.map((q, idx) => (
                 <button
                   key={idx}
@@ -299,7 +299,7 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
 
         {/* Hover Tooltip Label ("Ask Brokal AI") */}
         {!isOpen && (
-          <span className="absolute bottom-full mb-2.5 right-0 px-3 py-1.5 bg-slate-900/95 dark:bg-[#070e20]/95 border border-slate-700 dark:border-cyan-500/30 text-cyan-300 text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-xl">
+          <span className="absolute bottom-full mb-2.5 left-0 sm:left-auto sm:right-0 px-3 py-1.5 bg-slate-900/95 dark:bg-[#070e20]/95 border border-slate-700 dark:border-cyan-500/30 text-cyan-300 text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-xl">
             Ask Brokal AI ✨
           </span>
         )}

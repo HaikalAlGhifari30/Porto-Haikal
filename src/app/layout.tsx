@@ -42,19 +42,19 @@ import { FloatingButtonsServer } from "@/components/floating-buttons-server";
 import { DevNoticeModal } from "@/components/dev-notice-modal";
 
 export const metadata: Metadata = {
-  title: "Haikal Al Ghifari — Quality Assurance Engineer Portfolio",
-  description: "Dedicated Quality Assurance Engineer currently actively working at COMO 1907 (Global Media Visual). Specialized in manual testing, end-to-end user flow verification, regression testing, and software quality validation.",
+  title: "Haikal Al Ghifari — Quality Assurance Specialist Portfolio",
+  description: "Dedicated Quality Assurance Specialist currently actively working at COMO 1907 (Global Media Visual). Specialized in manual testing, end-to-end user flow verification, regression testing, and software quality validation.",
   manifest: "/site.webmanifest",
   icons: {
     icon: [
-      { url: "/favicon.ico?v=5" },
-      { url: "/favicon.png?v=5", sizes: "512x512", type: "image/png" },
-      { url: "/android-chrome-192x192.png?v=5", sizes: "192x192", type: "image/png" },
+      { url: "/favicon.ico?v=6" },
+      { url: "/favicon.png?v=6", sizes: "512x512", type: "image/png" },
+      { url: "/android-chrome-192x192.png?v=6", sizes: "192x192", type: "image/png" },
     ],
-    shortcut: "/favicon.ico?v=5",
+    shortcut: "/favicon.ico?v=6",
     apple: [
-      { url: "/apple-touch-icon.png?v=5", sizes: "180x180", type: "image/png" },
-      { url: "/apple-touch-icon-precomposed.png?v=5", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png?v=6", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon-precomposed.png?v=6", sizes: "180x180", type: "image/png" },
     ],
   },
   appleWebApp: {

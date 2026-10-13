@@ -47,9 +47,7 @@ export function FooterClient({ settings, onNavigateScene }: FooterClientProps) {
             className="flex items-center gap-2 group text-left cursor-pointer shrink-0 btn-retro"
             title="Haikal Al Ghifari — HAG"
           >
-            <div className="px-2 py-0.5 bg-[#FACC15] text-black border-2 border-black dark:border-white shadow-retro-xs font-pixel font-bold text-[10px] tracking-wider">
-              HAG
-            </div>
+            <HagLogo size="xs" />
             <span className="font-pixel text-xs font-bold text-black dark:text-white uppercase">
               Haikal Al Ghifari
             </span>

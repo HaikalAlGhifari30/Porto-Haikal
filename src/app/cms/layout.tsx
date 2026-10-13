@@ -126,7 +126,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                 {/* Collapse Toggle Button */}
                 <button 
                     onClick={() => setIsCollapsed(!isCollapsed)}
-                    className="absolute -right-3 top-32 w-7 h-7 rounded-full bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 flex items-center justify-center text-slate-400 hover:text-cyan-400 shadow-xl z-50 transition-all hover:scale-110 active:scale-95 cursor-pointer"
+                    className="absolute -right-3 top-32 w-7 h-7 rounded-full bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 flex items-center justify-center text-slate-400 hover:text-amber-500 dark:hover:text-[#FACC15] shadow-xl z-50 transition-all hover:scale-110 active:scale-95 cursor-pointer"
                 >
                     {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
                 </button>
@@ -137,7 +137,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                         {!isCollapsed && (
                             <div className="flex flex-col justify-center gap-[1px] leading-none transition-all duration-500">
                                 <span className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-900 dark:text-white">Haikal Al Ghifari</span>
-                                <span className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-cyan-400">QA PORTFOLIO</span>
+                                <span className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-amber-500 dark:text-[#FACC15]">QA PORTFOLIO</span>
                             </div>
                         )}
                     </Link>
@@ -150,7 +150,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                         <div className="flex flex-col gap-1 transition-all duration-500">
                             <p className="text-[10px] font-bold text-slate-400 dark:text-zinc-400 uppercase tracking-[0.2em] leading-tight">Haikal Al Ghifari</p>
                             <div className="flex items-center justify-between">
-                                <p className="text-[9px] font-semibold text-cyan-400 uppercase tracking-widest">QA Portfolio CMS</p>
+                                <p className="text-[9px] font-semibold text-amber-500 dark:text-[#FACC15] uppercase tracking-widest">QA Portfolio CMS</p>
                                 <div className="flex items-center gap-1">
                                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                                     <span className="text-[8px] font-bold text-emerald-400 uppercase tracking-tighter">System Live</span>
@@ -160,7 +160,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                     ) : (
                         <div className="flex flex-col items-center gap-2">
                             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                            <span className="text-[8px] font-black text-cyan-400 uppercase vertical-rl tracking-widest">HAG CMS</span>
+                            <span className="text-[8px] font-black text-amber-500 dark:text-[#FACC15] uppercase vertical-rl tracking-widest">HAG CMS</span>
                         </div>
                     )}
                 </div>
@@ -174,7 +174,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                         <HagLogo size="sm" useImage={false} />
                         <div className="flex flex-col leading-[1.1]">
                             <span className="text-[9px] font-black uppercase tracking-widest text-slate-900 dark:text-white">Haikal Al Ghifari</span>
-                            <span className="text-[8px] font-bold uppercase tracking-widest text-cyan-400">QA PORTFOLIO</span>
+                            <span className="text-[8px] font-bold uppercase tracking-widest text-amber-500 dark:text-[#FACC15]">QA PORTFOLIO</span>
                         </div>
                     </Link>
                     

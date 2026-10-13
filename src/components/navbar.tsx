@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { Menu, X, LogIn, LayoutDashboard, Eye, EyeOff, Download, Globe, Moon, Sun, Settings, Lock } from "lucide-react";
 import { ThemeSwitcher } from "@/components/cms/theme-switcher";
 import { useSafeLang } from "@/store/lang";
+import { HagLogo } from "@/components/hag-logo";
 
 interface NavbarProps {
   settings?: any;
@@ -116,16 +117,18 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
           {/* Brand Logo with 8-Bit Pixel badge */}
           <button
             onClick={() => handleNavClick(0)}
-            className="flex items-center gap-2.5 shrink-0 group text-left cursor-pointer z-10 btn-retro"
+            className="flex items-center gap-2 sm:gap-2.5 shrink-0 group text-left cursor-pointer z-10 btn-retro"
             title="Haikal Al Ghifari — HAG"
           >
-            <div className="px-2.5 py-1 bg-[#FACC15] text-black border-2 border-black dark:border-white shadow-retro-sm font-pixel font-black text-xs sm:text-sm tracking-wider flex items-center gap-1.5">
-              <span className="w-2 h-2 bg-black shrink-0" />
-              <span>HAG</span>
+            <HagLogo size="sm" />
+            <div className="flex flex-col leading-none">
+              <span className="font-pixel text-xs sm:text-sm font-black text-black dark:text-white tracking-wider">
+                HAG
+              </span>
+              <span className="font-pixel text-[9px] font-bold text-zinc-600 dark:text-zinc-400 hidden sm:inline tracking-widest uppercase mt-0.5">
+                PORTFOLIO
+              </span>
             </div>
-            <span className="font-pixel text-xs font-bold text-black dark:text-white hidden sm:inline tracking-wider">
-              PORTFOLIO
-            </span>
           </button>
 
           {/* Central 6-Menu Header Navigation Links (8-Bit Arcade Tab Style) */}

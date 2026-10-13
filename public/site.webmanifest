@@ -1,7 +1,7 @@
 {
   "name": "Haikal Al Ghifari — Portfolio",
   "short_name": "Haikal AG",
-  "description": "Quality Assurance Engineer & Manual Testing Specialist Portfolio",
+  "description": "Quality Assurance Specialist & Manual Testing Portfolio",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -14,8 +14,8 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#030712",
-  "background_color": "#030712",
+  "theme_color": "#FACC15",
+  "background_color": "#FAF6ED",
   "display": "standalone",
   "start_url": "/"
 }

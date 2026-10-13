@@ -543,7 +543,7 @@ export function AboutSectionClient({
                                   setSelectedCert(certWithImgs);
                                   setActiveCertPage(1);
                                 }}
-                                className="relative h-24 sm:h-28 w-full rounded-xl overflow-hidden bg-slate-900/80 border border-slate-700/50 cursor-pointer group/img my-1 shadow-md hover:border-cyan-400/80 transition-all"
+                                className="relative h-24 sm:h-28 w-full rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/50 cursor-pointer group/img my-1 shadow-md hover:border-cyan-500/80 transition-all"
                               >
                                 <img
                                   src={imgUrl}
@@ -552,13 +552,13 @@ export function AboutSectionClient({
                                 />
 
                                 {/* Subtle top-right glass badge when not hovered */}
-                                <div className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-slate-950/75 border border-slate-700/60 text-cyan-400 text-[10px] font-extrabold backdrop-blur-md flex items-center gap-1 shadow-md group-hover/img:opacity-0 transition-opacity">
-                                  <Eye className="w-3 h-3" />
+                                <div className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-white/90 dark:bg-slate-950/75 border border-slate-200/80 dark:border-slate-700/60 text-slate-800 dark:text-cyan-400 text-[10px] font-extrabold backdrop-blur-md flex items-center gap-1 shadow-sm group-hover/img:opacity-0 transition-opacity">
+                                  <Eye className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
                                   <span>{isEn ? "Preview" : "Lihat"}</span>
                                 </div>
 
-                                {/* Dark blurred overlay on hover for 100% clear text contrast */}
-                                <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-xs opacity-0 group-hover/img:opacity-100 transition-all duration-300 flex items-center justify-center">
+                                {/* Adaptive overlay on hover for clear contrast in both light and dark mode */}
+                                <div className="absolute inset-0 bg-slate-900/40 dark:bg-slate-950/80 backdrop-blur-xs opacity-0 group-hover/img:opacity-100 transition-all duration-300 flex items-center justify-center">
                                   <span className="px-3 py-1.5 rounded-full bg-cyan-500 text-slate-950 text-[11px] font-black shadow-[0_0_15px_rgba(6,182,212,0.6)] flex items-center gap-1.5 transform scale-90 group-hover/img:scale-100 transition-transform">
                                     <Eye className="w-3.5 h-3.5" />
                                     <span>{isEn ? "View Certificate" : "Lihat Sertifikat"}</span>
@@ -716,33 +716,33 @@ export function AboutSectionClient({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedCert(null)}
-              className="fixed inset-0 z-[99999] flex items-center justify-center p-2 sm:p-6 bg-slate-950/85 backdrop-blur-md overflow-y-auto overscroll-contain"
+              className="fixed inset-0 z-[99999] flex items-center justify-center p-2 sm:p-6 bg-slate-950/60 dark:bg-slate-950/85 backdrop-blur-md overflow-y-auto overscroll-contain"
             >
               <motion.div
                 initial={{ scale: 0.95, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.95, opacity: 0, y: 20 }}
                 onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-4xl max-h-[92dvh] sm:max-h-[88vh] bg-slate-900 border border-cyan-500/30 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between my-auto"
+                className="relative w-full max-w-4xl max-h-[92dvh] sm:max-h-[88vh] bg-white dark:bg-slate-900 border border-slate-200 dark:border-cyan-500/30 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between my-auto"
               >
                 {/* Modal Header */}
-                <div className="p-3 sm:p-5 bg-slate-950/90 border-b border-slate-800 flex items-center justify-between gap-3 shrink-0">
+                <div className="p-3 sm:p-5 bg-slate-50/95 dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
                   <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
                     <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center shrink-0">
-                      <Award className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
+                      <Award className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-600 dark:text-cyan-400" />
                     </div>
                     <div className="min-w-0">
-                      <h3 className="text-xs sm:text-base font-bold text-white leading-tight truncate">
+                      <h3 className="text-xs sm:text-base font-bold text-slate-950 dark:text-white leading-tight truncate">
                         {isEn && selectedCert.titleEn ? selectedCert.titleEn : selectedCert.title}
                       </h3>
-                      <p className="text-[11px] sm:text-xs text-cyan-400 font-semibold mt-0.5 truncate">
+                      <p className="text-[11px] sm:text-xs text-blue-600 dark:text-cyan-400 font-semibold mt-0.5 truncate">
                         {isEn && selectedCert.issuerEn ? selectedCert.issuerEn : selectedCert.issuer}
                       </p>
                     </div>
                   </div>
                   <button
                     onClick={() => setSelectedCert(null)}
-                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors shrink-0 border border-slate-700 cursor-pointer"
+                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-200/80 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-colors shrink-0 border border-slate-300/80 dark:border-slate-700 cursor-pointer"
                   >
                     <X className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                   </button>
@@ -752,12 +752,12 @@ export function AboutSectionClient({
                 <div className="flex-1 overflow-y-auto custom-scrollbar overscroll-contain">
                   {/* Full Description Box */}
                   {(selectedCert.description || selectedCert.descriptionEn) && (
-                    <div className="px-3 sm:px-6 py-2.5 sm:py-3 bg-slate-950/80 border-b border-slate-800/80 text-xs text-slate-300 leading-relaxed font-medium">
-                      <span className="font-bold text-cyan-400 block mb-1 uppercase tracking-wider text-[10px] flex items-center gap-1">
-                        <BookOpen className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                    <div className="px-3 sm:px-6 py-2.5 sm:py-3 bg-slate-100/70 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800/80 text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
+                      <span className="font-bold text-blue-600 dark:text-cyan-400 block mb-1 uppercase tracking-wider text-[10px] flex items-center gap-1">
+                        <BookOpen className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 shrink-0" />
                         <span>{isEn ? "Full Description & Competency Details" : "Keterangan & Deskripsi Lengkap Sertifikasi"}</span>
                       </span>
-                      <p className="text-slate-200 leading-relaxed text-[11px] sm:text-xs">
+                      <p className="text-slate-800 dark:text-slate-200 leading-relaxed text-[11px] sm:text-xs">
                         {isEn && selectedCert.descriptionEn ? selectedCert.descriptionEn : selectedCert.description}
                       </p>
                     </div>
@@ -765,7 +765,7 @@ export function AboutSectionClient({
 
                   {/* Multi-page Switcher Tabs */}
                   {modalPagesList.length > 1 && (
-                    <div className="px-3 sm:px-4 py-2 bg-slate-950/70 border-b border-slate-800 flex flex-wrap items-center gap-1.5 sm:gap-2">
+                    <div className="px-3 sm:px-4 py-2 bg-slate-100/90 dark:bg-slate-950/70 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center gap-1.5 sm:gap-2">
                       {modalPagesList.map((pObj) => (
                         <button
                           key={pObj.page}
@@ -774,7 +774,7 @@ export function AboutSectionClient({
                             "px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs font-black transition-all flex items-center gap-1.5 shrink-0 cursor-pointer",
                             activeCertPage === pObj.page
                               ? "bg-cyan-500 text-slate-950 shadow-md scale-105"
-                              : "bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-700"
+                              : "bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-transparent text-slate-700 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-700"
                           )}
                         >
                           <FileText className="w-3.5 h-3.5" />
@@ -785,11 +785,11 @@ export function AboutSectionClient({
                   )}
 
                   {/* Modal Image Display with Navigation Overlay */}
-                  <div className="relative min-h-[200px] max-h-[42vh] sm:max-h-[55vh] overflow-auto bg-slate-950/95 flex items-center justify-center p-2 sm:p-5 group/modalimg">
+                  <div className="relative min-h-[200px] max-h-[42vh] sm:max-h-[55vh] overflow-auto bg-slate-100/90 dark:bg-slate-950/95 flex items-center justify-center p-2 sm:p-5 group/modalimg">
                     {modalPagesList.length > 1 && (
                       <button
                         onClick={() => setActiveCertPage((prev) => (prev <= 1 ? modalPagesList.length : prev - 1))}
-                        className="absolute left-2 sm:left-3 z-10 p-2 sm:p-2.5 rounded-full bg-slate-900/80 border border-slate-700 text-slate-200 hover:text-cyan-400 hover:border-cyan-400 transition-all shadow-xl cursor-pointer"
+                        className="absolute left-2 sm:left-3 z-10 p-2 sm:p-2.5 rounded-full bg-white/90 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:text-cyan-600 dark:hover:text-cyan-400 hover:border-cyan-500 transition-all shadow-xl cursor-pointer"
                         title={isEn ? "Previous Page" : "Halaman Sebelumnya"}
                       >
                         <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -799,13 +799,13 @@ export function AboutSectionClient({
                     <img
                       src={currentModalImgUrl}
                       alt={`Certificate Page ${activeCertPage}`}
-                      className="max-h-[38vh] sm:max-h-[50vh] w-auto max-w-full object-contain rounded-lg shadow-2xl border border-slate-800"
+                      className="max-h-[38vh] sm:max-h-[50vh] w-auto max-w-full object-contain rounded-lg shadow-xl border border-slate-200 dark:border-slate-800 bg-white"
                     />
 
                     {modalPagesList.length > 1 && (
                       <button
                         onClick={() => setActiveCertPage((prev) => (prev >= modalPagesList.length ? 1 : prev + 1))}
-                        className="absolute right-2 sm:right-3 z-10 p-2 sm:p-2.5 rounded-full bg-slate-900/80 border border-slate-700 text-slate-200 hover:text-cyan-400 hover:border-cyan-400 transition-all shadow-xl cursor-pointer"
+                        className="absolute right-2 sm:right-3 z-10 p-2 sm:p-2.5 rounded-full bg-white/90 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:text-cyan-600 dark:hover:text-cyan-400 hover:border-cyan-500 transition-all shadow-xl cursor-pointer"
                         title={isEn ? "Next Page" : "Halaman Selanjutnya"}
                       >
                         <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -813,7 +813,7 @@ export function AboutSectionClient({
                     )}
 
                     {modalPagesList.length > 1 && (
-                      <div className="absolute bottom-3 px-2.5 py-0.5 rounded-full bg-slate-950/80 border border-slate-800 text-slate-300 text-[10px] font-bold backdrop-blur-md">
+                      <div className="absolute bottom-3 px-2.5 py-0.5 rounded-full bg-white/90 dark:bg-slate-950/80 border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-bold backdrop-blur-md shadow-sm">
                         {isEn ? `Page ${activeCertPage} of ${modalPagesList.length}` : `Halaman ${activeCertPage} dari ${modalPagesList.length}`}
                       </div>
                     )}
@@ -821,10 +821,10 @@ export function AboutSectionClient({
                 </div>
 
                 {/* Modal Footer */}
-                <div className="p-3 sm:p-4 bg-slate-950/95 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2.5 text-xs shrink-0">
-                  <div className="text-slate-400 font-medium flex items-center gap-2">
+                <div className="p-3 sm:p-4 bg-slate-50/95 dark:bg-slate-950/95 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2.5 text-xs shrink-0">
+                  <div className="text-slate-600 dark:text-slate-400 font-medium flex items-center gap-2">
                     <span className="text-[11px] sm:text-xs">{isEn ? "Period / Date: " : "Periode / Tanggal: "}</span>
-                    <span className="text-cyan-300 font-bold bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20 text-[11px] sm:text-xs">
+                    <span className="text-blue-700 dark:text-cyan-300 font-bold bg-blue-50 dark:bg-cyan-500/10 px-2 py-0.5 rounded border border-blue-200 dark:border-cyan-500/20 text-[11px] sm:text-xs">
                       {selectedCert.period}
                     </span>
                   </div>
@@ -853,7 +853,7 @@ export function AboutSectionClient({
                       href={currentModalImgUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white text-[11px] sm:text-xs font-bold transition-colors flex items-center gap-1.5 border border-slate-700"
+                      className="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg bg-white hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white text-[11px] sm:text-xs font-bold transition-colors flex items-center gap-1.5 border border-slate-300 dark:border-slate-700 shadow-xs"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                       <span>{isEn ? "Original Image" : "Gambar Asli"}</span>

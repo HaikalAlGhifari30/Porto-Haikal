@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   console.log("Adding MSIB Infinite Learning certificate to database...");
-  
+
   const existing = await prisma.certificate.findFirst({
     where: {
       OR: [

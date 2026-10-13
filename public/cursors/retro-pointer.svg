@@ -1,21 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" shape-rendering="crispEdges">
   <!-- 8-Bit Pixel Drop Shadow -->
-  <g transform="translate(2, 2)" opacity="0.35" fill="#000000">
-    <path d="M 7 1 L 13 1 L 13 9 L 21 9 L 25 13 L 25 23 L 21 27 L 9 27 L 5 21 L 5 11 L 7 11 Z" />
-  </g>
+  <path d="M 3 3 L 3 25 L 8 20 L 13 30 L 17 28 L 12 18 L 21 18 Z" fill="#000000" opacity="0.35" transform="translate(2, 2)" />
   
-  <!-- Outer Solid Black Border (Retro 8-Bit Outline) -->
-  <path d="M 7 1 L 13 1 L 13 9 L 21 9 L 25 13 L 25 23 L 21 27 L 9 27 L 5 21 L 5 11 L 7 11 Z" fill="#000000" stroke="#000000" stroke-width="3" stroke-linejoin="miter" stroke-linecap="square" />
+  <!-- Outer Solid Black Border (Retro 8-Bit Arcade Outline) -->
+  <path d="M 1 1 L 1 25 L 7 19 L 12 29 L 17 27 L 12 17 L 21 17 Z" fill="#000000" stroke="#000000" stroke-width="3" stroke-linejoin="miter" stroke-linecap="square" />
   
   <!-- Vibrant Retro Arcade Yellow Body -->
-  <path d="M 8 2 L 12 2 L 12 10 L 20 10 L 24 14 L 24 22 L 20 26 L 10 26 L 6 20 L 6 12 L 8 12 Z" fill="#FACC15" />
+  <path d="M 2 3 L 2 22 L 6 18 L 11 26 L 14 25 L 10 16 L 18 16 Z" fill="#FACC15" />
   
-  <!-- Finger Separator Creases -->
-  <line x1="14" y1="14" x2="21" y2="14" stroke="#000000" stroke-width="2" stroke-linecap="square" />
-  <line x1="14" y1="18" x2="21" y2="18" stroke="#000000" stroke-width="2" stroke-linecap="square" />
-  <line x1="14" y1="22" x2="19" y2="22" stroke="#000000" stroke-width="2" stroke-linecap="square" />
-  
-  <!-- Index Finger Highlight -->
-  <path d="M 9 3 L 11 3 L 11 9 L 9 9 Z" fill="#FEF08A" />
-  <rect x="9" y="3" width="2" height="4" fill="#FFFFFF" />
+  <!-- Retro Gloss Highlight (Light Yellow / Cream) -->
+  <path d="M 3 5 L 3 14 L 6 11 L 9 11 L 4 6 Z" fill="#FEF08A" />
+  <rect x="3" y="4" width="2" height="5" fill="#FFFFFF" />
 </svg>

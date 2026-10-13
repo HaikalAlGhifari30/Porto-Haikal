@@ -4,13 +4,16 @@ import { useState, useEffect } from "react";
 import { useSafeLang } from "@/store/lang";
 import { ArrowRight, Wrench, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export function DevNoticeModal() {
+  const pathname = usePathname();
   const { lang } = useSafeLang();
   const isEn = lang === "en";
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    if (pathname?.startsWith("/cms")) return;
     try {
       const hasSeen = sessionStorage.getItem("hasSeenDevNotice");
       if (!hasSeen) {
@@ -19,7 +22,7 @@ export function DevNoticeModal() {
     } catch {
       setIsOpen(true);
     }
-  }, []);
+  }, [pathname]);
 
   const handleDismiss = () => {
     try {
@@ -29,6 +32,10 @@ export function DevNoticeModal() {
     }
     setIsOpen(false);
   };
+
+  if (pathname?.startsWith("/cms")) {
+    return null;
+  }
 
   return (
     <AnimatePresence>

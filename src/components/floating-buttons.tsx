@@ -6,6 +6,7 @@ import { PixelWhatsAppIcon } from "@/components/ui/pixel-whatsapp-icon";
 import { cn } from "@/lib/utils";
 import { useSafeLang } from "@/store/lang";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 interface WhatsAppAdmin {
   id: string;
@@ -94,6 +95,11 @@ export function FloatingButtons({ admins = [] }: { admins?: WhatsAppAdmin[] }) {
     window.open(`https://wa.me/${targetPhone}?text=${text}`, "_blank");
     setIsChatOpen(false);
   };
+
+  const pathname = usePathname();
+  if (pathname?.startsWith("/cms")) {
+    return null;
+  }
 
   return (
     <>

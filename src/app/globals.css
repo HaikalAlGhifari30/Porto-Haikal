@@ -312,7 +312,7 @@
 html,
 body,
 body * {
-  cursor: url('/cursors/retro-cursor.svg?v=10') 1 1, auto;
+  cursor: url('/cursors/retro-cursor.svg?v=12') 1 1, auto;
 }
 
 button,
@@ -338,7 +338,7 @@ a:hover,
 [role="button"]:hover,
 .cursor-pointer:hover,
 .btn-retro:hover {
-  cursor: url('/cursors/retro-pointer.svg?v=10') 7 1, pointer !important;
+  cursor: url('/cursors/retro-cursor.svg?v=12') 1 1, pointer !important;
 }
 
 input[type="text"],

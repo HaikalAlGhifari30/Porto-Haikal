@@ -1,7 +1,7 @@
 "use client";
 
 import { useSafeLang } from "@/store/lang";
-import { Award, Briefcase, Calendar, CheckCircle2, ChevronDown, ChevronRight, ChevronUp, MapPin, Sparkles, Clock } from "lucide-react";
+import { Briefcase, ChevronDown, ChevronRight, ChevronUp, Clock, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
@@ -123,7 +123,7 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
     }
   };
 
-  const getJobBadge = (company: string, index: number) => {
+  const getJobBadge = (company: string) => {
     if (company.includes("Artristik")) return { label: isEn ? "Full-time" : "Penuh Waktu", color: "bg-emerald-500/15 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30" };
     if (company.includes("COMO")) return { label: isEn ? "Contract" : "Kontrak", color: "bg-cyan-500/15 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border-cyan-500/30" };
     if (company.includes("Volunteer")) return { label: "Volunteer", color: "bg-purple-500/15 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 border-purple-500/30" };
@@ -132,43 +132,46 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
   };
 
   return (
-    <section id="experience" className="py-20 lg:py-28 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white">
-      <div className="container-original relative z-10 mx-auto px-4 max-w-6xl">
+    <section id="experience" className="py-2 sm:py-6 lg:py-8 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white">
+      <div className="container-original relative z-10 mx-auto px-2 sm:px-4 max-w-6xl xl:max-w-7xl">
         
         {/* Section Header */}
-        <div className="max-w-2xl space-y-3 mb-12 text-center mx-auto">
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-blue-900 to-cyan-800 dark:from-white dark:via-cyan-200 dark:to-cyan-400 bg-clip-text text-transparent pb-1 pt-1 leading-tight">
+        <div className="max-w-3xl space-y-1.5 sm:space-y-2.5 mb-3.5 sm:mb-8 text-center mx-auto px-1">
+          <div className="inline-block px-2.5 sm:px-3.5 py-1 sm:py-1.5 bg-[#FACC15] border-2 border-black dark:border-white shadow-retro-sm text-black font-pixel text-[10px] sm:text-xs uppercase font-bold tracking-wider mb-0.5 sm:mb-1">
+            QUEST LOG // CAREER TIMELINE
+          </div>
+          <h2 className="text-2xl sm:text-5xl font-pixel font-black tracking-tight text-black dark:text-white uppercase leading-tight">
             {t('section.experience')}
           </h2>
-          <p className="text-zinc-600 dark:text-zinc-400 text-xs md:text-sm leading-relaxed font-medium">
+          <p className="font-sans text-xs sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium max-w-2xl mx-auto">
             {t('section.experience.desc')}
           </p>
         </div>
 
-        {/* Combined Single Expand / Collapse Toggle Pill */}
-        <div className="flex items-center justify-center mb-10">
+        {/* 8-Bit Expand / Collapse Toggle Button */}
+        <div className="flex items-center justify-center mb-4 sm:mb-8">
           <button
             onClick={toggleExpandAll}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/90 dark:bg-[#091124]/90 border border-slate-300 dark:border-cyan-500/30 hover:border-cyan-400 text-zinc-800 dark:text-zinc-200 text-xs font-bold transition-all shadow-md backdrop-blur-md hover:scale-105 cursor-pointer"
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2.5 border-2 border-black dark:border-white bg-[#FACC15] text-black font-sans text-xs sm:text-sm font-black tracking-wider shadow-retro-sm btn-retro transition-all cursor-pointer uppercase"
           >
             <span>
               {isAllExpanded
-                ? (isEn ? "Collapse All Cards" : "Tutup Semua Card")
-                : (isEn ? "Expand All Cards" : "Buka Semua Card")}
+                ? (isEn ? "[−] COLLAPSE ALL QUESTS" : "[−] TUTUP SEMUA QUEST")
+                : (isEn ? "[+] EXPAND ALL QUESTS" : "[+] BUKA SEMUA QUEST")}
             </span>
             {isAllExpanded ? (
-              <ChevronUp className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
+              <ChevronUp className="w-4 h-4 font-bold" />
             ) : (
-              <ChevronDown className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
+              <ChevronDown className="w-4 h-4 font-bold" />
             )}
           </button>
         </div>
 
-        {/* Timeline Layout (Central Line with Alternating Clean Cards) */}
-        <div className="relative space-y-10 md:space-y-12">
+        {/* Timeline Layout (Central Retro Pixel Line) */}
+        <div className="relative space-y-4 sm:space-y-8 md:space-y-10">
           
           {/* Central Line */}
-          <div className="absolute left-6 md:left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-blue-600 via-cyan-400 to-indigo-600 dark:from-cyan-400 dark:via-purple-500 dark:to-indigo-500 -translate-x-1/2 opacity-40" />
+          <div className="absolute left-3.5 sm:left-6 md:left-1/2 top-4 bottom-4 w-1 bg-black dark:bg-white -translate-x-1/2 opacity-70 border-dashed" />
 
           {items.map((exp, idx) => {
             const isExpanded = !!expandedCards[idx];
@@ -192,7 +195,7 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
 
             const techList = exp.technologies ? exp.technologies.split(",").map((t) => t.trim()) : [];
             const isEven = idx % 2 === 0;
-            const jobBadge = getJobBadge(comp, idx);
+            const jobBadge = getJobBadge(comp);
 
             return (
               <motion.div
@@ -201,23 +204,25 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="relative flex flex-col md:flex-row items-center justify-between gap-6"
+                className="relative flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6"
               >
-                {/* Central Timeline Glowing Node */}
-                <div className="absolute left-6 md:left-1/2 top-6 -translate-x-1/2 z-20 w-4 h-4 rounded-full bg-blue-600 dark:bg-cyan-400 border-2 border-white dark:border-slate-950 shadow-[0_0_15px_rgba(34,211,238,0.9)]" />
+                {/* Central Timeline 8-Bit Pixel Milestone Marker */}
+                <div className="absolute left-3.5 sm:left-6 md:left-1/2 top-4 sm:top-6 -translate-x-1/2 z-20 w-5 h-5 sm:w-6 sm:h-6 bg-[#FACC15] border-2 border-black dark:border-white shadow-retro-xs flex items-center justify-center font-pixel text-[8px] sm:text-[9px] font-bold text-black">
+                  {idx + 1}
+                </div>
 
                 {/* Card Position (Alternating Left & Right on Desktop) */}
                 <div
-                  className={`w-full md:w-[calc(50%-2.5rem)] pl-14 md:pl-0 ${
+                  className={`w-full md:w-[calc(50%-2rem)] lg:w-[calc(50%-2.5rem)] pl-7 sm:pl-14 md:pl-0 ${
                     isEven ? "md:mr-auto md:text-left" : "md:ml-auto md:text-left"
                   }`}
                 >
-                  {/* Card Container (Slim, Sleek & Compact Glass) */}
-                  <div className="group relative rounded-2xl bg-white/40 dark:bg-[#070e20]/80 border border-white/70 dark:border-cyan-500/20 hover:border-blue-500/50 dark:hover:border-cyan-400/50 transition-all duration-300 shadow-2xl shadow-blue-900/5 dark:shadow-xl overflow-hidden backdrop-blur-2xl p-5 sm:p-6 space-y-3.5">
+                  {/* Card Container (8-Bit Retro Box) */}
+                  <div className="group relative bg-white dark:bg-[#151B22] border-2 sm:border-3 border-black dark:border-white shadow-retro-sm sm:shadow-retro-md transition-all duration-300 p-3 sm:p-5 lg:p-7 space-y-2.5 sm:space-y-4">
                     
-                    {/* Header Bar: Job Type Badge & Icon-only Toggle Chevron Button */}
+                    {/* Header Bar: Job Type Badge & Toggle Chevron Button */}
                     <div className="flex items-center justify-between gap-3">
-                      <span className={`px-2.5 py-0.5 rounded-full border text-[10px] font-bold tracking-wider ${jobBadge.color}`}>
+                      <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 border-2 border-black dark:border-white bg-[#FAF6ED] dark:bg-[#0E1217] text-black dark:text-white font-sans text-[11px] sm:text-xs uppercase font-black tracking-wider shadow-retro-xs">
                         {jobBadge.label}
                       </span>
 
@@ -226,60 +231,60 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
                         type="button"
                         aria-label="Toggle details"
                         title={isExpanded ? "Tutup Rincian" : "Buka Rincian"}
-                        className="p-1.5 rounded-xl bg-white/60 dark:bg-zinc-900/90 border border-white/80 dark:border-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-all flex items-center justify-center shadow-2xs group/btn cursor-pointer backdrop-blur-xs"
+                        className="p-1.5 sm:p-2 border-2 border-black dark:border-white bg-white dark:bg-[#0E1217] text-black dark:text-white shadow-retro-xs btn-retro transition-all flex items-center justify-center cursor-pointer"
                       >
                         {isExpanded ? (
-                          <ChevronUp className="w-4 h-4 text-blue-600 dark:text-cyan-400 transition-transform group-hover/btn:-translate-y-0.5" />
+                          <ChevronUp className="w-4 h-4 font-bold" />
                         ) : (
-                          <ChevronDown className="w-4 h-4 text-slate-600 dark:text-zinc-400 group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition-transform group-hover/btn:translate-y-0.5" />
+                          <ChevronDown className="w-4 h-4 font-bold" />
                         )}
                       </button>
                     </div>
 
                     {/* Position & Company Title with Logo */}
-                    <div className="space-y-1.5">
-                      <h3 className="text-lg md:text-xl font-black text-slate-950 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors">
+                    <div className="space-y-1 sm:space-y-1.5">
+                      <h3 className="font-sans text-sm sm:text-lg font-black text-black dark:text-white tracking-tight leading-snug">
                         {pos}
                       </h3>
 
-                      <div className="flex items-center gap-2.5">
+                      <div className="flex items-center gap-2 sm:gap-2.5">
                         {logo ? (
-                          <div className="w-7 h-7 rounded-lg bg-white p-0.5 flex items-center justify-center shrink-0 shadow-2xs border border-slate-200 overflow-hidden">
+                          <div className="w-7 h-7 sm:w-8 sm:h-8 bg-white p-0.5 flex items-center justify-center shrink-0 border-2 border-black dark:border-white shadow-retro-xs overflow-hidden">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={logo} alt={comp} className="w-full h-full object-contain rounded-md" />
+                            <img src={logo} alt={comp} className="w-full h-full object-contain" />
                           </div>
                         ) : (
-                          <Briefcase className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 shrink-0" />
+                          <Briefcase className="w-4 h-4 text-blue-600 dark:text-yellow-400 shrink-0" />
                         )}
-                        <p className="text-xs font-bold text-slate-800 dark:text-zinc-300">{comp}</p>
+                        <p className="font-sans text-xs sm:text-sm font-bold text-blue-600 dark:text-yellow-400">{comp}</p>
                       </div>
                     </div>
 
                     {/* Meta Line: Period & Location */}
-                    <div className="flex items-center gap-1.5 text-xs text-slate-700 dark:text-zinc-400 font-semibold">
-                      <Clock className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 shrink-0" />
+                    <div className="flex items-center gap-2 font-sans text-xs text-zinc-700 dark:text-zinc-300 font-semibold">
+                      <Clock className="w-4 h-4 text-black dark:text-yellow-400 shrink-0" />
                       <span>{per}</span>
                     </div>
 
                     {/* Concise Summary Description */}
                     {bullets.length > 0 && !isExpanded && (
-                      <p className="text-xs text-slate-900 dark:text-zinc-300 leading-relaxed font-medium pt-2.5 border-t border-slate-200/80 dark:border-zinc-800/80">
+                      <p className="font-sans text-sm text-zinc-800 dark:text-zinc-200 leading-relaxed font-medium pt-3 border-t-2 border-black/10 dark:border-white/10">
                         {bullets[0]}
                       </p>
                     )}
 
                     {/* Expanded Detail Dropdown */}
                     {isExpanded && (
-                      <div className="pt-3 border-t border-slate-200/80 dark:border-zinc-800/80 space-y-3 animate-in fade-in slide-in-from-top-2 duration-300">
-                        <p className="text-[10px] font-black uppercase tracking-widest text-blue-700 dark:text-cyan-400 flex items-center gap-1.5">
-                          <Sparkles className="w-3.5 h-3.5" />
-                          <span>{isEn ? "AUDIT SCOPE & RESPONSIBILITIES:" : "CAKUPAN PENGUJIAN & TANGGUNG JAWAB AUDIT:"}</span>
+                      <div className="pt-3.5 border-t-2 border-black/10 dark:border-white/10 space-y-3.5">
+                        <p className="font-sans text-xs text-blue-600 dark:text-yellow-400 uppercase font-black tracking-wider flex items-center gap-2">
+                          <Sparkles className="w-4 h-4 text-blue-600 dark:text-yellow-400" />
+                          <span>{isEn ? "QUEST OBJECTIVES & RESPONSIBILITIES:" : "TARGET & TANGGUNG JAWAB QUEST:"}</span>
                         </p>
 
-                        <ul className="space-y-2">
+                        <ul className="space-y-2.5">
                           {bullets.map((bullet, bIdx) => (
-                            <li key={bIdx} className="flex items-start gap-2 text-xs text-slate-900 dark:text-zinc-300 leading-relaxed font-medium">
-                              <ChevronRight className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 shrink-0 mt-0.5" />
+                            <li key={bIdx} className="flex items-start gap-2.5 font-sans text-sm text-zinc-800 dark:text-zinc-200 leading-relaxed font-medium">
+                              <ChevronRight className="w-4 h-4 text-blue-600 dark:text-yellow-400 shrink-0 mt-0.5" />
                               <span>{bullet}</span>
                             </li>
                           ))}
@@ -289,11 +294,11 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
 
                     {/* Skill Tags at Bottom */}
                     {techList.length > 0 && (
-                      <div className="flex flex-wrap gap-1.5 pt-2.5 border-t border-slate-200/80 dark:border-zinc-800/60">
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-2.5 sm:pt-3 border-t-2 border-black/10 dark:border-white/10">
                         {techList.map((tech, tIdx) => (
                           <span
                             key={tIdx}
-                            className="px-2.5 py-0.5 rounded-lg bg-white/55 dark:bg-zinc-900/90 border border-white/80 dark:border-zinc-800 text-[10px] text-slate-900 dark:text-zinc-200 font-extrabold shadow-2xs backdrop-blur-xs"
+                            className="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-xs font-sans font-bold bg-[#FAF6ED] dark:bg-[#0E1217] border border-black dark:border-white text-black dark:text-white shadow-retro-xs"
                           >
                             {tech}
                           </span>

@@ -6,6 +6,9 @@
 
 @theme inline {
   --font-serif: "Playfair Display", serif;
+  --font-pixel: var(--font-pixel), "Pixelify Sans", monospace;
+  --font-arcade: var(--font-arcade), "Press Start 2P", monospace;
+  --font-silkscreen: var(--font-silkscreen), "Silkscreen", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
@@ -146,7 +149,14 @@
 
   html,
   body {
-    @apply overflow-x-hidden bg-slate-50 dark:bg-[#030712] text-slate-900 dark:text-slate-100;
+    @apply overflow-x-hidden bg-slate-50 dark:bg-[#0E1217] text-slate-900 dark:text-slate-100;
+    cursor: default;
+  }
+
+  button, a, [role="button"], .cursor-pointer, input[type="submit"], input[type="button"], label[for], select, summary,
+  .btn-retro, [data-hoverable],
+  button *, a *, [role="button"] *, .cursor-pointer *, .btn-retro * {
+    cursor: pointer !important;
   }
 
   * {
@@ -154,7 +164,7 @@
   }
 
   body {
-    @apply bg-slate-50 dark:bg-[#030712] text-slate-900 dark:text-slate-100;
+    @apply bg-slate-50 dark:bg-[#0E1217] text-slate-900 dark:text-slate-100;
   }
 }
 
@@ -165,6 +175,80 @@
 
   .responsive-font-base {
     @apply text-sm md:text-base;
+  }
+
+  /* ── 8-Bit Retro Grid Backgrounds ── */
+  .bg-retro-grid {
+    background-color: #FAF6ED;
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .dark .bg-retro-grid {
+    background-color: #0E1217;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* ── 8-Bit Retro Hard Shadows ── */
+  .shadow-retro {
+    box-shadow: 4px 4px 0px #000000;
+  }
+  .dark .shadow-retro {
+    box-shadow: 4px 4px 0px #ffffff;
+  }
+
+  .shadow-retro-sm {
+    box-shadow: 2px 2px 0px #000000;
+  }
+  .dark .shadow-retro-sm {
+    box-shadow: 2px 2px 0px #ffffff;
+  }
+
+  .shadow-retro-md {
+    box-shadow: 5px 5px 0px #000000;
+  }
+  .dark .shadow-retro-md {
+    box-shadow: 5px 5px 0px #ffffff;
+  }
+
+  .shadow-retro-lg {
+    box-shadow: 6px 6px 0px #000000;
+  }
+  .dark .shadow-retro-lg {
+    box-shadow: 6px 6px 0px #ffffff;
+  }
+
+  .border-3 {
+    border-width: 3px;
+  }
+
+  .shadow-retro-yellow {
+    box-shadow: 4px 4px 0px #EAB308;
+  }
+
+  .shadow-retro-cyan {
+    box-shadow: 4px 4px 0px #06B6D4;
+  }
+
+  .shadow-retro-black {
+    box-shadow: 4px 4px 0px #000000;
+  }
+
+  .shadow-retro-white {
+    box-shadow: 4px 4px 0px #ffffff;
+  }
+
+  /* ── 8-Bit Retro Button Pressed Animation ── */
+  .btn-retro {
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
+  }
+  .btn-retro:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px transparent !important;
   }
 
   /* ── Flip Card ── */
@@ -206,6 +290,15 @@
 }
 
 @layer utilities {
+  .font-pixel {
+    font-family: var(--font-pixel), "Pixelify Sans", monospace;
+  }
+  .font-arcade {
+    font-family: var(--font-arcade), "Press Start 2P", monospace;
+  }
+  .font-silkscreen {
+    font-family: var(--font-silkscreen), "Silkscreen", monospace;
+  }
   .hide-scrollbar::-webkit-scrollbar,
   .scrollbar-none::-webkit-scrollbar {
     display: none !important;

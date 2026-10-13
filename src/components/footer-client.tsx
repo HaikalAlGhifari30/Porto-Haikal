@@ -36,20 +36,22 @@ export function FooterClient({ settings, onNavigateScene }: FooterClientProps) {
   };
 
   return (
-    <footer className="w-full bg-white/20 dark:bg-slate-950/50 backdrop-blur-2xl text-slate-900 dark:text-white border-t border-white/60 dark:border-cyan-500/20 py-3 pb-16 sm:pb-3 relative overflow-hidden shadow-2xl shrink-0 mt-auto z-20">
-      <div className="w-full max-w-6xl px-4 sm:px-6 mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+    <footer className="w-full bg-[#FAF6ED] dark:bg-[#0E1217] text-black dark:text-white border-t-2 border-black dark:border-white py-3 pb-12 sm:pb-3 relative overflow-hidden shadow-retro-sm shrink-0 mt-auto z-20">
+      <div className="container-original relative flex flex-col sm:flex-row items-center justify-between w-full px-3 md:px-8 mx-auto gap-3 text-xs">
         
         {/* Brand & Socials Wrapper for Mobile Layout */}
         <div className="w-full sm:w-auto flex items-center justify-between sm:justify-start gap-3">
           {/* Brand */}
           <button
             onClick={(e) => handleNavClick(0, e)}
-            className="flex items-center gap-2.5 group text-left cursor-pointer shrink-0"
+            className="flex items-center gap-2 group text-left cursor-pointer shrink-0 btn-retro"
             title="Haikal Al Ghifari — HAG"
           >
-            <HagLogo size="sm" useImage={false} />
-            <span className="text-xs sm:text-sm font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition-colors">
-              Haikal <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-500 dark:from-blue-500 dark:via-cyan-400 dark:to-indigo-300">Al Ghifari</span>
+            <div className="px-2 py-0.5 bg-[#FACC15] text-black border-2 border-black dark:border-white shadow-retro-xs font-pixel font-bold text-[10px] tracking-wider">
+              HAG
+            </div>
+            <span className="font-pixel text-xs font-bold text-black dark:text-white uppercase">
+              Haikal Al Ghifari
             </span>
           </button>
 
@@ -59,7 +61,7 @@ export function FooterClient({ settings, onNavigateScene }: FooterClientProps) {
               href="https://github.com/HaikalAlGhifari30"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-lg bg-white/60 dark:bg-slate-900/80 border border-white/80 dark:border-zinc-800 text-slate-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-all shadow-2xs backdrop-blur-xs"
+              className="p-1.5 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white text-black dark:text-white shadow-retro-xs btn-retro hover:bg-yellow-100"
               aria-label="GitHub Profile"
               title="GitHub Profile"
             >
@@ -69,7 +71,7 @@ export function FooterClient({ settings, onNavigateScene }: FooterClientProps) {
               href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-lg bg-white/60 dark:bg-slate-900/80 border border-white/80 dark:border-zinc-800 text-slate-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-all shadow-2xs backdrop-blur-xs"
+              className="p-1.5 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white text-black dark:text-white shadow-retro-xs btn-retro hover:bg-yellow-100"
               aria-label="LinkedIn Profile"
               title="LinkedIn Profile"
             >
@@ -79,7 +81,7 @@ export function FooterClient({ settings, onNavigateScene }: FooterClientProps) {
               href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-lg bg-white/60 dark:bg-slate-900/80 border border-white/80 dark:border-zinc-800 text-slate-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-all shadow-2xs backdrop-blur-xs"
+              className="p-1.5 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white text-black dark:text-white shadow-retro-xs btn-retro hover:bg-yellow-100"
               aria-label="Instagram Profile"
               title="Instagram Profile"
             >
@@ -89,7 +91,7 @@ export function FooterClient({ settings, onNavigateScene }: FooterClientProps) {
               href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailUrl)}&su=${encodeURIComponent("Portfolio Inquiry")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-lg bg-white/60 dark:bg-slate-900/80 border border-white/80 dark:border-zinc-800 text-slate-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-all shadow-2xs backdrop-blur-xs"
+              className="p-1.5 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white text-black dark:text-white shadow-retro-xs btn-retro hover:bg-yellow-100"
               aria-label="Email Direct"
               title="Send Email"
             >
@@ -99,8 +101,8 @@ export function FooterClient({ settings, onNavigateScene }: FooterClientProps) {
         </div>
 
         {/* Center Copyright Notice */}
-        <p className="text-[11px] text-slate-800 dark:text-zinc-400 font-bold text-center order-last sm:order-none">
-          © {new Date().getFullYear()} Haikal Al Ghifari. {t('footer.copyright', 'Hak Cipta Dilindungi Undang-Undang.')}
+        <p className="font-pixel text-[10px] text-zinc-700 dark:text-zinc-300 text-center order-last sm:order-none uppercase">
+          © {new Date().getFullYear()} HAIKAL AL GHIFARI. {t('footer.copyright', 'Hak Cipta Dilindungi Undang-Undang.')}
         </p>
 
         {/* Social Icons (Desktop sm+ view) */}
@@ -109,7 +111,7 @@ export function FooterClient({ settings, onNavigateScene }: FooterClientProps) {
             href="https://github.com/HaikalAlGhifari30"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-1.5 rounded-lg bg-white/60 dark:bg-slate-900/80 border border-white/80 dark:border-zinc-800 text-slate-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-all shadow-2xs backdrop-blur-xs"
+            className="p-1.5 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white text-black dark:text-white shadow-retro-xs btn-retro hover:bg-yellow-100"
             aria-label="GitHub Profile"
             title="GitHub Profile"
           >
@@ -119,7 +121,7 @@ export function FooterClient({ settings, onNavigateScene }: FooterClientProps) {
             href={linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-1.5 rounded-lg bg-white/60 dark:bg-slate-900/80 border border-white/80 dark:border-zinc-800 text-slate-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-all shadow-2xs backdrop-blur-xs"
+            className="p-1.5 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white text-black dark:text-white shadow-retro-xs btn-retro hover:bg-yellow-100"
             aria-label="LinkedIn Profile"
             title="LinkedIn Profile"
           >
@@ -129,7 +131,7 @@ export function FooterClient({ settings, onNavigateScene }: FooterClientProps) {
             href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-1.5 rounded-lg bg-white/60 dark:bg-slate-900/80 border border-white/80 dark:border-zinc-800 text-slate-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-all shadow-2xs backdrop-blur-xs"
+            className="p-1.5 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white text-black dark:text-white shadow-retro-xs btn-retro hover:bg-yellow-100"
             aria-label="Instagram Profile"
             title="Instagram Profile"
           >
@@ -139,7 +141,7 @@ export function FooterClient({ settings, onNavigateScene }: FooterClientProps) {
             href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailUrl)}&su=${encodeURIComponent("Portfolio Inquiry")}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-1.5 rounded-lg bg-white/60 dark:bg-slate-900/80 border border-white/80 dark:border-zinc-800 text-slate-700 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-all shadow-2xs backdrop-blur-xs"
+            className="p-1.5 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white text-black dark:text-white shadow-retro-xs btn-retro hover:bg-yellow-100"
             aria-label="Email Direct"
             title="Send Email"
           >

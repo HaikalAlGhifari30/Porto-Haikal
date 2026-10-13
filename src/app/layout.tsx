@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif, Pixelify_Sans, Press_Start_2P, Silkscreen } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 import "./globals.css";
@@ -19,6 +19,23 @@ const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
   style: ["normal", "italic"],
+});
+
+const pixelifySans = Pixelify_Sans({
+  variable: "--font-pixel",
+  subsets: ["latin"],
+});
+
+const pressStart = Press_Start_2P({
+  variable: "--font-arcade",
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const silkscreen = Silkscreen({
+  variable: "--font-silkscreen",
+  subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 import { FloatingButtonsServer } from "@/components/floating-buttons-server";
@@ -55,11 +72,32 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
+      className={`light ${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} ${pixelifySans.variable} ${pressStart.variable} ${silkscreen.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-[#030712] text-slate-100 antialiased">
-        <ThemeProvider defaultTheme="dark">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var stored = localStorage.getItem('ui-theme');
+                  var theme = (stored === 'dark' || stored === 'light') ? stored : 'light';
+                  if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
+                  } else {
+                    document.documentElement.classList.add('light');
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-[#FAF6ED] dark:bg-[#030712] text-zinc-900 dark:text-slate-100 antialiased">
+        <ThemeProvider defaultTheme="light">
             {children}
             <FloatingButtonsServer />
             <DevNoticeModal />
@@ -68,7 +106,7 @@ export default function RootLayout({
                 duration={2000} 
                 expand={false}
                 richColors
-                theme="dark"
+                theme="system"
                 toastOptions={{
                     style: {
                         background: 'rgba(9, 9, 11, 0.8)',

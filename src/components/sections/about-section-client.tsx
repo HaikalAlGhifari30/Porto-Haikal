@@ -248,76 +248,79 @@ export function AboutSectionClient({
   const currentModalImgUrl = currentModalObj.url;
 
   return (
-    <section className="w-full max-w-5xl mx-auto px-2 sm:px-4 py-2 sm:py-4 flex flex-col justify-center items-center text-zinc-900 dark:text-white">
+    <section className="w-full max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6 flex flex-col justify-center items-center text-zinc-900 dark:text-white">
       {/* Header */}
-      <div className="w-full max-w-2xl space-y-1.5 mb-5 text-center mx-auto px-2 shrink-0">
-        <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-700 to-cyan-600 dark:from-white dark:via-cyan-200 dark:to-cyan-400">
+      <div className="w-full max-w-3xl space-y-2.5 mb-6 text-center mx-auto px-2 shrink-0">
+        <div className="inline-block px-3.5 py-1.5 bg-[#FACC15] border-2 border-black dark:border-white shadow-retro-sm text-black font-pixel text-xs uppercase font-bold tracking-wider">
+          PLAYER PROFILE // STATS
+        </div>
+        <h2 className="text-3xl sm:text-5xl font-pixel font-black tracking-tight text-black dark:text-white uppercase">
           {t('section.about')}
         </h2>
-        <p className="text-slate-600 dark:text-zinc-400 text-xs leading-relaxed font-medium w-full max-w-xl mx-auto px-2 break-words">
+        <p className="font-sans text-sm sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium max-w-2xl mx-auto px-2 break-words">
           {isEn
             ? "Personal background, academic foundation, certifications, and leadership journey"
             : "Latar belakang pribadi, fondasi akademik, sertifikasi, serta perjalanan organisasi"}
         </p>
 
-        {/* Compact Sub-Navigation Tabs inside ABOUT Section (Responsive Grid on Mobile) */}
-        <div className="w-full grid grid-cols-2 sm:flex sm:items-center sm:justify-center gap-2 max-w-xs sm:max-w-none mx-auto pt-1.5 px-1">
+        {/* 8-Bit Sub-Navigation Tabs */}
+        <div className="w-full grid grid-cols-2 sm:flex sm:items-center sm:justify-center gap-1.5 sm:gap-2.5 max-w-md sm:max-w-none mx-auto pt-2 sm:pt-3 px-1">
           <button
             onClick={() => setActiveTab("intro")}
             className={cn(
-              "w-full sm:w-auto px-2.5 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold transition-all cursor-pointer flex items-center justify-center gap-1.5 shrink-0 whitespace-nowrap",
+              "w-full sm:w-auto px-2 sm:px-4 lg:px-6 py-2 sm:py-2.5 lg:py-3 text-[10px] min-[400px]:text-[11px] sm:text-xs lg:text-sm font-sans font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2 shrink-0 whitespace-nowrap border-2 border-black dark:border-white btn-retro",
               activeTab === "intro"
-                ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md shadow-cyan-500/25"
-                : "bg-white/50 dark:bg-slate-900/60 text-slate-800 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white border border-white/70 dark:border-zinc-800 shadow-2xs backdrop-blur-xs"
+                ? "bg-[#FACC15] text-black shadow-retro-sm"
+                : "bg-white dark:bg-[#151B22] text-black dark:text-white shadow-retro-xs hover:bg-yellow-50 dark:hover:bg-zinc-800"
             )}
           >
-            <UserCheck className="w-3.5 h-3.5" />
+            <UserCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
             <span>{isEn ? "INTRO" : "PROFIL"}</span>
           </button>
 
           <button
             onClick={() => setActiveTab("education")}
             className={cn(
-              "w-full sm:w-auto px-2.5 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold transition-all cursor-pointer flex items-center justify-center gap-1.5 shrink-0 whitespace-nowrap",
+              "w-full sm:w-auto px-2 sm:px-4 lg:px-6 py-2 sm:py-2.5 lg:py-3 text-[10px] min-[400px]:text-[11px] sm:text-xs lg:text-sm font-sans font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2 shrink-0 whitespace-nowrap border-2 border-black dark:border-white btn-retro",
               activeTab === "education"
-                ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md shadow-cyan-500/25"
-                : "bg-white/50 dark:bg-slate-900/60 text-slate-800 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white border border-white/70 dark:border-zinc-800 shadow-2xs backdrop-blur-xs"
+                ? "bg-[#FACC15] text-black shadow-retro-sm"
+                : "bg-white dark:bg-[#151B22] text-black dark:text-white shadow-retro-xs hover:bg-yellow-50 dark:hover:bg-zinc-800"
             )}
           >
-            <GraduationCap className="w-3.5 h-3.5" />
+            <GraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
             <span>{isEn ? "EDUCATION" : "PENDIDIKAN"}</span>
           </button>
 
           <button
             onClick={() => setActiveTab("certificates")}
             className={cn(
-              "w-full sm:w-auto px-2.5 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold transition-all cursor-pointer flex items-center justify-center gap-1.5 shrink-0 whitespace-nowrap",
+              "w-full sm:w-auto px-2 sm:px-4 lg:px-6 py-2 sm:py-2.5 lg:py-3 text-[10px] min-[400px]:text-[11px] sm:text-xs lg:text-sm font-sans font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2 shrink-0 whitespace-nowrap border-2 border-black dark:border-white btn-retro",
               activeTab === "certificates"
-                ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md shadow-cyan-500/25"
-                : "bg-white/50 dark:bg-slate-900/60 text-slate-800 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white border border-white/70 dark:border-zinc-800 shadow-2xs backdrop-blur-xs"
+                ? "bg-[#FACC15] text-black shadow-retro-sm"
+                : "bg-white dark:bg-[#151B22] text-black dark:text-white shadow-retro-xs hover:bg-yellow-50 dark:hover:bg-zinc-800"
             )}
           >
-            <Award className="w-3.5 h-3.5" />
+            <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
             <span>{isEn ? "CERTIFICATES" : "SERTIFIKASI"}</span>
           </button>
 
           <button
             onClick={() => setActiveTab("organization")}
             className={cn(
-              "w-full sm:w-auto px-2.5 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-extrabold transition-all cursor-pointer flex items-center justify-center gap-1.5 shrink-0 whitespace-nowrap",
+              "w-full sm:w-auto px-2 sm:px-4 lg:px-6 py-2 sm:py-2.5 lg:py-3 text-[10px] min-[400px]:text-[11px] sm:text-xs lg:text-sm font-sans font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2 shrink-0 whitespace-nowrap border-2 border-black dark:border-white btn-retro",
               activeTab === "organization"
-                ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md shadow-cyan-500/25"
-                : "bg-white/50 dark:bg-slate-900/60 text-slate-800 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white border border-white/70 dark:border-zinc-800 shadow-2xs backdrop-blur-xs"
+                ? "bg-[#FACC15] text-black shadow-retro-sm"
+                : "bg-white dark:bg-[#151B22] text-black dark:text-white shadow-retro-xs hover:bg-yellow-50 dark:hover:bg-zinc-800"
             )}
           >
-            <Users className="w-3.5 h-3.5" />
+            <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
             <span>{isEn ? "ORGANIZATION" : "ORGANISASI"}</span>
           </button>
         </div>
       </div>
 
       {/* Tab Content Display Viewport Frame */}
-      <div className="w-full min-h-[410px] sm:h-[410px] flex flex-col justify-start pt-3 sm:pt-4 overflow-y-auto sm:overflow-hidden scrollbar-none">
+      <div className="w-full min-h-0 flex flex-col justify-start pt-2 sm:pt-4 overflow-visible">
         <AnimatePresence mode="wait">
           
           {/* TAB 1: PERSONAL INTRO */}
@@ -328,40 +331,40 @@ export function AboutSectionClient({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch w-full"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-stretch w-full"
             >
               {/* Main Bio Card */}
-              <div className="lg:col-span-6 p-6 rounded-[2rem] bg-white/40 dark:bg-slate-950/75 border border-white/70 dark:border-cyan-500/30 backdrop-blur-2xl space-y-4 shadow-2xl shadow-blue-900/5 dark:shadow-cyan-950/40 flex flex-col justify-between">
-                <div className="space-y-3">
-                  <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
-                    <UserCheck className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
+              <div className="lg:col-span-6 p-4 sm:p-6 lg:p-8 bg-white dark:bg-[#151B22] border-3 border-black dark:border-white shadow-retro-md space-y-4 sm:space-y-5 flex flex-col justify-between">
+                <div className="space-y-3.5">
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 bg-[#FACC15] border-2 border-black dark:border-white text-black shadow-retro-xs flex items-center justify-center">
+                    <UserCheck className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-extrabold text-slate-950 dark:text-white tracking-tight">Haikal Al Ghifari, S.Kom</h3>
-                    <p className="text-xs text-blue-700 dark:text-cyan-400 font-extrabold uppercase tracking-wider mt-0.5">UNIKOM Informatics Engineering</p>
+                    <h3 className="text-lg sm:text-2xl font-sans font-black text-black dark:text-white tracking-tight">Haikal Al Ghifari, S.Kom</h3>
+                    <p className="font-sans text-xs sm:text-sm text-blue-600 dark:text-yellow-400 font-bold uppercase tracking-wider mt-0.5">UNIKOM Informatics Engineering</p>
                   </div>
-                  <p className="text-xs text-slate-900 dark:text-zinc-300 leading-relaxed pt-2 border-t border-slate-200/80 dark:border-zinc-800 font-medium">
+                  <p className="font-sans text-xs sm:text-base text-zinc-800 dark:text-zinc-100 leading-relaxed pt-3 sm:pt-4 border-t-2 border-black/10 dark:border-white/10 font-medium">
                     {bioText}
                   </p>
                 </div>
               </div>
 
               {/* Highlights List */}
-              <div className="lg:col-span-6 space-y-3">
+              <div className="lg:col-span-6 space-y-3 sm:space-y-4">
                 {highlightCards.map((card, idx) => (
                   <div
                     key={idx}
-                    className="p-4 rounded-2xl bg-white/45 dark:bg-slate-950/75 border border-white/70 dark:border-zinc-800 hover:border-cyan-500/40 backdrop-blur-xl space-y-1.5 transition-all shadow-md group"
+                    className="p-4 sm:p-5 lg:p-6 bg-white dark:bg-[#151B22] border-3 border-black dark:border-white shadow-retro-sm hover:shadow-retro space-y-1.5 sm:space-y-2 btn-retro transition-all"
                   >
-                    <div className="flex items-center gap-2.5">
-                      <div className="p-1.5 rounded-lg bg-white/60 dark:bg-slate-900 border border-white/80 dark:border-zinc-800 shrink-0">
+                    <div className="flex items-center gap-2.5 sm:gap-3">
+                      <div className="p-1.5 sm:p-2 bg-[#FACC15] border-2 border-black dark:border-white text-black shrink-0 shadow-retro-xs">
                         {card.icon}
                       </div>
-                      <h4 className="text-sm font-bold text-slate-950 dark:text-white group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors">
+                      <h4 className="font-sans text-xs sm:text-base font-black text-black dark:text-white tracking-wide">
                         {card.title}
                       </h4>
                     </div>
-                    <p className="text-xs text-slate-800 dark:text-zinc-400 leading-relaxed pl-9 font-medium">
+                    <p className="font-sans text-xs sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium pl-8 sm:pl-11">
                       {card.desc}
                     </p>
                   </div>
@@ -372,7 +375,7 @@ export function AboutSectionClient({
 
           {/* TAB 2: EDUCATION */}
           {activeTab === "education" && (
-            <div className="w-full max-w-4xl mx-auto flex flex-col justify-between space-y-3">
+            <div className="w-full max-w-6xl mx-auto flex flex-col justify-between space-y-4">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={eduPage}
@@ -380,7 +383,7 @@ export function AboutSectionClient({
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
-                  className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4 w-full"
+                  className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 w-full"
                 >
                   {eduItems
                     .slice(eduPage * 2, eduPage * 2 + 2)
@@ -397,27 +400,27 @@ export function AboutSectionClient({
                       return (
                         <div
                           key={idx}
-                          className="p-4 sm:p-5 rounded-2xl bg-white/40 dark:bg-slate-950/75 border border-white/70 dark:border-cyan-500/25 backdrop-blur-2xl space-y-2.5 shadow-lg flex flex-col justify-between group hover:border-cyan-400 transition-all"
+                          className="p-6 sm:p-7 bg-white dark:bg-[#151B22] border-3 border-black dark:border-white shadow-retro-md space-y-3.5 flex flex-col justify-between"
                         >
-                          <div className="space-y-2.5">
-                            <div className="flex items-center gap-3">
-                              <div className="w-12 h-12 rounded-xl bg-white p-1 flex items-center justify-center shrink-0 shadow-md border border-slate-200 overflow-hidden">
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-3.5">
+                              <div className="w-14 h-14 bg-white p-1.5 flex items-center justify-center shrink-0 border-2 border-black dark:border-white shadow-retro-xs overflow-hidden">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src={logo} alt={inst} className="w-full h-full object-contain" />
                               </div>
                               <div>
-                                <h3 className="text-xs sm:text-sm font-bold text-slate-950 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors line-clamp-1">{inst}</h3>
-                                <p className="text-[11px] font-extrabold text-blue-700 dark:text-cyan-400 line-clamp-1">{deg}</p>
+                                <h3 className="font-sans text-sm sm:text-base font-black text-black dark:text-white line-clamp-1">{inst}</h3>
+                                <p className="font-sans text-xs sm:text-sm font-bold text-blue-600 dark:text-yellow-400 line-clamp-1 mt-0.5">{deg}</p>
                               </div>
                             </div>
 
-                            <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/60 dark:bg-slate-900 border border-white/80 dark:border-zinc-800 text-slate-900 dark:text-zinc-300 text-[10px] font-bold backdrop-blur-xs">
-                              <Calendar className="w-2.5 h-2.5 text-cyan-600 dark:text-cyan-400" />
+                            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAF6ED] dark:bg-[#0E1217] border border-black dark:border-white text-black dark:text-white font-sans text-xs font-semibold">
+                              <Calendar className="w-3.5 h-3.5 text-black dark:text-yellow-400" />
                               <span>{per}</span>
                             </div>
 
                             {desc && (
-                              <p className="text-[11px] text-slate-900 dark:text-zinc-300 leading-relaxed pt-2 border-t border-slate-200/80 dark:border-zinc-800/80 font-medium line-clamp-3">
+                              <p className="font-sans text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium pt-3 border-t-2 border-black/10 dark:border-white/10 line-clamp-3">
                                 {desc}
                               </p>
                             )}
@@ -428,19 +431,19 @@ export function AboutSectionClient({
                 </motion.div>
               </AnimatePresence>
 
-              {/* Carousel Controls for Education Cards */}
+              {/* 8-Bit Carousel Controls for Education Cards */}
               {eduItems.length > 2 && (
-                <div className="flex items-center justify-between pt-1 px-1">
-                  {/* Dots Indicator */}
+                <div className="flex items-center justify-between pt-2 px-1">
+                  {/* Square Dots Indicator */}
                   <div className="flex items-center gap-2">
                     {Array.from({ length: Math.ceil(eduItems.length / 2) }).map((_, idx) => (
                       <button
                         key={idx}
                         onClick={() => setEduPage(idx)}
-                        className={`h-2 rounded-full transition-all cursor-pointer ${
+                        className={`w-4 h-4 border-2 border-black dark:border-white transition-all cursor-pointer ${
                           idx === eduPage
-                            ? "w-8 bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.8)]"
-                            : "w-2 bg-slate-300 dark:bg-zinc-700 hover:bg-slate-400 dark:hover:bg-zinc-500"
+                            ? "bg-[#FACC15] shadow-retro-xs scale-110"
+                            : "bg-zinc-300 dark:bg-zinc-700 hover:bg-zinc-400"
                         }`}
                         title={`Page ${idx + 1}`}
                       />
@@ -448,20 +451,20 @@ export function AboutSectionClient({
                   </div>
 
                   {/* Prev / Next Arrows */}
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2.5">
                     <button
                       onClick={() => setEduPage((prev) => (prev === 0 ? Math.ceil(eduItems.length / 2) - 1 : prev - 1))}
-                      className="p-2 rounded-full bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-pointer shadow-md"
+                      className="p-2.5 border-2 border-black dark:border-white bg-[#FACC15] text-black shadow-retro-sm btn-retro transition-all cursor-pointer"
                       title={isEn ? "Previous" : "Sebelumnya"}
                     >
-                      <ChevronLeft className="w-4 h-4" />
+                      <ChevronLeft className="w-4 h-4 font-bold" />
                     </button>
                     <button
                       onClick={() => setEduPage((prev) => (prev === Math.ceil(eduItems.length / 2) - 1 ? 0 : prev + 1))}
-                      className="p-2 rounded-full bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-pointer shadow-md"
+                      className="p-2.5 border-2 border-black dark:border-white bg-[#FACC15] text-black shadow-retro-sm btn-retro transition-all cursor-pointer"
                       title={isEn ? "Next" : "Selanjutnya"}
                     >
-                      <ChevronRight className="w-4 h-4" />
+                      <ChevronRight className="w-4 h-4 font-bold" />
                     </button>
                   </div>
                 </div>
@@ -471,7 +474,7 @@ export function AboutSectionClient({
 
           {/* TAB 3: CERTIFICATES */}
           {activeTab === "certificates" && (
-            <div className="w-full max-w-4xl mx-auto flex flex-col justify-between space-y-3">
+            <div className="w-full max-w-6xl mx-auto flex flex-col justify-between space-y-4">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={certPage}
@@ -479,7 +482,7 @@ export function AboutSectionClient({
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
-                  className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4 w-full"
+                  className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 w-full"
                 >
                   {certItems
                     .slice(certPage * 2, certPage * 2 + 2)
@@ -515,24 +518,24 @@ export function AboutSectionClient({
                       return (
                         <div
                           key={cert.id || idx}
-                          className="p-3 sm:p-3.5 rounded-2xl bg-white/40 dark:bg-slate-950/75 border border-white/70 dark:border-cyan-500/25 backdrop-blur-2xl space-y-2 shadow-xl flex flex-col justify-between group hover:border-cyan-400 transition-all"
+                          className="p-6 sm:p-7 bg-white dark:bg-[#151B22] border-3 border-black dark:border-white shadow-retro-md space-y-3.5 flex flex-col justify-between"
                         >
-                          <div className="space-y-1.5">
+                          <div className="space-y-2.5">
                             <div className="flex items-center justify-between gap-2">
-                              <div className="w-7 h-7 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center shrink-0">
-                                <Award className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+                              <div className="w-8 h-8 bg-[#FACC15] border-2 border-black dark:border-white text-black flex items-center justify-center shrink-0 shadow-retro-xs">
+                                <Award className="w-4 h-4 text-black" />
                               </div>
-                              <span className="px-2 py-0.5 rounded-full bg-white/60 dark:bg-slate-900 border border-white/80 dark:border-zinc-800 text-slate-900 dark:text-zinc-300 text-[10px] font-extrabold backdrop-blur-xs">
+                              <span className="px-3 py-1 bg-[#FAF6ED] dark:bg-[#0E1217] border border-black dark:border-white text-black dark:text-white font-sans text-xs font-bold">
                                 {per}
                               </span>
                             </div>
 
                             <div>
-                              <h3 className="text-xs sm:text-sm font-bold text-slate-950 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors line-clamp-1">
+                              <h3 className="font-sans text-base sm:text-lg font-black text-black dark:text-white line-clamp-1 leading-snug">
                                 {tit}
                               </h3>
-                              <p className="text-[11px] font-extrabold text-blue-700 dark:text-cyan-400 flex items-center gap-1 mt-0.5 truncate">
-                                <ShieldCheck className="w-3 h-3 shrink-0" />
+                              <p className="font-sans text-xs sm:text-sm font-bold text-blue-600 dark:text-yellow-400 flex items-center gap-1.5 mt-0.5 truncate">
+                                <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
                                 <span className="truncate">{iss}</span>
                               </p>
                             </div>
@@ -543,26 +546,27 @@ export function AboutSectionClient({
                                   setSelectedCert(certWithImgs);
                                   setActiveCertPage(1);
                                 }}
-                                className="relative h-24 sm:h-28 w-full rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/50 cursor-pointer group/img my-1 shadow-md hover:border-cyan-500/80 transition-all"
+                                className="relative h-36 sm:h-44 w-full border-2 border-black dark:border-white cursor-pointer group/img my-2 overflow-hidden bg-zinc-100 dark:bg-zinc-900 shadow-retro-xs"
                               >
+                                {/* Certificate Thumbnail */}
                                 <img
                                   src={imgUrl}
                                   alt={tit}
                                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
                                 />
 
-                                {/* Subtle top-right glass badge when not hovered */}
-                                <div className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-white/90 dark:bg-slate-950/75 border border-slate-200/80 dark:border-slate-700/60 text-slate-800 dark:text-cyan-400 text-[10px] font-extrabold backdrop-blur-md flex items-center gap-1 shadow-sm group-hover/img:opacity-0 transition-opacity">
-                                  <Eye className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
-                                  <span>{isEn ? "Preview" : "Lihat"}</span>
+                                {/* Static Corner Preview Badge (fades out on hover) */}
+                                <div className="absolute top-2 right-2 px-2.5 py-1 bg-black/80 text-white border border-black font-sans text-[10px] sm:text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-retro-xs transition-opacity duration-300 group-hover/img:opacity-0 pointer-events-none">
+                                  <Eye className="w-3.5 h-3.5 text-[#FACC15]" />
+                                  <span>{isEn ? "PREVIEW" : "PRATINJAU"}</span>
                                 </div>
 
-                                {/* Adaptive overlay on hover for clear contrast in both light and dark mode */}
-                                <div className="absolute inset-0 bg-slate-900/40 dark:bg-slate-950/80 backdrop-blur-xs opacity-0 group-hover/img:opacity-100 transition-all duration-300 flex items-center justify-center">
-                                  <span className="px-3 py-1.5 rounded-full bg-cyan-500 text-slate-950 text-[11px] font-black shadow-[0_0_15px_rgba(6,182,212,0.6)] flex items-center gap-1.5 transform scale-90 group-hover/img:scale-100 transition-transform">
-                                    <Eye className="w-3.5 h-3.5" />
-                                    <span>{isEn ? "View Certificate" : "Lihat Sertifikat"}</span>
-                                  </span>
+                                {/* Hover Dark Backdrop Overlay & Centered "View Certificate" Button */}
+                                <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-all duration-300 z-10 p-3">
+                                  <div className="px-4 py-2 bg-[#FACC15] text-black border-2 border-black shadow-retro-sm font-sans text-xs sm:text-sm font-black flex items-center gap-2 uppercase tracking-wider btn-retro transform translate-y-1 group-hover/img:translate-y-0 transition-transform duration-300">
+                                    <Eye className="w-4 h-4 stroke-[2.5]" />
+                                    <span>{isEn ? "VIEW CERTIFICATE" : "LIHAT SERTIFIKAT"}</span>
+                                  </div>
                                 </div>
                               </div>
                             )}
@@ -574,21 +578,21 @@ export function AboutSectionClient({
                                   setActiveCertPage(1);
                                 }}
                                 title={desc}
-                                className="pt-1 border-t border-slate-200/80 dark:border-zinc-800/80 cursor-pointer group/desc"
+                                className="pt-2 border-t-2 border-black/10 dark:border-white/10 cursor-pointer group/desc"
                               >
-                                <p className="text-[11px] text-slate-900 dark:text-zinc-300 leading-relaxed font-medium line-clamp-2 group-hover/desc:text-cyan-500 dark:group-hover/desc:text-cyan-300 transition-colors">
+                                <p className="font-sans text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium line-clamp-2">
                                   {desc}
                                 </p>
-                                <span className="text-[10px] font-bold text-cyan-500 hover:underline mt-0.5 inline-block">
-                                  {isEn ? "→ Click to read full description" : "→ Klik untuk baca deskripsi lengkap"}
+                                <span className="font-sans text-xs font-black text-blue-600 dark:text-yellow-400 hover:underline mt-1.5 inline-block uppercase tracking-wider">
+                                  {isEn ? "► DETAILS" : "► DETAIL LENGKAP"}
                                 </span>
                               </div>
                             )}
                           </div>
 
-                          <div className="pt-1.5 flex items-center justify-between gap-2 border-t border-slate-200/50 dark:border-zinc-800/50">
+                          <div className="pt-3 flex items-center justify-between gap-2 border-t-2 border-black/10 dark:border-white/10">
                             {bdg ? (
-                              <span className="text-[10px] font-black text-slate-600 dark:text-zinc-400 uppercase tracking-wider block">
+                              <span className="font-sans text-xs font-black bg-[#FACC15] text-black px-2.5 py-1 border border-black uppercase tracking-wider block truncate max-w-[220px]">
                                 {bdg}
                               </span>
                             ) : <span />}
@@ -598,10 +602,10 @@ export function AboutSectionClient({
                                 href={cert.credentialUrl}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="text-[11px] font-extrabold text-cyan-500 hover:text-cyan-400 underline underline-offset-2 flex items-center gap-1 shrink-0"
+                                className="font-sans text-xs font-black text-blue-600 dark:text-yellow-400 underline underline-offset-2 flex items-center gap-1 shrink-0 uppercase tracking-wider"
                               >
-                                <BookOpen className="w-3 h-3" />
-                                <span>Credential</span>
+                                <BookOpen className="w-3.5 h-3.5" />
+                                <span>CREDENTIAL</span>
                               </a>
                             )}
                           </div>
@@ -611,19 +615,19 @@ export function AboutSectionClient({
                 </motion.div>
               </AnimatePresence>
 
-              {/* Carousel Controls for Certificate Cards (Identical to Education) */}
+              {/* 8-Bit Carousel Controls for Certificate Cards */}
               {certItems.length > 2 && (
-                <div className="flex items-center justify-between pt-1 px-1">
-                  {/* Dots Indicator */}
+                <div className="flex items-center justify-between pt-2 px-1">
+                  {/* Square Dots Indicator */}
                   <div className="flex items-center gap-2">
                     {Array.from({ length: Math.ceil(certItems.length / 2) }).map((_, idx) => (
                       <button
                         key={idx}
                         onClick={() => setCertPage(idx)}
-                        className={`h-2 rounded-full transition-all cursor-pointer ${
+                        className={`w-4 h-4 border-2 border-black dark:border-white transition-all cursor-pointer ${
                           idx === certPage
-                            ? "w-8 bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.8)]"
-                            : "w-2 bg-slate-300 dark:bg-zinc-700 hover:bg-slate-400 dark:hover:bg-zinc-500"
+                            ? "bg-[#FACC15] shadow-retro-xs scale-110"
+                            : "bg-zinc-300 dark:bg-zinc-700 hover:bg-zinc-400"
                         }`}
                         title={`Page ${idx + 1}`}
                       />
@@ -631,20 +635,20 @@ export function AboutSectionClient({
                   </div>
 
                   {/* Prev / Next Arrows */}
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2.5">
                     <button
                       onClick={() => setCertPage((prev) => (prev === 0 ? Math.ceil(certItems.length / 2) - 1 : prev - 1))}
-                      className="p-2 rounded-full bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-pointer shadow-md"
+                      className="p-2.5 border-2 border-black dark:border-white bg-[#FACC15] text-black shadow-retro-sm btn-retro transition-all cursor-pointer"
                       title={isEn ? "Previous" : "Sebelumnya"}
                     >
-                      <ChevronLeft className="w-4 h-4" />
+                      <ChevronLeft className="w-4 h-4 font-bold" />
                     </button>
                     <button
                       onClick={() => setCertPage((prev) => (prev === Math.ceil(certItems.length / 2) - 1 ? 0 : prev + 1))}
-                      className="p-2 rounded-full bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-pointer shadow-md"
+                      className="p-2.5 border-2 border-black dark:border-white bg-[#FACC15] text-black shadow-retro-sm btn-retro transition-all cursor-pointer"
                       title={isEn ? "Next" : "Selanjutnya"}
                     >
-                      <ChevronRight className="w-4 h-4" />
+                      <ChevronRight className="w-4 h-4 font-bold" />
                     </button>
                   </div>
                 </div>
@@ -660,7 +664,7 @@ export function AboutSectionClient({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl mx-auto"
             >
               {orgItems.map((org: any, idx: number) => {
                 const r = isEn && org.roleEn ? org.roleEn : org.role;
@@ -672,28 +676,28 @@ export function AboutSectionClient({
                 return (
                   <div
                     key={idx}
-                    className="p-6 rounded-[2rem] bg-white/40 dark:bg-slate-950/75 border border-white/70 dark:border-cyan-500/25 backdrop-blur-2xl space-y-4 shadow-2xl flex flex-col justify-between group hover:border-cyan-400 transition-all"
+                    className="p-6 sm:p-7 bg-white dark:bg-[#151B22] border-3 border-black dark:border-white shadow-retro-md space-y-4 flex flex-col justify-between"
                   >
-                    <div className="space-y-3">
+                    <div className="space-y-3.5">
                       <div className="flex flex-wrap items-center justify-between gap-2">
-                        <span className="px-3 py-1 rounded-full bg-blue-600/10 dark:bg-cyan-500/10 border border-blue-600/20 dark:border-cyan-500/30 text-blue-700 dark:text-cyan-400 text-[11px] font-black uppercase tracking-wider">
+                        <span className="px-3 py-1.5 bg-[#FACC15] border-2 border-black dark:border-white text-black font-sans text-xs sm:text-sm uppercase font-black tracking-wider shadow-retro-xs">
                           {r}
                         </span>
-                        <span className="text-[11px] text-slate-800 dark:text-zinc-400 font-extrabold flex items-center gap-1">
-                          <Calendar className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
+                        <span className="font-sans text-xs text-zinc-700 dark:text-zinc-300 font-semibold flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5 text-black dark:text-yellow-400" />
                           {p}
                         </span>
                       </div>
 
-                      <h3 className="text-base font-bold text-slate-950 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors">
+                      <h3 className="font-sans text-base sm:text-lg font-black text-black dark:text-white leading-snug">
                         {n}
                       </h3>
 
                       {bullets.length > 0 && (
-                        <ul className="space-y-1.5 pt-2 border-t border-slate-200/80 dark:border-zinc-800">
+                        <ul className="space-y-2 pt-3 border-t-2 border-black/10 dark:border-white/10">
                           {bullets.map((b: string, bIdx: number) => (
-                            <li key={bIdx} className="flex items-start gap-2 text-xs text-slate-900 dark:text-zinc-300 leading-relaxed font-medium">
-                              <CheckCircle2 className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" />
+                            <li key={bIdx} className="flex items-start gap-2.5 font-sans text-sm text-zinc-800 dark:text-zinc-200 leading-relaxed font-medium">
+                              <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-yellow-400 shrink-0 mt-0.5" />
                               <span>{b}</span>
                             </li>
                           ))}
@@ -708,43 +712,45 @@ export function AboutSectionClient({
 
         </AnimatePresence>
 
-        {/* CERTIFICATE LIGHTBOX MODAL */}
+        {/* 8-BIT CERTIFICATE LIGHTBOX MODAL */}
         <AnimatePresence>
           {selectedCert && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              data-no-scene-scroll="true"
               onClick={() => setSelectedCert(null)}
-              className="fixed inset-0 z-[99999] flex items-center justify-center p-2 sm:p-6 bg-slate-950/60 dark:bg-slate-950/85 backdrop-blur-md overflow-y-auto overscroll-contain"
+              className="fixed inset-0 z-[99999] flex items-center justify-center p-2 sm:p-6 bg-black/80 backdrop-blur-xs overflow-y-auto overscroll-contain"
             >
               <motion.div
                 initial={{ scale: 0.95, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                data-no-scene-scroll="true"
                 onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-4xl max-h-[92dvh] sm:max-h-[88vh] bg-white dark:bg-slate-900 border border-slate-200 dark:border-cyan-500/30 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between my-auto"
+                className="relative w-full max-w-4xl max-h-[92dvh] sm:max-h-[88vh] bg-[#FAF6ED] dark:bg-[#0E1217] border-4 border-black dark:border-white shadow-retro-lg flex flex-col justify-between my-auto overflow-hidden text-black dark:text-white"
               >
-                {/* Modal Header */}
-                <div className="p-3 sm:p-5 bg-slate-50/95 dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
+                {/* 8-Bit Modal Header */}
+                <div className="p-3 sm:p-4 bg-[#FACC15] border-b-2 border-black dark:border-white flex items-center justify-between gap-3 shrink-0 text-black">
                   <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center shrink-0">
-                      <Award className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-600 dark:text-cyan-400" />
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 bg-white border-2 border-black flex items-center justify-center shrink-0 shadow-retro-xs">
+                      <Award className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
                     </div>
                     <div className="min-w-0">
-                      <h3 className="text-xs sm:text-base font-bold text-slate-950 dark:text-white leading-tight truncate">
+                      <h3 className="font-sans text-sm sm:text-base font-black text-black leading-tight truncate">
                         {isEn && selectedCert.titleEn ? selectedCert.titleEn : selectedCert.title}
                       </h3>
-                      <p className="text-[11px] sm:text-xs text-blue-600 dark:text-cyan-400 font-semibold mt-0.5 truncate">
+                      <p className="font-sans text-xs text-black/80 font-bold mt-0.5 truncate">
                         {isEn && selectedCert.issuerEn ? selectedCert.issuerEn : selectedCert.issuer}
                       </p>
                     </div>
                   </div>
                   <button
                     onClick={() => setSelectedCert(null)}
-                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-200/80 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition-colors shrink-0 border border-slate-300/80 dark:border-slate-700 cursor-pointer"
+                    className="w-8 h-8 bg-white border-2 border-black text-black font-pixel font-bold shadow-retro-xs btn-retro flex items-center justify-center transition-colors shrink-0 cursor-pointer"
                   >
-                    <X className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                    <X className="w-4 h-4 font-bold" />
                   </button>
                 </div>
 
@@ -752,12 +758,12 @@ export function AboutSectionClient({
                 <div className="flex-1 overflow-y-auto custom-scrollbar overscroll-contain">
                   {/* Full Description Box */}
                   {(selectedCert.description || selectedCert.descriptionEn) && (
-                    <div className="px-3 sm:px-6 py-2.5 sm:py-3 bg-slate-100/70 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800/80 text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
-                      <span className="font-bold text-blue-600 dark:text-cyan-400 block mb-1 uppercase tracking-wider text-[10px] flex items-center gap-1">
-                        <BookOpen className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 shrink-0" />
-                        <span>{isEn ? "Full Description & Competency Details" : "Keterangan & Deskripsi Lengkap Sertifikasi"}</span>
+                    <div className="px-3 sm:px-5 py-2.5 sm:py-3 bg-white dark:bg-[#151B22] border-b-2 border-black dark:border-white text-xs leading-relaxed font-sans">
+                      <span className="font-sans text-xs text-blue-600 dark:text-yellow-400 block mb-1 uppercase font-black tracking-wider flex items-center gap-1.5">
+                        <BookOpen className="w-3.5 h-3.5 text-blue-600 dark:text-yellow-400 shrink-0" />
+                        <span>{isEn ? "COMPETENCY DETAILS" : "RINCIAN KOMPETENSI"}</span>
                       </span>
-                      <p className="text-slate-800 dark:text-slate-200 leading-relaxed text-[11px] sm:text-xs">
+                      <p className="text-zinc-800 dark:text-zinc-200 text-xs sm:text-sm font-medium leading-relaxed">
                         {isEn && selectedCert.descriptionEn ? selectedCert.descriptionEn : selectedCert.description}
                       </p>
                     </div>
@@ -765,16 +771,16 @@ export function AboutSectionClient({
 
                   {/* Multi-page Switcher Tabs */}
                   {modalPagesList.length > 1 && (
-                    <div className="px-3 sm:px-4 py-2 bg-slate-100/90 dark:bg-slate-950/70 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center gap-1.5 sm:gap-2">
+                    <div className="px-3 sm:px-4 py-2 bg-[#FAF6ED] dark:bg-[#0E1217] border-b-2 border-black dark:border-white flex flex-wrap items-center gap-1.5 sm:gap-2">
                       {modalPagesList.map((pObj) => (
                         <button
                           key={pObj.page}
                           onClick={() => setActiveCertPage(pObj.page)}
                           className={cn(
-                            "px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs font-black transition-all flex items-center gap-1.5 shrink-0 cursor-pointer",
+                            "px-3 py-1.5 text-xs font-sans font-black uppercase tracking-wider transition-all flex items-center gap-1.5 shrink-0 cursor-pointer border-2 border-black dark:border-white btn-retro",
                             activeCertPage === pObj.page
-                              ? "bg-cyan-500 text-slate-950 shadow-md scale-105"
-                              : "bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-transparent text-slate-700 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-700"
+                              ? "bg-[#FACC15] text-black shadow-retro-xs"
+                              : "bg-white dark:bg-[#151B22] text-black dark:text-white"
                           )}
                         >
                           <FileText className="w-3.5 h-3.5" />
@@ -784,47 +790,47 @@ export function AboutSectionClient({
                     </div>
                   )}
 
-                  {/* Modal Image Display with Navigation Overlay */}
-                  <div className="relative min-h-[200px] max-h-[42vh] sm:max-h-[55vh] overflow-auto bg-slate-100/90 dark:bg-slate-950/95 flex items-center justify-center p-2 sm:p-5 group/modalimg">
+                  {/* Modal Image Display */}
+                  <div className="relative min-h-[200px] max-h-[42vh] sm:max-h-[55vh] overflow-auto bg-zinc-100 dark:bg-black/40 flex items-center justify-center p-3 sm:p-5 group/modalimg">
                     {modalPagesList.length > 1 && (
                       <button
                         onClick={() => setActiveCertPage((prev) => (prev <= 1 ? modalPagesList.length : prev - 1))}
-                        className="absolute left-2 sm:left-3 z-10 p-2 sm:p-2.5 rounded-full bg-white/90 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:text-cyan-600 dark:hover:text-cyan-400 hover:border-cyan-500 transition-all shadow-xl cursor-pointer"
+                        className="absolute left-3 z-10 p-2 bg-[#FACC15] border-2 border-black text-black shadow-retro-sm btn-retro cursor-pointer"
                         title={isEn ? "Previous Page" : "Halaman Sebelumnya"}
                       >
-                        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                        <ChevronLeft className="w-4 h-4 font-bold" />
                       </button>
                     )}
 
                     <img
                       src={currentModalImgUrl}
                       alt={`Certificate Page ${activeCertPage}`}
-                      className="max-h-[38vh] sm:max-h-[50vh] w-auto max-w-full object-contain rounded-lg shadow-xl border border-slate-200 dark:border-slate-800 bg-white"
+                      className="max-h-[38vh] sm:max-h-[50vh] w-auto max-w-full object-contain border-2 border-black dark:border-white shadow-retro-sm bg-white"
                     />
 
                     {modalPagesList.length > 1 && (
                       <button
                         onClick={() => setActiveCertPage((prev) => (prev >= modalPagesList.length ? 1 : prev + 1))}
-                        className="absolute right-2 sm:right-3 z-10 p-2 sm:p-2.5 rounded-full bg-white/90 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:text-cyan-600 dark:hover:text-cyan-400 hover:border-cyan-500 transition-all shadow-xl cursor-pointer"
+                        className="absolute right-3 z-10 p-2 bg-[#FACC15] border-2 border-black text-black shadow-retro-sm btn-retro cursor-pointer"
                         title={isEn ? "Next Page" : "Halaman Selanjutnya"}
                       >
-                        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                        <ChevronRight className="w-4 h-4 font-bold" />
                       </button>
                     )}
 
                     {modalPagesList.length > 1 && (
-                      <div className="absolute bottom-3 px-2.5 py-0.5 rounded-full bg-white/90 dark:bg-slate-950/80 border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-bold backdrop-blur-md shadow-sm">
-                        {isEn ? `Page ${activeCertPage} of ${modalPagesList.length}` : `Halaman ${activeCertPage} dari ${modalPagesList.length}`}
+                      <div className="absolute bottom-3 px-3 py-1 bg-[#FACC15] border-2 border-black text-black font-sans text-xs font-black tracking-wider shadow-retro-xs">
+                        {isEn ? `PAGE ${activeCertPage} / ${modalPagesList.length}` : `HALAMAN ${activeCertPage} / ${modalPagesList.length}`}
                       </div>
                     )}
                   </div>
                 </div>
 
-                {/* Modal Footer */}
-                <div className="p-3 sm:p-4 bg-slate-50/95 dark:bg-slate-950/95 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2.5 text-xs shrink-0">
-                  <div className="text-slate-600 dark:text-slate-400 font-medium flex items-center gap-2">
-                    <span className="text-[11px] sm:text-xs">{isEn ? "Period / Date: " : "Periode / Tanggal: "}</span>
-                    <span className="text-blue-700 dark:text-cyan-300 font-bold bg-blue-50 dark:bg-cyan-500/10 px-2 py-0.5 rounded border border-blue-200 dark:border-cyan-500/20 text-[11px] sm:text-xs">
+                {/* 8-Bit Modal Footer */}
+                <div className="p-3 sm:p-4 bg-white dark:bg-[#151B22] border-t-2 border-black dark:border-white flex flex-wrap items-center justify-between gap-2.5 text-xs shrink-0">
+                  <div className="font-mono text-xs flex items-center gap-2">
+                    <span className="text-zinc-600 dark:text-zinc-400 font-bold">{isEn ? "DATE: " : "TANGGAL: "}</span>
+                    <span className="font-bold bg-[#FAF6ED] dark:bg-[#0E1217] px-2 py-0.5 border border-black dark:border-white text-[11px]">
                       {selectedCert.period}
                     </span>
                   </div>
@@ -843,20 +849,20 @@ export function AboutSectionClient({
                       }
                       target="_blank"
                       rel="noreferrer"
-                      className="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-[11px] sm:text-xs font-extrabold transition-all flex items-center gap-1.5 shadow-md hover:scale-105"
+                      className="px-3 py-1.5 border-2 border-black dark:border-white bg-[#FACC15] text-black font-sans text-xs font-black tracking-wider uppercase shadow-retro-xs btn-retro flex items-center gap-1.5"
                     >
                       <BookOpen className="w-3.5 h-3.5" />
-                      <span>{isEn ? "Open / Download PDF" : "Buka / Unduh File PDF"}</span>
+                      <span>{isEn ? "DOWNLOAD PDF" : "UNDUH PDF"}</span>
                     </a>
 
                     <a
                       href={currentModalImgUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg bg-white hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white text-[11px] sm:text-xs font-bold transition-colors flex items-center gap-1.5 border border-slate-300 dark:border-slate-700 shadow-xs"
+                      className="px-3 py-1.5 border-2 border-black dark:border-white bg-white dark:bg-[#0E1217] text-black dark:text-white font-sans text-xs font-black tracking-wider uppercase shadow-retro-xs btn-retro flex items-center gap-1.5"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
-                      <span>{isEn ? "Original Image" : "Gambar Asli"}</span>
+                      <span>{isEn ? "VIEW IMAGE" : "LIHAT GAMBAR"}</span>
                     </a>
                   </div>
                 </div>

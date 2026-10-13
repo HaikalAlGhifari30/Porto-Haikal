@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Sparkles, X, Send, RotateCcw, Mail } from "lucide-react";
-import { FaWhatsapp as FaWhatsappIcon } from "react-icons/fa6";
+import { PixelWhatsAppIcon } from "@/components/ui/pixel-whatsapp-icon";
 import { cn } from "@/lib/utils";
 import { getAIResponse, SUGGESTED_QUESTIONS_EN, SUGGESTED_QUESTIONS_ID, AIResponse } from "@/lib/ai-assistant-intents";
 import { useSafeLang } from "@/store/lang";
@@ -140,39 +140,36 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
 
       <div
         data-no-scene-scroll="true"
-        className="fixed bottom-4 left-4 sm:left-auto sm:right-6 sm:bottom-6 z-[60] flex flex-col items-start sm:items-end pointer-events-auto ai-assistant-modal-container"
+        className="fixed bottom-3.5 right-3.5 sm:right-6 sm:bottom-6 z-[60] flex flex-col items-end pointer-events-auto ai-assistant-modal-container"
         ref={modalRef}
         onWheel={(e) => e.stopPropagation()}
         onTouchStart={(e) => e.stopPropagation()}
         onTouchMove={(e) => e.stopPropagation()}
       >
 
-        {/* ── Chat Panel Window ── */}
+        {/* ── Chat Panel Window (8-Bit Retro Game Dialog) ── */}
         {isOpen && (
           <div
             data-no-scene-scroll="true"
             onWheel={(e) => e.stopPropagation()}
             onTouchStart={(e) => e.stopPropagation()}
             onTouchMove={(e) => e.stopPropagation()}
-            className="fixed top-1/2 -translate-y-1/2 left-4 right-4 mx-auto sm:top-auto sm:translate-y-0 sm:left-auto sm:right-6 sm:bottom-20 z-[60] w-[calc(100vw-2rem)] max-w-[380px] sm:w-[390px] h-[510px] max-h-[80vh] sm:max-h-[70vh] bg-slate-900/95 dark:bg-[#070e20]/95 backdrop-blur-2xl border border-cyan-500/30 text-white rounded-3xl shadow-2xl shadow-cyan-950/80 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 slide-in-from-bottom-5 duration-300"
+            className="fixed top-1/2 -translate-y-1/2 left-4 right-4 mx-auto sm:top-auto sm:translate-y-0 sm:left-auto sm:right-6 sm:bottom-20 z-[60] w-[calc(100vw-2rem)] max-w-[390px] h-[520px] max-h-[82dvh] sm:max-h-[70vh] bg-[#FAF6ED] dark:bg-[#151B22] border-3 border-black dark:border-white shadow-retro-lg flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200"
           >
 
             {/* Top Header */}
-            <div className="p-4 border-b border-slate-800 dark:border-cyan-500/20 bg-slate-950/70 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="relative w-9 h-9 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 p-0.5 shadow-md shadow-cyan-500/30 flex items-center justify-center">
-                  <div className="w-full h-full bg-slate-900 rounded-full flex items-center justify-center">
-                    <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
-                  </div>
-                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-2 ring-slate-900" />
+            <div className="p-3 bg-[#FACC15] border-b-2 border-black dark:border-white flex items-center justify-between text-black">
+              <div className="flex items-center gap-2.5">
+                <div className="w-7 h-7 bg-black text-[#FACC15] border-2 border-black flex items-center justify-center shrink-0">
+                  <Sparkles className="w-3.5 h-3.5" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white tracking-tight flex items-center gap-1.5">
-                    Brokal Assistant
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 font-mono">AI</span>
+                  <h3 className="font-pixel text-xs font-black tracking-wider uppercase flex items-center gap-1.5">
+                    BROKAL AI
+                    <span className="text-[9px] px-1 bg-black text-white font-mono">v1.0</span>
                   </h3>
-                  <p className="text-[11px] text-slate-400 font-medium">
-                    {isEn ? "Virtual Assistant" : "Asisten Virtual"} • <span className="text-emerald-400">Online</span>
+                  <p className="font-pixel text-[8px] text-zinc-800 uppercase">
+                    NPC ASSISTANT // ONLINE
                   </p>
                 </div>
               </div>
@@ -180,59 +177,60 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
               <div className="flex items-center gap-1">
                 <button
                   onClick={handleReset}
-                  className="p-2 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-cyan-400 transition-colors cursor-pointer"
+                  className="p-1.5 border-2 border-black bg-white hover:bg-yellow-100 text-black shadow-retro-xs btn-retro transition-colors cursor-pointer"
                   title={isEn ? "Reset chat" : "Reset percakapan"}
                 >
-                  <RotateCcw className="w-4 h-4" />
+                  <RotateCcw className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-2 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-colors cursor-pointer"
-                  title={isEn ? "Tutup Brokal AI" : "Tutup Brokal AI"}
+                  className="p-1.5 border-2 border-black bg-white hover:bg-red-200 text-black shadow-retro-xs btn-retro transition-colors cursor-pointer"
+                  title={isEn ? "Close Brokal AI" : "Tutup Brokal AI"}
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
 
             {/* Conversation Area */}
-            <div className="flex-1 p-4 overflow-y-auto space-y-3.5 scrollbar-none hide-scrollbar text-xs sm:text-sm">
+            <div className="flex-1 p-3.5 overflow-y-auto space-y-3 scrollbar-none hide-scrollbar text-xs">
               {messages.map((msg) => (
                 <div
                   key={msg.id}
                   className={cn(
-                    "flex flex-col gap-1.5 max-w-[88%]",
+                    "flex flex-col gap-1 max-w-[90%]",
                     msg.sender === "user" ? "ml-auto items-end" : "mr-auto items-start"
                   )}
                 >
                   <div
                     className={cn(
-                      "p-3.5 rounded-2xl whitespace-pre-line leading-relaxed shadow-sm",
+                      "p-3 border-2 border-black dark:border-white whitespace-pre-line leading-relaxed shadow-retro-xs font-mono text-xs font-medium",
                       msg.sender === "user"
-                        ? "bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-500 text-white rounded-tr-xs font-medium"
-                        : "bg-slate-800/90 dark:bg-slate-900/90 border border-slate-700/80 dark:border-cyan-500/25 text-slate-100 rounded-tl-xs"
+                        ? "bg-[#FACC15] text-black font-bold"
+                        : "bg-white dark:bg-[#0E1217] text-black dark:text-white"
                     )}
                   >
                     {msg.text}
                   </div>
 
-                  {/* Contact Buttons Triggered by Contact or Fallback intents */}
+                  {/* Contact Buttons */}
                   {msg.showContactButtons && (
                     <div className="flex flex-wrap gap-2 mt-1 w-full">
                       <a
                         href={whatsappUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 py-2 px-3.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition-all shadow-md shadow-emerald-600/20 hover:scale-[1.02] cursor-pointer"
+                        className="inline-flex items-center gap-1.5 py-1.5 px-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white font-pixel text-[10px] uppercase font-bold border-2 border-black shadow-retro-xs btn-retro cursor-pointer"
                       >
-                        <FaWhatsappIcon className="w-3.5 h-3.5 text-white" />
-                        <span>{isEn ? "Contact via WhatsApp" : "Chat WhatsApp"}</span>
+                        <PixelWhatsAppIcon className="w-3.5 h-3.5 text-white" />
+                        <span>WHATSAPP</span>
                       </a>
                       <a
                         href={emailUrl}
-                        className="inline-flex items-center gap-1.5 py-2 px-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-cyan-300 text-xs font-bold rounded-xl transition-all shadow-md hover:scale-[1.02] cursor-pointer"
+                        className="inline-flex items-center gap-1.5 py-1.5 px-2.5 bg-white dark:bg-[#0E1217] hover:bg-yellow-100 text-black dark:text-white font-pixel text-[10px] uppercase font-bold border-2 border-black dark:border-white shadow-retro-xs btn-retro cursor-pointer"
                       >
-                        <span>{isEn ? "Send Email" : "Kirim Email"}</span>
+                        <Mail className="w-3 h-3" />
+                        <span>EMAIL</span>
                       </a>
                     </div>
                   )}
@@ -242,13 +240,8 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
               {/* Typing Indicator */}
               {isTyping && (
                 <div className="flex items-center gap-2 max-w-[80%] mr-auto">
-                  <div className="p-3.5 rounded-2xl rounded-tl-xs bg-slate-800/90 border border-slate-700/80 text-slate-400 flex items-center gap-2 text-xs">
-                    <span className="font-semibold text-cyan-400">Typing</span>
-                    <div className="flex gap-1 items-center">
-                      <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                      <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                      <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-bounce" />
-                    </div>
+                  <div className="p-2 border-2 border-black dark:border-white bg-white dark:bg-[#0E1217] text-black dark:text-white flex items-center gap-2 text-xs font-mono font-bold shadow-retro-xs">
+                    <span className="font-pixel text-[10px]">THINKING...</span>
                   </div>
                 </div>
               )}
@@ -257,17 +250,17 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
             </div>
 
             {/* Suggested Chips Area */}
-            <div className="p-3 border-t border-slate-800/80 bg-slate-950/70 flex flex-col gap-1.5">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-0.5">
-                {isEn ? "Suggested Questions" : "Pertanyaan Rekomendasi"}
+            <div className="p-2.5 border-t-2 border-black dark:border-white bg-white dark:bg-[#0E1217] flex flex-col gap-1.5">
+              <span className="font-pixel text-[9px] font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider px-0.5">
+                {isEn ? "QUICK PROMPTS" : "PILIHAN PERTANYAAN"}
               </span>
-              <div className="flex flex-wrap gap-1.5 max-h-[130px] overflow-y-auto scrollbar-none hide-scrollbar">
+              <div className="flex flex-wrap gap-1.5 max-h-[100px] overflow-y-auto scrollbar-none hide-scrollbar">
                 {suggestedQuestions.map((q, idx) => (
                   <button
                     key={idx}
                     onClick={() => handleSendMessage(q)}
                     disabled={isTyping}
-                    className="text-[11px] font-medium py-1.5 px-3 rounded-xl bg-slate-800/90 hover:bg-cyan-500/20 border border-slate-700/80 dark:border-cyan-500/30 text-cyan-300 hover:text-white transition-all cursor-pointer disabled:opacity-50 text-left leading-snug"
+                    className="font-mono text-[11px] font-bold py-1 px-2.5 bg-[#FAF6ED] dark:bg-[#151B22] hover:bg-[#FACC15] dark:hover:bg-[#FACC15] hover:text-black dark:hover:text-black border-2 border-black dark:border-white text-black dark:text-white shadow-retro-xs btn-retro transition-all cursor-pointer disabled:opacity-50 text-left leading-snug"
                   >
                     {q}
                   </button>
@@ -281,54 +274,53 @@ export function AIAssistantModal({ settings }: AIAssistantModalProps) {
                 e.preventDefault();
                 handleSendMessage();
               }}
-              className="p-3 border-t border-slate-800 dark:border-cyan-500/20 bg-slate-950/90 flex items-center gap-2"
+              className="p-2.5 border-t-2 border-black dark:border-white bg-[#FAF6ED] dark:bg-[#151B22] flex items-center gap-2"
             >
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder={isEn ? "Ask about experience, skills..." : "Tanya pengalaman, skill..."}
-                className="flex-1 bg-slate-900 border border-slate-700 dark:border-cyan-500/30 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 transition-colors"
+                placeholder={isEn ? "Ask something..." : "Tanya sesuatu..."}
+                className="flex-1 h-9 bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white px-3 font-mono text-xs font-bold text-black dark:text-white placeholder:text-zinc-500 shadow-retro-xs outline-none"
               />
               <button
                 type="submit"
                 disabled={!inputValue.trim() || isTyping}
-                className="p-2.5 rounded-xl bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-400 text-white disabled:opacity-40 disabled:hover:scale-100 transition-all cursor-pointer shadow-md shadow-cyan-500/20 active:scale-95 flex items-center justify-center shrink-0"
+                className="h-9 px-3 bg-[#FACC15] hover:bg-yellow-300 text-black border-2 border-black dark:border-white shadow-retro-xs btn-retro disabled:opacity-40 transition-all cursor-pointer flex items-center justify-center shrink-0 font-pixel text-xs font-bold"
                 title="Send Message"
               >
-                <Send className="w-4 h-4 text-white" />
+                <Send className="w-3.5 h-3.5" />
               </button>
             </form>
 
           </div>
         )}
 
-        {/* ── Floating AI Orb Trigger Button ── */}
+        {/* ── Floating AI Orb Trigger Button (8-Bit Retro Box) ── */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
-            "w-12 h-12 sm:w-13 sm:h-13 rounded-full shadow-xl transition-all duration-300 flex items-center justify-center relative group cursor-pointer",
+            "w-10 h-10 sm:w-12 sm:h-12 border-2 sm:border-3 border-black dark:border-white shadow-retro btn-retro flex items-center justify-center relative group cursor-pointer transition-transform",
             isOpen
-              ? "bg-slate-900 border-2 border-cyan-500 text-cyan-400 shadow-cyan-500/30"
-              : "bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 hover:scale-110 active:scale-95 shadow-[0_0_25px_rgba(34,211,238,0.45)] border border-cyan-300/40"
+              ? "bg-black text-[#FACC15]"
+              : "bg-[#FACC15] text-black hover:bg-yellow-300"
           )}
           aria-label="Ask Brokal AI"
           title="Ask Brokal AI"
         >
-          {!isOpen && (
-            <span className="absolute inset-0 rounded-full bg-cyan-400 animate-ping opacity-25 pointer-events-none" />
-          )}
-
           {isOpen ? (
-            <X className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-300" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
           ) : (
-            <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-white relative z-10 animate-pulse" />
+            <div className="flex flex-col items-center justify-center">
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
+              <span className="font-pixel text-[6px] sm:text-[7px] font-black uppercase tracking-tighter">AI</span>
+            </div>
           )}
 
-          {/* Hover Tooltip Label ("Ask Brokal AI") */}
+          {/* Hover Tooltip Label */}
           {!isOpen && (
-            <span className="absolute left-full ml-3 sm:left-auto sm:right-full sm:ml-0 sm:mr-3 px-3 py-1.5 bg-slate-900/95 dark:bg-[#070e20]/95 border border-slate-700 dark:border-cyan-500/30 text-cyan-300 text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-xl">
-              Ask Brokal AI ✨
+            <span className="absolute right-full mr-2.5 sm:mr-3 px-2 py-1 bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white text-black dark:text-white font-pixel text-[9px] uppercase font-bold shadow-retro-xs opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap">
+              BROKAL AI
             </span>
           )}
         </button>

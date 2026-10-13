@@ -10,10 +10,9 @@ import { login } from "@/actions/auth";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { Menu, X, LogIn, LayoutDashboard, Eye, EyeOff, Download, Globe, Moon, Sun, Settings } from "lucide-react";
+import { Menu, X, LogIn, LayoutDashboard, Eye, EyeOff, Download, Globe, Moon, Sun, Settings, Lock } from "lucide-react";
 import { ThemeSwitcher } from "@/components/cms/theme-switcher";
 import { useSafeLang } from "@/store/lang";
-import { HagLogo } from "@/components/hag-logo";
 
 interface NavbarProps {
   settings?: any;
@@ -110,22 +109,28 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
 
   return (
     <>
-      {/* Top Fixed Header Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/20 dark:bg-slate-950/50 backdrop-blur-2xl border-b border-white/60 dark:border-cyan-500/20 shadow-lg shadow-blue-900/5 dark:shadow-cyan-950/30 transition-all duration-300 h-16 flex items-center">
+      {/* Top Fixed Header Navbar (8-Bit Retro) */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FAF6ED]/95 dark:bg-[#0E1217]/95 backdrop-blur-md border-b-2 border-black dark:border-white shadow-retro-sm transition-all duration-300 h-16 flex items-center">
         <div className="container-original relative flex items-center justify-between w-full px-3 md:px-8 mx-auto h-full gap-2">
           
-          {/* Brand Logo */}
+          {/* Brand Logo with 8-Bit Pixel badge */}
           <button
             onClick={() => handleNavClick(0)}
-            className="flex items-center gap-2 shrink-0 group text-left cursor-pointer z-10"
+            className="flex items-center gap-2.5 shrink-0 group text-left cursor-pointer z-10 btn-retro"
             title="Haikal Al Ghifari — HAG"
           >
-            <HagLogo size="md" useImage={false} />
+            <div className="px-2.5 py-1 bg-[#FACC15] text-black border-2 border-black dark:border-white shadow-retro-sm font-pixel font-black text-xs sm:text-sm tracking-wider flex items-center gap-1.5">
+              <span className="w-2 h-2 bg-black shrink-0" />
+              <span>HAG</span>
+            </div>
+            <span className="font-pixel text-xs font-bold text-black dark:text-white hidden sm:inline tracking-wider">
+              PORTFOLIO
+            </span>
           </button>
 
-          {/* Central 6-Menu Header Navigation Links (Desktop md+ only) */}
+          {/* Central 6-Menu Header Navigation Links (8-Bit Arcade Tab Style) */}
           <div className="hidden md:flex flex-1 items-center justify-center z-10 py-1">
-            <div className="flex items-center gap-1 bg-white/40 dark:bg-slate-950/60 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-white/70 dark:border-cyan-500/20 shadow-2xs whitespace-nowrap">
+            <div className="flex items-center gap-1.5 whitespace-nowrap">
               {navItems.map((item) => {
                 const isActive = activeSceneIndex === item.sceneIdx;
                 return (
@@ -133,15 +138,18 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
                     key={item.sceneIdx}
                     onClick={(e) => handleNavClick(item.sceneIdx, e)}
                     className={cn(
-                      "relative px-3 md:px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wider transition-all duration-300 cursor-pointer flex items-center gap-1.5 shrink-0",
+                      "relative px-2 xl:px-3.5 py-1.5 border-2 border-black dark:border-white font-pixel text-[11px] xl:text-xs tracking-wide xl:tracking-wider transition-all cursor-pointer flex items-center gap-1 xl:gap-1.5 shrink-0 btn-retro",
                       isActive
-                        ? "text-white dark:text-cyan-300 bg-gradient-to-r from-blue-600 to-cyan-500 shadow-md shadow-cyan-500/25"
-                        : "text-slate-900 dark:text-zinc-300 hover:text-blue-700 dark:hover:text-white hover:bg-white/50 dark:hover:bg-zinc-800/50"
+                        ? "bg-[#FACC15] text-black font-black shadow-retro-sm scale-105"
+                        : "bg-white dark:bg-[#151B22] text-black dark:text-white hover:bg-yellow-200 dark:hover:bg-zinc-800 shadow-retro-sm"
                     )}
                   >
                     <span>{item.label}</span>
                     {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_rgba(34,211,238,1)]" />
+                      <span className="relative flex h-2 w-2 shrink-0 ml-1">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 border border-black/40" />
+                      </span>
                     )}
                   </button>
                 );
@@ -152,15 +160,12 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
           {/* Top Bar Action Cluster (Download CV & Settings Burger Menu) */}
           <div className="flex items-center gap-2 shrink-0 z-10 relative" ref={menuRef}>
             
-            {/* Download CV CTA */}
+            {/* Download CV CTA (8-Bit Yellow Box) */}
             <a
               href={cvUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={cn(
-                buttonVariants({ variant: "default" }),
-                "rounded-full px-3.5 py-1.5 h-9 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold text-xs shadow-md shadow-blue-500/25 hover:shadow-cyan-500/40 transition-all duration-300 flex items-center gap-1.5"
-              )}
+              className="px-3.5 py-1.5 h-9 bg-[#FACC15] hover:bg-[#EAB308] text-black font-pixel font-black text-xs border-2 border-black dark:border-white shadow-retro-sm btn-retro flex items-center gap-1.5 transition-all"
             >
               <Download className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">{translate('nav.downloadCv', 'Unduh CV')}</span>
@@ -170,31 +175,31 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={cn(
-                "p-2.5 rounded-full backdrop-blur-md border transition-all duration-300 flex items-center justify-center cursor-pointer shadow-2xs",
+                "p-2 h-9 w-9 border-2 border-black dark:border-white font-pixel transition-all flex items-center justify-center cursor-pointer shadow-retro-sm btn-retro",
                 isMenuOpen
-                  ? "bg-blue-600 text-white border-blue-400 shadow-md shadow-blue-500/30"
-                  : "bg-white/50 dark:bg-zinc-900/80 border-white/80 dark:border-zinc-800 text-slate-900 dark:text-zinc-200 hover:text-blue-600 dark:hover:text-cyan-400 hover:bg-white dark:hover:bg-slate-800"
+                  ? "bg-[#FACC15] text-black font-bold"
+                  : "bg-white dark:bg-[#151B22] text-black dark:text-white hover:bg-yellow-100 dark:hover:bg-zinc-800"
               )}
               aria-label="Pengaturan & Akun"
               title="Pengaturan & Akun"
             >
               {isMenuOpen ? (
-                <X className="w-4 h-4 transition-transform rotate-90" />
+                <X className="w-4 h-4" />
               ) : (
-                <Menu className="w-4 h-4 transition-transform" />
+                <Menu className="w-4 h-4" />
               )}
             </button>
 
             {/* Compact Settings & Mobile Navigation Popover */}
             {isMenuOpen && (
-              <div className="absolute right-0 top-full mt-3 z-50 w-72 sm:w-80 bg-white/95 dark:bg-[#081026]/95 backdrop-blur-2xl border border-white/80 dark:border-cyan-500/30 rounded-2xl p-4 shadow-2xl shadow-slate-900/20 dark:shadow-cyan-950/50 animate-in fade-in zoom-in-95 duration-200">
+              <div className="absolute right-0 top-full mt-3 z-50 w-72 sm:w-80 bg-[#FAF6ED] dark:bg-[#0E1217] border-2 border-black dark:border-white p-4 shadow-retro animate-in fade-in zoom-in-95 duration-150">
                 {/* Pointer Tip pointing to burger button */}
-                <div className="absolute -top-1.5 right-3.5 w-3 h-3 bg-white dark:bg-[#081026] border-t border-l border-white/80 dark:border-cyan-500/30 rotate-45" />
+                <div className="absolute -top-2 right-3.5 w-3.5 h-3.5 bg-[#FAF6ED] dark:bg-[#0E1217] border-t-2 border-l-2 border-black dark:border-white rotate-45" />
 
                 {/* Mobile Navigation Section (< md) */}
-                <div className="md:hidden pb-3 mb-3 border-b border-slate-200/80 dark:border-zinc-800/80">
+                <div className="md:hidden pb-3 mb-3 border-b-2 border-black dark:border-white">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-[11px] font-black tracking-wider text-zinc-500 dark:text-zinc-400 uppercase">Navigation</span>
+                    <span className="text-[11px] font-pixel font-black tracking-wider text-black dark:text-white uppercase">NAVIGATION</span>
                   </div>
                   <div className="grid grid-cols-2 gap-1.5">
                     {navItems.map((item) => {
@@ -207,15 +212,18 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
                             setIsMenuOpen(false);
                           }}
                           className={cn(
-                            "w-full px-3 py-2 rounded-xl text-xs font-extrabold tracking-wider transition-all duration-200 cursor-pointer flex items-center justify-between text-left",
+                            "w-full px-3 py-2 border-2 border-black dark:border-white font-pixel text-xs tracking-wider transition-all cursor-pointer flex items-center justify-between text-left btn-retro",
                             isActive
-                              ? "text-white dark:text-cyan-300 bg-gradient-to-r from-blue-600 to-cyan-500 shadow-md shadow-cyan-500/25"
-                              : "text-slate-800 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-zinc-800/70"
+                              ? "bg-[#FACC15] text-black font-black shadow-retro-sm"
+                              : "bg-white dark:bg-[#151B22] text-black dark:text-white hover:bg-yellow-100 dark:hover:bg-zinc-800"
                           )}
                         >
                           <span>{item.label}</span>
                           {isActive && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse shadow-[0_0_8px_rgba(34,211,238,1)]" />
+                            <span className="relative flex h-2 w-2 shrink-0">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 border border-black/40" />
+                            </span>
                           )}
                         </button>
                       );
@@ -223,29 +231,29 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
                   </div>
                 </div>
 
-                <div className="relative z-10 flex items-center justify-between pb-2.5 border-b border-slate-200/80 dark:border-zinc-800/80 mb-3">
-                  <span className="text-xs font-bold tracking-wider text-zinc-500 dark:text-zinc-400 uppercase flex items-center gap-1.5">
-                    <Settings className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>Options</span>
+                <div className="relative z-10 flex items-center justify-between pb-2.5 border-b-2 border-black dark:border-white mb-3">
+                  <span className="text-xs font-pixel font-bold tracking-wider text-black dark:text-white uppercase flex items-center gap-1.5">
+                    <Settings className="w-3.5 h-3.5 text-yellow-500" />
+                    <span>OPTIONS</span>
                   </span>
-                  <span className="text-[10px] bg-cyan-500/10 text-cyan-400 px-2 py-0.5 rounded-full font-semibold border border-cyan-500/20">
-                    Preferences
+                  <span className="text-[10px] font-pixel bg-[#FACC15] text-black px-2 py-0.5 font-bold border-2 border-black dark:border-white">
+                    PREFERENCES
                   </span>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-3 font-mono">
                   {/* Language Switcher Row */}
-                  <div className="flex items-center justify-between p-2 rounded-xl bg-slate-100/80 dark:bg-zinc-900/60 border border-slate-200/60 dark:border-zinc-800/60">
-                    <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 flex items-center gap-2">
-                      <Globe className="w-3.5 h-3.5 text-blue-500" />
-                      <span>Language</span>
+                  <div className="flex items-center justify-between p-2 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white shadow-retro-sm">
+                    <span className="text-xs font-bold text-black dark:text-white flex items-center gap-2 font-pixel">
+                      <Globe className="w-3.5 h-3.5 text-yellow-500" />
+                      <span>LANGUAGE</span>
                     </span>
-                    <div className="flex items-center gap-1 bg-white dark:bg-zinc-950 p-1 rounded-full border border-slate-200 dark:border-zinc-800">
+                    <div className="flex items-center gap-1">
                       <button 
                         onClick={() => setLang('id')}
                         className={cn(
-                          "px-2.5 py-0.5 rounded-full text-[11px] font-bold transition-all cursor-pointer",
-                          (mounted ? lang === 'id' : true) ? "bg-blue-600 text-white shadow-xs" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                          "px-2.5 py-0.5 border-2 border-black dark:border-white font-pixel text-[11px] font-bold transition-all cursor-pointer btn-retro",
+                          (mounted ? lang === 'id' : false) ? "bg-[#FACC15] text-black font-black" : "bg-transparent text-black dark:text-white"
                         )}
                         title="Bahasa Indonesia"
                       >
@@ -254,8 +262,8 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
                       <button 
                         onClick={() => setLang('en')}
                         className={cn(
-                          "px-2.5 py-0.5 rounded-full text-[11px] font-bold transition-all cursor-pointer",
-                          (mounted ? lang === 'en' : false) ? "bg-blue-600 text-white shadow-xs" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                          "px-2.5 py-0.5 border-2 border-black dark:border-white font-pixel text-[11px] font-bold transition-all cursor-pointer btn-retro",
+                          (mounted ? lang === 'en' : true) ? "bg-[#FACC15] text-black font-black" : "bg-transparent text-black dark:text-white"
                         )}
                         title="English"
                       >
@@ -265,11 +273,11 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
                   </div>
 
                   {/* Theme Switcher Row */}
-                  <div className="flex items-center justify-between p-2 rounded-xl bg-slate-100/80 dark:bg-zinc-900/60 border border-slate-200/60 dark:border-zinc-800/60">
-                    <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 flex items-center gap-2">
-                      <Moon className="w-3.5 h-3.5 text-indigo-400 dark:inline hidden" />
+                  <div className="flex items-center justify-between p-2 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white shadow-retro-sm">
+                    <span className="text-xs font-bold text-black dark:text-white flex items-center gap-2 font-pixel">
+                      <Moon className="w-3.5 h-3.5 text-yellow-400 dark:inline hidden" />
                       <Sun className="w-3.5 h-3.5 text-amber-500 dark:hidden inline" />
-                      <span>Theme</span>
+                      <span>THEME</span>
                     </span>
                     <div className="flex items-center">
                       <ThemeSwitcher />
@@ -282,7 +290,7 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
                       <Link
                         href="/cms"
                         onClick={() => setIsMenuOpen(false)}
-                        className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-gradient-to-r from-blue-600/20 to-cyan-500/20 border border-cyan-500/40 text-cyan-400 hover:text-white hover:border-cyan-400 text-xs font-bold transition-all"
+                        className="w-full flex items-center justify-center gap-2 py-2.5 px-3 border-2 border-black dark:border-white bg-[#FACC15] text-black font-pixel text-xs font-bold uppercase shadow-retro-xs btn-retro transition-all"
                       >
                         <LayoutDashboard className="w-3.5 h-3.5" />
                         <span>Dasbor CMS Admin</span>
@@ -293,9 +301,9 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
                           setIsMenuOpen(false);
                           setIsLoginOpen(true);
                         }}
-                        className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-slate-100 dark:bg-zinc-900 hover:bg-cyan-500/10 border border-slate-200 dark:border-zinc-800 hover:border-cyan-500/30 text-zinc-700 dark:text-zinc-300 hover:text-cyan-400 text-xs font-bold transition-all cursor-pointer"
+                        className="w-full flex items-center justify-center gap-2 py-2.5 px-3 border-2 border-black dark:border-white bg-[#FACC15] hover:bg-yellow-300 text-black font-pixel text-xs font-bold uppercase shadow-retro-xs btn-retro transition-all cursor-pointer"
                       >
-                        <LogIn className="w-3.5 h-3.5 text-cyan-400" />
+                        <LogIn className="w-3.5 h-3.5" />
                         <span>Login Admin</span>
                       </button>
                     )}
@@ -310,29 +318,76 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
         </div>
       </nav>
 
-      {/* Admin Login Dialog Modal */}
+      {/* Admin Login Dialog Modal (8-Bit Neo-Brutalist Retro Box) */}
       <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
-        <DialogContent className="sm:max-w-[420px] bg-[#070e20]/95 border border-cyan-500/30 text-white p-0 rounded-[2.2rem] shadow-[0_0_60px_rgba(34,211,238,0.2)] overflow-hidden backdrop-blur-2xl">
-          <div className="p-8 relative">
-            <DialogHeader className="mb-6 flex flex-col items-center text-center relative z-10">
-              <HagLogo size="lg" useImage={false} className="mb-4" />
-              <DialogTitle className="text-2xl font-black tracking-tight text-white">{translate('auth.loginTitle', 'Selamat Datang Kembali')}</DialogTitle>
-              <p className="text-zinc-400 text-xs mt-1.5 font-medium">{translate('auth.loginSubtitle', 'Silakan masuk ke akun admin Anda')}</p>
+        <DialogContent
+          showCloseButton={false}
+          className="sm:max-w-[420px] bg-[#FAF6ED] dark:bg-[#151B22] border-3 sm:border-4 border-black dark:border-white text-black dark:text-white p-0 rounded-none shadow-retro-lg overflow-hidden gap-0"
+        >
+          {/* Retro Top Header Bar */}
+          <div className="p-3 sm:p-3.5 bg-[#FACC15] border-b-2 border-black dark:border-white flex items-center justify-between text-black shrink-0">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="w-8 h-8 bg-black text-[#FACC15] border-2 border-black flex items-center justify-center shrink-0 shadow-retro-xs">
+                <Lock className="w-4 h-4" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-pixel text-xs font-black tracking-wider uppercase flex items-center gap-1.5 leading-none truncate">
+                  ADMIN CONSOLE
+                  <span className="text-[9px] px-1 bg-black text-[#FACC15] font-mono shrink-0">v1.0</span>
+                </h3>
+                <p className="font-pixel text-[8px] sm:text-[9px] text-zinc-900 uppercase mt-1 leading-none truncate">
+                  SYSTEM // AUTHENTICATION
+                </p>
+              </div>
+            </div>
+
+            {/* Retro [X] Close Button */}
+            <button
+              type="button"
+              onClick={() => setIsLoginOpen(false)}
+              className="w-8 h-8 bg-white border-2 border-black text-black font-bold shadow-retro-xs btn-retro flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors cursor-pointer shrink-0 ml-2"
+              aria-label="Close"
+            >
+              <X className="w-4 h-4 font-bold stroke-[2.5]" />
+            </button>
+          </div>
+
+          {/* Form Body Container */}
+          <div className="p-6 sm:p-7 space-y-5 bg-[#FAF6ED] dark:bg-[#151B22]">
+            <DialogHeader className="space-y-1 text-center pb-2 border-b-2 border-black/10 dark:border-white/10">
+              <DialogTitle className="text-xl sm:text-2xl font-sans font-black uppercase tracking-tight text-black dark:text-white">
+                {translate('auth.loginTitle', 'Selamat Datang Kembali')}
+              </DialogTitle>
+              <p className="font-sans text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-medium">
+                {translate('auth.loginSubtitle', 'Silakan masuk ke akun admin Anda')}
+              </p>
             </DialogHeader>
-            <form action={handleLogin} className="space-y-4 relative z-10">
+
+            <form action={handleLogin} className="space-y-4 pt-1">
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-xs font-semibold text-zinc-300">{translate('auth.email', 'Alamat Email')}</Label>
+                <Label
+                  htmlFor="email"
+                  className="font-sans text-xs font-black uppercase tracking-wider text-black dark:text-white block text-left"
+                >
+                  {translate('auth.email', 'Alamat Email')}
+                </Label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
                   required
                   placeholder="admin@haikalalghifari.dev"
-                  className="bg-[#0c142c] border border-slate-700/80 dark:border-cyan-500/30 h-11 rounded-xl text-sm px-4 text-white placeholder:text-zinc-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                  className="bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white rounded-none h-11 text-sm px-3.5 text-black dark:text-white font-mono placeholder:text-zinc-400 focus:bg-yellow-50 dark:focus:bg-zinc-900 shadow-retro-xs transition-all w-full"
                 />
               </div>
+
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-xs font-semibold text-zinc-300">{translate('auth.password', 'Kata Sandi')}</Label>
+                <Label
+                  htmlFor="password"
+                  className="font-sans text-xs font-black uppercase tracking-wider text-black dark:text-white block text-left"
+                >
+                  {translate('auth.password', 'Kata Sandi')}
+                </Label>
                 <div className="relative">
                   <Input
                     id="password"
@@ -340,27 +395,32 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
                     type={showPassword ? "text" : "password"}
                     required
                     placeholder="••••••••"
-                    className="bg-[#0c142c] border border-slate-700/80 dark:border-cyan-500/30 h-11 rounded-xl text-sm px-4 pr-10 text-white placeholder:text-zinc-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                    className="bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white rounded-none h-11 text-sm px-3.5 pr-11 text-black dark:text-white font-mono placeholder:text-zinc-400 focus:bg-yellow-50 dark:focus:bg-zinc-900 shadow-retro-xs transition-all w-full"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-cyan-400 transition-colors"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-zinc-100 dark:bg-zinc-800 border border-black dark:border-white text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white shadow-retro-xs btn-retro transition-colors cursor-pointer"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
                   >
-                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    {showPassword ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                   </button>
                 </div>
               </div>
+
               {error && (
-                <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium text-center">
+                <div className="p-3 bg-red-100 dark:bg-red-950/60 border-2 border-red-600 dark:border-red-500 text-red-700 dark:text-red-300 font-sans text-xs font-bold text-center shadow-retro-xs">
                   {error}
                 </div>
               )}
+
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-400 h-11 rounded-xl font-bold text-sm text-white shadow-lg shadow-blue-500/25 hover:shadow-cyan-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all cursor-pointer mt-2"
+                disabled={isPending}
+                className="w-full bg-[#FACC15] hover:bg-[#EAB308] text-black border-2 border-black dark:border-white rounded-none h-11 sm:h-12 font-sans font-black text-xs sm:text-sm uppercase tracking-wider shadow-retro-sm btn-retro transition-all cursor-pointer mt-3 flex items-center justify-center gap-2"
               >
-                {isPending ? "Authenticating..." : translate('auth.loginBtn', 'Masuk')}
+                <LogIn className="w-4 h-4 font-bold" />
+                <span>{isPending ? "Authenticating..." : translate('auth.loginBtn', 'Masuk')}</span>
               </Button>
             </form>
           </div>

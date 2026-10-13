@@ -204,7 +204,7 @@ const dictionary: Record<Language, Record<string, string>> = {
 };
 
 export const useLang = create<LangState>()((set, get) => ({
-    lang: 'id',
+    lang: 'en',
     setLang: (lang) => {
         if (typeof window !== 'undefined') {
             try {
@@ -217,7 +217,7 @@ export const useLang = create<LangState>()((set, get) => ({
     },
     t: (key: string) => {
         const state = get();
-        return dictionary[state.lang]?.[key] || dictionary['id']?.[key] || dictionary['en']?.[key] || key;
+        return dictionary[state.lang]?.[key] || dictionary['en']?.[key] || dictionary['id']?.[key] || key;
     }
 }));
 
@@ -234,6 +234,9 @@ export function useSafeLang() {
                     if (stored !== lang) {
                         setLang(stored);
                     }
+                } else {
+                    // First time access defaults to English
+                    setLang('en');
                 }
             } catch {
                 // Ignore storage error
@@ -241,11 +244,11 @@ export function useSafeLang() {
         }
     }, [lang, setLang]);
 
-    const safeLang = mounted ? lang : 'id';
+    const safeLang = mounted ? lang : 'en';
 
     const safet = (key: string, fallback?: string): string => {
         if (!mounted) {
-            return dictionary['id'][key] ?? fallback ?? dictionary['en'][key] ?? key;
+            return dictionary['en'][key] ?? fallback ?? dictionary['id'][key] ?? key;
         }
         return t(key);
     };

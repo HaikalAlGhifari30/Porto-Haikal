@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" shape-rendering="crispEdges">
+  <!-- Retro 2px solid drop shadow -->
+  <polygon points="16,4 28,16 16,28 4,16" transform="translate(2, 2)" fill="#000000" />
+  <!-- Main black border -->
+  <polygon points="16,3 29,16 16,29 3,16" fill="#000000" />
+  <!-- Inner yellow diamond -->
+  <polygon points="16,6 26,16 16,26 6,16" fill="#FACC15" />
+</svg>

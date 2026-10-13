@@ -352,7 +352,7 @@ export function PortfolioSceneContainer({
                 className={cn(
                   "w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:pr-14 2xl:pr-8 min-h-full flex flex-col",
                   activeSceneIndex === 0
-                    ? "my-auto justify-center py-2 sm:py-6"
+                    ? "sm:my-auto justify-start sm:justify-center pt-8 pb-20 sm:py-6"
                     : "my-auto justify-start py-3 sm:py-6 lg:py-8"
                 )}
               >

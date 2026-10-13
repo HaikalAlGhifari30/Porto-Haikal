@@ -76,7 +76,7 @@ export function HeroSection({ settings, onNavigateScene }: HeroSectionProps) {
                 onClick={() => onNavigateScene && onNavigateScene(4)}
                 className="w-full max-w-xs sm:w-auto sm:max-w-none px-5 sm:px-7 py-3 sm:py-3.5 bg-[#FACC15] hover:bg-[#EAB308] text-black font-pixel font-black text-xs sm:text-sm tracking-wider uppercase border-2 border-black dark:border-white shadow-retro btn-retro flex items-center justify-center gap-2.5 cursor-pointer transition-all"
               >
-                <span>{isEn ? "VIEW MY WORK" : "LIHAT PORTOFOLIO"}</span>
+                <span className="leading-none pt-0.5">{isEn ? "VIEW MY WORK" : "LIHAT PORTOFOLIO"}</span>
                 <ArrowRight className="w-4 h-4 stroke-[3]" />
               </button>
 
@@ -85,7 +85,7 @@ export function HeroSection({ settings, onNavigateScene }: HeroSectionProps) {
                 className="w-full max-w-xs sm:w-auto sm:max-w-none px-5 sm:px-7 py-3 sm:py-3.5 bg-white dark:bg-[#151B22] hover:bg-yellow-100 dark:hover:bg-zinc-800 text-black dark:text-white font-pixel font-black text-xs sm:text-sm tracking-wider uppercase border-2 border-black dark:border-white shadow-retro btn-retro flex items-center justify-center gap-2.5 cursor-pointer transition-all"
               >
                 <User className="w-4 h-4 text-black dark:text-[#FACC15]" />
-                <span>{isEn ? "ABOUT ME" : "TENTANG SAYA"}</span>
+                <span className="leading-none pt-0.5">{isEn ? "ABOUT ME" : "TENTANG SAYA"}</span>
               </button>
             </div>
 
@@ -140,9 +140,9 @@ export function HeroSection({ settings, onNavigateScene }: HeroSectionProps) {
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="lg:col-span-5 flex justify-center relative order-1 lg:order-2 px-2"
+          className="lg:col-span-5 flex justify-center relative order-1 lg:order-2 px-2 pt-2 sm:py-0"
         >
-          <div className="relative w-full max-w-[200px] min-[400px]:max-w-[240px] sm:max-w-[300px] lg:max-w-[340px] xl:max-w-[380px]">
+          <div className="relative w-full max-w-[190px] min-[400px]:max-w-[220px] sm:max-w-[280px] lg:max-w-[340px] xl:max-w-[380px]">
             {/* Top-Right Pin Badge */}
             <div className="absolute -top-2.5 -right-2 sm:-top-3.5 sm:-right-3.5 z-20 px-2 sm:px-3.5 py-0.5 sm:py-1.5 bg-[#FACC15] text-black font-pixel font-black text-[9px] sm:text-xs border-2 border-black dark:border-white shadow-retro-sm tracking-wider uppercase">
               20+ PROJECTS
@@ -160,7 +160,7 @@ export function HeroSection({ settings, onNavigateScene }: HeroSectionProps) {
               <img
                 src={settings?.heroBannerUrl || "/haikal-al-ghifari.jpg"}
                 alt="Haikal Al Ghifari Profile"
-                className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover object-[center_18%] hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>

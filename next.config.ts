@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
     // Mengabaikan error TypeScript saat build
     ignoreBuildErrors: true,
   },
+  devIndicators: false,
 };
 
 export default nextConfig;

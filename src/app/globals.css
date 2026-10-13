@@ -312,10 +312,11 @@
   }
 }
 
-/* Custom 8-Bit Retro Gaming Yellow Cursors */
+/* Custom 8-Bit Retro Gaming Yellow Cursors (Instant Base64 PNG + Static Fallbacks) */
+*,
 html,
 body {
-  cursor: url('/cursors/retro-cursor.svg') 1 1, auto;
+  cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAeklEQVR4nM3Tyw2AMAwDUC/BXh2cibgEtQfEJymf2IClSD3lpUoLAAZxTI1YjRJpwDQOMmQBVMgGUCAHgI24ABMJARbSBRjIKZBFLgEZpPeKvMoBTqPypKkL7Jq3M2UHweQRcPtG0XRUoIszkM+A9xEVAMX/8FJW9Y/Mo+U0P1Q5WhIAAAAASUVORK5CYII=') 0 0, url('/cursors/retro-cursor.png') 0 0, auto;
 }
 
 button,
@@ -325,22 +326,20 @@ input[type="submit"],
 input[type="button"],
 input[type="reset"],
 select,
+summary,
 .cursor-pointer,
-.btn-retro {
-  cursor: url('/cursors/retro-pointer.svg') 7 1, pointer !important;
-}
-
+.btn-retro,
 button *,
 a *,
 [role="button"] *,
 .btn-retro *,
 .cursor-pointer * {
-  cursor: inherit;
+  cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAgUlEQVR4nN3TbQrAIAgGYC+xe+3gO9H+NIgZKzM1cUGCf0b47O0DgFZ6O6QSVhSUh9/XkXtbwAVLgDtdD8BB5TuHa9AKaJARoE5GAK4NyerhRkBKZv9zQ7Jw4PwVIIcVAbiRZv/XANNI5/bwgKNVAHwfnaaYu78YcG6PCOACbW9cD3lQrlWH4cJoAAAAAElFTkSuQmCC') 5 0, url('/cursors/retro-pointer.png') 5 0, pointer !important;
 }
 
 input[type="text"],
 input[type="email"],
 input[type="password"],
 textarea {
-  cursor: text;
+  cursor: text !important;
 }

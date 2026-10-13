@@ -90,7 +90,7 @@ export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-10 items-center bg-white dark:bg-[#151B22] border-3 border-black dark:border-white p-3.5 sm:p-6 lg:p-8 shadow-retro-lg relative overflow-hidden"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-10 items-center bg-white dark:bg-[#151B22] border-3 border-black dark:border-white p-4 sm:p-6 lg:p-8 pb-6 sm:pb-7 lg:pb-8 shadow-retro-lg relative overflow-hidden"
           >
             {/* Image Preview Frame (Left 6 Columns) */}
             <div className="lg:col-span-6">
@@ -122,7 +122,7 @@ export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
 
               {/* Title */}
               <h3 className="font-sans text-lg min-[400px]:text-xl sm:text-2xl font-black text-black dark:text-white tracking-tight leading-snug">
-                <Link href={`/projects/${currentProj.slug}`} className="hover:text-blue-600 dark:hover:text-yellow-400">
+                <Link href={`/projects/${currentProj.slug}`} className="hover:text-amber-500 dark:hover:text-[#FACC15] transition-colors">
                   {title}
                 </Link>
               </h3>
@@ -147,10 +147,10 @@ export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
               )}
 
               {/* Action Buttons Row */}
-              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-2">
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-3">
                 <Link
                   href={`/projects/${currentProj.slug}`}
-                  className="px-4 sm:px-5 py-2 sm:py-2.5 border-2 border-black dark:border-white bg-[#FACC15] hover:bg-yellow-300 text-black font-sans text-xs sm:text-sm font-black uppercase tracking-wider flex items-center gap-2 shadow-retro-sm btn-retro"
+                  className="px-4 sm:px-5 py-2.5 border-2 border-black dark:border-white bg-[#FACC15] hover:bg-[#FFE043] text-black font-sans text-xs sm:text-sm font-black uppercase tracking-wider flex items-center gap-2 shadow-retro-sm hover:shadow-retro hover:-translate-y-0.5 active:translate-y-0 active:shadow-retro-xs transition-all btn-retro"
                 >
                   <span>{t('projects.viewDetail')}</span>
                   <ArrowUpRight className="w-4 h-4 font-bold" />
@@ -161,7 +161,7 @@ export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
                     href={currentProj.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-9 h-9 border-2 border-black dark:border-white bg-white dark:bg-[#0E1217] text-black dark:text-white hover:bg-yellow-100 flex items-center justify-center shadow-retro-xs btn-retro"
+                    className="w-9 h-9 border-2 border-black dark:border-white bg-white dark:bg-[#0E1217] text-black dark:text-white hover:bg-[#FACC15] hover:text-black dark:hover:bg-[#FACC15] dark:hover:text-black flex items-center justify-center shadow-retro-xs hover:shadow-retro-sm hover:-translate-y-0.5 active:translate-y-0 transition-all btn-retro"
                     title="GitHub Repository"
                   >
                     <FaGithub className="w-4 h-4" />
@@ -173,7 +173,7 @@ export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
                     href={currentProj.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-9 h-9 border-2 border-black dark:border-white bg-white dark:bg-[#0E1217] text-black dark:text-white hover:bg-yellow-100 flex items-center justify-center shadow-retro-xs btn-retro"
+                    className="w-9 h-9 border-2 border-black dark:border-white bg-white dark:bg-[#0E1217] text-black dark:text-white hover:bg-[#FACC15] hover:text-black dark:hover:bg-[#FACC15] dark:hover:text-black flex items-center justify-center shadow-retro-xs hover:shadow-retro-sm hover:-translate-y-0.5 active:translate-y-0 transition-all btn-retro"
                     title="Live Demo"
                   >
                     <ExternalLink className="w-3.5 h-3.5" />

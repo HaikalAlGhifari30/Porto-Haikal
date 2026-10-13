@@ -150,13 +150,6 @@
   html,
   body {
     @apply overflow-x-hidden bg-slate-50 dark:bg-[#0E1217] text-slate-900 dark:text-slate-100;
-    cursor: default;
-  }
-
-  button, a, [role="button"], .cursor-pointer, input[type="submit"], input[type="button"], label[for], select, summary,
-  .btn-retro, [data-hoverable],
-  button *, a *, [role="button"] *, .cursor-pointer *, .btn-retro * {
-    cursor: pointer !important;
   }
 
   * {
@@ -314,9 +307,12 @@
 
 /* Custom 8-Bit Retro Gaming Yellow Cursors (Instant Base64 PNG + Static Fallbacks) */
 *,
+*::before,
+*::after,
 html,
-body {
-  cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAeklEQVR4nM3Tyw2AMAwDUC/BXh2cibgEtQfEJymf2IClSD3lpUoLAAZxTI1YjRJpwDQOMmQBVMgGUCAHgI24ABMJARbSBRjIKZBFLgEZpPeKvMoBTqPypKkL7Jq3M2UHweQRcPtG0XRUoIszkM+A9xEVAMX/8FJW9Y/Mo+U0P1Q5WhIAAAAASUVORK5CYII=') 0 0, url('/cursors/retro-cursor.png') 0 0, auto;
+body,
+body * {
+  cursor: url('/cursors/retro-cursor.png?v=8') 0 0, url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA2ElEQVR4nMXVyw0DIQxFUTeR4tJSaksxWc8iNxopSIDMZxjbPMnbeUeGEBERstkSdiPYjeCc4/3YBiEBUqIRDACEA47g40ADpImAUAO+n1coggQ4i/OJQtACRCHQAHnxAIE54GiUe22DHDBTbo0gAVbGAsEdgMW9YAbQKBmN7QbECcEi4NmZS6EG9FAeCPKyeoUDgElIRdoZej5ABaA33ltAmfws3beA8rEC4L0FlA/VN7l7UU3+jKRM/TMye/VagJm4ImbSK778+q2GwUsYApB/wsu13C7+AQcF1oHQ1fpBAAAAAElFTkSuQmCC') 0 0, default;
 }
 
 button,
@@ -327,14 +323,22 @@ input[type="button"],
 input[type="reset"],
 select,
 summary,
+label[for],
 .cursor-pointer,
 .btn-retro,
+[data-hoverable],
 button *,
 a *,
 [role="button"] *,
 .btn-retro *,
-.cursor-pointer * {
-  cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAgUlEQVR4nN3TbQrAIAgGYC+xe+3gO9H+NIgZKzM1cUGCf0b47O0DgFZ6O6QSVhSUh9/XkXtbwAVLgDtdD8BB5TuHa9AKaJARoE5GAK4NyerhRkBKZv9zQ7Jw4PwVIIcVAbiRZv/XANNI5/bwgKNVAHwfnaaYu78YcG6PCOACbW9cD3lQrlWH4cJoAAAAAElFTkSuQmCC') 5 0, url('/cursors/retro-pointer.png') 5 0, pointer !important;
+.cursor-pointer *,
+[data-hoverable] *,
+button:hover,
+a:hover,
+[role="button"]:hover,
+.cursor-pointer:hover,
+.btn-retro:hover {
+  cursor: url('/cursors/retro-pointer.png?v=8') 7 2, url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAp0lEQVR4nO3WQQqAIBAF0LlEh/NKna3DtHbRDwIXDZo6zqRYH/4umEeDKFE8KKhpMAzAb8utXQAhDOB+AH1mBce+XmUA01MCBYAIAd6HY2iCQA6QaysCrYBWBFoGZxB6ACrYfeS79wFecHdAawURgJsHQLIVTATwvVfgDQFFiJJfrwKgBMIaoLYKhqt+wED5QpIDqBKRGC56wkGh4uEhXYfzOEH/jJ0TsovJyjDI4EUAAAAASUVORK5CYII=') 7 2, pointer !important;
 }
 
 input[type="text"],

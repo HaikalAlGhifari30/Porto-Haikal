@@ -305,14 +305,14 @@
   }
 }
 
-/* Custom 8-Bit Retro Gaming Yellow Cursors (Instant Base64 PNG + Static Fallbacks) */
+/* Custom 8-Bit Retro Gaming Yellow Cursors (Exact Match to SS) */
 *,
 *::before,
 *::after,
 html,
 body,
 body * {
-  cursor: url('/cursors/retro-cursor.png?v=9') 0 0, url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAdElEQVR4nO3VMQqAMBQD0FzC+1/IE/0l0qGg1f4OTf5kwKmQRwlUACDMoRthixNhS5yHDWEHXAjvgAPhCKgRfgFKhDNAhaRACJAlEJtINjKHbx/oZZYN8CzTboB3iQ7AvICSkbOzML5RZQhLboGCX+sfWHIBq3AKMmNmM5kAAAAASUVORK5CYII=') 0 0, default;
+  cursor: url('/cursors/retro-cursor.svg?v=10') 1 1, auto;
 }
 
 button,
@@ -338,7 +338,7 @@ a:hover,
 [role="button"]:hover,
 .cursor-pointer:hover,
 .btn-retro:hover {
-  cursor: url('/cursors/retro-pointer.png?v=9') 5 0, url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAa0lEQVR4nO3TSwqAMAyE4V7C+1/IE2UzEjEFH9GUdChCf8hGYT5cWMo9HEcJFguBJuuyHwMZDiCLvgHo8WUeAHvm4VH0CcB13HsfQU5A630B9R9gAMiOSwTIjMtoQKMDGnXcoo5baLzZ7M9t9fsLcSszduEAAAAASUVORK5CYII=') 5 0, pointer !important;
+  cursor: url('/cursors/retro-pointer.svg?v=10') 7 1, pointer !important;
 }
 
 input[type="text"],

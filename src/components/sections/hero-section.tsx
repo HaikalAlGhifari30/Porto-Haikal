@@ -16,8 +16,8 @@ export function HeroSection({ settings, onNavigateScene }: HeroSectionProps) {
 
   const greeting = isEn ? "HELLO, I'M" : "HALO, SAYA";
   const role = isEn
-    ? "Informatics Engineer // QA Specialist & Developer"
-    : "Informatics Engineer // QA Specialist & Developer";
+    ? "Quality Assurance Specialist"
+    : "Quality Assurance Specialist";
   const summary = isEn
     ? (settings?.aboutTextEn || "Dedicated Quality Assurance Engineer currently actively working at COMO 1907. Highly experienced in web & mobile manual testing, end-to-end user flow verification, regression, and system modeling.")
     : (settings?.aboutText || "Quality Assurance Engineer berdedikasi yang saat ini aktif bekerja di COMO 1907. Berpengalaman dalam pengujian manual web & mobile, verifikasi alur pengguna end-to-end, regresi, serta pemodelan sistem.");
@@ -150,7 +150,7 @@ export function HeroSection({ settings, onNavigateScene }: HeroSectionProps) {
 
             {/* Bottom-Left Pin Badge */}
             <div className="absolute -bottom-2.5 -left-2 sm:-bottom-3.5 sm:-left-3.5 z-20 px-2.5 sm:px-3.5 py-0.5 sm:py-1.5 bg-white dark:bg-[#151B22] text-black dark:text-white font-pixel font-black text-[9px] sm:text-xs border-2 border-black dark:border-white shadow-retro-sm tracking-wider uppercase whitespace-nowrap">
-              QA ENGINEER
+              QA SPECIALIST
             </div>
 
             {/* Main 8-Bit Frame */}

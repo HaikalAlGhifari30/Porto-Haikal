@@ -26,9 +26,9 @@ const dictionary: Record<Language, Record<string, string>> = {
         'nav.login': 'Masuk Admin',
         'nav.dashboard': 'Dasbor',
         
-        'hero.badge': 'Quality Assurance Engineer (Manual Testing)',
+        'hero.badge': 'Quality Assurance Specialist',
         'hero.greeting': 'Halo, Saya',
-        'hero.title': 'Quality Assurance Engineer',
+        'hero.title': 'Quality Assurance Specialist',
         'hero.subtitle': 'Lulusan S1 Teknik Informatika UNIKOM (IPK 3.46) dengan passion tinggi pada Quality Assurance & Manual Testing untuk menjamin mutu, fungsionalitas, dan pengalaman pengguna aplikasi.',
         'hero.viewProjects': 'Lihat Portofolio Proyek',
         'hero.contactMe': 'Hubungi Saya',
@@ -125,9 +125,9 @@ const dictionary: Record<Language, Record<string, string>> = {
         'options.theme': 'Theme',
         'contact.scene': 'CLOSING SCENE',
         
-        'hero.badge': 'Quality Assurance Engineer & Web Developer',
+        'hero.badge': 'Quality Assurance Specialist',
         'hero.greeting': "Hi, I'm",
-        'hero.title': 'Quality Assurance Engineer',
+        'hero.title': 'Quality Assurance Specialist',
         'hero.subtitle': 'Informatics Engineering Graduate from UNIKOM (GPA 3.46) specializing in Quality Assurance, Manual Testing, and Web Development.',
         'hero.viewProjects': 'View Featured Projects',
         'hero.contactMe': 'Contact Me',

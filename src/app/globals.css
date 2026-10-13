@@ -311,3 +311,36 @@
     scrollbar-width: none !important;
   }
 }
+
+/* Custom 8-Bit Retro Gaming Yellow Cursors */
+html,
+body {
+  cursor: url('/cursors/retro-cursor.svg') 1 1, auto;
+}
+
+button,
+a,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+select,
+.cursor-pointer,
+.btn-retro {
+  cursor: url('/cursors/retro-pointer.svg') 7 1, pointer !important;
+}
+
+button *,
+a *,
+[role="button"] *,
+.btn-retro *,
+.cursor-pointer * {
+  cursor: inherit;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  cursor: text;
+}

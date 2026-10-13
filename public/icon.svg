@@ -1,12 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" shape-rendering="crispEdges">
-  <!-- Retro Shadow -->
-  <rect x="18" y="18" width="96" height="96" fill="#000000" opacity="0.35" />
-  <!-- Main Badge Outer Border & Background -->
-  <rect x="6" y="6" width="96" height="96" fill="#FACC15" stroke="#000000" stroke-width="8" />
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" shape-rendering="crispEdges">
+  <rect width="512" height="512" fill="#FACC15" />
   <!-- H Left Column -->
-  <rect x="22" y="24" width="14" height="60" fill="#000000" />
-  <!-- H Crossbar to G Path -->
-  <path d="M 22 50 H 64 V 84 H 90 V 60 H 70" fill="none" stroke="#000000" stroke-width="14" stroke-linecap="square" stroke-linejoin="miter" />
-  <!-- Accent Pixel Top Right -->
-  <rect x="76" y="24" width="14" height="14" fill="#000000" />
+  <rect x="102" y="121" width="59" height="242" fill="#000000" />
+  <!-- Top Right Accent Pixel -->
+  <rect x="322" y="121" width="59" height="59" fill="#000000" />
+  <!-- H Crossbar -->
+  <rect x="102" y="187" width="161" height="59" fill="#000000" />
+  <!-- Center Vertical Stem -->
+  <rect x="234" y="216" width="59" height="147" fill="#000000" />
+  <!-- Bottom Bar of G -->
+  <rect x="234" y="333" width="176" height="59" fill="#000000" />
+  <!-- Right Vertical Bar of G -->
+  <rect x="351" y="231" width="59" height="161" fill="#000000" />
+  <!-- Inward Hook of G -->
+  <rect x="263" y="231" width="147" height="59" fill="#000000" />
 </svg>

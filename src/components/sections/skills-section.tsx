@@ -1,7 +1,7 @@
 "use client";
 
 import { useSafeLang } from "@/store/lang";
-import { ShieldCheck, Cpu, Wrench, Sparkles, CheckCircle2 } from "lucide-react";
+import { ShieldCheck, Cpu, Wrench, Sparkles, CheckCircle2, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface SkillItem {
@@ -12,9 +12,10 @@ interface SkillItem {
 
 interface SkillsSectionProps {
   skills?: SkillItem[];
+  onNavigateScene?: (index: number) => void;
 }
 
-export function SkillsSection({ skills = [] }: SkillsSectionProps) {
+export function SkillsSection({ skills = [], onNavigateScene }: SkillsSectionProps) {
   const { lang, t } = useSafeLang();
   const isEn = lang === "en";
 
@@ -87,7 +88,7 @@ export function SkillsSection({ skills = [] }: SkillsSectionProps) {
       </div>
 
       {/* Categorized Skills Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3.5 sm:gap-5 lg:gap-7 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3.5 sm:gap-5 lg:gap-7 w-full pb-12 sm:pb-0">
         {categories.map((cat, cIdx) => {
           let catSkills = skillData.filter((s) => s.category === cat.key);
           if (catSkills.length === 0) {
@@ -126,6 +127,19 @@ export function SkillsSection({ skills = [] }: SkillsSectionProps) {
           );
         })}
       </div>
+
+      {/* Next Scene CTA Button */}
+      {onNavigateScene && (
+        <div className="flex justify-center pt-8 sm:pt-10">
+          <button
+            onClick={() => onNavigateScene(3)}
+            className="px-6 py-3 bg-[#FACC15] hover:bg-yellow-300 text-black font-pixel text-xs sm:text-sm font-black uppercase border-2 border-black dark:border-white shadow-retro btn-retro transition-all flex items-center gap-2.5 cursor-pointer"
+          >
+            <span>{isEn ? "NEXT: CAREER TIMELINE" : "SELANJUTNYA: RIWAYAT KARIR"}</span>
+            <ChevronRight className="w-4 h-4 stroke-[3]" />
+          </button>
+        </div>
+      )}
     </section>
   );
 }

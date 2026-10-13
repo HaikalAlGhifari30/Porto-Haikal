@@ -431,9 +431,9 @@ export function AboutSectionClient({
                 </motion.div>
               </AnimatePresence>
 
-              {/* 8-Bit Carousel Controls for Education Cards */}
+              {/* 8-Bit Carousel Controls for Education Cards (Centered on Mobile, Justified on Desktop) */}
               {eduItems.length > 2 && (
-                <div className="flex items-center justify-between pt-2 px-1">
+                <div className="flex items-center justify-center sm:justify-between gap-4 sm:gap-2 pt-3 px-2">
                   {/* Square Dots Indicator */}
                   <div className="flex items-center gap-2">
                     {Array.from({ length: Math.ceil(eduItems.length / 2) }).map((_, idx) => (
@@ -615,9 +615,9 @@ export function AboutSectionClient({
                 </motion.div>
               </AnimatePresence>
 
-              {/* 8-Bit Carousel Controls for Certificate Cards */}
+              {/* 8-Bit Carousel Controls for Certificate Cards (Centered on Mobile, Justified on Desktop) */}
               {certItems.length > 2 && (
-                <div className="flex items-center justify-between pt-2 px-1">
+                <div className="flex items-center justify-center sm:justify-between gap-4 sm:gap-2 pt-3 px-2">
                   {/* Square Dots Indicator */}
                   <div className="flex items-center gap-2">
                     {Array.from({ length: Math.ceil(certItems.length / 2) }).map((_, idx) => (
@@ -664,7 +664,7 @@ export function AboutSectionClient({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl mx-auto"
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl mx-auto pb-12 sm:pb-0"
             >
               {orgItems.map((org: any, idx: number) => {
                 const r = isEn && org.roleEn ? org.roleEn : org.role;
@@ -711,6 +711,19 @@ export function AboutSectionClient({
           )}
 
         </AnimatePresence>
+
+        {/* Next Scene CTA Button */}
+        {onNavigateScene && (
+          <div className="flex justify-center pt-8 sm:pt-10">
+            <button
+              onClick={() => onNavigateScene(2)}
+              className="px-6 py-3 bg-[#FACC15] hover:bg-yellow-300 text-black font-pixel text-xs sm:text-sm font-black uppercase border-2 border-black dark:border-white shadow-retro btn-retro transition-all flex items-center gap-2.5 cursor-pointer"
+            >
+              <span>{isEn ? "NEXT: SKILL TREE" : "SELANJUTNYA: POHON KEAHLIAN"}</span>
+              <ChevronRight className="w-4 h-4 stroke-[3]" />
+            </button>
+          </div>
+        )}
 
         {/* 8-BIT CERTIFICATE LIGHTBOX MODAL */}
         <AnimatePresence>

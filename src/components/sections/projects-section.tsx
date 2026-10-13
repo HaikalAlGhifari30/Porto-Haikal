@@ -27,7 +27,7 @@ interface ProjectsSectionProps {
   onNavigateScene?: (index: number) => void;
 }
 
-export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
+export function ProjectsSection({ projects = [], onNavigateScene }: ProjectsSectionProps) {
   const { lang, t } = useSafeLang();
   const isEn = lang === "en";
   const [activeIndex, setActiveIndex] = useState(0);
@@ -67,14 +67,14 @@ export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
   return (
     <section className="w-full max-w-6xl xl:max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-6 flex flex-col justify-center items-center text-zinc-900 dark:text-white">
       {/* Header */}
-      <div className="max-w-3xl space-y-2.5 mb-5 sm:mb-6 text-center mx-auto px-1">
-        <div className="inline-block px-3.5 py-1.5 bg-[#FACC15] border-2 border-black dark:border-white shadow-retro-sm text-black font-pixel text-xs uppercase font-bold tracking-wider mb-1">
+      <div className="max-w-3xl space-y-1.5 sm:space-y-2.5 mb-3 sm:mb-6 text-center mx-auto px-1">
+        <div className="inline-block px-3.5 py-1 sm:py-1.5 bg-[#FACC15] border-2 border-black dark:border-white shadow-retro-sm text-black font-pixel text-[10px] sm:text-xs uppercase font-bold tracking-wider mb-0.5 sm:mb-1">
           SELECT GAME // PORTFOLIO CARTRIDGES
         </div>
-        <h2 className="text-3xl sm:text-5xl font-pixel font-black tracking-tight text-black dark:text-white uppercase">
+        <h2 className="text-2xl sm:text-5xl font-pixel font-black tracking-tight text-black dark:text-white uppercase">
           {t('section.projects')}
         </h2>
-        <p className="font-sans text-sm sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium max-w-2xl mx-auto">
+        <p className="font-sans text-xs sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium max-w-2xl mx-auto">
           {isEn
             ? "Interactive showcase of curated software & testing projects"
             : "Showcase interaktif proyek perangkat lunak & pengujian pilihan"}
@@ -90,7 +90,7 @@ export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-10 items-center bg-white dark:bg-[#151B22] border-3 border-black dark:border-white p-4 sm:p-6 lg:p-8 pb-6 sm:pb-7 lg:pb-8 shadow-retro-lg relative overflow-hidden"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-6 lg:gap-10 items-center bg-white dark:bg-[#151B22] border-3 border-black dark:border-white p-3.5 sm:p-6 lg:p-8 pb-5 sm:pb-7 lg:pb-8 shadow-retro-lg relative overflow-hidden"
           >
             {/* Image Preview Frame (Left 6 Columns) */}
             <div className="lg:col-span-6">
@@ -185,8 +185,8 @@ export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
           </motion.div>
         </AnimatePresence>
 
-        {/* Carousel Navigation Footer Controls (Pixel Squares on Left, Buttons on Right) */}
-        <div className="flex items-center justify-between mt-4 px-1">
+        {/* Carousel Navigation Footer Controls (Centered on Mobile, Justified on Desktop) */}
+        <div className="flex items-center justify-center sm:justify-between gap-4 sm:gap-2 mt-4 px-2">
           {/* Square Pixel Dots Indicator */}
           <div className="flex items-center gap-2">
             {items.map((_, idx) => (
@@ -222,6 +222,19 @@ export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
             </button>
           </div>
         </div>
+
+        {/* Next Scene CTA Button */}
+        {onNavigateScene && (
+          <div className="flex justify-center pt-8 sm:pt-10">
+            <button
+              onClick={() => onNavigateScene(5)}
+              className="px-6 py-3 bg-[#FACC15] hover:bg-yellow-300 text-black font-pixel text-xs sm:text-sm font-black uppercase border-2 border-black dark:border-white shadow-retro btn-retro transition-all flex items-center gap-2.5 cursor-pointer"
+            >
+              <span>{isEn ? "NEXT: GET IN TOUCH" : "SELANJUTNYA: HUBUNGI SAYA"}</span>
+              <ChevronRight className="w-4 h-4 stroke-[3]" />
+            </button>
+          </div>
+        )}
 
       </div>
     </section>

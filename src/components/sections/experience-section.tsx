@@ -21,9 +21,10 @@ interface ExperienceItem {
 
 interface ExperienceSectionProps {
   experiences?: ExperienceItem[];
+  onNavigateScene?: (index: number) => void;
 }
 
-export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) {
+export function ExperienceSection({ experiences = [], onNavigateScene }: ExperienceSectionProps) {
   const { lang, t } = useSafeLang();
   const isEn = lang === "en";
 
@@ -168,7 +169,7 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
         </div>
 
         {/* Timeline Layout (Central Retro Pixel Line) */}
-        <div className="relative space-y-4 sm:space-y-8 md:space-y-10">
+        <div className="relative space-y-4 sm:space-y-8 md:space-y-10 pb-12 sm:pb-0">
           
           {/* Central Line */}
           <div className="absolute left-3.5 sm:left-6 md:left-1/2 top-4 bottom-4 w-1 bg-black dark:bg-white -translate-x-1/2 opacity-70 border-dashed" />
@@ -314,6 +315,20 @@ export function ExperienceSection({ experiences = [] }: ExperienceSectionProps) 
           })}
 
         </div>
+
+        {/* Next Scene CTA Button */}
+        {onNavigateScene && (
+          <div className="flex justify-center pt-8 sm:pt-10">
+            <button
+              onClick={() => onNavigateScene(4)}
+              className="px-6 py-3 bg-[#FACC15] hover:bg-yellow-300 text-black font-pixel text-xs sm:text-sm font-black uppercase border-2 border-black dark:border-white shadow-retro btn-retro transition-all flex items-center gap-2.5 cursor-pointer"
+            >
+              <span>{isEn ? "NEXT: FEATURED PROJECTS" : "SELANJUTNYA: PROYEK UNGGULAN"}</span>
+              <ChevronRight className="w-4 h-4 stroke-[3]" />
+            </button>
+          </div>
+        )}
+
       </div>
     </section>
   );

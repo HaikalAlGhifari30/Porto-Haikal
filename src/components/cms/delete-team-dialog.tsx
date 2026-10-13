@@ -57,36 +57,36 @@ export function DeleteTeamDialog({ team }: DeleteTeamDialogProps) {
                     <Button 
                         variant="ghost" 
                         size="icon" 
-                        className="w-9 h-9 rounded-full bg-red-500/10 backdrop-blur-md border border-red-500/20 flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition-all"
+                        className="w-9 h-9 rounded-none bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-retro-xs"
                         onClick={(e) => e.stopPropagation()}
                     />
                 }
             >
-                <Trash2 className="w-4 h-4" />
+                <Trash2 className="w-4 h-4 stroke-[2.5]" />
             </DialogTrigger>
             <DialogContent 
-                className="sm:max-w-sm bg-white dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 rounded-[2.5rem] p-10 flex flex-col items-center text-center shadow-2xl"
+                className="sm:max-w-sm bg-[#FAF6ED] dark:bg-[#151B22] border-2 border-black dark:border-white rounded-none p-8 flex flex-col items-center text-center shadow-retro-md"
                 onClick={(e) => e.stopPropagation()}
             >
-                <div className="w-20 h-20 rounded-full bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-8 text-red-500 animate-pulse">
-                    <AlertTriangle className="w-10 h-10" />
+                <div className="w-14 h-14 rounded-none bg-red-500 border-2 border-black flex items-center justify-center mb-6 text-white shadow-retro-xs">
+                    <AlertTriangle className="w-8 h-8 stroke-[2.5]" />
                 </div>
                 <DialogHeader>
-                    <DialogTitle className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Hapus Divisi?</DialogTitle>
+                    <DialogTitle className="text-xl font-black uppercase text-slate-900 dark:text-white mb-2">Hapus Divisi?</DialogTitle>
                 </DialogHeader>
-                <p className="text-sm text-slate-500 dark:text-zinc-400 mb-10 leading-relaxed px-4">
+                <p className="text-xs text-slate-700 dark:text-zinc-300 font-bold mb-8 leading-relaxed px-2">
                     {confirmStep === 0 ? (
-                        <>Apakah Anda yakin ingin menghapus divisi <span className="font-bold text-slate-900 dark:text-white">"{team.name}"</span>? Seluruh data posisi dan anggota di dalamnya juga akan terhapus.</>
+                        <>Apakah Anda yakin ingin menghapus divisi <span className="font-black text-slate-900 dark:text-white">"{team.name}"</span>? Seluruh data posisi dan anggota di dalamnya juga akan terhapus.</>
                     ) : (
-                        <span className="text-red-500 font-bold animate-in fade-in slide-in-from-top-2 duration-300 block">
-                            PERINGATAN: Seluruh data anggota, posisi, dan struktur di dalam divisi ini akan DIHAPUS PERMANEN. Tindakan ini tidak dapat dibatalkan.
+                        <span className="text-red-600 dark:text-red-400 font-black uppercase text-xs animate-in fade-in slide-in-from-top-2 duration-300 block">
+                            PERINGATAN: Seluruh data anggota, posisi, dan struktur di dalam divisi ini akan DIHAPUS PERMANEN!
                         </span>
                     )}
                 </p>
                 <div className="flex w-full gap-3">
                     <Button 
                         variant="outline" 
-                        className="flex-1 h-14 rounded-2xl border-slate-200 dark:border-zinc-800 font-bold hover:bg-slate-50 dark:hover:bg-zinc-800"
+                        className="flex-1 h-11 rounded-none border-2 border-black dark:border-white font-black uppercase text-xs hover:bg-slate-200 dark:hover:bg-zinc-800"
                         onClick={() => setIsOpen(false)}
                         disabled={isDeleting}
                     >
@@ -96,10 +96,10 @@ export function DeleteTeamDialog({ team }: DeleteTeamDialogProps) {
                         onClick={handleDelete}
                         disabled={isDeleting}
                         className={cn(
-                            "flex-1 h-14 rounded-2xl font-bold shadow-lg transition-all",
+                            "flex-1 h-11 rounded-none font-black uppercase text-xs border-2 border-black text-white shadow-retro-xs transition-all",
                             confirmStep === 0 
-                                ? "bg-red-500 hover:bg-red-600 text-white shadow-red-500/30" 
-                                : "bg-amber-500 hover:bg-amber-600 text-white shadow-amber-500/30 animate-pulse"
+                                ? "bg-red-500 hover:bg-red-600" 
+                                : "bg-amber-500 hover:bg-amber-600 text-black animate-pulse"
                         )}
                     >
                         {isDeleting 

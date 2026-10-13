@@ -40,32 +40,32 @@ export function TeamCard({ team }: { team: Team }) {
 
     return (
         <>
-            <Card className="bg-white dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 rounded-3xl overflow-hidden shadow-lg shadow-slate-200/40 dark:shadow-none transition-all hover:shadow-xl">
-                <CardHeader className="flex flex-row items-center justify-between p-8 border-b border-slate-100 dark:border-zinc-800/50 bg-slate-50/30 dark:bg-zinc-900/30">
+            <Card className="bg-[#FAF6ED] dark:bg-[#151B22] border-2 border-black dark:border-white rounded-none overflow-hidden shadow-retro-sm transition-all hover:shadow-retro-md">
+                <CardHeader className="flex flex-row items-center justify-between p-6 border-b-2 border-black dark:border-white bg-white dark:bg-[#0E1217]">
                     <div>
-                        <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">{team.name}</CardTitle>
-                        <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400 mt-1">/{team.slug}</p>
+                        <CardTitle className="text-xl font-black uppercase text-slate-900 dark:text-white">{team.name}</CardTitle>
+                        <p className="text-xs font-bold text-amber-600 dark:text-[#FACC15] mt-1">/{team.slug}</p>
                     </div>
                     <Button 
                         variant="ghost" 
                         size="sm" 
-                        className="h-9 px-4 rounded-lg hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-500/10 text-slate-400 transition-colors font-bold"
+                        className="h-9 px-4 rounded-none hover:bg-red-500 hover:text-white text-red-500 border border-red-500 transition-colors font-black uppercase text-xs shadow-retro-xs"
                         onClick={() => setIsDeleteOpen(true)}
                     >
                         Hapus Divisi
                     </Button>
                 </CardHeader>
-                <CardContent className="p-8">
+                <CardContent className="p-6">
                     <div className="flex items-center gap-2 mb-6">
-                        <div className="h-4 w-1 bg-emerald-500 rounded-full" />
-                        <h4 className="text-xs font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-[0.2em]">Hierarki Posisi</h4>
+                        <div className="h-4 w-1 bg-[#FACC15] border border-black" />
+                        <h4 className="text-xs font-black text-slate-700 dark:text-zinc-300 uppercase tracking-widest">Hierarki Posisi</h4>
                     </div>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                         {team.positions.map(pos => (
-                            <div key={pos.id} className="flex items-center justify-between bg-slate-50 dark:bg-zinc-950 p-4 rounded-2xl border border-slate-100 dark:border-zinc-800 group hover:border-emerald-500/30 transition-all">
+                            <div key={pos.id} className="flex items-center justify-between bg-white dark:bg-[#0E1217] p-4 rounded-none border-2 border-black dark:border-white group shadow-retro-xs">
                                 <div className="min-0">
-                                    <p className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate">{pos.name}</p>
-                                    <p className="text-[10px] text-slate-400 dark:text-zinc-500 font-bold uppercase tracking-widest mt-1">Level {pos.hierarchyLevel}</p>
+                                    <p className="text-sm font-black text-slate-900 dark:text-white uppercase truncate">{pos.name}</p>
+                                    <p className="text-[10px] text-slate-500 dark:text-zinc-400 font-bold uppercase tracking-widest mt-1">Level {pos.hierarchyLevel}</p>
                                 </div>
                                 <form action={deletePosition}>
                                     <input type="hidden" name="id" value={pos.id} />
@@ -73,7 +73,7 @@ export function TeamCard({ team }: { team: Team }) {
                                         type="submit" 
                                         variant="ghost" 
                                         size="icon" 
-                                        className="h-8 w-8 rounded-full text-slate-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 opacity-0 group-hover:opacity-100 transition-all"
+                                        className="h-8 w-8 rounded-none border border-black text-slate-500 hover:text-white hover:bg-red-500 opacity-0 group-hover:opacity-100 transition-all"
                                     >
                                         <X className="w-4 h-4" />
                                     </Button>
@@ -81,44 +81,44 @@ export function TeamCard({ team }: { team: Team }) {
                             </div>
                         ))}
                         {team.positions.length === 0 && (
-                            <div className="col-span-full py-4 text-center text-slate-400 dark:text-zinc-600 text-xs italic">
+                            <div className="col-span-full py-4 text-center text-slate-500 dark:text-zinc-400 text-xs italic font-bold">
                                 Belum ada posisi yang didefinisikan.
                             </div>
                         )}
                     </div>
                     
-                    <div className="pt-6 border-t border-slate-100 dark:border-zinc-800/50">
+                    <div className="pt-6 border-t-2 border-black dark:border-white">
                         <form action={createPosition} className="flex flex-col md:flex-row gap-4 items-end">
                             <input type="hidden" name="teamId" value={team.id} />
                             <div className="space-y-2 flex-1 w-full">
-                                <Label className="text-[10px] text-slate-400 dark:text-zinc-500 uppercase font-bold tracking-widest pl-1">Nama Posisi Baru</Label>
-                                <Input name="name" placeholder="Tech Lead" required className="bg-slate-50 dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white h-11 rounded-xl" />
+                                <Label className="text-[10px] text-slate-800 dark:text-zinc-200 uppercase font-black tracking-widest pl-1">Nama Posisi Baru</Label>
+                                <Input name="name" placeholder="Tech Lead" required className="bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white text-slate-900 dark:text-white h-11 rounded-none font-bold text-sm" />
                             </div>
                             <div className="space-y-2 w-full md:w-24">
-                                <Label className="text-[10px] text-slate-400 dark:text-zinc-500 uppercase font-bold tracking-widest pl-1">Level</Label>
-                                <Input name="hierarchyLevel" type="number" min="1" placeholder="1" required className="bg-slate-50 dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white h-11 rounded-xl" />
+                                <Label className="text-[10px] text-slate-800 dark:text-zinc-200 uppercase font-black tracking-widest pl-1">Level</Label>
+                                <Input name="hierarchyLevel" type="number" min="1" placeholder="1" required className="bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white text-slate-900 dark:text-white h-11 rounded-none font-bold text-sm" />
                             </div>
-                            <Button type="submit" variant="secondary" className="h-11 px-6 rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold hover:bg-slate-800 dark:hover:bg-white transition-all w-full md:w-auto">Tambah Posisi</Button>
+                            <Button type="submit" variant="secondary" className="h-11 px-6 rounded-none bg-[#FACC15] hover:bg-yellow-300 text-black font-black uppercase text-xs border-2 border-black shadow-retro-xs transition-all w-full md:w-auto">Tambah Posisi</Button>
                         </form>
                     </div>
                 </CardContent>
             </Card>
 
             <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
-                <DialogContent className="sm:max-w-sm bg-white dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 rounded-[2.5rem] p-10 flex flex-col items-center text-center">
-                    <div className="w-20 h-20 rounded-full bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-8 text-red-500 animate-pulse">
-                        <AlertTriangle className="w-10 h-10" />
+                <DialogContent className="sm:max-w-sm bg-[#FAF6ED] dark:bg-[#151B22] border-2 border-black dark:border-white rounded-none p-8 flex flex-col items-center text-center shadow-retro-md">
+                    <div className="w-14 h-14 rounded-none bg-red-500 border-2 border-black flex items-center justify-center mb-6 text-white shadow-retro-xs">
+                        <AlertTriangle className="w-8 h-8 stroke-[2.5]" />
                     </div>
                     <DialogHeader>
-                        <DialogTitle className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Hapus Divisi?</DialogTitle>
+                        <DialogTitle className="text-xl font-black uppercase text-slate-900 dark:text-white mb-2">Hapus Divisi?</DialogTitle>
                     </DialogHeader>
-                    <p className="text-sm text-slate-500 dark:text-zinc-400 mb-10 leading-relaxed">
-                        Apakah Anda yakin ingin menghapus divisi <span className="font-bold text-slate-900 dark:text-white">"{team.name}"</span>? Seluruh data posisi dan anggota di dalamnya juga akan terhapus.
+                    <p className="text-xs text-slate-700 dark:text-zinc-300 font-bold mb-8 leading-relaxed">
+                        Apakah Anda yakin ingin menghapus divisi <span className="font-black text-slate-900 dark:text-white">"{team.name}"</span>? Seluruh data posisi dan anggota di dalamnya juga akan terhapus.
                     </p>
                     <div className="flex w-full gap-3">
                         <Button 
                             variant="outline" 
-                            className="flex-1 h-14 rounded-2xl border-slate-200 dark:border-zinc-800 font-bold hover:bg-slate-50 dark:hover:bg-zinc-800"
+                            className="flex-1 h-11 rounded-none border-2 border-black dark:border-white font-black uppercase text-xs hover:bg-slate-200 dark:hover:bg-zinc-800"
                             onClick={() => setIsDeleteOpen(false)}
                             disabled={isDeleting}
                         >
@@ -126,7 +126,7 @@ export function TeamCard({ team }: { team: Team }) {
                         </Button>
                         <Button 
                             variant="destructive" 
-                            className="flex-1 h-14 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-bold shadow-[0_0_20px_rgba(239,68,68,0.3)]"
+                            className="flex-1 h-11 rounded-none bg-red-500 hover:bg-red-600 text-white font-black uppercase text-xs border-2 border-black shadow-retro-xs"
                             onClick={handleDelete}
                             disabled={isDeleting}
                         >

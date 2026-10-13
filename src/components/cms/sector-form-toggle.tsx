@@ -12,9 +12,9 @@ export function SectorFormToggle({ onAdd }: { onAdd: (sector: BusinessSector) =>
         <>
             <button
                 onClick={() => setIsOpen(true)}
-                className="flex items-center gap-2 px-5 py-3 bg-primary hover:bg-primary/90 text-white font-bold text-sm rounded-2xl transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5"
+                className="flex items-center gap-2 h-11 px-6 bg-[#FACC15] hover:bg-yellow-300 text-black font-black uppercase text-xs rounded-none border-2 border-black dark:border-white transition-all shadow-retro-xs"
             >
-                <Plus className="w-4 h-4" />
+                <Plus className="w-4 h-4 stroke-[3]" />
                 Tambah Bidang Usaha
             </button>
 

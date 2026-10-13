@@ -54,28 +54,28 @@ function SortableMemberItem({ member, onEdit, onDelete }: { member: TeamMember, 
         <div 
             ref={setNodeRef} 
             style={style}
-            className={`flex items-center justify-between p-4 mb-3 rounded-xl border ${isDragging ? 'bg-blue-50/80 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 shadow-lg' : 'bg-white dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 shadow-sm'} transition-colors`}
+            className={`flex items-center justify-between p-4 mb-3 rounded-none border-2 border-black dark:border-white ${isDragging ? 'bg-[#FACC15]/20 shadow-retro-sm' : 'bg-[#FAF6ED] dark:bg-[#151B22] shadow-retro-xs'} transition-all`}
         >
             <div className="flex items-center gap-4">
                 <div 
                     {...attributes} 
                     {...listeners}
-                    className="p-2 cursor-grab active:cursor-grabbing text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+                    className="p-2 cursor-grab active:cursor-grabbing text-slate-500 hover:text-black dark:hover:text-white transition-colors"
                 >
                     <GripVertical className="w-5 h-5" />
                 </div>
                 <div>
-                    <h4 className="font-bold text-slate-900 dark:text-white">{member.name}</h4>
-                    <p className="text-sm text-slate-500 dark:text-zinc-400">{member.position}</p>
+                    <h4 className="font-black text-slate-900 dark:text-white uppercase">{member.name}</h4>
+                    <p className="text-xs text-slate-600 dark:text-zinc-300 font-bold">{member.position}</p>
                 </div>
             </div>
             
             <div className="flex items-center gap-2">
-                <Button variant="ghost" size="icon" onClick={() => onEdit(member)}>
-                    <Edit2 className="w-4 h-4 text-blue-500" />
+                <Button variant="ghost" size="icon" onClick={() => onEdit(member)} className="w-8 h-8 rounded-none bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white text-black dark:text-white hover:bg-[#FACC15] dark:hover:bg-[#FACC15] hover:text-black shadow-retro-xs">
+                    <Edit2 className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="icon" onClick={() => onDelete(member.id)}>
-                    <Trash2 className="w-4 h-4 text-red-500" />
+                <Button variant="ghost" size="icon" onClick={() => onDelete(member.id)} className="w-8 h-8 rounded-none bg-red-500 border-2 border-black dark:border-white text-white hover:bg-red-600 shadow-retro-xs">
+                    <Trash2 className="w-4 h-4" />
                 </Button>
             </div>
         </div>
@@ -192,8 +192,8 @@ export function OrganizationCms({ initialMembers }: { initialMembers: TeamMember
     return (
         <div className="space-y-6">
             <div className="flex items-center justify-between">
-                <Button onClick={handleOpenAdd} className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl">
-                    <Plus className="w-4 h-4 mr-2" />
+                <Button onClick={handleOpenAdd} className="bg-[#FACC15] hover:bg-yellow-300 text-black border-2 border-black dark:border-white rounded-none font-black uppercase text-xs h-11 px-6 shadow-retro-xs">
+                    <Plus className="w-4 h-4 mr-2 stroke-[3]" />
                     Tambah Jabatan
                 </Button>
 
@@ -201,7 +201,7 @@ export function OrganizationCms({ initialMembers }: { initialMembers: TeamMember
                     <Button 
                         onClick={handleSaveOrder} 
                         disabled={isSaving}
-                        className="bg-slate-900 hover:bg-slate-800 text-white rounded-xl animate-in fade-in"
+                        className="bg-black dark:bg-white text-white dark:text-black border-2 border-black dark:border-white rounded-none font-black uppercase text-xs h-11 px-6 shadow-retro-xs animate-in fade-in"
                     >
                         {isSaving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
                         Simpan Urutan
@@ -221,8 +221,8 @@ export function OrganizationCms({ initialMembers }: { initialMembers: TeamMember
                             />
                         ))}
                         {members.length === 0 && (
-                            <div className="p-12 text-center border-2 border-dashed border-slate-200 dark:border-zinc-800 rounded-2xl">
-                                <p className="text-slate-500 dark:text-zinc-400">Belum ada anggota tim. Klik Tambah Jabatan untuk memulai.</p>
+                            <div className="p-12 text-center border-2 border-dashed border-black dark:border-white rounded-none bg-[#FAF6ED] dark:bg-[#151B22]">
+                                <p className="text-slate-600 dark:text-zinc-300 font-bold">Belum ada anggota tim. Klik Tambah Jabatan untuk memulai.</p>
                             </div>
                         )}
                     </div>
@@ -231,38 +231,40 @@ export function OrganizationCms({ initialMembers }: { initialMembers: TeamMember
 
             {/* Modal Form */}
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                <DialogContent className="sm:max-w-[425px] bg-white dark:bg-zinc-900 border-slate-200 dark:border-zinc-800 rounded-2xl">
+                <DialogContent className="sm:max-w-[425px] bg-[#FAF6ED] dark:bg-[#151B22] border-2 border-black dark:border-white rounded-none shadow-retro-md p-6">
                     <DialogHeader>
-                        <DialogTitle className="text-slate-900 dark:text-white text-xl font-bold">
+                        <DialogTitle className="text-slate-900 dark:text-white text-xl font-black uppercase">
                             {editingMember ? "Edit Jabatan" : "Tambah Jabatan"}
                         </DialogTitle>
                     </DialogHeader>
                     <form onSubmit={handleFormSubmit} className="space-y-6 mt-4">
                         <div className="space-y-2">
-                            <Label htmlFor="name">Nama Lengkap</Label>
+                            <Label htmlFor="name" className="text-xs font-black uppercase">Nama Lengkap</Label>
                             <Input 
                                 id="name" 
                                 value={formData.name}
                                 onChange={(e) => setFormData({...formData, name: e.target.value})}
-                                placeholder="Contoh: Budi Santoso"
+                                placeholder="Contoh: Haikal Al Ghifari"
                                 required
+                                className="bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white rounded-none font-bold text-sm h-11"
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="position">Posisi / Jabatan</Label>
+                            <Label htmlFor="position" className="text-xs font-black uppercase">Posisi / Jabatan</Label>
                             <Input 
                                 id="position" 
                                 value={formData.position}
                                 onChange={(e) => setFormData({...formData, position: e.target.value})}
-                                placeholder="Contoh: Direktur Utama"
+                                placeholder="Contoh: QA Lead Specialist"
                                 required
+                                className="bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white rounded-none font-bold text-sm h-11"
                             />
                         </div>
-                        <DialogFooter>
-                            <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)}>
+                        <DialogFooter className="gap-2 sm:gap-0">
+                            <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)} className="rounded-none border-2 border-black dark:border-white font-black uppercase">
                                 Batal
                             </Button>
-                            <Button type="submit" disabled={isSubmitting} className="bg-blue-600 hover:bg-blue-700 text-white">
+                            <Button type="submit" disabled={isSubmitting} className="bg-[#FACC15] hover:bg-yellow-300 text-black border-2 border-black dark:border-white rounded-none font-black uppercase shadow-retro-xs">
                                 {isSubmitting && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
                                 Simpan
                             </Button>
@@ -273,27 +275,27 @@ export function OrganizationCms({ initialMembers }: { initialMembers: TeamMember
 
             {/* Delete Confirmation Modal */}
             <Dialog open={deleteId !== null} onOpenChange={(open) => !open && setDeleteId(null)}>
-                <DialogContent className="sm:max-w-sm bg-white dark:bg-slate-900 border-slate-200 dark:border-zinc-800 rounded-[3rem] p-10 flex flex-col items-center text-center">
-                    <div className="w-24 h-24 rounded-[2rem] bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-8 text-red-500 border-2 border-red-500/20 shadow-xl shadow-red-500/5">
-                        <AlertTriangle className="w-12 h-12" />
+                <DialogContent className="sm:max-w-sm bg-[#FAF6ED] dark:bg-[#151B22] border-2 border-black dark:border-white rounded-none p-8 flex flex-col items-center text-center shadow-retro-md">
+                    <div className="w-16 h-16 rounded-none bg-red-500 flex items-center justify-center mb-6 text-white border-2 border-black dark:border-white shadow-retro-xs">
+                        <AlertTriangle className="w-8 h-8" />
                     </div>
                     <DialogHeader>
-                        <DialogTitle className="text-2xl font-black text-slate-900 dark:text-white mb-3">Hapus Anggota?</DialogTitle>
+                        <DialogTitle className="text-xl font-black uppercase text-slate-900 dark:text-white mb-2">Hapus Anggota?</DialogTitle>
                     </DialogHeader>
-                    <p className="text-sm text-slate-500 dark:text-zinc-400 mb-10 leading-relaxed font-medium">
+                    <p className="text-sm text-slate-600 dark:text-zinc-300 mb-6 font-bold">
                         Apakah Anda yakin ingin menghapus anggota ini? Tindakan ini permanen.
                     </p>
-                    <div className="flex w-full gap-4">
+                    <div className="flex w-full gap-3">
                         <Button 
                             variant="outline" 
-                            className="flex-1 h-14 rounded-2xl border-slate-200 dark:border-zinc-800 font-bold hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all"
+                            className="flex-1 h-11 rounded-none border-2 border-black dark:border-white font-black uppercase hover:bg-slate-200 dark:hover:bg-zinc-800"
                             onClick={() => setDeleteId(null)}
                         >
                             Batal
                         </Button>
                         <Button 
                             variant="destructive" 
-                            className="flex-1 h-14 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-black uppercase tracking-widest shadow-xl shadow-red-500/20 hover:shadow-red-500/40 hover:-translate-y-1 transition-all"
+                            className="flex-1 h-11 rounded-none bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-wider border-2 border-black dark:border-white shadow-retro-xs"
                             onClick={confirmDelete}
                         >
                             Hapus

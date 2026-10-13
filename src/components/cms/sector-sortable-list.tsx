@@ -43,7 +43,7 @@ function SectorRow({ sector, onEdit, onDelete }: {
         <div
             ref={setNodeRef}
             style={style}
-            className="flex items-center gap-4 p-4 bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 shadow-sm hover:border-primary/30 transition-all duration-300"
+            className="flex items-center gap-4 p-4 bg-[#FAF6ED] dark:bg-[#151B22] rounded-none border-2 border-black dark:border-white shadow-retro-xs hover:shadow-retro-sm transition-all duration-300"
         >
             <button
                 {...attributes}
@@ -57,15 +57,15 @@ function SectorRow({ sector, onEdit, onDelete }: {
                 <img
                     src={sector.imageUrl}
                     alt={sector.name}
-                    className="w-12 h-12 rounded-xl object-cover border border-slate-100 dark:border-zinc-800 shrink-0"
+                    className="w-12 h-12 rounded-none object-cover border-2 border-black dark:border-white shrink-0"
                 />
             ) : DynamicIcon ? (
-                <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                    <DynamicIcon className="w-6 h-6" />
+                <div className="w-12 h-12 rounded-none bg-[#FACC15] text-black border-2 border-black flex items-center justify-center shrink-0 shadow-retro-xs">
+                    <DynamicIcon className="w-6 h-6 stroke-[2.5]" />
                 </div>
             ) : (
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                    <span className="text-xl font-bold text-primary">{sector.name.charAt(0)}</span>
+                <div className="w-12 h-12 rounded-none bg-[#FACC15] text-black border-2 border-black flex items-center justify-center shrink-0 shadow-retro-xs">
+                    <span className="text-xl font-black">{sector.name.charAt(0)}</span>
                 </div>
             )}
 
@@ -80,14 +80,14 @@ function SectorRow({ sector, onEdit, onDelete }: {
             <div className="flex items-center gap-2 shrink-0">
                 <button
                     onClick={() => onEdit(sector)}
-                    className="w-9 h-9 rounded-full bg-blue-500/10 backdrop-blur-md border border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-500 hover:bg-blue-600 hover:text-white transition-all shrink-0"
+                    className="w-9 h-9 rounded-none bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white flex items-center justify-center text-black dark:text-white hover:bg-[#FACC15] dark:hover:bg-[#FACC15] hover:text-black transition-all shrink-0 shadow-retro-xs"
                     title="Edit"
                 >
                     <Pencil className="w-4 h-4" />
                 </button>
                 <button
                     onClick={() => onDelete(sector.id)}
-                    className="w-9 h-9 rounded-full bg-red-500/10 backdrop-blur-md border border-red-500/20 flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition-all shrink-0"
+                    className="w-9 h-9 rounded-none bg-red-500 border-2 border-black dark:border-white flex items-center justify-center text-white hover:bg-red-600 transition-all shrink-0 shadow-retro-xs"
                     title="Hapus"
                 >
                     <Trash2 className="w-4 h-4" />
@@ -190,10 +190,10 @@ export function SectorSortableList({ initialSectors }: { initialSectors: Busines
                     <p className="text-sm text-slate-500 dark:text-zinc-400 mb-10 leading-relaxed font-medium">
                         Tindakan ini permanen. Bidang usaha yang dipilih akan dihapus selamanya dari sistem.
                     </p>
-                    <div className="flex w-full gap-4">
+                    <div className="flex w-full gap-3">
                         <Button 
                             variant="outline" 
-                            className="flex-1 h-14 rounded-2xl border-slate-200 dark:border-zinc-800 font-bold hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all"
+                            className="flex-1 h-11 rounded-none border-2 border-black dark:border-white font-black uppercase text-xs hover:bg-slate-200 dark:hover:bg-zinc-800 transition-all"
                             onClick={() => setDeleteId(null)}
                             disabled={isPending}
                         >
@@ -201,7 +201,7 @@ export function SectorSortableList({ initialSectors }: { initialSectors: Busines
                         </Button>
                         <Button 
                             variant="destructive" 
-                            className="flex-1 h-14 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-black uppercase tracking-widest shadow-xl shadow-red-500/20 hover:shadow-red-500/40 hover:-translate-y-1 transition-all"
+                            className="flex-1 h-11 rounded-none bg-red-500 hover:bg-red-600 text-white font-black uppercase text-xs border-2 border-black shadow-retro-xs transition-all"
                             onClick={confirmDelete}
                             disabled={isPending}
                         >

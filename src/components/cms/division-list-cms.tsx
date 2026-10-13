@@ -25,20 +25,20 @@ export function DivisionListCMS({ teams }: DivisionListCMSProps) {
     return (
         <div className="space-y-8">
             {/* Search & Stats Bar */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-zinc-900/50 p-4 rounded-[2rem] border border-slate-100 dark:border-zinc-800/50 backdrop-blur-sm">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#FAF6ED] dark:bg-[#151B22] p-4 rounded-none border-2 border-black dark:border-white shadow-retro-sm">
                 <div className="relative flex-1 max-w-md">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                     <Input 
                         placeholder="Cari divisi..." 
-                        className="h-11 pl-12 rounded-xl bg-slate-50 dark:bg-zinc-950 border-slate-200 dark:border-zinc-800"
+                        className="h-11 pl-12 rounded-none bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white font-bold"
                         value={searchQuery}
                         onChange={(e) => handleSearchChange(e.target.value)}
                     />
                 </div>
                 <div className="flex items-center gap-6 px-4">
                     <div className="flex flex-col">
-                        <span className="text-[10px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-widest">Total Divisi</span>
-                        <span className="text-lg font-bold text-slate-900 dark:text-white">{teams.length}</span>
+                        <span className="text-[10px] font-black text-slate-700 dark:text-zinc-300 uppercase tracking-widest">Total Divisi</span>
+                        <span className="text-xl font-black text-slate-900 dark:text-white">{teams.length}</span>
                     </div>
                 </div>
             </div>
@@ -52,10 +52,10 @@ export function DivisionListCMS({ teams }: DivisionListCMSProps) {
 
             {/* Empty State */}
             {filteredTeams.length === 0 && (
-                <div className="flex flex-col items-center justify-center py-24 border-2 border-dashed border-slate-200 dark:border-zinc-800 rounded-[3rem] bg-slate-50/50 dark:bg-zinc-900/10 text-center">
-                    <Search className="w-12 h-12 text-slate-200 dark:text-zinc-800 mb-4" />
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">Divisi tidak ditemukan</h3>
-                    <p className="text-sm text-slate-400 dark:text-zinc-500 max-w-xs">Coba cari dengan kata kunci lain atau reset filter pencarian Anda.</p>
+                <div className="flex flex-col items-center justify-center py-20 border-2 border-dashed border-black dark:border-white rounded-none bg-white dark:bg-[#0E1217] text-center p-8">
+                    <Search className="w-10 h-10 text-slate-400 dark:text-zinc-600 mb-3" />
+                    <h3 className="text-base font-black uppercase text-slate-900 dark:text-white mb-1">Divisi tidak ditemukan</h3>
+                    <p className="text-xs text-slate-600 dark:text-zinc-400 font-bold max-w-xs">Coba cari dengan kata kunci lain atau reset filter pencarian Anda.</p>
                 </div>
             )}
         </div>

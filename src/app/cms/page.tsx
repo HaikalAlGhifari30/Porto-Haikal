@@ -17,16 +17,16 @@ export default async function CMSDashboard() {
     });
 
     return (
-        <div className="space-y-6 md:space-y-8 animate-in fade-in duration-700">
+        <div className="space-y-6 md:space-y-8 animate-in fade-in duration-500">
             {/* Hero Header Section */}
-            <div className="relative group p-6 md:p-10 rounded-[2rem] bg-gradient-to-br from-slate-900 via-[#070e20] to-blue-950 text-white overflow-hidden shadow-2xl border border-cyan-500/20">
-                <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-cyan-400/10 rounded-full blur-[100px] pointer-events-none" />
-                <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-blue-600/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="relative group p-6 md:p-8 rounded-2xl bg-[#0E1217] text-white overflow-hidden shadow-retro-md border-2 border-black dark:border-white">
+                <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-yellow-400/10 rounded-full blur-[100px] pointer-events-none" />
+                <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-amber-500/10 rounded-full blur-[100px] pointer-events-none" />
                 
-                <div className="relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
+                <div className="relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
                     <div className="max-w-2xl">
-                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-[10px] font-extrabold uppercase tracking-[0.2em] mb-4">
-                            <Zap className="w-3.5 h-3.5 text-cyan-400" /> QA Portfolio CMS
+                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FACC15] text-black border-2 border-black dark:border-white text-[10px] font-pixel font-bold uppercase tracking-wider mb-4 shadow-retro-xs">
+                            <Zap className="w-3.5 h-3.5 text-black" /> QA PORTFOLIO CMS
                         </div>
                         <DashboardGreeting />
                         <p className="text-zinc-300 text-sm md:text-base font-medium max-w-lg leading-relaxed pt-1">
@@ -34,15 +34,15 @@ export default async function CMSDashboard() {
                         </p>
                     </div>
                     
-                    <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+                    <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
                         <Link href="/cms/messages" className="flex-1 sm:flex-none">
-                            <Button className="w-full sm:w-auto h-12 px-8 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold border-none shadow-xl shadow-cyan-500/25 transition-all active:scale-95 cursor-pointer">
-                                <MessageSquare className="w-5 h-5 mr-2" /> Pesan Masuk {unreadMessages > 0 && `(${unreadMessages})`}
+                            <Button className="w-full sm:w-auto h-11 px-6 rounded-none bg-[#FACC15] hover:bg-yellow-300 text-black font-bold border-2 border-black dark:border-white shadow-retro-xs btn-retro transition-all cursor-pointer">
+                                <MessageSquare className="w-4 h-4 mr-2" /> Pesan Masuk {unreadMessages > 0 && `(${unreadMessages})`}
                             </Button>
                         </Link>
                         <Link href="/cms/settings" className="flex-1 sm:flex-none">
-                            <Button variant="outline" className="w-full sm:w-auto h-12 px-8 rounded-2xl bg-white/10 border-cyan-500/30 text-white font-bold backdrop-blur-md hover:bg-white/20 transition-all active:scale-95 cursor-pointer">
-                                <Settings className="w-4 h-4 mr-2 text-cyan-400" /> Pengaturan Website
+                            <Button variant="outline" className="w-full sm:w-auto h-11 px-6 rounded-none bg-white/10 border-2 border-black dark:border-white text-white font-bold backdrop-blur-md hover:bg-white/20 shadow-retro-xs btn-retro transition-all cursor-pointer">
+                                <Settings className="w-4 h-4 mr-2 text-[#FACC15]" /> Pengaturan Website
                             </Button>
                         </Link>
                     </div>
@@ -50,24 +50,24 @@ export default async function CMSDashboard() {
             </div>
 
             {/* Statistics Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 px-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 px-1">
                 {[
-                    { label: "Pesan Masuk", value: unreadMessages > 0 ? `${unreadMessages} Baru` : `${totalMessages} Pesan`, icon: MessageSquare, color: "blue", detail: "Formulir Kontak Public", href: "/cms/messages" },
-                    { label: "Total Proyek", value: totalProjects, icon: FolderKanban, color: "cyan", detail: "Active Live Showcase", href: "/cms/projects" },
-                    { label: "Galeri Screenshot", value: totalGallery, icon: ImageIcon, color: "emerald", detail: "Media Showcase", href: "/cms/gallery" },
-                    { label: "Database Neon", value: "Online", icon: CheckCircle2, color: "indigo", detail: "PostgreSQL Synced", href: "/cms/settings" },
+                    { label: "Pesan Masuk", value: unreadMessages > 0 ? `${unreadMessages} Baru` : `${totalMessages} Pesan`, icon: MessageSquare, detail: "Formulir Kontak Public", href: "/cms/messages" },
+                    { label: "Total Proyek", value: totalProjects, icon: FolderKanban, detail: "Active Live Showcase", href: "/cms/projects" },
+                    { label: "Galeri Screenshot", value: totalGallery, icon: ImageIcon, detail: "Media Showcase", href: "/cms/gallery" },
+                    { label: "Database Neon", value: "Online", icon: CheckCircle2, detail: "PostgreSQL Synced", href: "/cms/settings" },
                 ].map((stat, i) => (
-                    <Link key={i} href={stat.href} className="bg-white dark:bg-[#070e20]/90 border border-slate-200 dark:border-cyan-500/20 rounded-2xl p-6 hover:shadow-xl hover:border-cyan-400/50 transition-all group overflow-hidden relative cursor-pointer block">
-                        <div className="flex flex-col gap-4 relative z-10">
-                            <div className="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform duration-500">
+                    <Link key={i} href={stat.href} className="bg-white dark:bg-[#151B22] border-2 border-black dark:border-white rounded-2xl p-5 shadow-retro-xs hover:shadow-retro-sm hover:-translate-y-0.5 transition-all group overflow-hidden relative cursor-pointer block btn-retro">
+                        <div className="flex flex-col gap-3 relative z-10">
+                            <div className="w-10 h-10 bg-[#FACC15] border-2 border-black dark:border-white flex items-center justify-center text-black shadow-retro-xs group-hover:scale-105 transition-transform">
                                 <stat.icon className="w-5 h-5" />
                             </div>
                             <div>
-                                <h3 className="text-slate-400 dark:text-zinc-400 font-extrabold text-[10px] uppercase tracking-[0.2em] mb-1">{stat.label}</h3>
-                                <div className="flex items-end gap-2">
-                                    <span className="text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-none">{stat.value}</span>
-                                    <div className="flex items-center text-cyan-400 text-[9px] font-bold uppercase tracking-widest pb-0.5">
-                                        <ArrowUpRight className="w-3 h-3 mr-1" />
+                                <h3 className="text-zinc-600 dark:text-zinc-400 font-bold text-[10px] uppercase tracking-wider mb-1">{stat.label}</h3>
+                                <div className="flex items-end justify-between gap-2">
+                                    <span className="text-2xl sm:text-3xl font-black text-black dark:text-white tracking-tight leading-none">{stat.value}</span>
+                                    <div className="flex items-center text-amber-600 dark:text-[#FACC15] text-[9px] font-bold uppercase tracking-wider pb-0.5">
+                                        <ArrowUpRight className="w-3.5 h-3.5 mr-0.5" />
                                         <span>{stat.detail}</span>
                                     </div>
                                 </div>
@@ -81,38 +81,38 @@ export default async function CMSDashboard() {
             <div className="space-y-4 px-1">
                 <div className="flex items-center justify-between px-1">
                     <div className="flex items-center gap-2">
-                        <div className="h-5 w-1 bg-cyan-400 rounded-full" />
-                        <h3 className="text-sm font-black text-slate-900 dark:text-white tracking-tight uppercase">Daftar Proyek Terbaru</h3>
+                        <div className="h-5 w-1.5 bg-[#FACC15] border border-black dark:border-white" />
+                        <h3 className="text-sm font-black text-black dark:text-white tracking-tight uppercase">Daftar Proyek Terbaru</h3>
                     </div>
-                    <Link href="/cms/projects" className="group flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-cyan-400 hover:opacity-80 transition-all">
-                        Kelola Semua Proyek <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    <Link href="/cms/projects" className="group flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-amber-600 dark:text-[#FACC15] hover:underline transition-all">
+                        Kelola Semua Proyek <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </Link>
                 </div>
 
-                <div className="bg-white dark:bg-[#070e20]/90 border border-slate-200 dark:border-cyan-500/20 rounded-3xl p-4 shadow-sm overflow-hidden">
-                    <div className="divide-y divide-slate-100 dark:divide-zinc-800/60">
+                <div className="bg-white dark:bg-[#151B22] border-2 border-black dark:border-white rounded-2xl p-4 shadow-retro-sm overflow-hidden">
+                    <div className="divide-y divide-black/10 dark:divide-white/10">
                         {recentProjects.map(project => (
-                            <div key={project.id} className="p-4 flex flex-col md:flex-row items-start md:items-center gap-4 group hover:bg-slate-50 dark:hover:bg-zinc-800/40 transition-all rounded-2xl border border-transparent hover:border-cyan-500/20">
-                                <div className="w-24 h-16 rounded-xl bg-slate-100 dark:bg-zinc-950 overflow-hidden border border-slate-200 dark:border-zinc-800 shrink-0 shadow-inner">
+                            <div key={project.id} className="p-3.5 sm:p-4 flex flex-col md:flex-row items-start md:items-center gap-4 group hover:bg-[#FAF6ED]/70 dark:hover:bg-zinc-800/40 transition-all rounded-xl">
+                                <div className="w-24 h-16 rounded-lg bg-zinc-100 dark:bg-zinc-950 overflow-hidden border-2 border-black dark:border-white shrink-0 shadow-retro-xs">
                                     {project.imageUrl ? (
-                                        <img src={project.imageUrl.split(',')[0].trim()} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                        <img src={project.imageUrl.split(',')[0].trim()} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                     ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-[7px] font-bold text-slate-300 tracking-widest">NO IMAGE</div>
+                                        <div className="w-full h-full flex items-center justify-center text-[7px] font-bold text-zinc-400 tracking-widest">NO IMAGE</div>
                                     )}
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <div className="flex items-center gap-2 mb-0.5">
-                                        <h4 className="text-base font-bold text-slate-900 dark:text-white truncate group-hover:text-cyan-400 transition-colors">{project.title}</h4>
-                                        <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest ${project.isVisible ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30' : 'bg-slate-500/15 text-slate-400 border border-slate-500/30'}`}>
+                                        <h4 className="text-base font-bold text-black dark:text-white truncate group-hover:text-amber-500 dark:group-hover:text-[#FACC15] transition-colors">{project.title}</h4>
+                                        <span className={`px-2 py-0.5 text-[9px] font-black uppercase tracking-wider border ${project.isVisible ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/40' : 'bg-zinc-500/15 text-zinc-600 dark:text-zinc-400 border-zinc-500/40'}`}>
                                             {project.isVisible ? 'LIVE' : 'DRAFT'}
                                         </span>
                                     </div>
-                                    <p className="text-xs text-slate-400 dark:text-zinc-400 font-medium truncate mb-1">{project.url ? project.url.replace(/^https?:\/\//, '') : 'No URL'}</p>
+                                    <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium truncate mb-1">{project.url ? project.url.replace(/^https?:\/\//, '') : 'No URL'}</p>
                                     <p className="text-[10px] font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest italic">{new Date(project.createdAt).toLocaleDateString('id-ID', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
                                 </div>
-                                <div className="flex items-center gap-3">
+                                <div className="flex items-center gap-2">
                                     {project.url && (
-                                        <a href={project.url} target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-xl bg-slate-100 dark:bg-zinc-950 text-zinc-400 hover:text-cyan-400 transition-colors border border-slate-200 dark:border-zinc-800">
+                                        <a href={project.url} target="_blank" rel="noopener noreferrer" className="p-2 border-2 border-black dark:border-white bg-white dark:bg-[#0E1217] text-black dark:text-white hover:bg-[#FACC15] hover:text-black transition-colors shadow-retro-xs btn-retro">
                                             <ArrowUpRight className="w-4 h-4" />
                                         </a>
                                     )}
@@ -121,8 +121,8 @@ export default async function CMSDashboard() {
                             </div>
                         ))}
                     </div>
-                    <div className="p-4 mt-2">
-                        <Link href="/cms/projects" className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl bg-cyan-500/10 hover:bg-cyan-500/20 text-xs font-black uppercase tracking-[0.2em] text-cyan-400 transition-all border border-cyan-500/30">
+                    <div className="p-3 sm:p-4 mt-2">
+                        <Link href="/cms/projects" className="flex items-center justify-center gap-2 w-full py-3 rounded-none bg-[#FACC15] hover:bg-yellow-300 text-black text-xs font-bold uppercase tracking-wider transition-all border-2 border-black dark:border-white shadow-retro-xs btn-retro">
                             <Plus className="w-4 h-4" /> Tambah Proyek Portofolio Baru
                         </Link>
                     </div>

@@ -88,20 +88,20 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                                     href={item.href} 
                                     onClick={() => setIsSidebarOpen(false)} 
                                     className={cn(
-                                        "flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl transition-all duration-300 group relative",
+                                        "flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl transition-all duration-150 group relative cursor-pointer btn-retro",
                                         isActive 
-                                            ? "bg-[#142346]/75 backdrop-blur-md text-white border border-cyan-500/30 shadow-[0_0_15px_rgba(34,211,238,0.15)] font-bold" 
-                                            : "text-slate-500 dark:text-slate-400 hover:text-cyan-400 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/50 font-medium",
+                                            ? "bg-[#FACC15] text-black border-2 border-black dark:border-white shadow-retro-xs font-bold" 
+                                            : "text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:bg-yellow-100/80 dark:hover:bg-zinc-800 font-medium",
                                         isCollapsed && "px-2.5 justify-center"
                                     )}
                                 >
                                     <item.icon className={cn(
-                                        "w-4.5 h-4.5 transition-transform duration-300 group-hover:scale-110 shrink-0",
-                                        isActive ? "text-cyan-400" : "text-slate-400 group-hover:text-cyan-400"
+                                        "w-4.5 h-4.5 transition-transform duration-200 group-hover:scale-105 shrink-0",
+                                        isActive ? "text-black" : "text-zinc-500 group-hover:text-black dark:group-hover:text-[#FACC15]"
                                     )} />
                                     {!isCollapsed && <span className="truncate text-[13px]">{item.label}</span>}
                                     {isCollapsed && (
-                                        <div className="absolute left-full ml-4 px-3 py-1.5 bg-zinc-900 text-white text-[10px] font-bold rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-[100] border border-white/10 shadow-2xl">
+                                        <div className="absolute left-full ml-4 px-3 py-1.5 bg-[#0E1217] text-white text-[10px] font-bold rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-[100] border-2 border-black dark:border-white shadow-retro-sm">
                                             {item.label}
                                         </div>
                                     )}
@@ -115,23 +115,23 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
     };
 
     return (
-        <div className="flex h-screen bg-[#F8FAFC] dark:bg-zinc-950 text-slate-900 dark:text-slate-50 overflow-hidden font-sans relative">
+        <div className="flex h-screen bg-[#FAF6ED] dark:bg-[#0E1217] bg-retro-grid text-black dark:text-white overflow-hidden font-sans relative">
             {/* Desktop Sidebar (Left) */}
             <aside 
                 className={cn(
-                    "m-4 rounded-[2rem] bg-white/90 dark:bg-[#070e20]/90 backdrop-blur-xl border border-slate-200 dark:border-cyan-500/20 flex flex-col shadow-2xl relative z-20 hidden lg:flex transition-all duration-500 ease-in-out",
+                    "m-3 sm:m-4 rounded-2xl bg-white dark:bg-[#151B22] border-2 border-black dark:border-white flex flex-col shadow-retro-md relative z-20 hidden lg:flex transition-all duration-300 ease-in-out",
                     isCollapsed ? "w-20" : "w-64"
                 )}
             >
                 {/* Collapse Toggle Button */}
                 <button 
                     onClick={() => setIsCollapsed(!isCollapsed)}
-                    className="absolute -right-3 top-32 w-7 h-7 rounded-full bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 flex items-center justify-center text-slate-400 hover:text-amber-500 dark:hover:text-[#FACC15] shadow-xl z-50 transition-all hover:scale-110 active:scale-95 cursor-pointer"
+                    className="absolute -right-3 top-32 w-7 h-7 rounded-none bg-white dark:bg-[#151B22] border-2 border-black dark:border-white flex items-center justify-center text-black dark:text-white hover:bg-[#FACC15] hover:text-black shadow-retro-xs z-50 transition-all cursor-pointer btn-retro"
                 >
                     {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
                 </button>
 
-                <div className="h-[90px] relative border-b border-slate-100 dark:border-zinc-800/60 transition-all duration-500 flex items-center justify-center">
+                <div className="h-[90px] relative border-b border-black/10 dark:border-white/10 transition-all duration-500 flex items-center justify-center">
                     <Link href="/" className="flex items-center gap-3 px-4 group">
                         <HagLogo size="md" useImage={false} />
                         {!isCollapsed && (
@@ -145,7 +145,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                 <SidebarLinks />
 
                 {/* Sidebar Footer Branding */}
-                <div className="p-6 mt-auto border-t border-slate-100 dark:border-zinc-800/60">
+                <div className="p-6 mt-auto border-t border-black/10 dark:border-white/10">
                     {!isCollapsed ? (
                         <div className="flex flex-col gap-1 transition-all duration-500">
                             <p className="text-[10px] font-bold text-slate-400 dark:text-zinc-400 uppercase tracking-[0.2em] leading-tight">Haikal Al Ghifari</p>
@@ -169,7 +169,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
             {/* Main Content Area */}
             <div className="flex-1 flex flex-col h-full overflow-hidden relative">
                 {/* Mobile Top Header */}
-                <header className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-xl border-b border-slate-100/50 dark:border-zinc-800/30 z-[100] px-4 flex items-center justify-between transition-all duration-300">
+                <header className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-[#FAF6ED]/95 dark:bg-[#0E1217]/95 backdrop-blur-md border-b-2 border-black dark:border-white z-[100] px-4 flex items-center justify-between transition-all duration-300">
                     <Link href="/" className="flex items-center gap-2 active:scale-95 transition-transform">
                         <HagLogo size="sm" useImage={false} />
                         <div className="flex flex-col leading-[1.1]">
@@ -178,11 +178,11 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                         </div>
                     </Link>
                     
-                    <div className="flex items-center gap-1.5 p-1 rounded-full bg-slate-100/50 dark:bg-zinc-900/50 backdrop-blur-md border border-slate-200/50 dark:border-zinc-800/50">
+                    <div className="flex items-center gap-1.5 p-1 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white shadow-retro-xs">
                         <div className="scale-[0.85] origin-center -mx-1">
                             <ThemeSwitcher />
                         </div>
-                        <div className="h-3 w-px bg-slate-200 dark:bg-zinc-800/60 mx-0.5" />
+                        <div className="h-3 w-px bg-black/20 dark:bg-white/20 mx-0.5" />
                         <div className="scale-[0.85] origin-center -ml-1">
                             <AdminProfile />
                         </div>
@@ -195,9 +195,9 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                 >
                     {/* Desktop Top Actions */}
                     <div className="hidden lg:flex absolute top-6 right-10 z-[50] items-center gap-3">
-                        <div className="flex items-center gap-2 p-2 rounded-full bg-white/80 dark:bg-[#070e20]/90 backdrop-blur-xl border border-slate-200 dark:border-cyan-500/30 shadow-2xl">
+                        <div className="flex items-center gap-2 p-1.5 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white shadow-retro-xs">
                             <ThemeSwitcher />
-                            <div className="h-4 w-px bg-slate-200 dark:bg-zinc-800/60 mx-1" />
+                            <div className="h-4 w-px bg-black/20 dark:bg-white/20 mx-1" />
                             <AdminProfile />
                         </div>
                     </div>
@@ -220,7 +220,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                         duration: 0.35, 
                         ease: [0.23, 1, 0.32, 1] 
                     }}
-                    className="lg:hidden fixed bottom-[calc(16px+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 w-[calc(100%-2.5rem)] max-w-md h-14 bg-zinc-950/80 dark:bg-[#070e20]/90 backdrop-blur-3xl border border-white/10 dark:border-cyan-500/30 rounded-[2rem] shadow-[0_15px_40px_rgba(0,0,0,0.3)] z-[100] flex items-center justify-around px-2"
+                    className="lg:hidden fixed bottom-[calc(16px+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 w-[calc(100%-2.5rem)] max-w-md h-14 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white shadow-retro z-[100] flex items-center justify-around px-2"
                 >
                     {[
                         { href: "/cms", label: "Home", icon: LayoutDashboard },
@@ -236,26 +236,26 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                                 key={item.href}
                                 href={item.href}
                                 className={cn(
-                                    "flex flex-col items-center justify-center gap-0.5 min-w-[4rem] h-11 rounded-2xl transition-all duration-300 relative shrink-0",
+                                    "flex flex-col items-center justify-center gap-0.5 min-w-[4rem] h-11 rounded-none transition-all duration-150 relative shrink-0",
                                     isActive 
-                                        ? "text-cyan-400 font-bold" 
-                                        : "text-slate-400 dark:text-zinc-500"
+                                        ? "text-black dark:text-[#FACC15] font-black" 
+                                        : "text-zinc-600 dark:text-zinc-400"
                                 )}
                             >
                                 <item.icon className={cn(
-                                    "w-4.5 h-4.5 transition-all duration-300",
-                                    isActive ? "scale-110 text-cyan-400" : "scale-100"
+                                    "w-4.5 h-4.5 transition-all duration-150",
+                                    isActive ? "scale-110 text-amber-500 dark:text-[#FACC15]" : "scale-100"
                                 )} />
                                 <span className={cn(
                                     "text-[9px] font-bold uppercase tracking-wider",
-                                    isActive ? "opacity-100 text-cyan-400" : "opacity-60"
+                                    isActive ? "opacity-100 text-black dark:text-[#FACC15]" : "opacity-70"
                                 )}>
                                     {item.label}
                                 </span>
                                 {isActive && (
                                     <motion.div 
                                         layoutId="mobile-nav-indicator"
-                                        className="absolute -bottom-1.5 w-1 h-1 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]" 
+                                        className="absolute -bottom-1 w-1.5 h-1.5 rounded-full bg-[#FACC15] border border-black" 
                                     />
                                 )}
                             </Link>

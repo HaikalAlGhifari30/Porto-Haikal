@@ -41,7 +41,10 @@ export function DivisionCard({ team, className, isCms }: DivisionCardProps) {
     const CardContent = (
         <>
             {/* Cover Area */}
-            <div className="aspect-[16/9] relative overflow-hidden bg-slate-50 dark:bg-zinc-950 border-b border-slate-100 dark:border-zinc-800">
+            <div className={cn(
+                "aspect-[16/9] relative overflow-hidden bg-slate-50 dark:bg-zinc-950",
+                isCms ? "border-b-2 border-black dark:border-white" : "border-b border-slate-100 dark:border-zinc-800"
+            )}>
                 {(team.coverImage || team.imageUrl) ? (
                     <div className="absolute inset-0 group-hover:scale-105 transition-transform duration-700 ease-in-out">
                         <img
@@ -58,18 +61,19 @@ export function DivisionCard({ team, className, isCms }: DivisionCardProps) {
                 {/* Icon Container */}
                 <div className="absolute inset-0 flex items-center justify-center z-10 group-hover:scale-105 transition-transform duration-700 ease-in-out">
                     <div className={cn(
-                        "w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300",
-                        (team.coverImage || team.imageUrl)
+                        "w-16 h-16 flex items-center justify-center transition-all duration-300",
+                        isCms ? "rounded-none border-2 border-black dark:border-white bg-[#FACC15] text-black shadow-retro-xs" : "rounded-2xl shadow-lg",
+                        !isCms && ((team.coverImage || team.imageUrl)
                             ? "bg-white/20 dark:bg-black/30 backdrop-blur-md border border-white/30 dark:border-white/10"
-                            : "bg-white dark:bg-zinc-800/60 border border-slate-100 dark:border-zinc-800/80"
+                            : "bg-white dark:bg-zinc-800/60 border border-slate-100 dark:border-zinc-800/80")
                     )}>
                         {(() => {
                             const SelectedIcon = (team.icon && (Icons as any)[team.icon]) ? (Icons as any)[team.icon] : Briefcase;
                             return <SelectedIcon className={cn(
                                 "w-8 h-8 transition-colors duration-300",
-                                (team.coverImage || team.imageUrl)
+                                isCms ? "text-black" : ((team.coverImage || team.imageUrl)
                                     ? "text-white"
-                                    : "text-blue-500/70 dark:text-blue-400/70"
+                                    : "text-amber-500 dark:text-[#FACC15]")
                             )} />;
                         })()}
                     </div>
@@ -86,39 +90,52 @@ export function DivisionCard({ team, className, isCms }: DivisionCardProps) {
             </div>
 
             {/* Content Area */}
-            <div className="p-6 md:p-8 bg-white dark:bg-zinc-900 flex flex-col justify-between flex-grow relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-500/10 dark:group-hover:bg-blue-500/20 transition-colors duration-500" />
-
+            <div className={cn(
+                "p-6 md:p-8 flex flex-col justify-between flex-grow relative overflow-hidden",
+                isCms ? "bg-white dark:bg-[#0E1217]" : "bg-white dark:bg-zinc-900"
+            )}>
                 <div className="relative z-10 flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold text-slate-800 dark:text-white transition-colors group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                    <h3 className={cn(
+                        "text-xl font-bold tracking-tight transition-colors",
+                        isCms 
+                            ? "font-black uppercase text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-[#FACC15]" 
+                            : "text-slate-800 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400"
+                    )}>
                         <TranslatedContent idText={team.name} enText={team.nameEn} />
                     </h3>
                     <div className={cn(
-                        "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shrink-0 ml-4",
-                        "bg-slate-50 dark:bg-zinc-800 text-slate-400 dark:text-zinc-500",
-                        "group-hover:bg-blue-600 group-hover:text-white group-hover:shadow-lg group-hover:shadow-blue-500/30"
+                        "w-10 h-10 flex items-center justify-center transition-all duration-300 shrink-0 ml-4",
+                        isCms 
+                            ? "rounded-none border-2 border-black dark:border-white bg-[#FAF6ED] dark:bg-[#151B22] text-black dark:text-white group-hover:bg-[#FACC15] group-hover:text-black shadow-retro-xs" 
+                            : "rounded-full bg-slate-50 dark:bg-zinc-800 text-slate-400 dark:text-zinc-500 group-hover:bg-[#FACC15] group-hover:text-black"
                     )}>
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </div>
                 </div>
 
-                <p className="relative z-10 text-sm text-slate-500 dark:text-zinc-400 font-medium leading-relaxed line-clamp-3 mb-2">
+                <p className="relative z-10 text-sm text-slate-600 dark:text-zinc-400 font-medium leading-relaxed line-clamp-3 mb-2">
                     <TranslatedContent idText={team.description || "Divisi ini berdedikasi untuk memberikan hasil terbaik dan inovatif dalam setiap proyeknya."} enText={team.descriptionEn || "This division is dedicated to delivering the best and innovative results in every project."} />
                 </p>
 
-                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-zinc-800/80 flex items-center justify-between relative z-10">
+                <div className={cn(
+                    "mt-6 pt-4 flex items-center justify-between relative z-10",
+                    isCms ? "border-t-2 border-black dark:border-white" : "border-t border-slate-100 dark:border-zinc-800/80"
+                )}>
                     <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center">
-                            <Users className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                        <div className={cn(
+                            "w-7 h-7 flex items-center justify-center",
+                            isCms ? "rounded-none bg-[#FACC15] border border-black text-black shadow-retro-xs" : "rounded-full bg-amber-500/10 text-amber-500"
+                        )}>
+                            <Users className="w-3.5 h-3.5 stroke-[2.5]" />
                         </div>
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-zinc-400">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-zinc-300">
                             {team.members?.length || 0} Members
                         </span>
                     </div>
                     {isCms && (
                         <div className="flex flex-col items-end">
-                            <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 group-hover:hidden transition-all">Manage</span>
-                            <span className="text-[9px] font-bold uppercase tracking-[0.1em] text-blue-500 hidden group-hover:block animate-in fade-in slide-in-from-right-1 duration-300 italic">Open Settings</span>
+                            <span className="text-[9px] font-black uppercase tracking-widest text-amber-600 dark:text-[#FACC15] group-hover:hidden transition-all">Manage</span>
+                            <span className="text-[9px] font-black uppercase tracking-widest text-amber-600 dark:text-[#FACC15] hidden group-hover:block underline italic">Open Settings</span>
                         </div>
                     )}
                 </div>
@@ -127,8 +144,10 @@ export function DivisionCard({ team, className, isCms }: DivisionCardProps) {
     );
 
     const wrapperClasses = cn(
-        "group relative block border transition-all duration-500 rounded-3xl overflow-hidden h-full flex flex-col cursor-pointer",
-        "bg-white dark:bg-zinc-900 border-slate-100 dark:border-zinc-800 shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1.5",
+        "group relative block transition-all duration-300 overflow-hidden h-full flex flex-col cursor-pointer",
+        isCms 
+            ? "rounded-none border-2 border-black dark:border-white bg-[#FAF6ED] dark:bg-[#151B22] shadow-retro-sm hover:shadow-retro-md hover:-translate-y-1" 
+            : "rounded-3xl border border-slate-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm hover:shadow-2xl hover:-translate-y-1.5",
         className
     );
 

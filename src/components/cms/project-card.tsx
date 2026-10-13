@@ -88,17 +88,17 @@ export function ProjectCard({ project }: { project: Project }) {
     return (
         <>
             <div ref={setNodeRef} style={style} className="group h-full">
-                <Card className="h-full bg-white dark:bg-zinc-900 border-slate-200 dark:border-white/5 flex flex-col shadow-sm hover:shadow-lg transition-all duration-500 overflow-hidden relative rounded-2xl">
-                    <div className="h-40 w-full bg-slate-100 dark:bg-zinc-950 relative overflow-hidden">
+                <Card className="h-full bg-white dark:bg-[#151B22] border-2 border-black dark:border-white flex flex-col shadow-retro-xs hover:shadow-retro-sm transition-all overflow-hidden relative rounded-2xl">
+                    <div className="h-40 w-full bg-[#FAF6ED] dark:bg-[#0E1217] relative overflow-hidden border-b-2 border-black dark:border-white">
                         {project.imageUrl ? (
                             <img 
                                 src={project.imageUrl.split(',')[0].trim()} 
                                 alt={project.title} 
-                                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-110" 
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                             />
                         ) : (
                             <div 
-                                className="flex flex-col items-center justify-center w-full h-full text-slate-400 dark:text-zinc-700 bg-zinc-900"
+                                className="flex flex-col items-center justify-center w-full h-full text-slate-400 dark:text-zinc-600 bg-zinc-900"
                             >
                                 <ImageIcon className="w-8 h-8 mb-1 opacity-50" />
                                 <span className="text-[9px] font-bold uppercase tracking-widest">No Thumbnail</span>
@@ -106,14 +106,14 @@ export function ProjectCard({ project }: { project: Project }) {
                         )}
                         
                         {/* Dark Gradient Overlay for Readability */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/15 to-black/55 opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/50 opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
 
                         {/* Floating Action Bar */}
-                        <div className="absolute top-2.5 right-2.5 bg-[#0F172A]/78 backdrop-blur-[14px] border border-white/10 rounded-full p-1 flex gap-1 z-20 shadow-xl opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                        <div className="absolute top-2.5 right-2.5 bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white p-1 flex gap-1 z-20 shadow-retro-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                              <Button 
                                 size="icon"
                                 variant="ghost" 
-                                className="h-7 w-7 rounded-full bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 hover:text-blue-300 transition-all"
+                                className="h-7 w-7 rounded-none bg-[#FACC15] text-black hover:bg-yellow-300 border border-black btn-retro transition-all"
                                 onClick={() => setIsEditOpen(true)}
                             >
                                 <Edit className="h-3.5 w-3.5" />
@@ -121,7 +121,7 @@ export function ProjectCard({ project }: { project: Project }) {
                             <Button 
                                 size="icon"
                                 variant="ghost" 
-                                className="h-7 w-7 rounded-full bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-all"
+                                className="h-7 w-7 rounded-none bg-red-500 text-white hover:bg-red-600 border border-black btn-retro transition-all"
                                 onClick={() => setIsDeleteOpen(true)}
                             >
                                 <Trash2 className="h-3.5 w-3.5" />
@@ -132,22 +132,20 @@ export function ProjectCard({ project }: { project: Project }) {
                         <div 
                             {...attributes} 
                             {...listeners} 
-                            className="absolute top-2.5 left-2.5 w-8 h-8 rounded-lg bg-black/40 backdrop-blur-md flex items-center justify-center text-white cursor-grab active:cursor-grabbing border border-white/10 hover:bg-blue-600 transition-all z-10"
+                            className="absolute top-2.5 left-2.5 w-8 h-8 rounded-none bg-[#FACC15] text-black flex items-center justify-center cursor-grab active:cursor-grabbing border-2 border-black shadow-retro-xs z-10"
                         >
                             <GripVertical className="h-4 w-4" />
                         </div>
-
-                        {/* Removed Featured Badge */}
                     </div>
                     
                     <CardHeader className="p-4 flex-1">
                         <div className="flex flex-col gap-1">
-                            <span className="text-[9px] font-bold text-blue-400 uppercase tracking-[0.2em] mb-0.5">Portfolio Proyek</span>
+                            <span className="text-[9px] font-black text-amber-600 dark:text-[#FACC15] uppercase tracking-[0.2em] mb-0.5">Portfolio Proyek</span>
                             <div className="flex items-start justify-between gap-3">
-                                <CardTitle className="text-slate-900 dark:text-white text-lg font-bold tracking-tight leading-snug group-hover:text-blue-400 transition-colors">
+                                <CardTitle className="text-slate-900 dark:text-white text-lg font-bold tracking-tight leading-snug group-hover:text-amber-500 dark:group-hover:text-[#FACC15] transition-colors">
                                     {project.title}
                                 </CardTitle>
-                                <a href={project.url || "#"} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-blue-500 transition-colors shrink-0">
+                                <a href={project.url || "#"} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-amber-500 dark:hover:text-[#FACC15] transition-colors shrink-0">
                                     <ExternalLink className="w-4 h-4" />
                                 </a>
                             </div>
@@ -157,14 +155,14 @@ export function ProjectCard({ project }: { project: Project }) {
                         </p>
                     </CardHeader>
                     
-                    <CardContent className="px-4 py-3 border-t border-slate-100 dark:border-white/5 flex justify-between items-center">
+                    <CardContent className="px-4 py-3 border-t-2 border-black/10 dark:border-white/10 flex justify-between items-center">
                          <div className="flex items-center gap-1.5">
-                            <div className={`w-1.5 h-1.5 rounded-full ${project.isVisible ? 'bg-blue-500' : 'bg-slate-300 dark:bg-zinc-700'}`} />
-                            <span className="text-[9px] uppercase font-bold tracking-widest text-slate-500 dark:text-zinc-500">
+                            <div className={`w-2 h-2 border border-black ${project.isVisible ? 'bg-emerald-500' : 'bg-zinc-400'}`} />
+                            <span className="text-[9px] uppercase font-black tracking-widest text-slate-700 dark:text-zinc-400">
                                 {project.isVisible ? "Tampil" : "Tersembunyi"}
                             </span>
                         </div>
-                        <div className="text-[9px] font-bold uppercase tracking-widest text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="text-[9px] font-black uppercase tracking-widest text-amber-600 dark:text-[#FACC15] opacity-0 group-hover:opacity-100 transition-opacity">
                             Manage
                         </div>
                     </CardContent>
@@ -173,11 +171,11 @@ export function ProjectCard({ project }: { project: Project }) {
 
             {/* Edit Modal */}
             <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
-                <DialogContent className="sm:max-w-xl bg-white dark:bg-slate-900 border-slate-200 dark:border-blue-500/20 rounded-2xl p-6">
+                <DialogContent className="sm:max-w-xl bg-white dark:bg-[#151B22] border-2 border-black dark:border-white rounded-2xl p-6 shadow-retro-md">
                     <DialogHeader className="mb-6">
-                        <DialogTitle className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-xl bg-blue-500/10 flex items-center justify-center">
-                                <Edit className="w-4 h-4 text-blue-500" />
+                        <DialogTitle className="text-xl font-black text-slate-900 dark:text-white uppercase flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-none bg-[#FACC15] border border-black flex items-center justify-center text-black">
+                                <Edit className="w-4 h-4" />
                             </div>
                             Edit Proyek
                         </DialogTitle>
@@ -187,27 +185,27 @@ export function ProjectCard({ project }: { project: Project }) {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="space-y-6">
                                 <div className="space-y-1.5">
-                                    <Label className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">Judul Proyek</Label>
+                                    <Label className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-700 dark:text-zinc-300">Judul Proyek</Label>
                                     <Input 
                                         value={editTitle}
                                         onChange={(e) => setEditTitle(e.target.value)}
-                                        className="bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-zinc-800 rounded-lg h-10 text-sm focus:ring-blue-500/20"
+                                        className="bg-[#FAF6ED] dark:bg-[#0E1217] border-2 border-black dark:border-white rounded-none h-10 text-sm font-medium"
                                     />
                                 </div>
                                 <div className="space-y-1.5">
-                                    <Label className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">URL Proyek</Label>
+                                    <Label className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-700 dark:text-zinc-300">URL Proyek</Label>
                                     <Input 
                                         value={editUrl}
                                         onChange={(e) => setEditUrl(e.target.value)}
-                                        className="bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-zinc-800 rounded-lg h-10 text-sm focus:ring-blue-500/20"
+                                        className="bg-[#FAF6ED] dark:bg-[#0E1217] border-2 border-black dark:border-white rounded-none h-10 text-sm font-medium"
                                     />
                                 </div>
                             </div>
 
                             <div className="space-y-2">
-                                <Label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Thumbnail Preview</Label>
+                                <Label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-700 dark:text-zinc-300">Thumbnail Preview</Label>
                                 <div 
-                                    className="relative group aspect-video rounded-2xl border-2 border-dashed border-slate-200 dark:border-zinc-800 overflow-hidden bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center cursor-pointer hover:border-blue-500/50 transition-colors"
+                                    className="relative group aspect-video rounded-xl border-2 border-dashed border-black dark:border-white overflow-hidden bg-[#FAF6ED] dark:bg-[#0E1217] flex flex-col items-center justify-center cursor-pointer transition-colors"
                                     onClick={() => fileInputRef.current?.click()}
                                 >
                                     {previewImage ? (
@@ -220,7 +218,7 @@ export function ProjectCard({ project }: { project: Project }) {
                                             <Button 
                                                 size="icon" 
                                                 variant="destructive" 
-                                                className="absolute top-2 right-2 h-8 w-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                                                className="absolute top-2 right-2 h-7 w-7 rounded-none border border-black opacity-0 group-hover:opacity-100 transition-opacity shadow-retro-xs"
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     setPreviewImage(null);
@@ -232,35 +230,33 @@ export function ProjectCard({ project }: { project: Project }) {
                                         </>
                                     ) : (
                                         <div className="flex flex-col items-center text-center p-4">
-                                            <UploadCloud className="w-10 h-10 text-slate-300 mb-2" />
-                                            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Klik untuk Upload</p>
+                                            <UploadCloud className="w-10 h-10 text-slate-400 mb-2" />
+                                            <p className="text-[10px] font-black text-slate-600 dark:text-zinc-400 uppercase tracking-widest">Klik untuk Upload</p>
                                         </div>
                                     )}
                                     <input 
                                         type="file" 
                                         ref={fileInputRef}
                                         className="hidden" 
-                                        accept="image/*"
+                                        accept="image/*" 
                                         onChange={handleImageUpload} 
                                     />
                                 </div>
                             </div>
                         </div>
 
-                        {/* Edit isFeatured removed */}
-
                         <div className="flex gap-3 pt-2">
                             <Button 
                                 type="button"
                                 variant="outline" 
-                                className="flex-1 h-11 rounded-xl border-slate-200 dark:border-zinc-800 font-bold hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all text-sm"
+                                className="flex-1 h-11 rounded-none border-2 border-black dark:border-white font-bold text-black dark:text-white btn-retro text-sm"
                                 onClick={() => setIsEditOpen(false)}
                             >
                                 Batal
                             </Button>
                             <Button 
-                                type="submit"
-                                className="flex-1 h-11 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-widest shadow-lg shadow-blue-500/10 transition-all"
+                                type="submit" 
+                                className="flex-1 h-11 rounded-none bg-[#FACC15] hover:bg-yellow-300 text-black font-black uppercase tracking-widest border-2 border-black dark:border-white shadow-retro-xs btn-retro transition-all text-sm"
                                 disabled={isUpdating}
                             >
                                 {isUpdating ? "Saving..." : "Update Data"}
@@ -272,20 +268,20 @@ export function ProjectCard({ project }: { project: Project }) {
 
             {/* Delete Confirmation Modal */}
             <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
-                <DialogContent className="sm:max-w-sm bg-white dark:bg-slate-900 border-slate-200 dark:border-zinc-800 rounded-2xl p-6 flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-xl bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-6 text-red-500 border border-red-500/20">
+                <DialogContent className="sm:max-w-sm bg-white dark:bg-[#151B22] border-2 border-black dark:border-white rounded-2xl p-6 flex flex-col items-center text-center shadow-retro-md">
+                    <div className="w-16 h-16 rounded-none bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-6 text-red-500 border-2 border-red-500">
                         <AlertTriangle className="w-8 h-8" />
                     </div>
                     <DialogHeader>
-                        <DialogTitle className="text-xl font-bold text-slate-900 dark:text-white mb-2">Hapus Proyek?</DialogTitle>
+                        <DialogTitle className="text-xl font-black text-slate-900 dark:text-white mb-2 uppercase">Hapus Proyek?</DialogTitle>
                     </DialogHeader>
-                    <p className="text-xs text-slate-500 dark:text-zinc-400 mb-6 leading-relaxed font-medium">
+                    <p className="text-xs text-slate-600 dark:text-zinc-300 mb-6 leading-relaxed font-medium">
                         Tindakan ini permanen. Proyek <span className="text-slate-900 dark:text-white font-bold">"{project.title}"</span> akan dihapus.
                     </p>
                     <div className="flex w-full gap-3">
                         <Button 
                             variant="outline" 
-                            className="flex-1 h-11 rounded-xl border-slate-200 dark:border-zinc-800 font-bold text-sm"
+                            className="flex-1 h-11 rounded-none border-2 border-black dark:border-white font-bold text-sm btn-retro"
                             onClick={() => setIsDeleteOpen(false)}
                             disabled={isDeleting}
                         >
@@ -293,7 +289,7 @@ export function ProjectCard({ project }: { project: Project }) {
                         </Button>
                         <Button 
                             variant="destructive" 
-                            className="flex-1 h-11 rounded-xl bg-red-500 hover:bg-red-600 text-white font-bold uppercase tracking-widest transition-all text-sm"
+                            className="flex-1 h-11 rounded-none bg-red-500 hover:bg-red-600 text-white font-black uppercase tracking-widest border-2 border-black shadow-retro-xs btn-retro transition-all text-sm"
                             onClick={handleDelete}
                             disabled={isDeleting}
                         >

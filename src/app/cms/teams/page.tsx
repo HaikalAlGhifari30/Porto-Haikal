@@ -17,44 +17,44 @@ export default async function TeamsPage() {
                     
                     <div className="mt-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                         {/* Tutorial/Helper Section */}
-                        <div className="flex-1 bg-cyan-500/[0.04] border border-cyan-500/20 rounded-2xl p-5 animate-in fade-in slide-in-from-top-4 duration-700">
+                        <div className="flex-1 bg-amber-500/10 border-2 border-black dark:border-white rounded-xl p-5 shadow-retro-xs">
                             <div className="flex items-center gap-3 mb-4">
-                                <div className="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center">
-                                    <Lightbulb className="w-4 h-4 text-cyan-400" />
+                                <div className="w-8 h-8 rounded-none bg-[#FACC15] border border-black flex items-center justify-center">
+                                    <Lightbulb className="w-4 h-4 text-black" />
                                 </div>
                                 <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Panduan Widget Kontak WhatsApp</h3>
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
                                 <div className="flex items-start gap-3">
-                                    <div className="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-blue-500/10 flex items-center justify-center">
-                                        <PlusCircle className="w-3 h-3 text-blue-500" />
+                                    <div className="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-[#FACC15] border border-black flex items-center justify-center">
+                                        <PlusCircle className="w-3 h-3 text-black" />
                                     </div>
                                     <p className="text-[11px] text-slate-500 dark:text-zinc-400 font-medium leading-relaxed">
-                                        Klik <span className="text-blue-500 font-bold">"Tambah Divisi Baru"</span> untuk membuat divisi baru.
+                                        Klik <span className="text-amber-600 dark:text-[#FACC15] font-bold">"Tambah Divisi Baru"</span> untuk membuat divisi baru.
                                     </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <div className="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-blue-500/10 flex items-center justify-center">
-                                        <MousePointerClick className="w-3 h-3 text-blue-500" />
+                                    <div className="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-[#FACC15] border border-black flex items-center justify-center">
+                                        <MousePointerClick className="w-3 h-3 text-black" />
                                     </div>
                                     <p className="text-[11px] text-slate-500 dark:text-zinc-400 font-medium leading-relaxed">
-                                        Klik <span className="text-blue-500 font-bold">card divisi</span> untuk membuka detail dan mengelola anggota.
+                                        Klik <span className="text-amber-600 dark:text-[#FACC15] font-bold">card divisi</span> untuk membuka detail dan mengelola anggota.
                                     </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <div className="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-blue-500/10 flex items-center justify-center">
-                                        <UserPlus className="w-3 h-3 text-blue-500" />
+                                    <div className="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-[#FACC15] border border-black flex items-center justify-center">
+                                        <UserPlus className="w-3 h-3 text-black" />
                                     </div>
                                     <p className="text-[11px] text-slate-500 dark:text-zinc-400 font-medium leading-relaxed">
-                                        Tambahkan <span className="text-blue-500 font-bold">anggota langsung</span> dari halaman detail divisi.
+                                        Tambahkan <span className="text-amber-600 dark:text-[#FACC15] font-bold">anggota langsung</span> dari halaman detail divisi.
                                     </p>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <div className="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-blue-500/10 flex items-center justify-center">
-                                        <Layers className="w-3 h-3 text-blue-500" />
+                                    <div className="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-[#FACC15] border border-black flex items-center justify-center">
+                                        <Layers className="w-3 h-3 text-black" />
                                     </div>
                                     <p className="text-[11px] text-slate-500 dark:text-zinc-400 font-medium leading-relaxed">
-                                        Setiap divisi dapat memiliki <span className="text-blue-500 font-bold">struktur & anggota</span> berbeda.
+                                        Setiap divisi dapat memiliki <span className="text-amber-600 dark:text-[#FACC15] font-bold">struktur & anggota</span> berbeda.
                                     </p>
                                 </div>
                             </div>

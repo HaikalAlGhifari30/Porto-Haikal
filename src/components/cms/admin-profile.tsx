@@ -92,16 +92,15 @@ export function AdminProfile() {
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <div className="text-right hidden sm:block">
-                    <p className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">{adminName}</p>
+                    <p className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-amber-500 dark:group-hover:text-[#FACC15] transition-colors">{adminName}</p>
                     <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold">QA Lead Admin</p>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold transition-all overflow-hidden relative">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/5 to-indigo-500/5" />
+                <div className="w-8 h-8 bg-[#FACC15] text-black border-2 border-black dark:border-white shadow-retro-xs flex items-center justify-center font-pixel font-bold transition-all overflow-hidden relative">
                     {adminPhoto ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={adminPhoto} alt="Admin" className="w-full h-full object-cover relative z-10" />
                     ) : (
-                        <span className="relative z-10 text-[10px]">{adminName.charAt(0).toUpperCase()}</span>
+                        <span className="relative z-10 text-xs font-black">{adminName.charAt(0).toUpperCase()}</span>
                     )}
                 </div>
             </div>
@@ -114,28 +113,28 @@ export function AdminProfile() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute right-0 mt-3 w-56 rounded-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-50"
+                        className="absolute right-0 mt-3 w-56 rounded-none bg-white dark:bg-[#151B22] border-2 border-black dark:border-white shadow-retro overflow-hidden z-50"
                     >
-                        <div className="p-4 border-b border-slate-200 dark:border-slate-800/50 bg-slate-50/50 dark:bg-slate-950/50">
+                        <div className="p-4 border-b-2 border-black dark:border-white bg-[#FAF6ED] dark:bg-[#0E1217]">
                             <p className="text-[10px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-widest mb-1">AKUN SAYA</p>
                             <p className="text-sm font-black text-slate-900 dark:text-white truncate">{adminName}</p>
                         </div>
                         <div className="p-2 space-y-1">
                             <button 
                                 onClick={openEditModal}
-                                className="w-full flex items-center gap-3 px-3 py-3 text-sm font-bold text-slate-600 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-xl transition-all group"
+                                className="w-full flex items-center gap-3 px-3 py-2.5 text-xs font-bold text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:bg-[#FACC15] dark:hover:bg-[#FACC15] dark:hover:text-black rounded-none border border-transparent hover:border-black transition-all group"
                             >
-                                <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-zinc-800 flex items-center justify-center group-hover:bg-blue-500/10 group-hover:text-blue-600 transition-colors">
-                                    <User className="w-4 h-4" />
+                                <div className="w-7 h-7 bg-white dark:bg-zinc-800 border border-black flex items-center justify-center group-hover:bg-white text-black transition-colors">
+                                    <User className="w-3.5 h-3.5" />
                                 </div>
                                 Edit Profil
                             </button>
                             <button 
                                 onClick={openLogoutModal}
-                                className="w-full flex items-center gap-3 px-3 py-3 text-sm font-bold text-red-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-xl transition-all group"
+                                className="w-full flex items-center gap-3 px-3 py-2.5 text-xs font-bold text-red-600 hover:bg-red-500 hover:text-white rounded-none border border-transparent hover:border-black transition-all group"
                             >
-                                <div className="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-500/10 flex items-center justify-center group-hover:bg-red-500 group-hover:text-white transition-colors">
-                                    <LogOut className="w-4 h-4" />
+                                <div className="w-7 h-7 bg-red-100 dark:bg-red-950/50 border border-black flex items-center justify-center text-red-600 group-hover:bg-white transition-colors">
+                                    <LogOut className="w-3.5 h-3.5" />
                                 </div>
                                 Keluar
                             </button>
@@ -145,69 +144,70 @@ export function AdminProfile() {
             </AnimatePresence>
 
             {/* Edit Profile Modal */}
+            {/* Edit Profile Modal */}
             <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
-                <DialogContent className="sm:max-w-md bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-[2rem] p-8 !backdrop-blur-xl">
-                    <DialogHeader className="mb-8">
-                        <DialogTitle className="text-xl font-bold text-slate-800 dark:text-white">Edit Profil</DialogTitle>
+                <DialogContent className="sm:max-w-md bg-[#FAF6ED] dark:bg-[#151B22] border-2 border-black dark:border-white rounded-none p-8 shadow-retro-md">
+                    <DialogHeader className="mb-6">
+                        <DialogTitle className="text-xl font-black uppercase text-slate-900 dark:text-white">Edit Profil</DialogTitle>
                     </DialogHeader>
                     
-                    <div className="flex flex-col items-center mb-8">
+                    <div className="flex flex-col items-center mb-6">
                         <div className="relative group cursor-pointer">
-                            <div className="w-24 h-24 rounded-full border-2 border-blue-500/50 overflow-hidden bg-slate-100 dark:bg-slate-800 shadow-inner">
+                            <div className="w-24 h-24 rounded-none border-2 border-black dark:border-white overflow-hidden bg-white dark:bg-[#0E1217] shadow-retro-xs">
                                 {previewPhoto ? (
                                     // eslint-disable-next-line @next/next/no-img-element
                                     <img src={previewPhoto} alt="Preview" className="w-full h-full object-cover" />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-3xl font-bold text-blue-500/50">
+                                    <div className="w-full h-full flex items-center justify-center text-3xl font-black bg-[#FACC15] text-black">
                                         {tempName.charAt(0).toUpperCase()}
                                     </div>
                                 )}
                             </div>
-                            <label className="absolute bottom-0 right-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white cursor-pointer shadow-lg hover:scale-110 transition-transform">
+                            <label className="absolute bottom-0 right-0 w-8 h-8 bg-[#FACC15] text-black border-2 border-black rounded-none flex items-center justify-center cursor-pointer shadow-retro-xs hover:scale-105 transition-transform">
                                 <Camera className="w-4 h-4" />
                                 <input type="file" accept="image/*" className="hidden" onChange={handlePhotoUpload} />
                             </label>
                         </div>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-3 font-medium uppercase tracking-wider">Ganti Foto</p>
+                        <p className="text-xs text-slate-600 dark:text-zinc-400 mt-3 font-black uppercase tracking-wider">Ganti Foto</p>
                     </div>
 
-                    <div className="space-y-4 mb-8">
+                    <div className="space-y-4 mb-6">
                         <div className="space-y-2">
-                            <Label htmlFor="adminName" className="text-slate-600 dark:text-slate-300 text-xs font-bold uppercase tracking-wider">Nama Lengkap</Label>
+                            <Label htmlFor="adminName" className="text-slate-800 dark:text-slate-200 text-xs font-black uppercase tracking-wider">Nama Lengkap</Label>
                             <div className="relative">
                                 <Input 
                                     id="adminName" 
                                     value={tempName}
                                     onChange={(e) => setTempName(e.target.value)}
-                                    className="bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-800 dark:text-white h-12 rounded-xl pl-4 pr-10"
+                                    className="bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white text-slate-900 dark:text-white h-11 rounded-none pl-4 pr-10 font-bold"
                                 />
-                                <User className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                <User className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                             </div>
                         </div>
                     </div>
 
                     <div className="flex gap-3">
-                        <Button variant="outline" className="flex-1 h-12 rounded-xl border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" onClick={() => setIsEditOpen(false)}>Batal</Button>
-                        <Button className="flex-1 h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white border-none" onClick={handleSaveProfile}>Simpan</Button>
+                        <Button variant="outline" className="flex-1 h-11 rounded-none border-2 border-black dark:border-white font-black uppercase hover:bg-slate-200 dark:hover:bg-zinc-800" onClick={() => setIsEditOpen(false)}>Batal</Button>
+                        <Button className="flex-1 h-11 rounded-none bg-[#FACC15] hover:bg-yellow-300 text-black border-2 border-black dark:border-white font-black uppercase shadow-retro-xs" onClick={handleSaveProfile}>Simpan</Button>
                     </div>
                 </DialogContent>
             </Dialog>
 
             {/* Logout Confirmation Modal */}
             <Dialog open={isLogoutOpen} onOpenChange={setIsLogoutOpen}>
-                <DialogContent className="sm:max-w-sm bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-[2rem] p-8 flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-6 text-red-500">
+                <DialogContent className="sm:max-w-sm bg-[#FAF6ED] dark:bg-[#151B22] border-2 border-black dark:border-white rounded-none p-8 flex flex-col items-center text-center shadow-retro-md">
+                    <div className="w-16 h-16 rounded-none bg-red-500 border-2 border-black flex items-center justify-center mb-6 text-white shadow-retro-xs">
                         <LogOut className="w-8 h-8 ml-1" />
                     </div>
                     <DialogHeader>
-                        <DialogTitle className="text-xl font-bold text-slate-800 dark:text-white mb-2">Konfirmasi Keluar</DialogTitle>
+                        <DialogTitle className="text-xl font-black uppercase text-slate-900 dark:text-white mb-2">Konfirmasi Keluar</DialogTitle>
                     </DialogHeader>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 mb-8">
+                    <p className="text-sm text-slate-600 dark:text-zinc-300 mb-6 font-bold">
                         Apakah Anda yakin ingin keluar? Sesi Anda akan berakhir.
                     </p>
                     <div className="flex w-full gap-3">
-                        <Button variant="outline" className="flex-1 h-12 rounded-xl border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" onClick={() => setIsLogoutOpen(false)}>Batal</Button>
-                        <Button variant="destructive" className="flex-1 h-12 rounded-xl bg-red-500 hover:bg-red-600 text-white border-none shadow-[0_0_15px_rgba(239,68,68,0.3)]" onClick={handleLogout}>Ya, Keluar</Button>
+                        <Button variant="outline" className="flex-1 h-11 rounded-none border-2 border-black dark:border-white font-black uppercase hover:bg-slate-200 dark:hover:bg-zinc-800" onClick={() => setIsLogoutOpen(false)}>Batal</Button>
+                        <Button variant="destructive" className="flex-1 h-11 rounded-none bg-red-600 hover:bg-red-700 text-white border-2 border-black font-black uppercase shadow-retro-xs" onClick={handleLogout}>Ya, Keluar</Button>
                     </div>
                 </DialogContent>
             </Dialog>

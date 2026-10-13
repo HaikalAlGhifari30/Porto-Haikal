@@ -53,38 +53,38 @@ export function SectorFormModal({ sector, onClose, onSuccess }: SectorFormModalP
     }
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xl animate-in fade-in duration-200">
-            <div className="bg-white dark:bg-zinc-950 rounded-3xl shadow-2xl w-full max-w-lg border border-slate-200 dark:border-zinc-800 max-h-[90vh] overflow-y-auto overflow-x-hidden hide-scrollbar">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
+            <div className="bg-[#FAF6ED] dark:bg-[#151B22] rounded-none shadow-retro-md w-full max-w-lg border-2 border-black dark:border-white max-h-[90vh] overflow-y-auto overflow-x-hidden hide-scrollbar">
                 {/* Header */}
-                <div className="flex items-center justify-between px-8 py-6 border-b border-slate-100 dark:border-zinc-800">
-                    <h2 className="text-xl font-black tracking-tight text-slate-900 dark:text-white">
+                <div className="flex items-center justify-between px-8 py-6 border-b-2 border-black dark:border-white">
+                    <h2 className="text-xl font-black uppercase tracking-tight text-slate-900 dark:text-white">
                         {sector ? "Edit Bidang Usaha" : "Tambah Bidang Usaha"}
                     </h2>
                     <button
                         onClick={onClose}
-                        className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 dark:hover:bg-zinc-800 transition-all"
+                        className="p-1.5 rounded-none border-2 border-black dark:border-white bg-white dark:bg-[#0E1217] text-slate-600 dark:text-zinc-300 hover:bg-red-500 hover:text-white transition-all shadow-retro-xs"
                     >
-                        <X className="w-5 h-5" />
+                        <X className="w-4 h-4 stroke-[2.5]" />
                     </button>
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="p-8 space-y-5 max-h-[70vh] overflow-y-auto">
+                <form onSubmit={handleSubmit} className="p-8 space-y-5 max-h-[70vh] overflow-y-auto custom-scrollbar">
                     {/* Image Upload */}
                     <div>
-                        <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-2">
+                        <label className="block text-[10px] font-black uppercase tracking-widest text-slate-800 dark:text-zinc-200 mb-2">
                             Ikon / Gambar Ilustrasi
                         </label>
                         <div
                             onClick={() => fileRef.current?.click()}
-                            className="relative flex items-center justify-center w-full h-36 rounded-2xl border-2 border-dashed border-slate-200 dark:border-zinc-700 hover:border-primary/50 cursor-pointer transition-all overflow-hidden bg-slate-50 dark:bg-zinc-900"
+                            className="relative flex items-center justify-center w-full h-36 rounded-none border-2 border-dashed border-black dark:border-white hover:bg-[#FACC15]/10 cursor-pointer transition-all overflow-hidden bg-white dark:bg-[#0E1217]"
                         >
                             {preview ? (
                                 <img src={preview} alt="Preview" className="w-full h-full object-cover" />
                             ) : (
-                                <div className="flex flex-col items-center gap-2 text-slate-400">
-                                    <Upload className="w-6 h-6" />
-                                    <span className="text-xs font-medium">Klik untuk unggah gambar</span>
+                                <div className="flex flex-col items-center gap-2 text-slate-600 dark:text-zinc-400">
+                                    <Upload className="w-6 h-6 stroke-[2.5]" />
+                                    <span className="text-xs font-black uppercase tracking-wider">Klik untuk unggah gambar</span>
                                 </div>
                             )}
                         </div>
@@ -100,7 +100,7 @@ export function SectorFormModal({ sector, onClose, onSuccess }: SectorFormModalP
 
                     {/* Icon Selection Fallback */}
                     <div>
-                        <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-2">
+                        <label className="block text-[10px] font-black uppercase tracking-widest text-slate-800 dark:text-zinc-200 mb-2">
                             Pilih Ikon (Otomatis dipakai bila tidak ada gambar)
                         </label>
                         <IconSelector value={icon} onChange={setIcon} />
@@ -108,7 +108,7 @@ export function SectorFormModal({ sector, onClose, onSuccess }: SectorFormModalP
 
                     {/* Name ID */}
                     <div>
-                        <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-2">
+                        <label className="block text-[10px] font-black uppercase tracking-widest text-slate-800 dark:text-zinc-200 mb-2">
                             Nama Bidang Usaha <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -117,13 +117,13 @@ export function SectorFormModal({ sector, onClose, onSuccess }: SectorFormModalP
                             required
                             defaultValue={sector?.name}
                             placeholder="cth: Perdagangan Umum"
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-900 text-sm font-medium text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
+                            className="w-full px-4 py-3 rounded-none border-2 border-black dark:border-white bg-white dark:bg-[#0E1217] text-sm font-bold text-slate-900 dark:text-white focus:outline-none"
                         />
                     </div>
 
                     {/* Description ID */}
                     <div>
-                        <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-2">
+                        <label className="block text-[10px] font-black uppercase tracking-widest text-slate-800 dark:text-zinc-200 mb-2">
                             Deskripsi Singkat <span className="text-red-500">*</span>
                         </label>
                         <textarea
@@ -132,7 +132,7 @@ export function SectorFormModal({ sector, onClose, onSuccess }: SectorFormModalP
                             rows={3}
                             defaultValue={sector?.description}
                             placeholder="Deskripsi singkat bidang usaha..."
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-900 text-sm font-medium text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none"
+                            className="w-full px-4 py-3 rounded-none border-2 border-black dark:border-white bg-white dark:bg-[#0E1217] text-sm font-bold text-slate-900 dark:text-white focus:outline-none resize-none"
                         />
                     </div>
 
@@ -140,7 +140,7 @@ export function SectorFormModal({ sector, onClose, onSuccess }: SectorFormModalP
                     <button
                         type="submit"
                         disabled={isPending}
-                        className="w-full h-13 bg-primary hover:bg-primary/90 text-white font-bold rounded-2xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 disabled:opacity-60 disabled:translate-y-0"
+                        className="w-full h-12 bg-[#FACC15] hover:bg-yellow-300 text-black font-black uppercase text-xs rounded-none border-2 border-black dark:border-white flex items-center justify-center gap-2 transition-all shadow-retro-xs disabled:opacity-60"
                     >
                         {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
                         {sector ? "Simpan Perubahan" : "Tambah Bidang Usaha"}

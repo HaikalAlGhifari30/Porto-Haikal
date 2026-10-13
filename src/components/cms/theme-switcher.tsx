@@ -45,11 +45,11 @@ export function ThemeSwitcher() {
                 className={cn(
                     "absolute w-6 h-6 rounded-full transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex items-center justify-center shadow-md transform",
                     isDark 
-                        ? "translate-x-0 bg-slate-800 text-blue-400 border border-slate-700" 
-                        : "translate-x-8 bg-white text-orange-500 border border-slate-100"
+                        ? "translate-x-0 bg-[#151B22] text-[#FACC15] border border-black dark:border-white" 
+                        : "translate-x-8 bg-[#FACC15] text-black border border-black"
                 )}
             >
-                {isDark ? <Moon className="w-3 h-3 fill-blue-400/10" /> : <Sun className="w-3 h-3 fill-orange-400/10" />}
+                {isDark ? <Moon className="w-3 h-3 fill-[#FACC15]/20" /> : <Sun className="w-3 h-3 fill-black/20" />}
             </div>
 
             {/* Background Icons (Subtle) */}

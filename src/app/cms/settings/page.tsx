@@ -13,8 +13,8 @@ export default async function SettingsPage() {
     ]);
 
     return (
-        <div className="space-y-8">
-            <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-8">
+        <div className="space-y-6">
+            <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
                 <div>
                     <h2 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase">Pengaturan Website & Visual</h2>
                     <p className="text-sm text-slate-500 dark:text-zinc-400 mt-1 font-medium">Kelola foto profil utama Hero, dokumen CV PDF, widget WhatsApp melayang, dan footer.</p>
@@ -22,10 +22,10 @@ export default async function SettingsPage() {
             </div>
 
             {/* 1. Foto Profil Utama & File CV */}
-            <Card className="bg-white dark:bg-[#070e20]/90 border-slate-200 dark:border-cyan-500/20 rounded-3xl overflow-hidden shadow-sm">
-                <CardHeader className="border-b border-slate-100 dark:border-zinc-800/60 bg-slate-50/50 dark:bg-zinc-900/50 px-6 py-4">
+            <Card className="bg-white dark:bg-[#151B22] border-2 border-black dark:border-white rounded-2xl overflow-hidden shadow-retro-sm">
+                <CardHeader className="border-b-2 border-black/10 dark:border-white/10 bg-[#FAF6ED] dark:bg-[#0E1217] px-6 py-4">
                     <CardTitle className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                        <User className="w-5 h-5 text-cyan-400" />
+                        <User className="w-5 h-5 text-amber-500 dark:text-[#FACC15]" />
                         Foto Profil Utama & File Dokumen CV
                     </CardTitle>
                 </CardHeader>
@@ -35,10 +35,10 @@ export default async function SettingsPage() {
             </Card>
 
             {/* 2. Admin WhatsApp Widget */}
-            <Card className="bg-white dark:bg-[#070e20]/90 border-slate-200 dark:border-cyan-500/20 rounded-3xl overflow-hidden shadow-sm">
-                <CardHeader className="border-b border-slate-100 dark:border-zinc-800/60 bg-slate-50/50 dark:bg-zinc-900/50 px-6 py-4">
+            <Card className="bg-white dark:bg-[#151B22] border-2 border-black dark:border-white rounded-2xl overflow-hidden shadow-retro-sm">
+                <CardHeader className="border-b-2 border-black/10 dark:border-white/10 bg-[#FAF6ED] dark:bg-[#0E1217] px-6 py-4">
                     <CardTitle className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                        <MessageCircle className="w-5 h-5 text-cyan-400" />
+                        <MessageCircle className="w-5 h-5 text-amber-500 dark:text-[#FACC15]" />
                         Admin WhatsApp (Floating Button Widget)
                     </CardTitle>
                 </CardHeader>
@@ -48,10 +48,10 @@ export default async function SettingsPage() {
             </Card>
 
             {/* 3. Pengaturan Footer & Media Sosial */}
-            <Card className="bg-white dark:bg-[#070e20]/90 border-slate-200 dark:border-cyan-500/20 rounded-3xl overflow-hidden shadow-sm">
-                <CardHeader className="border-b border-slate-100 dark:border-zinc-800/60 bg-slate-50/50 dark:bg-zinc-900/50 px-6 py-4">
+            <Card className="bg-white dark:bg-[#151B22] border-2 border-black dark:border-white rounded-2xl overflow-hidden shadow-retro-sm">
+                <CardHeader className="border-b-2 border-black/10 dark:border-white/10 bg-[#FAF6ED] dark:bg-[#0E1217] px-6 py-4">
                     <CardTitle className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                        <Share2 className="w-5 h-5 text-cyan-400" />
+                        <Share2 className="w-5 h-5 text-amber-500 dark:text-[#FACC15]" />
                         Pengaturan Footer & Media Sosial
                     </CardTitle>
                 </CardHeader>

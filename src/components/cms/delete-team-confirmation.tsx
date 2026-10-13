@@ -48,36 +48,36 @@ export function DeleteTeamConfirmation({ teamId, teamName }: DeleteTeamConfirmat
         }}>
             <DialogTrigger 
                 render={
-                    <Button variant="ghost" className="h-12 px-6 rounded-2xl text-red-500 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-500/10 font-bold border border-transparent hover:border-red-200 dark:hover:border-red-500/20 transition-all" />
+                    <Button variant="ghost" className="h-11 px-6 rounded-none text-red-500 hover:bg-red-500 hover:text-white dark:hover:bg-red-500/20 font-black uppercase text-xs border-2 border-red-500 shadow-retro-xs transition-all" />
                 }
             >
-                <Trash2 className="w-4 h-4 mr-2" /> Delete Division
+                <Trash2 className="w-4 h-4 mr-2 stroke-[2.5]" /> Delete Division
             </DialogTrigger>
-            <DialogContent className="sm:max-w-md bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 rounded-[2.5rem] p-8 !backdrop-blur-xl">
-                <DialogHeader className="mb-8">
+            <DialogContent className="sm:max-w-md bg-[#FAF6ED] dark:bg-[#151B22] border-2 border-black dark:border-white rounded-none p-8 shadow-retro-md">
+                <DialogHeader className="mb-6">
                     <div className="flex items-center gap-3 mb-2">
-                        <div className="w-10 h-10 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500">
-                            <AlertTriangle className="w-5 h-5" />
+                        <div className="w-10 h-10 rounded-none bg-red-500 border-2 border-black flex items-center justify-center text-white shadow-retro-xs">
+                            <AlertTriangle className="w-5 h-5 stroke-[2.5]" />
                         </div>
-                        <DialogTitle className="text-xl font-bold text-slate-900 dark:text-white">Hapus Divisi?</DialogTitle>
+                        <DialogTitle className="text-xl font-black uppercase text-slate-900 dark:text-white">Hapus Divisi?</DialogTitle>
                     </div>
-                    <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium leading-relaxed">
-                        Tindakan ini bersifat permanen. Seluruh data anggota dan posisi dalam divisi <span className="font-bold text-red-500">{teamName}</span> akan dihapus selamanya.
+                    <p className="text-xs text-slate-700 dark:text-zinc-300 font-bold leading-relaxed">
+                        Tindakan ini bersifat permanen. Seluruh data anggota dan posisi dalam divisi <span className="font-black text-red-600 underline">{teamName}</span> akan dihapus selamanya.
                     </p>
                 </DialogHeader>
                 <div className="space-y-6">
-                    <div className="flex gap-3 pt-4">
-                        <DialogClose render={<Button variant="ghost" className="flex-1 h-12 rounded-xl text-slate-500 font-bold" />}>
+                    <div className="flex gap-3 pt-4 border-t-2 border-black dark:border-white">
+                        <DialogClose render={<Button variant="ghost" className="flex-1 h-11 rounded-none border-2 border-black dark:border-white font-black uppercase text-xs hover:bg-slate-200 dark:hover:bg-zinc-800" />}>
                             Batal
                         </DialogClose>
                         <Button 
                             onClick={handleDelete}
                             disabled={isDeleting}
                             className={cn(
-                                "flex-1 h-12 rounded-xl font-bold shadow-lg transition-all",
+                                "flex-1 h-11 rounded-none font-black uppercase text-xs border-2 border-black text-white shadow-retro-xs transition-all",
                                 confirmStep === 0 
-                                    ? "bg-red-600 hover:bg-red-700 text-white shadow-red-500/20" 
-                                    : "bg-amber-500 hover:bg-amber-600 text-white shadow-amber-500/20 animate-pulse"
+                                    ? "bg-red-500 hover:bg-red-600" 
+                                    : "bg-amber-500 hover:bg-amber-600 text-black animate-pulse"
                             )}
                         >
                             {isDeleting 

@@ -99,13 +99,13 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           {/* Left Column: Profile Photo Upload & Preview */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-zinc-800">
-              <User className="w-5 h-5 text-cyan-400" />
-              <Label className="text-base font-black text-slate-900 dark:text-white">Foto Profil Utama (Hero Section)</Label>
+            <div className="flex items-center gap-2 pb-2 border-b-2 border-black dark:border-white">
+              <User className="w-5 h-5 text-amber-500 dark:text-[#FACC15]" />
+              <Label className="text-base font-black text-slate-900 dark:text-white uppercase tracking-tight">Foto Profil Utama (Hero Section)</Label>
             </div>
 
-            <div className="flex flex-col items-center sm:flex-row gap-6 p-4 rounded-2xl bg-slate-50 dark:bg-[#0c142c] border border-slate-200 dark:border-cyan-500/30">
-              <div className="relative w-32 h-40 rounded-2xl overflow-hidden border-2 border-cyan-500/50 shadow-xl shrink-0 group">
+            <div className="flex flex-col items-center sm:flex-row gap-6 p-5 rounded-2xl bg-[#FAF6ED] dark:bg-[#151B22] border-2 border-black dark:border-white shadow-retro-xs">
+              <div className="relative w-32 h-40 rounded-xl overflow-hidden border-2 border-black dark:border-white shadow-retro-xs shrink-0 group">
                 <img
                   src={heroBannerUrl}
                   alt="Haikal Al Ghifari Profile"
@@ -117,13 +117,13 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
                 <Button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="w-full h-11 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold rounded-xl shadow-md transition-all active:scale-95 cursor-pointer"
+                  className="w-full h-11 bg-[#FACC15] hover:bg-yellow-300 text-black font-black border-2 border-black dark:border-white shadow-retro-xs btn-retro transition-all active:scale-95 cursor-pointer rounded-none"
                 >
                   <ImagePlus className="w-4 h-4 mr-2" /> Upload Foto Baru dari Perangkat
                 </Button>
 
                 <div className="space-y-1">
-                  <Label htmlFor="heroBannerUrl" className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider">
+                  <Label htmlFor="heroBannerUrl" className="text-[11px] font-black text-slate-700 dark:text-zinc-300 uppercase tracking-wider">
                     URL / Base64 Foto Profil
                   </Label>
                   <Input
@@ -132,7 +132,7 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
                     value={heroBannerUrl}
                     onChange={(e) => setHeroBannerUrl(e.target.value)}
                     placeholder="/haikal-al-ghifari.jpg"
-                    className="h-9 rounded-xl bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 text-xs text-slate-900 dark:text-white font-mono"
+                    className="h-10 rounded-none bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white text-xs text-slate-900 dark:text-white font-mono"
                   />
                 </div>
 
@@ -145,22 +145,22 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
 
           {/* Right Column: CV File Link & Upload */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-zinc-800">
-              <FileText className="w-5 h-5 text-cyan-400" />
-              <Label className="text-base font-black text-slate-900 dark:text-white">File Dokumen CV / Resume</Label>
+            <div className="flex items-center gap-2 pb-2 border-b-2 border-black dark:border-white">
+              <FileText className="w-5 h-5 text-amber-500 dark:text-[#FACC15]" />
+              <Label className="text-base font-black text-slate-900 dark:text-white uppercase tracking-tight">File Dokumen CV / Resume</Label>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#0c142c] border border-slate-200 dark:border-cyan-500/30 space-y-4">
+            <div className="p-5 rounded-2xl bg-[#FAF6ED] dark:bg-[#151B22] border-2 border-black dark:border-white shadow-retro-xs space-y-4">
               <Button
                 type="button"
                 onClick={() => cvFileInputRef.current?.click()}
-                className="w-full h-11 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-md transition-all active:scale-95 cursor-pointer"
+                className="w-full h-11 bg-white dark:bg-[#0E1217] hover:bg-[#FAF6ED] dark:hover:bg-zinc-800 text-black dark:text-white font-black border-2 border-black dark:border-white shadow-retro-xs btn-retro transition-all active:scale-95 cursor-pointer rounded-none"
               >
-                <FileUp className="w-4 h-4 mr-2" /> Upload File CV PDF Baru
+                <FileUp className="w-4 h-4 mr-2 text-amber-500 dark:text-[#FACC15]" /> Upload File CV PDF Baru
               </Button>
 
               <div className="space-y-1">
-                <Label htmlFor="heroCtaLink" className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider">
+                <Label htmlFor="heroCtaLink" className="text-[11px] font-black text-slate-700 dark:text-zinc-300 uppercase tracking-wider">
                   Tautan File CV PDF (Unduh CV)
                 </Label>
                 <Input
@@ -169,12 +169,12 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
                   value={cvLink}
                   onChange={(e) => setCvLink(e.target.value)}
                   placeholder="/cv-haikal-al-ghifari.pdf"
-                  className="h-9 rounded-xl bg-white dark:bg-zinc-950 border-slate-200 dark:border-zinc-800 text-xs text-slate-900 dark:text-white font-mono"
+                  className="h-10 rounded-none bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white text-xs text-slate-900 dark:text-white font-mono"
                 />
               </div>
 
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold">
-                <CheckCircle2 className="w-4 h-4 shrink-0" />
+              <div className="flex items-center gap-3 p-3 rounded-none bg-yellow-400/10 border-2 border-black dark:border-[#FACC15]/40 text-black dark:text-zinc-200 text-xs font-semibold">
+                <CheckCircle2 className="w-4 h-4 shrink-0 text-amber-500 dark:text-[#FACC15]" />
                 <span>Tombol &quot;Unduh CV&quot; di Navbar & Hero akan langsung mengunduh file ini.</span>
               </div>
             </div>
@@ -184,7 +184,7 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
         <div className="flex justify-end pt-4">
           <Button
             type="submit"
-            className="h-12 px-8 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold tracking-wide shadow-lg shadow-cyan-500/25 transition-all active:scale-95 cursor-pointer"
+            className="h-12 px-8 rounded-none bg-[#FACC15] hover:bg-yellow-300 text-black font-black tracking-wide border-2 border-black dark:border-white shadow-retro-sm btn-retro transition-all active:scale-95 cursor-pointer"
           >
             <Save className="w-5 h-5 mr-2" /> Simpan Foto Profil & File CV
           </Button>
@@ -193,9 +193,9 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
 
       {/* Confirmation Dialog */}
       <Dialog open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
-        <DialogContent className="sm:max-w-[420px] bg-white dark:bg-[#070e20] border-slate-200 dark:border-cyan-500/30 rounded-3xl p-6 shadow-2xl">
+        <DialogContent className="sm:max-w-[420px] bg-white dark:bg-[#151B22] border-2 border-black dark:border-white rounded-2xl p-6 shadow-retro-md">
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold text-slate-900 dark:text-white">Konfirmasi Perubahan</DialogTitle>
+            <DialogTitle className="text-xl font-black text-slate-900 dark:text-white uppercase">Konfirmasi Perubahan</DialogTitle>
           </DialogHeader>
           <p className="text-sm text-slate-600 dark:text-zinc-300 py-2">
             Apakah Anda yakin ingin menyimpan perubahan foto profil utama dan tautan dokumen CV?
@@ -205,14 +205,14 @@ export function ProfilePhotoSettingsForm({ settings }: { settings: any }) {
               variant="outline"
               onClick={() => setIsConfirmOpen(false)}
               disabled={isSaving}
-              className="rounded-xl border-slate-200 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 font-semibold"
+              className="rounded-none border-2 border-black dark:border-white text-black dark:text-white font-bold btn-retro"
             >
               Batal
             </Button>
             <Button
               onClick={handleConfirmSave}
               disabled={isSaving}
-              className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold shadow-md shadow-cyan-500/25"
+              className="rounded-none bg-[#FACC15] hover:bg-yellow-300 text-black font-black border-2 border-black dark:border-white shadow-retro-xs btn-retro"
             >
               {isSaving ? (
                 <>

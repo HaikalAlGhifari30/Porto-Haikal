@@ -18,7 +18,7 @@ export function DashboardGreeting() {
 
     return (
         <h2 className="text-2xl md:text-3xl font-black tracking-tight mb-2 leading-tight text-white">
-            Selamat Datang Kembali, <span className="text-cyan-400">{adminName}.</span>
+            Selamat Datang Kembali, <span className="text-[#FACC15]">{adminName}.</span>
         </h2>
     );
 }

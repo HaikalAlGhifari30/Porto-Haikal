@@ -157,9 +157,9 @@ export function HeroCarouselManager({ initialSlides }: HeroCarouselManagerProps)
                         <Button 
                             onClick={() => fileInputRef.current?.click()}
                             disabled={isUploading}
-                            className="rounded-2xl bg-blue-600 hover:bg-blue-700 font-bold"
+                            className="rounded-none bg-[#FACC15] hover:bg-yellow-300 text-black border-2 border-black dark:border-white font-black uppercase text-xs h-11 px-6 shadow-retro-xs"
                         >
-                            {isUploading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Plus className="w-4 h-4 mr-2" />}
+                            {isUploading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Plus className="w-4 h-4 mr-2 stroke-[3]" />}
                             Tambah Foto
                         </Button>
                     )}
@@ -190,19 +190,19 @@ export function HeroCarouselManager({ initialSlides }: HeroCarouselManagerProps)
                         {slides.length < 5 && !isUploading && (
                             <button 
                                 onClick={() => fileInputRef.current?.click()}
-                                className="aspect-[16/9] rounded-[2rem] border-2 border-dashed border-slate-200 dark:border-zinc-800 flex flex-col items-center justify-center gap-2 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all group"
+                                className="aspect-[16/9] rounded-none border-2 border-dashed border-black dark:border-white bg-[#FAF6ED] dark:bg-[#151B22] flex flex-col items-center justify-center gap-2 hover:bg-[#FACC15]/10 transition-all group"
                             >
-                                <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-zinc-800 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                    <Plus className="w-5 h-5 text-slate-400 dark:text-zinc-500" />
+                                <div className="w-10 h-10 rounded-none bg-[#FACC15] border-2 border-black flex items-center justify-center shadow-retro-xs group-hover:scale-105 transition-transform">
+                                    <Plus className="w-5 h-5 text-black stroke-[3]" />
                                 </div>
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-zinc-500">Tambah Foto</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-slate-800 dark:text-zinc-200">Tambah Foto</span>
                             </button>
                         )}
                         
                         {isUploading && (
-                            <div className="aspect-[16/9] rounded-[2rem] border-2 border-blue-500/30 bg-blue-500/5 flex flex-col items-center justify-center gap-2 animate-pulse">
-                                <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-blue-500">Mengunggah...</span>
+                            <div className="aspect-[16/9] rounded-none border-2 border-black dark:border-white bg-[#FACC15]/20 flex flex-col items-center justify-center gap-2 animate-pulse">
+                                <Loader2 className="w-8 h-8 text-black dark:text-white animate-spin" />
+                                <span className="text-[10px] font-black uppercase tracking-widest text-slate-900 dark:text-white">Mengunggah...</span>
                             </div>
                         )}
                     </div>
@@ -211,19 +211,19 @@ export function HeroCarouselManager({ initialSlides }: HeroCarouselManagerProps)
 
             {/* Instructions & Recommendations */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-6 rounded-[2rem] bg-blue-500/5 border border-blue-500/10">
-                    <h4 className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold text-xs uppercase tracking-widest mb-3">
+                <div className="p-6 rounded-none bg-[#FACC15]/10 border-2 border-black dark:border-white shadow-retro-xs">
+                    <h4 className="flex items-center gap-2 text-amber-500 dark:text-[#FACC15] font-black text-xs uppercase tracking-widest mb-3">
                         <Settings2 className="w-4 h-4" /> Instruksi Pengurutan
                     </h4>
-                    <p className="text-sm text-slate-600 dark:text-zinc-400 leading-relaxed">
-                        Anda dapat <strong className="text-blue-600 dark:text-blue-400">menarik dan melepas (drag & drop)</strong> gambar untuk mengubah urutannya. Gambar paling kiri dengan label <strong className="text-emerald-500 uppercase">"Tampil Pertama"</strong> akan menjadi banner utama.
+                    <p className="text-xs text-slate-800 dark:text-zinc-200 leading-relaxed font-bold">
+                        Anda dapat <strong className="text-black dark:text-[#FACC15]">menarik dan melepas (drag & drop)</strong> gambar untuk mengubah urutannya. Gambar paling kiri dengan label <strong className="text-emerald-500 uppercase">"Tampil Pertama"</strong> akan menjadi banner utama.
                     </p>
                 </div>
-                <div className="p-6 rounded-[2rem] bg-amber-500/5 border border-amber-500/10">
-                    <h4 className="flex items-center gap-2 text-amber-600 dark:text-amber-400 font-bold text-xs uppercase tracking-widest mb-3">
-                        <ImageIcon className="w-4 h-4" /> Rekomendasi
+                <div className="p-6 rounded-none bg-[#FAF6ED] dark:bg-[#151B22] border-2 border-black dark:border-white shadow-retro-xs">
+                    <h4 className="flex items-center gap-2 text-slate-900 dark:text-white font-black text-xs uppercase tracking-widest mb-3">
+                        <ImageIcon className="w-4 h-4 text-[#FACC15]" /> Rekomendasi
                     </h4>
-                    <ul className="space-y-2 text-sm text-slate-600 dark:text-zinc-400">
+                    <ul className="space-y-2 text-xs text-slate-800 dark:text-zinc-300 font-bold">
                         <li className="flex items-start gap-2">
                             <span className="text-amber-500">•</span>
                             Gunakan rasio aspek lebar (21:9 atau 16:9) untuk hasil maksimal.
@@ -237,27 +237,27 @@ export function HeroCarouselManager({ initialSlides }: HeroCarouselManagerProps)
             </div>
             {/* Delete Confirmation Modal */}
             <Dialog open={deleteId !== null} onOpenChange={(open) => !open && setDeleteId(null)}>
-                <DialogContent className="sm:max-w-sm bg-white dark:bg-slate-900 border-slate-200 dark:border-zinc-800 rounded-[3rem] p-10 flex flex-col items-center text-center">
-                    <div className="w-24 h-24 rounded-[2rem] bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-8 text-red-500 border-2 border-red-500/20 shadow-xl shadow-red-500/5">
-                        <AlertTriangle className="w-12 h-12" />
+                <DialogContent className="sm:max-w-sm bg-[#FAF6ED] dark:bg-[#151B22] border-2 border-black dark:border-white rounded-none p-8 flex flex-col items-center text-center shadow-retro-md">
+                    <div className="w-16 h-16 rounded-none bg-red-500 flex items-center justify-center mb-6 text-white border-2 border-black dark:border-white shadow-retro-xs">
+                        <AlertTriangle className="w-8 h-8" />
                     </div>
                     <DialogHeader>
-                        <DialogTitle className="text-2xl font-black text-slate-900 dark:text-white mb-3">Hapus Banner?</DialogTitle>
+                        <DialogTitle className="text-xl font-black uppercase text-slate-900 dark:text-white mb-2">Hapus Banner?</DialogTitle>
                     </DialogHeader>
-                    <p className="text-sm text-slate-500 dark:text-zinc-400 mb-10 leading-relaxed font-medium">
+                    <p className="text-sm text-slate-600 dark:text-zinc-300 mb-6 font-bold">
                         Apakah Anda yakin ingin menghapus banner ini? Tindakan ini permanen.
                     </p>
-                    <div className="flex w-full gap-4">
+                    <div className="flex w-full gap-3">
                         <Button 
                             variant="outline" 
-                            className="flex-1 h-14 rounded-2xl border-slate-200 dark:border-zinc-800 font-bold hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all"
+                            className="flex-1 h-11 rounded-none border-2 border-black dark:border-white font-black uppercase hover:bg-slate-200 dark:hover:bg-zinc-800"
                             onClick={() => setDeleteId(null)}
                         >
                             Batal
                         </Button>
                         <Button 
                             variant="destructive" 
-                            className="flex-1 h-14 rounded-2xl bg-red-500 hover:bg-red-600 text-white font-black uppercase tracking-widest shadow-xl shadow-red-500/20 hover:shadow-red-500/40 hover:-translate-y-1 transition-all"
+                            className="flex-1 h-11 rounded-none bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-wider border-2 border-black dark:border-white shadow-retro-xs"
                             onClick={confirmDelete}
                         >
                             Hapus
@@ -296,7 +296,7 @@ function SortableSlide({ slide, isFirst, onDelete, onUpdate, isSaving }: {
         <div 
             ref={setNodeRef} 
             style={style}
-            className="group relative aspect-[16/9] rounded-[2rem] overflow-hidden border border-slate-200 dark:border-zinc-800 bg-zinc-900 shadow-xl"
+            className="group relative aspect-[16/9] rounded-none overflow-hidden border-2 border-black dark:border-white bg-[#0E1217] shadow-retro-xs hover:shadow-retro-sm transition-all"
         >
             <img 
                 src={slide.imageUrl} 
@@ -306,24 +306,24 @@ function SortableSlide({ slide, isFirst, onDelete, onUpdate, isSaving }: {
             
             {/* Status Badges */}
             {isFirst && (
-                <div className="absolute top-4 left-4 px-3 py-1 bg-emerald-500 text-white text-[8px] font-black uppercase tracking-widest rounded-full shadow-lg">
-                    • Tampil Pertama
+                <div className="absolute top-3 left-3 px-2 py-0.5 bg-[#FACC15] text-black text-[9px] font-black uppercase tracking-widest rounded-none border-2 border-black shadow-retro-xs">
+                    • Utama
                 </div>
             )}
             
             {!slide.isActive && (
-                <div className="absolute bottom-4 right-4 px-3 py-1 bg-zinc-800 text-white text-[8px] font-black uppercase tracking-widest rounded-full border border-white/10 shadow-lg">
+                <div className="absolute bottom-3 right-3 px-2 py-0.5 bg-black text-white text-[9px] font-black uppercase tracking-widest rounded-none border-2 border-white shadow-retro-xs">
                     Nonaktif
                 </div>
             )}
 
             {/* Actions Overlay */}
-            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[2px]">
+            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300">
                 {/* Settings - Top Left */}
                 <div className="absolute top-3 left-3">
                     <SlideSettingsModal slide={slide} onSave={onUpdate} isSaving={isSaving}>
-                        <Button size="icon" className="w-10 h-10 rounded-2xl bg-blue-600 hover:bg-blue-700 border-none text-white shadow-xl transition-all hover:scale-110 active:scale-95">
-                            <Settings2 className="w-5 h-5" />
+                        <Button size="icon" className="w-9 h-9 rounded-none bg-[#FACC15] hover:bg-yellow-300 border-2 border-black text-black shadow-retro-xs transition-transform active:translate-x-0.5 active:translate-y-0.5" title="Pengaturan Slide">
+                            <Settings2 className="w-4 h-4" />
                         </Button>
                     </SlideSettingsModal>
                 </div>
@@ -333,10 +333,11 @@ function SortableSlide({ slide, isFirst, onDelete, onUpdate, isSaving }: {
                     <Button 
                         size="icon" 
                         variant="destructive" 
-                        className="w-10 h-10 rounded-2xl bg-red-500 hover:bg-red-600 border-none text-white shadow-xl transition-all hover:scale-110 active:scale-95"
+                        className="w-9 h-9 rounded-none bg-red-500 hover:bg-red-600 border-2 border-black text-white shadow-retro-xs transition-transform active:translate-x-0.5 active:translate-y-0.5"
                         onClick={() => onDelete()}
+                        title="Hapus Slide"
                     >
-                        <Trash2 className="w-5 h-5" />
+                        <Trash2 className="w-4 h-4" />
                     </Button>
                 </div>
 
@@ -344,9 +345,9 @@ function SortableSlide({ slide, isFirst, onDelete, onUpdate, isSaving }: {
                 <div 
                     {...attributes} 
                     {...listeners}
-                    className="absolute bottom-3 left-1/2 -translate-x-1/2 w-20 h-10 rounded-2xl bg-white/10 hover:bg-white/20 flex items-center justify-center cursor-grab active:cursor-grabbing text-white border border-white/20 backdrop-blur-md transition-all group/handle"
+                    className="absolute bottom-3 left-1/2 -translate-x-1/2 w-16 h-8 rounded-none bg-black/80 hover:bg-black flex items-center justify-center cursor-grab active:cursor-grabbing text-white border-2 border-white shadow-retro-xs transition-all"
                 >
-                    <GripVertical className="w-6 h-6 group-hover/handle:scale-110 transition-transform" />
+                    <GripVertical className="w-5 h-5" />
                 </div>
             </div>
         </div>

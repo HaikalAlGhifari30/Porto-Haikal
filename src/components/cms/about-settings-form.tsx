@@ -50,105 +50,105 @@ export function AboutSettingsForm({ settings }: { settings: any }) {
             <form onSubmit={handleSubmit} className="space-y-8">
                 {/* 1. Hero Section Headers */}
                 <div className="space-y-6">
-                    <div className="flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-zinc-800">
-                        <Sparkles className="w-5 h-5 text-cyan-400" />
-                        <h3 className="text-lg font-black text-slate-900 dark:text-white">Pengaturan Teks Hero Utama</h3>
+                    <div className="flex items-center gap-2 pb-2 border-b-2 border-black dark:border-white">
+                        <Sparkles className="w-5 h-5 text-amber-500 dark:text-[#FACC15]" />
+                        <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight">Pengaturan Teks Hero Utama</h3>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <Label htmlFor="heroTitle" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Judul Utama Hero</Label>
+                            <Label htmlFor="heroTitle" className="text-xs font-black text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Judul Utama Hero</Label>
                             <Input 
                                 id="heroTitle" 
                                 name="heroTitle" 
                                 defaultValue={settings?.heroTitle || defaultHeroTitle} 
                                 placeholder="Halo, Saya Haikal Al Ghifari"
-                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
+                                className="h-11 rounded-none bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white text-slate-900 dark:text-white font-medium"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="heroSubtitle" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Subtitle Profesi</Label>
+                            <Label htmlFor="heroSubtitle" className="text-xs font-black text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Subtitle Profesi</Label>
                             <Input 
                                 id="heroSubtitle" 
                                 name="heroSubtitle" 
                                 defaultValue={settings?.heroSubtitle || defaultHeroSubtitle} 
                                 placeholder="— Quality Assurance Engineer —"
-                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
+                                className="h-11 rounded-none bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white text-slate-900 dark:text-white font-medium"
                             />
                         </div>
                     </div>
                 </div>
 
                 {/* 2. Professional Bio (About Me) */}
-                <div className="space-y-6 pt-4 border-t border-slate-200 dark:border-zinc-800">
-                    <div className="flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-zinc-800">
-                        <UserCheck className="w-5 h-5 text-cyan-400" />
-                        <h3 className="text-lg font-black text-slate-900 dark:text-white">Deskripsi Biodata (About Me)</h3>
+                <div className="space-y-6 pt-4 border-t-2 border-black dark:border-white">
+                    <div className="flex items-center gap-2 pb-2 border-b-2 border-black dark:border-white">
+                        <UserCheck className="w-5 h-5 text-amber-500 dark:text-[#FACC15]" />
+                        <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight">Deskripsi Biodata (About Me)</h3>
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="aboutText" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Deskripsi Biodata (About Me)</Label>
+                        <Label htmlFor="aboutText" className="text-xs font-black text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Deskripsi Biodata (About Me)</Label>
                         <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">Teks ringkasan tentang profil profesional QA Anda di Landing Page.</p>
                         <Textarea 
                             id="aboutText" 
                             name="aboutText" 
                             defaultValue={settings?.aboutText || defaultAboutText} 
                             placeholder="Lulusan S1 Teknik Informatika UNIKOM..."
-                            className="min-h-[140px] rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium leading-relaxed"
+                            className="min-h-[140px] rounded-none bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white text-slate-900 dark:text-white font-medium leading-relaxed"
                         />
                     </div>
                 </div>
 
                 {/* 3. Contact & Social Media Links */}
-                <div className="space-y-6 pt-4 border-t border-slate-200 dark:border-zinc-800">
-                    <div className="flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-zinc-800">
-                        <Link2 className="w-5 h-5 text-cyan-400" />
-                        <h3 className="text-lg font-black text-slate-900 dark:text-white">Kontak & Tautan Sosial Media</h3>
+                <div className="space-y-6 pt-4 border-t-2 border-black dark:border-white">
+                    <div className="flex items-center gap-2 pb-2 border-b-2 border-black dark:border-white">
+                        <Link2 className="w-5 h-5 text-amber-500 dark:text-[#FACC15]" />
+                        <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tight">Kontak & Tautan Sosial Media</h3>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <Label htmlFor="email" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Alamat Email Kontak</Label>
+                            <Label htmlFor="email" className="text-xs font-black text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Alamat Email Kontak</Label>
                             <Input 
                                 id="email" 
                                 name="email" 
                                 defaultValue={settings?.email || "alghifaribahren03@gmail.com"} 
                                 placeholder="alghifaribahren03@gmail.com"
-                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
+                                className="h-11 rounded-none bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white text-slate-900 dark:text-white font-medium"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="phone" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Nomor Telepon / WhatsApp</Label>
+                            <Label htmlFor="phone" className="text-xs font-black text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Nomor Telepon / WhatsApp</Label>
                             <Input 
                                 id="phone" 
                                 name="phone" 
                                 defaultValue={settings?.phone || "+62 813 880 583 31"} 
                                 placeholder="+62 813 880 583 31"
-                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
+                                className="h-11 rounded-none bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white text-slate-900 dark:text-white font-medium"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="linkedin" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Tautan LinkedIn</Label>
+                            <Label htmlFor="linkedin" className="text-xs font-black text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Tautan LinkedIn</Label>
                             <Input 
                                 id="linkedin" 
                                 name="linkedin" 
                                 defaultValue={settings?.linkedin || "https://www.linkedin.com/in/haikalalghifari"} 
                                 placeholder="https://www.linkedin.com/in/haikalalghifari"
-                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
+                                className="h-11 rounded-none bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white text-slate-900 dark:text-white font-medium"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="instagram" className="text-xs font-bold text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Tautan Instagram</Label>
+                            <Label htmlFor="instagram" className="text-xs font-black text-slate-700 dark:text-zinc-300 uppercase tracking-wider">Tautan Instagram</Label>
                             <Input 
                                 id="instagram" 
                                 name="instagram" 
                                 defaultValue={settings?.instagram || "https://instagram.com/HaikalAlGhifari30"} 
                                 placeholder="https://instagram.com/HaikalAlGhifari30"
-                                className="h-11 rounded-xl bg-slate-50 dark:bg-[#0c142c] border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white font-medium"
+                                className="h-11 rounded-none bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white text-slate-900 dark:text-white font-medium"
                             />
                         </div>
                     </div>
@@ -157,7 +157,7 @@ export function AboutSettingsForm({ settings }: { settings: any }) {
                 <div className="flex justify-end pt-4">
                     <Button 
                         type="submit" 
-                        className="h-12 px-8 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold tracking-wide shadow-lg shadow-cyan-500/25 transition-all active:scale-95 cursor-pointer"
+                        className="h-12 px-8 rounded-none bg-[#FACC15] hover:bg-yellow-300 text-black font-black tracking-wide border-2 border-black dark:border-white shadow-retro-sm btn-retro transition-all active:scale-95 cursor-pointer"
                     >
                         <Save className="w-5 h-5 mr-2" /> Simpan Pengaturan Biodata
                     </Button>
@@ -166,9 +166,9 @@ export function AboutSettingsForm({ settings }: { settings: any }) {
 
             {/* Confirmation Dialog */}
             <Dialog open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
-                <DialogContent className="sm:max-w-[420px] bg-white dark:bg-[#070e20] border-slate-200 dark:border-cyan-500/30 rounded-3xl p-6 shadow-2xl">
+                <DialogContent className="sm:max-w-[420px] bg-white dark:bg-[#151B22] border-2 border-black dark:border-white rounded-2xl p-6 shadow-retro-md">
                     <DialogHeader>
-                        <DialogTitle className="text-xl font-bold text-slate-900 dark:text-white">Konfirmasi Simpan Pengaturan</DialogTitle>
+                        <DialogTitle className="text-xl font-black text-slate-900 dark:text-white uppercase">Konfirmasi Simpan Pengaturan</DialogTitle>
                     </DialogHeader>
                     <p className="text-sm text-slate-600 dark:text-zinc-300 py-2">
                         Apakah Anda yakin ingin menyimpan perubahan teks Hero, Biodata, dan Kontak ini ke website utama?
@@ -178,14 +178,14 @@ export function AboutSettingsForm({ settings }: { settings: any }) {
                             variant="outline" 
                             onClick={() => setIsConfirmOpen(false)} 
                             disabled={isSaving}
-                            className="rounded-xl border-slate-200 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 font-semibold"
+                            className="rounded-none border-2 border-black dark:border-white text-black dark:text-white font-bold btn-retro"
                         >
                             Batal
                         </Button>
                         <Button 
                             onClick={handleConfirmSave} 
                             disabled={isSaving}
-                            className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold shadow-md shadow-cyan-500/25"
+                            className="rounded-none bg-[#FACC15] hover:bg-yellow-300 text-black font-black border-2 border-black dark:border-white shadow-retro-xs btn-retro"
                         >
                             {isSaving ? (
                                 <>

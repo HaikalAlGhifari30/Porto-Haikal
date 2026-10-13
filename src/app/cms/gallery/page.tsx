@@ -19,12 +19,12 @@ export default async function GalleryPage() {
 
                 <div className="flex flex-col lg:flex-row lg:items-center gap-6 mt-6">
                     {/* Tutorial/Tips Card */}
-                    <div className="flex-1 flex items-center gap-4 p-5 rounded-[1.5rem] bg-indigo-500/[0.03] dark:bg-indigo-500/[0.02] border border-indigo-500/10 animate-in fade-in slide-in-from-top-1 duration-500">
-                        <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 shrink-0">
+                    <div className="flex-1 flex items-center gap-4 p-5 rounded-2xl bg-yellow-400/10 border-2 border-black dark:border-white shadow-retro-xs">
+                        <div className="p-2.5 bg-[#FACC15] text-black border border-black shrink-0">
                             <ImageIcon className="w-5 h-5" />
                         </div>
-                        <p className="text-[11px] md:text-xs text-slate-600 dark:text-zinc-400 leading-relaxed font-medium">
-                            <span className="font-bold text-indigo-600 dark:text-indigo-400 mr-1 uppercase tracking-widest">Tips:</span>
+                        <p className="text-[11px] md:text-xs text-slate-600 dark:text-zinc-300 leading-relaxed font-medium">
+                            <span className="font-bold text-amber-600 dark:text-[#FACC15] mr-1 uppercase tracking-widest">Tips:</span>
                             Upload foto dengan kualitas yang baik namun pastikan ukurannya tidak terlalu besar (Maksimal 5MB) agar loading website tetap cepat.
                         </p>
                     </div>

@@ -96,7 +96,7 @@ export function ProjectSortableList({ initialProjects }: { initialProjects: Proj
                         <Button 
                             onClick={handleSaveOrder} 
                             disabled={isSaving}
-                            className="h-12 px-8 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition-all shadow-lg shadow-blue-500/20 flex items-center gap-2"
+                            className="h-11 px-8 rounded-none bg-[#FACC15] hover:bg-yellow-300 text-black font-black border-2 border-black dark:border-white shadow-retro-xs btn-retro flex items-center gap-2"
                         >
                             <Save className="w-4 h-4" />
                             {isSaving ? "Menyimpan..." : "Simpan Urutan Proyek"}

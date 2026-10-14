@@ -51,22 +51,22 @@ export function SkillsSection({ skills = [], onNavigateScene }: SkillsSectionPro
     {
       key: "Frontend",
       title: isEn ? "QA SKILLS & TESTING" : "METODOLOGI & PENGUJIAN QA",
-      icon: <ShieldCheck className="w-5 h-5 text-cyan-400" />,
+      icon: <ShieldCheck className="w-5 h-5 text-black" strokeWidth={2.5} />,
     },
     {
       key: "Backend",
       title: isEn ? "SYSTEM ANALYSIS & MODELING" : "ANALISIS SISTEM & DFD/ERD",
-      icon: <Cpu className="w-5 h-5 text-blue-400" />,
+      icon: <Cpu className="w-5 h-5 text-black" strokeWidth={2.5} />,
     },
     {
       key: "Database",
       title: isEn ? "TESTING TOOLS & API VALIDATION" : "PERANGKAT UJI & VALIDASI API",
-      icon: <Wrench className="w-5 h-5 text-indigo-400" />,
+      icon: <Wrench className="w-5 h-5 text-black" strokeWidth={2.5} />,
     },
     {
       key: "Tools",
       title: isEn ? "LEADERSHIP & SOFT SKILLS" : "KEPEMIMPINAN & SOFT SKILLS",
-      icon: <Sparkles className="w-5 h-5 text-emerald-400" />,
+      icon: <Sparkles className="w-5 h-5 text-black" strokeWidth={2.5} />,
     },
   ];
 

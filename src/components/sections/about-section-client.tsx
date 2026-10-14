@@ -47,21 +47,21 @@ export function AboutSectionClient({
 
   const highlightCards = [
     {
-      icon: <GraduationCap className="w-5 h-5 text-cyan-400" />,
+      icon: <GraduationCap className="w-5 h-5 text-black" strokeWidth={2.5} />,
       title: isEn ? "Education & Academic" : "Lulusan S1 Teknik Informatika",
       desc: isEn
         ? "Bachelor of Informatics Engineering (S.Kom) from UNIKOM."
         : "Gelar S1 Teknik Informatika UNIKOM dengan fondasi ilmu komputer yang kuat.",
     },
     {
-      icon: <ShieldCheck className="w-5 h-5 text-cyan-400" />,
+      icon: <ShieldCheck className="w-5 h-5 text-black" strokeWidth={2.5} />,
       title: isEn ? "Manual & Functional Testing" : "Manual & Functional Testing",
       desc: isEn
         ? "Structured test case design, boundary value analysis, regression, smoke, and UAT."
         : "Perancangan test case terstruktur, analisis nilai batas, verifikasi regresi, smoke, dan UAT.",
     },
     {
-      icon: <Target className="w-5 h-5 text-emerald-400" />,
+      icon: <Target className="w-5 h-5 text-black" strokeWidth={2.5} />,
       title: isEn ? "Client & Team Collaboration" : "Kolaborasi Klien & Tim",
       desc: isEn
         ? "Liaison between technical teams and clients, conducting UAT sessions with DJK for LIT NON-TR."

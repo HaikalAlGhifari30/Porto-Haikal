@@ -44,17 +44,17 @@ import { DevNoticeModal } from "@/components/dev-notice-modal";
 export const metadata: Metadata = {
   title: "Haikal Al Ghifari — Quality Assurance Specialist Portfolio",
   description: "Dedicated Quality Assurance Specialist currently actively working at COMO 1907 (Global Media Visual). Specialized in manual testing, end-to-end user flow verification, regression testing, and software quality validation.",
-  manifest: "/manifest.json?v=8",
+  manifest: "/manifest.json?v=9",
   icons: {
     icon: [
-      { url: "/favicon.ico?v=8" },
-      { url: "/favicon.png?v=8", sizes: "512x512", type: "image/png" },
-      { url: "/android-chrome-192x192.png?v=8", sizes: "192x192", type: "image/png" },
+      { url: "/favicon.ico?v=9" },
+      { url: "/favicon.png?v=9", sizes: "512x512", type: "image/png" },
+      { url: "/android-chrome-192x192.png?v=9", sizes: "192x192", type: "image/png" },
     ],
-    shortcut: "/favicon.ico?v=8",
+    shortcut: "/favicon.ico?v=9",
     apple: [
-      { url: "/apple-touch-icon.png?v=8", sizes: "180x180", type: "image/png" },
-      { url: "/apple-touch-icon-precomposed.png?v=8", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png?v=9", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon-precomposed.png?v=9", sizes: "180x180", type: "image/png" },
     ],
   },
   appleWebApp: {
@@ -76,10 +76,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=8" />
-        <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/apple-touch-icon-precomposed.png?v=8" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png?v=8" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png?v=8" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=9" />
+        <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/apple-touch-icon-precomposed.png?v=9" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png?v=9" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png?v=9" />
         <meta name="theme-color" content="#FACC15" />
         <meta name="mobile-web-app-capable" content="yes" />
         <script

@@ -4,6 +4,8 @@ import { useSafeLang } from "@/store/lang";
 import { ArrowRight, Mail, User } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa6";
 import { motion } from "framer-motion";
+import { HeroPhotoCarousel } from "@/components/hero-photo-carousel";
+import { parseProfilePhotos } from "@/lib/profile-photos";
 
 interface HeroSectionProps {
   settings?: any;
@@ -142,27 +144,8 @@ export function HeroSection({ settings, onNavigateScene }: HeroSectionProps) {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="lg:col-span-5 flex justify-center relative order-1 lg:order-2 px-2 pt-1 sm:py-0"
         >
-          <div className="relative w-full max-w-[195px] min-[380px]:max-w-[215px] sm:max-w-[245px] lg:max-w-[285px] xl:max-w-[315px]">
-            {/* Top-Right Pin Badge */}
-            <div className="absolute -top-2.5 -right-2 sm:-top-3.5 sm:-right-3.5 z-20 px-2 sm:px-3.5 py-0.5 sm:py-1.5 bg-[#FACC15] text-black font-pixel font-black text-[9px] sm:text-xs border-2 border-black dark:border-white shadow-retro-sm tracking-wider uppercase">
-              20+ PROJECTS
-            </div>
-
-            {/* Bottom-Left Pin Badge */}
-            <div className="absolute -bottom-2.5 -left-2 sm:-bottom-3.5 sm:-left-3.5 z-20 px-2.5 sm:px-3.5 py-0.5 sm:py-1.5 bg-white dark:bg-[#151B22] text-black dark:text-white font-pixel font-black text-[9px] sm:text-xs border-2 border-black dark:border-white shadow-retro-sm tracking-wider uppercase whitespace-nowrap">
-              QA SPECIALIST
-            </div>
-
-            {/* Main 8-Bit Frame */}
-            <div className="relative aspect-[4/5] overflow-hidden border-3 border-black dark:border-white shadow-retro-md sm:shadow-retro-lg bg-black">
-              {/* Profile Photo */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={settings?.heroBannerUrl || "/haikal-al-ghifari.jpg"}
-                alt="Haikal Al Ghifari Profile"
-                className="w-full h-full object-cover object-[center_18%] hover:scale-105 transition-transform duration-500"
-              />
-            </div>
+          <div className="relative w-full max-w-[200px] min-[380px]:max-w-[220px] sm:max-w-[250px] lg:max-w-[290px] xl:max-w-[320px]">
+            <HeroPhotoCarousel photos={parseProfilePhotos(settings?.heroBannerUrl)} />
           </div>
         </motion.div>
 

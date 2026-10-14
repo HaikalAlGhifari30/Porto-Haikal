@@ -51,7 +51,7 @@ export async function updateSettings(formData: FormData) {
     const heroCtaText = formData.get("heroCtaText") as string ?? settings.heroCtaText;
     const heroCtaLink = formData.get("heroCtaLink") as string ?? settings.heroCtaLink;
     const heroBannerFile = formData.get("banner") as File;
-    const currentHeroBannerUrl = formData.get("currentHeroBannerUrl") as string;
+    const heroBannerUrlFromForm = (formData.get("heroBannerUrl") as string | null) || (formData.get("currentHeroBannerUrl") as string | null);
     const removeBanner = formData.get("removeBanner") === "true";
     const heroOverlayOpacityStr = formData.get("heroOverlayOpacity");
     const heroOverlayOpacity = heroOverlayOpacityStr !== null 
@@ -91,7 +91,7 @@ export async function updateSettings(formData: FormData) {
         }
     }
 
-    let heroBannerUrl = currentHeroBannerUrl || null;
+    let heroBannerUrl = heroBannerUrlFromForm !== null ? heroBannerUrlFromForm : settings.heroBannerUrl;
 
     if (heroBannerFile && heroBannerFile.size > 0) {
         heroBannerUrl = await uploadFile(heroBannerFile, "settings");
@@ -146,4 +146,18 @@ export async function updateSettings(formData: FormData) {
     
     revalidatePath("/cms/settings");
     revalidatePath("/");
+}
+
+export async function uploadProfilePhoto(formData: FormData): Promise<{ success: boolean; url?: string; error?: string }> {
+  try {
+    const file = formData.get("file") as File;
+    if (!file || file.size === 0) {
+      return { success: false, error: "File tidak ditemukan" };
+    }
+    const url = await uploadFile(file, "profile");
+    return { success: true, url };
+  } catch (err: any) {
+    console.error("uploadProfilePhoto error:", err);
+    return { success: false, error: err.message || "Gagal mengunggah foto profil" };
+  }
 }

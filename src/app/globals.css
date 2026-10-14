@@ -186,33 +186,40 @@
     background-size: 24px 24px;
   }
 
-  /* ── 8-Bit Retro Hard Shadows ── */
+  /* ── 8-Bit Retro Hard Shadows (Warm cream #EDE4D0 in dark mode for soft vintage contrast) ── */
   .shadow-retro {
     box-shadow: 4px 4px 0px #000000;
   }
   .dark .shadow-retro {
-    box-shadow: 4px 4px 0px #ffffff;
+    box-shadow: 4px 4px 0px #EDE4D0;
+  }
+
+  .shadow-retro-xs {
+    box-shadow: 1.5px 1.5px 0px #000000;
+  }
+  .dark .shadow-retro-xs {
+    box-shadow: 1.5px 1.5px 0px #EDE4D0;
   }
 
   .shadow-retro-sm {
     box-shadow: 2px 2px 0px #000000;
   }
   .dark .shadow-retro-sm {
-    box-shadow: 2px 2px 0px #ffffff;
+    box-shadow: 2px 2px 0px #EDE4D0;
   }
 
   .shadow-retro-md {
     box-shadow: 5px 5px 0px #000000;
   }
   .dark .shadow-retro-md {
-    box-shadow: 5px 5px 0px #ffffff;
+    box-shadow: 5px 5px 0px #EDE4D0;
   }
 
   .shadow-retro-lg {
     box-shadow: 6px 6px 0px #000000;
   }
   .dark .shadow-retro-lg {
-    box-shadow: 6px 6px 0px #ffffff;
+    box-shadow: 6px 6px 0px #EDE4D0;
   }
 
   .border-3 {
@@ -233,6 +240,16 @@
 
   .shadow-retro-white {
     box-shadow: 4px 4px 0px #ffffff;
+  }
+  .dark .shadow-retro-white {
+    box-shadow: 4px 4px 0px #EDE4D0;
+  }
+
+  /* ── Harmonious Dark Mode Retro Cream Accents (Softens harsh pure #ffffff) ── */
+  .dark .border-white,
+  .dark .dark\:border-white,
+  .dark [class*="dark:border-white"]:not([class*="dark:border-white/"]) {
+    border-color: #EDE4D0 !important;
   }
 
   /* ── 8-Bit Retro Button Pressed Animation ── */

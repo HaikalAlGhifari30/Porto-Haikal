@@ -53,12 +53,12 @@ export function HeroSection({ settings, onNavigateScene }: HeroSectionProps) {
             </p>
             <h1 className="text-2xl min-[400px]:text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-pixel font-black tracking-tight text-black dark:text-white leading-[1.1] break-words">
               HAIKAL{" "}
-              <span className="text-[#FACC15] drop-shadow-[2px_2px_0_#000000] sm:drop-shadow-[3px_3px_0_#000000] dark:drop-shadow-[2px_2px_0_#ffffff] sm:dark:drop-shadow-[3px_3px_0_#ffffff]">
+              <span className="text-[#FACC15] drop-shadow-[2px_2px_0_#000000] sm:drop-shadow-[3px_3px_0_#000000] dark:drop-shadow-[2px_2px_0_#EDE4D0] sm:dark:drop-shadow-[3px_3px_0_#EDE4D0]">
                 AL GHIFARI
               </span>
             </h1>
             <div className="pt-0.5">
-              <span className="inline-block px-2.5 sm:px-3 py-1 bg-black text-[#FACC15] dark:bg-white dark:text-black font-pixel font-bold text-[11px] sm:text-xs border-2 border-black dark:border-white shadow-retro-sm tracking-wide sm:tracking-wider">
+              <span className="inline-block px-2.5 sm:px-3 py-1 bg-black text-[#FACC15] dark:bg-[#EDE4D0] dark:text-black font-pixel font-bold text-[11px] sm:text-xs border-2 border-black dark:border-white shadow-retro-sm tracking-wide sm:tracking-wider">
                 {role}
               </span>
             </div>

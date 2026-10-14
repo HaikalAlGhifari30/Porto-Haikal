@@ -172,7 +172,7 @@ export function ExperienceSection({ experiences = [], onNavigateScene }: Experie
         <div className="relative space-y-4 sm:space-y-8 md:space-y-10 pb-12 sm:pb-0">
           
           {/* Central Line */}
-          <div className="absolute left-3.5 sm:left-6 md:left-1/2 top-4 bottom-4 w-1 bg-black dark:bg-white -translate-x-1/2 opacity-70 border-dashed" />
+          <div className="absolute left-3.5 sm:left-6 md:left-1/2 top-4 bottom-4 w-1 bg-black dark:bg-[#EDE4D0] -translate-x-1/2 opacity-70 border-dashed" />
 
           {items.map((exp, idx) => {
             const isExpanded = !!expandedCards[idx];

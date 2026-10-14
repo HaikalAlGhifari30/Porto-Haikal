@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { useSafeLang } from "@/store/lang";
-import { ArrowUpRight, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ExternalLink, ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface ProjectItem {
   id?: string;
@@ -31,6 +32,7 @@ export function ProjectsSection({ projects = [], onNavigateScene }: ProjectsSect
   const { lang, t } = useSafeLang();
   const isEn = lang === "en";
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isImgHovered, setIsImgHovered] = useState(false);
 
   const items = projects.length > 0 ? projects : [
     {
@@ -94,15 +96,38 @@ export function ProjectsSection({ projects = [], onNavigateScene }: ProjectsSect
           >
             {/* Image Preview Frame (Left 6 Columns) */}
             <div className="lg:col-span-6">
-              <Link href={`/projects/${currentProj.slug}`} className="block relative group border-2 border-black dark:border-white shadow-retro-sm overflow-hidden bg-black aspect-[16/10]">
+              <Link
+                href={`/projects/${currentProj.slug}`}
+                onMouseEnter={() => setIsImgHovered(true)}
+                onMouseLeave={() => setIsImgHovered(false)}
+                className="block relative group border-2 border-black dark:border-white shadow-retro-sm overflow-hidden bg-black aspect-[16/10]"
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={imageList[0]}
                   alt={title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95"
+                  className={cn(
+                    "w-full h-full object-cover transition-transform duration-500 opacity-95 group-hover:scale-105",
+                    isImgHovered && "scale-105"
+                  )}
                 />
-                <div className="absolute top-2.5 left-2.5 px-2.5 py-1 bg-[#FACC15] border border-black text-black font-pixel text-[10px] font-bold shadow-retro-xs">
-                  SCREENSHOT
+                
+                {/* Hover Dark Backdrop Overlay & Centered "View Project" Button */}
+                <div
+                  className={cn(
+                    "absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center transition-all duration-300 z-10 p-3 pointer-events-none",
+                    isImgHovered ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                  )}
+                >
+                  <div
+                    className={cn(
+                      "px-4 py-2 bg-[#FACC15] text-black border-2 border-black shadow-retro-sm font-sans text-xs sm:text-sm font-black flex items-center gap-2 uppercase tracking-wider btn-retro transition-transform duration-300",
+                      isImgHovered ? "translate-y-0" : "translate-y-1 group-hover:translate-y-0"
+                    )}
+                  >
+                    <Eye className="w-4 h-4 stroke-[2.5]" />
+                    <span>{isEn ? "VIEW PROJECT" : "LIHAT PROYEK"}</span>
+                  </div>
                 </div>
               </Link>
             </div>

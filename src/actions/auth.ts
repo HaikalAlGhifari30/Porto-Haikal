@@ -8,7 +8,7 @@ export async function login(formData: FormData) {
     const password = (formData.get("password") as string || "").trim();
 
     if (!email || !password) {
-        return { success: false, error: "Email dan password wajib diisi." };
+        return { success: false, error: "MISSING_FIELDS" };
     }
 
     // Support admin credentials (admin123 & Lnfvjem)
@@ -23,13 +23,13 @@ export async function login(formData: FormData) {
         });
 
         if (!user) {
-            return { success: false, error: "Email atau password yang Anda masukkan salah." };
+            return { success: false, error: "INVALID_CREDENTIALS" };
         }
 
         const credentialAccount = user.accounts.find(a => a.providerId === "credential");
         
         if (!credentialAccount || !credentialAccount.password) {
-            return { success: false, error: "Email atau password yang Anda masukkan salah." };
+            return { success: false, error: "INVALID_CREDENTIALS" };
         }
 
         let isValid = false;
@@ -40,13 +40,13 @@ export async function login(formData: FormData) {
         }
 
         if (!isValid) {
-            return { success: false, error: "Email atau password yang Anda masukkan salah." };
+            return { success: false, error: "INVALID_CREDENTIALS" };
         }
 
         return { success: true };
     } catch (error: any) {
         console.error("Login server action error:", error);
-        return { success: false, error: "Email atau password yang Anda masukkan salah." };
+        return { success: false, error: "INVALID_CREDENTIALS" };
     }
 }
 

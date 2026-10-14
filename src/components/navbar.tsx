@@ -71,22 +71,32 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
     return mounted ? t(key) : fallback;
   };
 
+  useEffect(() => {
+    if (!isLoginOpen) {
+      setError("");
+    }
+  }, [isLoginOpen]);
+
   const handleLogin = async (formData: FormData) => {
     setIsPending(true);
     setError("");
     try {
       const res = await login(formData);
       if (!res.success) {
-        setError(res.error || "Email atau password yang Anda masukkan salah.");
+        if (res.error === "MISSING_FIELDS") {
+          setError(translate('auth.missingFields', 'Email dan password wajib diisi.'));
+        } else {
+          setError(translate('auth.invalidCredentials', 'Email atau password yang Anda masukkan salah.'));
+        }
         return;
       }
       localStorage.setItem("isAdmin", "true");
       setIsLoggedIn(true);
       setIsLoginOpen(false);
-      toast.success("Login Berhasil");
+      toast.success(translate('auth.loginSuccess', 'Login Berhasil'));
       router.push("/cms");
     } catch (e: any) {
-      setError(e.message || "Gagal masuk. Silakan coba lagi.");
+      setError(translate('auth.loginFailed', 'Gagal masuk. Silakan coba lagi.'));
     } finally {
       setIsPending(false);
     }
@@ -379,7 +389,8 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
                   name="email"
                   type="email"
                   required
-                  placeholder="admin@haikalalghifari.dev"
+                  autoComplete="off"
+                  placeholder={translate('auth.emailPlaceholder', 'email@domain.com')}
                   className="bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white rounded-none h-11 text-sm px-3.5 text-black dark:text-white font-mono placeholder:text-zinc-400 focus:bg-yellow-50 dark:focus:bg-zinc-900 shadow-retro-xs transition-all w-full"
                 />
               </div>
@@ -397,7 +408,8 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
                     name="password"
                     type={showPassword ? "text" : "password"}
                     required
-                    placeholder="••••••••"
+                    autoComplete="current-password"
+                    placeholder={translate('auth.passwordPlaceholder', '••••••••')}
                     className="bg-white dark:bg-[#0E1217] border-2 border-black dark:border-white rounded-none h-11 text-sm px-3.5 pr-11 text-black dark:text-white font-mono placeholder:text-zinc-400 focus:bg-yellow-50 dark:focus:bg-zinc-900 shadow-retro-xs transition-all w-full"
                   />
                   <button
@@ -423,7 +435,7 @@ export function Navbar({ settings, activeSceneIndex = 0, onNavigateScene }: Navb
                 className="w-full bg-[#FACC15] hover:bg-[#EAB308] text-black border-2 border-black dark:border-white rounded-none h-11 sm:h-12 font-sans font-black text-xs sm:text-sm uppercase tracking-wider shadow-retro-sm btn-retro transition-all cursor-pointer mt-3 flex items-center justify-center gap-2"
               >
                 <LogIn className="w-4 h-4 font-bold" />
-                <span>{isPending ? "Authenticating..." : translate('auth.loginBtn', 'Masuk')}</span>
+                <span>{isPending ? translate('auth.authenticating', 'Memverifikasi...') : translate('auth.loginBtn', 'Masuk')}</span>
               </Button>
             </form>
           </div>

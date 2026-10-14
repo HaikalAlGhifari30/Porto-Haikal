@@ -50,7 +50,8 @@ export function PortfolioSceneContainer({
   const [direction, setDirection] = useState<"up" | "down">("down");
   const isTransitioningRef = useRef(false);
   const sceneContentRef = useRef<HTMLDivElement | null>(null);
-  const touchStartRef = useRef<number | null>(null);
+  const touchStartYRef = useRef<number | null>(null);
+  const touchStartXRef = useRef<number | null>(null);
   const wasAtBottomRef = useRef(false);
   const wasAtTopRef = useRef(false);
 
@@ -116,6 +117,9 @@ export function PortfolioSceneContainer({
 
   // Intelligent Mouse Wheel Scroll Handler
   useEffect(() => {
+    let accumulatedDeltaY = 0;
+    let resetTimer: NodeJS.Timeout | null = null;
+
     const handleWheel = (e: WheelEvent) => {
       if (isTransitioningRef.current) return;
 
@@ -126,28 +130,33 @@ export function PortfolioSceneContainer({
 
       const el = sceneContentRef.current;
       if (el) {
-        const isScrollable = el.scrollHeight > el.clientHeight + 25;
-        const isAtTop = el.scrollTop <= 10;
-        const isAtBottom = el.scrollHeight - el.clientHeight - el.scrollTop <= 20;
-
-        // On mobile / tablet viewports (< 1024px), never allow wheel events to flip scenes on scrollable content
-        if (window.innerWidth < 1024 && isScrollable) {
-          return;
-        }
+        const isScrollable = el.scrollHeight > el.clientHeight + 15;
+        const isAtTop = el.scrollTop <= 5;
+        const isAtBottom = el.scrollHeight - el.clientHeight - el.scrollTop <= 10;
 
         // If user is scrolling DOWN and content can still scroll down -> let it scroll!
         if (e.deltaY > 0 && isScrollable && !isAtBottom) {
+          accumulatedDeltaY = 0;
           return;
         }
 
         // If user is scrolling UP and content can still scroll up -> let it scroll!
         if (e.deltaY < 0 && isScrollable && !isAtTop) {
+          accumulatedDeltaY = 0;
           return;
         }
 
-        // On scrollable sections at the boundary, require a strong deliberate delta
-        if (isScrollable && Math.abs(e.deltaY) < 80) {
-          return;
+        // When at boundary on scrollable sections, accumulate delta for a clean deliberate flip
+        if (isScrollable) {
+          accumulatedDeltaY += e.deltaY;
+          if (resetTimer) clearTimeout(resetTimer);
+          resetTimer = setTimeout(() => {
+            accumulatedDeltaY = 0;
+          }, 250);
+
+          if (Math.abs(accumulatedDeltaY) < 35) {
+            return;
+          }
         }
       }
 
@@ -166,7 +175,10 @@ export function PortfolioSceneContainer({
     };
 
     window.addEventListener("wheel", handleWheel, { passive: true });
-    return () => window.removeEventListener("wheel", handleWheel);
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      if (resetTimer) clearTimeout(resetTimer);
+    };
   }, [activeSceneIndex, goToScene]);
 
   // Keyboard Arrow Handler
@@ -212,15 +224,17 @@ export function PortfolioSceneContainer({
   // Touch Swipe Handler (Mobile)
   const handleTouchStart = (e: React.TouchEvent) => {
     const targetEl = e.target as HTMLElement | null;
-    if (targetEl && targetEl.closest("[data-no-scene-scroll], .ai-assistant-modal-container, input, textarea, button, a")) {
-      touchStartRef.current = null;
+    if (targetEl && targetEl.closest("[data-no-scene-scroll], .ai-assistant-modal-container, input, textarea, select")) {
+      touchStartYRef.current = null;
+      touchStartXRef.current = null;
       return;
     }
-    touchStartRef.current = e.touches[0].clientY;
+    touchStartYRef.current = e.touches[0].clientY;
+    touchStartXRef.current = e.touches[0].clientX;
 
     const el = sceneContentRef.current;
     if (el) {
-      wasAtBottomRef.current = el.scrollHeight - el.clientHeight - el.scrollTop <= 20;
+      wasAtBottomRef.current = el.scrollHeight - el.clientHeight - el.scrollTop <= 15;
       wasAtTopRef.current = el.scrollTop <= 10;
     } else {
       wasAtBottomRef.current = true;
@@ -229,34 +243,58 @@ export function PortfolioSceneContainer({
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartRef.current === null || isTransitioningRef.current) return;
+    if (touchStartYRef.current === null || isTransitioningRef.current) return;
     const targetEl = e.target as HTMLElement | null;
     if (targetEl && targetEl.closest("[data-no-scene-scroll], .ai-assistant-modal-container")) {
-      touchStartRef.current = null;
+      touchStartYRef.current = null;
+      touchStartXRef.current = null;
       return;
     }
 
-    const touchEnd = e.changedTouches[0].clientY;
-    const diff = touchStartRef.current - touchEnd;
-    touchStartRef.current = null;
+    const touchEndY = e.changedTouches[0].clientY;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diffY = touchStartYRef.current - touchEndY;
+    const diffX = (touchStartXRef.current ?? touchEndX) - touchEndX;
+    touchStartYRef.current = null;
+    touchStartXRef.current = null;
+
+    // Ignore mostly horizontal swipes
+    if (Math.abs(diffX) > Math.abs(diffY)) return;
 
     const el = sceneContentRef.current;
     if (el) {
-      const isScrollable = el.scrollHeight > el.clientHeight + 25;
+      const isScrollable = el.scrollHeight > el.clientHeight + 15;
 
       if (isScrollable) {
-        // Completely prevent accidental scene flipping while user is scrolling through content on mobile.
-        // Users can comfortably read all content and use the dedicated "NEXT" button at the bottom,
-        // side scene indicators, or header menu to advance.
+        const isCurrentlyAtTop = el.scrollTop <= 10;
+        const isCurrentlyAtBottom = el.scrollHeight - el.clientHeight - el.scrollTop <= 15;
+
+        // Swiping DOWN (pulling from top down) -> Go to PREVIOUS scene
+        if (diffY < -50 && wasAtTopRef.current && isCurrentlyAtTop) {
+          if (activeSceneIndex > 0) {
+            goToScene(activeSceneIndex - 1);
+          }
+          return;
+        }
+
+        // Swiping UP (pulling from bottom up) -> Go to NEXT scene
+        if (diffY > 50 && wasAtBottomRef.current && isCurrentlyAtBottom) {
+          if (activeSceneIndex < SCENES.length - 1) {
+            goToScene(activeSceneIndex + 1);
+          }
+          return;
+        }
+
+        // Inside scrollable area: let native touch scrolling do its work
         return;
       }
     }
 
-    // Single-screen (non-scrollable) scenes require a clean intentional swipe (> 80px)
-    if (Math.abs(diff) > 80) {
-      if (diff > 0 && activeSceneIndex < SCENES.length - 1) {
+    // Single-screen (non-scrollable) scenes require a clean intentional swipe (> 50px)
+    if (Math.abs(diffY) > 50) {
+      if (diffY > 0 && activeSceneIndex < SCENES.length - 1) {
         goToScene(activeSceneIndex + 1);
-      } else if (diff < 0 && activeSceneIndex > 0) {
+      } else if (diffY < 0 && activeSceneIndex > 0) {
         goToScene(activeSceneIndex - 1);
       }
     }
@@ -264,7 +302,7 @@ export function PortfolioSceneContainer({
 
   return (
     <div
-      className="bg-[#FAF6ED] dark:bg-[#0E1217] text-black dark:text-white h-screen h-[100dvh] w-full min-h-[100dvh] relative overflow-hidden flex flex-col justify-between"
+      className="bg-[#FAF6ED] dark:bg-[#0E1217] text-black dark:text-white h-screen h-[100dvh] w-full min-h-[100dvh] relative overflow-hidden flex flex-col"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -329,7 +367,7 @@ export function PortfolioSceneContainer({
       </aside>
 
       {/* Main Viewport Scene Container */}
-      <main className="w-full h-full relative z-10 pt-14 sm:pt-16 overflow-hidden flex flex-col">
+      <main className="w-full flex-1 min-h-0 relative z-10 pt-14 sm:pt-16 overflow-hidden flex flex-col">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={activeSceneIndex}
@@ -355,7 +393,7 @@ export function PortfolioSceneContainer({
               ease: "easeInOut",
             }}
             className={cn(
-              "w-full h-full overflow-y-auto overscroll-contain flex flex-col items-center",
+              "w-full h-full flex-1 min-h-0 overflow-y-auto overscroll-contain flex flex-col items-center",
               activeSceneIndex === 5
                 ? "justify-between"
                 : activeSceneIndex === 0
@@ -369,7 +407,7 @@ export function PortfolioSceneContainer({
                   "w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:pr-14 2xl:pr-8 min-h-full flex flex-col",
                   activeSceneIndex === 0
                     ? "sm:my-auto justify-start sm:justify-center pt-8 pb-24 sm:py-6"
-                    : "justify-start pt-4 sm:pt-6 pb-36 sm:pb-16"
+                    : "justify-start pt-4 sm:pt-6 pb-36 sm:pb-24"
                 )}
               >
                 {activeSceneIndex === 0 && (

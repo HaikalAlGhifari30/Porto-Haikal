@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSafeLang } from "@/store/lang";
 import { ArrowRight, Wrench, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,6 +11,16 @@ export function DevNoticeModal() {
   const { lang } = useSafeLang();
   const isEn = lang === "en";
   const [isOpen, setIsOpen] = useState(false);
+  const [countdown, setCountdown] = useState(3);
+
+  const handleDismiss = useCallback(() => {
+    try {
+      sessionStorage.setItem("hasSeenDevNotice", "true");
+    } catch {
+      // Ignore storage error in restricted webviews
+    }
+    setIsOpen(false);
+  }, []);
 
   useEffect(() => {
     if (pathname?.startsWith("/cms")) return;
@@ -18,20 +28,31 @@ export function DevNoticeModal() {
       const hasSeen = sessionStorage.getItem("hasSeenDevNotice");
       if (!hasSeen) {
         setIsOpen(true);
+        setCountdown(3);
       }
     } catch {
       setIsOpen(true);
+      setCountdown(3);
     }
   }, [pathname]);
 
-  const handleDismiss = () => {
-    try {
-      sessionStorage.setItem("hasSeenDevNotice", "true");
-    } catch {
-      // Ignore storage error in restricted webviews
-    }
-    setIsOpen(false);
-  };
+  // Countdown timer: automatically close popup after 3 seconds
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const interval = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          handleDismiss();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isOpen, handleDismiss]);
 
   if (pathname?.startsWith("/cms")) {
     return null;
@@ -46,15 +67,19 @@ export function DevNoticeModal() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
           data-no-scene-scroll="true"
-          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-xs"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) handleDismiss();
+          }}
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-xs cursor-pointer"
         >
           <motion.div
             initial={{ scale: 0.94, opacity: 0, y: 15 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.94, opacity: 0, y: 15 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
+            onClick={(e) => e.stopPropagation()}
             data-no-scene-scroll="true"
-            className="relative w-full max-w-md bg-[#FAF6ED] dark:bg-[#151B22] border-3 sm:border-4 border-black dark:border-white shadow-retro-lg text-black dark:text-white overflow-hidden my-auto"
+            className="relative w-full max-w-md bg-[#FAF6ED] dark:bg-[#151B22] border-3 sm:border-4 border-black dark:border-white shadow-retro-lg text-black dark:text-white overflow-hidden my-auto cursor-default"
           >
             {/* 8-Bit Retro Title Bar */}
             <div className="p-3 bg-[#FACC15] border-b-2 border-black dark:border-white flex items-center justify-between text-black select-none">
@@ -64,9 +89,25 @@ export function DevNoticeModal() {
                   SYSTEM NOTICE // DEV LOG
                 </span>
               </div>
-              <span className="px-2 py-0.5 bg-white border border-black font-pixel text-[10px] font-bold shadow-retro-xs">
-                BUILD v1.0
-              </span>
+              <div className="flex items-center gap-1.5">
+                <span className="px-1.5 py-0.5 bg-black text-[#FACC15] font-mono text-[10px] font-bold border border-black flex items-center gap-1 shadow-retro-xs">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
+                  {countdown}s
+                </span>
+                <span className="px-2 py-0.5 bg-white border border-black font-pixel text-[10px] font-bold shadow-retro-xs">
+                  BUILD v1.0
+                </span>
+              </div>
+            </div>
+
+            {/* Auto-close Progress Bar */}
+            <div className="w-full bg-black/10 dark:bg-white/10 h-1 overflow-hidden">
+              <motion.div
+                initial={{ width: "100%" }}
+                animate={{ width: "0%" }}
+                transition={{ duration: 3, ease: "linear" }}
+                className="h-full bg-black dark:bg-[#FACC15]"
+              />
             </div>
 
             {/* Modal Content Body */}
@@ -114,9 +155,13 @@ export function DevNoticeModal() {
               <div className="w-full pt-1">
                 <button
                   onClick={handleDismiss}
-                  className="w-full py-3 sm:py-3.5 px-6 bg-[#FACC15] hover:bg-yellow-300 text-black font-pixel text-xs sm:text-sm font-black uppercase tracking-wider border-2 border-black dark:border-white shadow-retro btn-retro flex items-center justify-center gap-2 cursor-pointer transition-all"
+                  className="w-full py-3 sm:py-3.5 px-6 bg-[#FACC15] hover:bg-yellow-300 text-black font-pixel text-xs sm:text-sm font-black uppercase tracking-wider border-2 border-black dark:border-white shadow-retro btn-retro flex items-center justify-center gap-2 cursor-pointer transition-all active:translate-x-0.5 active:translate-y-0.5"
                 >
-                  <span>{isEn ? "PRESS START // CONTINUE" : "MULAI JELAJAHI // LANJUTKAN"}</span>
+                  <span>
+                    {isEn
+                      ? `PRESS START // CONTINUE (${countdown}s)`
+                      : `MULAI JELAJAHI // LANJUTKAN (${countdown}s)`}
+                  </span>
                   <ArrowRight className="w-4 h-4 stroke-[3]" />
                 </button>
               </div>

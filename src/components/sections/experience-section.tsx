@@ -133,7 +133,7 @@ export function ExperienceSection({ experiences = [], onNavigateScene }: Experie
   };
 
   return (
-    <section id="experience" className="py-2 sm:py-6 lg:py-8 relative overflow-hidden bg-transparent text-zinc-900 dark:text-white">
+    <section id="experience" className="w-full py-2 sm:py-6 lg:py-8 relative bg-transparent text-zinc-900 dark:text-white">
       <div className="container-original relative z-10 mx-auto px-2 sm:px-4 max-w-6xl xl:max-w-7xl">
         
         {/* Section Header */}

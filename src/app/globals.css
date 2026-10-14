@@ -309,12 +309,16 @@
   .font-silkscreen {
     font-family: var(--font-silkscreen), "Silkscreen", monospace;
   }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
   .hide-scrollbar::-webkit-scrollbar,
   .scrollbar-none::-webkit-scrollbar {
     display: none !important;
     width: 0 !important;
     height: 0 !important;
   }
+  html,
+  body,
   .hide-scrollbar,
   .scrollbar-none {
     -ms-overflow-style: none !important;

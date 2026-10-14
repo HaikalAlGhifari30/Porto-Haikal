@@ -15,6 +15,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronUp, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSafeLang } from "@/store/lang";
+import { AnimatedScrollIndicator } from "@/components/ui/animated-scroll-indicator";
 
 interface PortfolioSceneContainerProps {
   settings?: any;
@@ -393,7 +394,7 @@ export function PortfolioSceneContainer({
               ease: "easeInOut",
             }}
             className={cn(
-              "w-full h-full flex-1 min-h-0 overflow-y-auto overscroll-contain flex flex-col items-center",
+              "w-full h-full flex-1 min-h-0 overflow-y-auto overscroll-contain flex flex-col items-center hide-scrollbar",
               activeSceneIndex === 5
                 ? "justify-between"
                 : activeSceneIndex === 0
@@ -449,6 +450,24 @@ export function PortfolioSceneContainer({
           </motion.div>
         </AnimatePresence>
       </main>
+
+      {/* Floating Living Scroll Indicator (Hero Scene - Text Only) */}
+      <AnimatePresence>
+        {activeSceneIndex === 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 15 }}
+            transition={{ duration: 0.3 }}
+            className="hidden sm:flex absolute bottom-2.5 sm:bottom-4 md:bottom-5 left-1/2 -translate-x-1/2 z-30 pointer-events-auto"
+          >
+            <AnimatedScrollIndicator
+              onClick={() => goToScene(1)}
+              label="SCROLL"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

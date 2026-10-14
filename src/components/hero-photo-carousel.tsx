@@ -67,7 +67,7 @@ export function HeroPhotoCarousel({
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* ── Top-Right Pin Badge (Retro 8-Bit) ── */}
-      <div className="absolute -top-2.5 -right-2 sm:-top-3.5 sm:-right-3.5 z-30 px-2 sm:px-3.5 py-0.5 sm:py-1.5 bg-[#FACC15] text-black font-pixel font-black text-[9px] sm:text-xs border-2 border-black dark:border-white shadow-retro-sm tracking-wider uppercase flex items-center gap-1">
+      <div className="absolute -top-3 -right-2 sm:-top-4 sm:-right-3 z-30 px-2 sm:px-3.5 py-0.5 sm:py-1.5 bg-[#FACC15] text-black font-pixel font-black text-[9px] sm:text-xs border-2 border-black dark:border-white shadow-retro-sm tracking-wider uppercase flex items-center gap-1">
         <Sparkles className="w-3 h-3 text-black fill-black" />
         <span>20+ PROJECTS</span>
       </div>
@@ -92,15 +92,19 @@ export function HeroPhotoCarousel({
 
         {/* Console Header Bar */}
         <div className="flex items-center justify-between px-1.5 py-1 mb-1 border-b-2 border-black/80 dark:border-white/20 bg-black/5 dark:bg-white/5 text-[9px] font-pixel font-black tracking-wider text-black dark:text-[#EDE4D0]">
-          <span className="flex items-center gap-1 uppercase">
-            <span className="w-1.5 h-1.5 bg-[#FACC15] inline-block border border-black" />
-            P1 // HERO
-          </span>
-          {validPhotos.length > 1 && (
-            <span className="font-pixel text-[8px] sm:text-[9px] px-1.5 py-0.2 bg-[#FACC15] text-black border border-black">
-              0{currentIndex + 1}/0{validPhotos.length}
+          <div className="flex items-center gap-2">
+            <span className="flex items-center gap-1 uppercase">
+              <span className="w-1.5 h-1.5 bg-[#FACC15] inline-block border border-black" />
+              P1 // HERO
             </span>
-          )}
+            {validPhotos.length > 1 && (
+              <span className="font-pixel text-[8px] sm:text-[9px] px-1.5 py-0.5 bg-black/10 dark:bg-white/10 text-black dark:text-[#EDE4D0] border border-black/30 dark:border-white/30 tracking-wider">
+                0{currentIndex + 1}/0{validPhotos.length}
+              </span>
+            )}
+          </div>
+          {/* Keep right side clear to prevent collisions with the floating top-right badge */}
+          <div className="w-16 sm:w-20" aria-hidden="true" />
         </div>
 
         {/* Main Inner Photo Screen with 8-Bit Inner Border */}

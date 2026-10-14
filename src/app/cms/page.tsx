@@ -19,7 +19,7 @@ export default async function CMSDashboard() {
     return (
         <div className="space-y-6 md:space-y-8 animate-in fade-in duration-500">
             {/* Hero Header Section */}
-            <div className="relative group p-6 md:p-8 rounded-2xl bg-[#0E1217] text-white overflow-hidden shadow-retro-md border-2 border-black dark:border-white">
+            <div className="relative group p-4 sm:p-6 md:p-8 rounded-2xl bg-[#0E1217] text-white overflow-hidden shadow-retro-md border-2 border-black dark:border-white">
                 <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-yellow-400/10 rounded-full blur-[100px] pointer-events-none" />
                 <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-amber-500/10 rounded-full blur-[100px] pointer-events-none" />
                 
@@ -34,14 +34,14 @@ export default async function CMSDashboard() {
                         </p>
                     </div>
                     
-                    <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-                        <Link href="/cms/messages" className="flex-1 sm:flex-none">
-                            <Button className="w-full sm:w-auto h-11 px-6 rounded-none bg-[#FACC15] hover:bg-yellow-300 text-black font-bold border-2 border-black dark:border-white shadow-retro-xs btn-retro transition-all cursor-pointer">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+                        <Link href="/cms/messages" className="w-full sm:w-auto">
+                            <Button className="w-full sm:w-auto h-11 px-5 rounded-none bg-[#FACC15] hover:bg-yellow-300 text-black font-bold border-2 border-black dark:border-white shadow-retro-xs btn-retro transition-all cursor-pointer">
                                 <MessageSquare className="w-4 h-4 mr-2" /> Pesan Masuk {unreadMessages > 0 && `(${unreadMessages})`}
                             </Button>
                         </Link>
-                        <Link href="/cms/settings" className="flex-1 sm:flex-none">
-                            <Button variant="outline" className="w-full sm:w-auto h-11 px-6 rounded-none bg-white/10 border-2 border-black dark:border-white text-white font-bold backdrop-blur-md hover:bg-white/20 shadow-retro-xs btn-retro transition-all cursor-pointer">
+                        <Link href="/cms/settings" className="w-full sm:w-auto">
+                            <Button variant="outline" className="w-full sm:w-auto h-11 px-5 rounded-none bg-white/10 border-2 border-black dark:border-white text-white font-bold backdrop-blur-md hover:bg-white/20 shadow-retro-xs btn-retro transition-all cursor-pointer">
                                 <Settings className="w-4 h-4 mr-2 text-[#FACC15]" /> Pengaturan Website
                             </Button>
                         </Link>
@@ -50,7 +50,7 @@ export default async function CMSDashboard() {
             </div>
 
             {/* Statistics Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 px-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                 {[
                     { label: "Pesan Masuk", value: unreadMessages > 0 ? `${unreadMessages} Baru` : `${totalMessages} Pesan`, icon: MessageSquare, detail: "Formulir Kontak Public", href: "/cms/messages" },
                     { label: "Total Proyek", value: totalProjects, icon: FolderKanban, detail: "Active Live Showcase", href: "/cms/projects" },

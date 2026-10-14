@@ -23,39 +23,39 @@ export default async function SettingsPage() {
 
             {/* 1. Foto Profil Utama & File CV */}
             <Card className="bg-white dark:bg-[#151B22] border-2 border-black dark:border-white rounded-2xl overflow-hidden shadow-retro-sm">
-                <CardHeader className="border-b-2 border-black/10 dark:border-white/10 bg-[#FAF6ED] dark:bg-[#0E1217] px-6 py-4">
-                    <CardTitle className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <CardHeader className="border-b-2 border-black/10 dark:border-white/10 bg-[#FAF6ED] dark:bg-[#0E1217] px-3.5 sm:px-6 py-3 sm:py-4">
+                    <CardTitle className="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                         <User className="w-5 h-5 text-amber-500 dark:text-[#FACC15]" />
                         Foto Profil Utama & File Dokumen CV
                     </CardTitle>
                 </CardHeader>
-                <CardContent className="p-6">
+                <CardContent className="p-2.5 sm:p-6">
                     <ProfilePhotoSettingsForm settings={settings} />
                 </CardContent>
             </Card>
 
             {/* 2. Admin WhatsApp Widget */}
             <Card className="bg-white dark:bg-[#151B22] border-2 border-black dark:border-white rounded-2xl overflow-hidden shadow-retro-sm">
-                <CardHeader className="border-b-2 border-black/10 dark:border-white/10 bg-[#FAF6ED] dark:bg-[#0E1217] px-6 py-4">
-                    <CardTitle className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <CardHeader className="border-b-2 border-black/10 dark:border-white/10 bg-[#FAF6ED] dark:bg-[#0E1217] px-3.5 sm:px-6 py-3 sm:py-4">
+                    <CardTitle className="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                         <MessageCircle className="w-5 h-5 text-amber-500 dark:text-[#FACC15]" />
                         Admin WhatsApp (Floating Button Widget)
                     </CardTitle>
                 </CardHeader>
-                <CardContent className="p-6">
+                <CardContent className="p-2.5 sm:p-6">
                     <WhatsAppAdminCMS initialAdmins={whatsappAdmins} />
                 </CardContent>
             </Card>
 
             {/* 3. Pengaturan Footer & Media Sosial */}
             <Card className="bg-white dark:bg-[#151B22] border-2 border-black dark:border-white rounded-2xl overflow-hidden shadow-retro-sm">
-                <CardHeader className="border-b-2 border-black/10 dark:border-white/10 bg-[#FAF6ED] dark:bg-[#0E1217] px-6 py-4">
-                    <CardTitle className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <CardHeader className="border-b-2 border-black/10 dark:border-white/10 bg-[#FAF6ED] dark:bg-[#0E1217] px-3.5 sm:px-6 py-3 sm:py-4">
+                    <CardTitle className="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                         <Share2 className="w-5 h-5 text-amber-500 dark:text-[#FACC15]" />
                         Pengaturan Footer & Media Sosial
                     </CardTitle>
                 </CardHeader>
-                <CardContent className="p-6">
+                <CardContent className="p-2.5 sm:p-6">
                     <FooterSettingsForm settings={settings} />
                 </CardContent>
             </Card>

@@ -169,16 +169,16 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
             {/* Main Content Area */}
             <div className="flex-1 flex flex-col h-full overflow-hidden relative">
                 {/* Mobile Top Header */}
-                <header className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-[#FAF6ED]/95 dark:bg-[#0E1217]/95 backdrop-blur-md border-b-2 border-black dark:border-white z-[100] px-4 flex items-center justify-between transition-all duration-300">
-                    <Link href="/" className="flex items-center gap-2 active:scale-95 transition-transform">
+                <header className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-[#FAF6ED]/95 dark:bg-[#0E1217]/95 backdrop-blur-md border-b-2 border-black dark:border-white z-[100] px-3 sm:px-4 flex items-center justify-between transition-all duration-300">
+                    <Link href="/" className="flex items-center gap-1.5 sm:gap-2 active:scale-95 transition-transform min-w-0 max-w-[65%]">
                         <HagLogo size="sm" useImage={false} />
-                        <div className="flex flex-col leading-[1.1]">
-                            <span className="text-[9px] font-black uppercase tracking-widest text-slate-900 dark:text-white">Haikal Al Ghifari</span>
-                            <span className="text-[8px] font-bold uppercase tracking-widest text-amber-500 dark:text-[#FACC15]">QA PORTFOLIO</span>
+                        <div className="flex flex-col leading-[1.1] min-w-0">
+                            <span className="text-[8.5px] sm:text-[9px] font-black uppercase tracking-wider text-slate-900 dark:text-white truncate">Haikal Al Ghifari</span>
+                            <span className="text-[7.5px] sm:text-[8px] font-bold uppercase tracking-widest text-amber-500 dark:text-[#FACC15] truncate">QA PORTFOLIO</span>
                         </div>
                     </Link>
                     
-                    <div className="flex items-center gap-1.5 p-1 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white shadow-retro-xs">
+                    <div className="shrink-0 flex items-center gap-1 sm:gap-1.5 p-1 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white shadow-retro-xs">
                         <div className="scale-[0.85] origin-center -mx-1">
                             <ThemeSwitcher />
                         </div>
@@ -191,7 +191,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
 
                 <main 
                     ref={scrollContainerRef}
-                    className="flex-1 overflow-y-auto pt-20 pb-28 px-4 md:px-8 lg:p-10 lg:pt-24 lg:pb-10 relative scroll-smooth"
+                    className="flex-1 overflow-y-auto overflow-x-hidden pt-16 sm:pt-20 pb-36 sm:pb-32 px-3 sm:px-6 md:px-8 lg:p-10 lg:pt-24 lg:pb-12 relative scroll-smooth"
                 >
                     {/* Desktop Top Actions */}
                     <div className="hidden lg:flex absolute top-6 right-10 z-[50] items-center gap-3">
@@ -220,7 +220,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                         duration: 0.35, 
                         ease: [0.23, 1, 0.32, 1] 
                     }}
-                    className="lg:hidden fixed bottom-[calc(16px+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 w-[calc(100%-2.5rem)] max-w-md h-14 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white shadow-retro z-[100] flex items-center justify-around px-2"
+                    className="lg:hidden fixed bottom-[calc(10px+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 w-[calc(100%-1.25rem)] sm:w-[calc(100%-2.5rem)] max-w-md h-13 bg-white dark:bg-[#151B22] border-2 border-black dark:border-white shadow-retro z-[100] flex items-center justify-between px-1"
                 >
                     {[
                         { href: "/cms", label: "Home", icon: LayoutDashboard },
@@ -236,18 +236,18 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                                 key={item.href}
                                 href={item.href}
                                 className={cn(
-                                    "flex flex-col items-center justify-center gap-0.5 min-w-[4rem] h-11 rounded-none transition-all duration-150 relative shrink-0",
+                                    "flex flex-col items-center justify-center gap-0.5 flex-1 min-w-0 h-10 rounded-none transition-all duration-150 relative px-0.5",
                                     isActive 
                                         ? "text-black dark:text-[#FACC15] font-black" 
                                         : "text-zinc-600 dark:text-zinc-400"
                                 )}
                             >
                                 <item.icon className={cn(
-                                    "w-4.5 h-4.5 transition-all duration-150",
-                                    isActive ? "scale-110 text-amber-500 dark:text-[#FACC15]" : "scale-100"
+                                    "w-4 h-4 transition-all duration-150 shrink-0",
+                                    isActive ? "scale-105 text-amber-500 dark:text-[#FACC15]" : "scale-100"
                                 )} />
                                 <span className={cn(
-                                    "text-[9px] font-bold uppercase tracking-wider",
+                                    "text-[7.5px] sm:text-[8.5px] font-bold uppercase tracking-tight truncate max-w-full text-center leading-none",
                                     isActive ? "opacity-100 text-black dark:text-[#FACC15]" : "opacity-70"
                                 )}>
                                     {item.label}
@@ -255,7 +255,7 @@ export default function CMSLayout({ children }: { children: ReactNode }) {
                                 {isActive && (
                                     <motion.div 
                                         layoutId="mobile-nav-indicator"
-                                        className="absolute -bottom-1 w-1.5 h-1.5 rounded-full bg-[#FACC15] border border-black" 
+                                        className="absolute bottom-0 w-1.5 h-1.5 rounded-full bg-[#FACC15] border border-black" 
                                     />
                                 )}
                             </Link>

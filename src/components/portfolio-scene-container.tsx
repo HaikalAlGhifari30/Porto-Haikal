@@ -160,8 +160,8 @@ export function PortfolioSceneContainer({
         }
       }
 
-      // Threshold check for scene flipping
-      if (Math.abs(e.deltaY) < 25) return;
+      // Threshold check for scene flipping (prevents accidental flip on slight wheel nudge)
+      if (Math.abs(e.deltaY) < 50) return;
 
       if (e.deltaY > 0) {
         if (activeSceneIndex < SCENES.length - 1) {
@@ -290,8 +290,8 @@ export function PortfolioSceneContainer({
       }
     }
 
-    // Single-screen (non-scrollable) scenes require a clean intentional swipe (> 50px)
-    if (Math.abs(diffY) > 50) {
+    // Single-screen (non-scrollable) scenes require a clean intentional swipe (> 65px)
+    if (Math.abs(diffY) > 65) {
       if (diffY > 0 && activeSceneIndex < SCENES.length - 1) {
         goToScene(activeSceneIndex + 1);
       } else if (diffY < 0 && activeSceneIndex > 0) {
@@ -397,7 +397,7 @@ export function PortfolioSceneContainer({
               activeSceneIndex === 5
                 ? "justify-between"
                 : activeSceneIndex === 0
-                ? "justify-start sm:justify-center"
+                ? "justify-center"
                 : "justify-start"
             )}
           >
@@ -406,7 +406,7 @@ export function PortfolioSceneContainer({
                 className={cn(
                   "w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 xl:pr-14 2xl:pr-8 min-h-full flex flex-col",
                   activeSceneIndex === 0
-                    ? "sm:my-auto justify-start sm:justify-center pt-8 pb-24 sm:py-6"
+                    ? "my-auto justify-center py-2 sm:py-4 md:py-6"
                     : "justify-start pt-4 sm:pt-6 pb-36 sm:pb-24"
                 )}
               >
